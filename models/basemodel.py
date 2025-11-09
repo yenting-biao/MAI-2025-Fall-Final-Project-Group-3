@@ -4,10 +4,10 @@ class BaseModel:
         self.model_name = model_name
         pass
 
-    def process_input(self, texts):
+    def process_input(self, conversation:list[dict]):
         raise NotImplementedError("Subclasses should implement this method")
     
-    def generate(self):
+    def generate(self) -> str:
         raise NotImplementedError("Subclasses should implement this method")
 
 

@@ -1,16 +1,7 @@
 import time
 from models.diva import DiVA
 
-TEST_CONVERSATION = [
-    {"role": "system", "content": "You are a helpful assistant."},
-    {
-        "role": "user",
-        "content": "Briefly describe what you hear.",
-        "audio_path": "samples/sd-qa_1008642825401516622.wav",
-    },
-]
-
-def run_smoke_test(model_cls, name: str, verbose: bool = True):
+def run_smoke_test(model_cls, name: str, conversations: List[Dict[str, str]], verbose: bool = True):
 
     print(f"=== Testing {name} ===")
 
@@ -24,7 +15,7 @@ def run_smoke_test(model_cls, name: str, verbose: bool = True):
 
     if verbose:
         print(f"[{name}] Processing input...")
-    model.process_input(TEST_CONVERSATION)
+    model.process_input(conversations)
     t2 = time.time()
     if verbose:
         print(f"[{name}] Input processed in {t2 - t1:.2f} seconds.")
@@ -39,4 +30,21 @@ def run_smoke_test(model_cls, name: str, verbose: bool = True):
     print(f"\n[{name}] Output:", out)
 
 if __name__ == "__main__":
-    run_smoke_test(DiVA, "DiVA")
+
+    TEST_CONVERSATIONS = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {
+            "role": "user",
+            "content": "What does the speaker say in the audio?",
+            "audio_path": "samples/sd-qa_1008642825401516622.wav",
+        },
+
+        {"role": "system", "content": "You are a helpful assistant."},
+        {
+            "role": "user",
+            "content": "What does the speaker say in the audio?",
+            "audio_path": "samples/sd-rq_6426446469024899068.wav",
+        },
+    ]
+
+    run_smoke_test(DiVA, "DiVA", TEST_CONVERSATIONS)

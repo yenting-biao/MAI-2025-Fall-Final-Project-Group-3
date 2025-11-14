@@ -42,7 +42,7 @@ pip install -r requirements/diva.txt
 Run the following command (about 23.5GB VRAM required):
 
 ```bash
-bash smoke_test_diva.py
+python smoke_test_diva.py
 ```
 
 

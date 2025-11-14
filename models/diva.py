@@ -56,11 +56,11 @@ class DiVA(BaseModel):
         self.model = AutoModel.from_pretrained(
             model_name,
             trust_remote_code=True,
-            dtype=torch.float16 if "cuda" in self.device else torch.float32,
+            # dtype=torch.float16 if "cuda" in self.device else torch.float32,
         ).to(self.device)
 
         # will store processed inputs between process_input() and generate()
-        self._speech_batch: Optional[List[np.ndarray]] = None
+        self._speech_batch: Optional[List[Optional[np.ndarray]]] = None
         self._style_prompts: Optional[List[str]] = None
 
     def _get_last_user_msg(self, conversation: List[Dict]) -> Dict:
@@ -100,7 +100,7 @@ class DiVA(BaseModel):
                 "User message has neither audio nor text content; nothing to send to DiVA."
             )
 
-        # DiVA expects a *list* of examples
+        # DiVA expects a list of examples
         self._speech_batch = [speech_array] if speech_array is not None else [None]
         self._style_prompts = [style_prompt] if style_prompt else [""]
 

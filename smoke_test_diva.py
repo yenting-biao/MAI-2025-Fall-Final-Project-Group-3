@@ -46,7 +46,7 @@ if __name__ == "__main__":
             {
                 "role": "user",
                 "content": "What does the speaker say in the audio?",
-                "audio_path": "samples/sd-rq_6426446469024899068.wav",
+                "audio_path": "samples/sd-qa_6426446469024899068.wav",
             },
         ]
     ]

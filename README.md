@@ -39,7 +39,7 @@ conda activate diva
 pip install -r requirements/diva.txt
 ```
 
-Run the following command (21GB VRAM required):
+Run the following command (about 23.5GB VRAM required):
 
 ```bash
 bash smoke_test_diva.py

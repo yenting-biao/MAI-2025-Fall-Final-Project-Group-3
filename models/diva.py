@@ -8,6 +8,11 @@ from transformers import AutoModel
 
 from models.basemodel import BaseModel
 
+warnings.filterwarnings(
+    "ignore",
+    message="`torch_dtype` is deprecated! Use `dtype` instead!",
+)
+
 class DiVA(BaseModel):
     """
     Wrapper for DiVA Llama 3 (speech-in / text-in, text-out).
@@ -53,10 +58,11 @@ class DiVA(BaseModel):
         self.sampling_rate = sampling_rate
 
         # DiVA exposes custom generate() via remote code
+        dtype = torch.float16 if self.device == "cuda" else torch.float32
         self.model = AutoModel.from_pretrained(
             model_name,
             trust_remote_code=True,
-            # dtype=torch.float16 if "cuda" in self.device else torch.float32,
+            dtype=dtype,
         ).to(self.device)
 
         # will store processed inputs between process_input() and generate()

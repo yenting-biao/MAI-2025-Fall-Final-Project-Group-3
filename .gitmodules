@@ -1,0 +1,3 @@
+[submodule "models/blsp-emo"]
+	path = models/blsp_emo_package
+	url = git@github.com:cwang621/blsp-emo.git

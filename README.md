@@ -45,4 +45,18 @@ Run the following command (about 23.5GB VRAM required):
 python smoke_test_diva.py
 ```
 
+#### BLSP-Emo
 
+Create and enter the conda env for running DiVA.
+
+```bash
+conda create --name blsp-emo python=3.11 -y  # Must use python=3.11 as BLSP-Emo uses some old packages like torch==2.0.1 that are not installable in newer Python versions
+conda activate blsp-emo
+pip install -r models/blsp_emo_package/requirements.txt
+```
+
+Run the following command (about 20GB VRAM required):
+
+```bash
+python smoke_test_blsp_emo.py
+```

@@ -123,12 +123,9 @@ class BLSP_emo(BaseModel):
                 "min_new_tokens": 1,
                 "do_sample": False,  # Greedy decoding
                 "temperature": 1.0,
-                "top_p": None,
-                "top_k": None,
-                # Note: it looks like top_p=0.5 and top_k=0 were set in the original GenerationConfig,
-                # so if we set do_sample=False here we get a warning. Maybe removing
-                # do_sample=False here and just setting top_p=None and top_k=None 
-                # would silence this warning. This is left as future work.
+                # Note: it looks like top_p=0.5 and top_k=0 were set in the original GenerationConfig. If we set do_sample=False, we get a warning about do_sample=False and top_p/top_k settings both being set, even if we set top_p and top_k to None. Setting top_p=1.0 silences the warning for top_p but the warning for top_k can't seem to be silenced.
+                "top_p": 1.0,
+                "top_k": 1,
                 "num_beams": 1,
                 "num_return_sequences": 1,
                 "bos_token_id": self.nl_tokens[0],

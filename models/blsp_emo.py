@@ -99,10 +99,8 @@ class BLSP_emo(BaseModel):
         self.tokenizer = QWenTokenizer.from_pretrained(path_to_weights)
         self.extractor = WhisperFeatureExtractor.from_pretrained(path_to_weights)
         self.model = Blsp2Model.from_pretrained(
-            path_to_weights, torch_dtype=load_dtype
-        ).to(
-            self.device
-        )  # this takes about 8 minutes on 3090 GPU
+            path_to_weights, torch_dtype=load_dtype, device_map="cuda",
+        )
 
         if self.device == "cuda":
             self.model = self.model.half()

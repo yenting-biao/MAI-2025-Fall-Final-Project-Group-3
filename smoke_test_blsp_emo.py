@@ -9,6 +9,11 @@ def load_model(
     verbose: bool = True,
     model_kwargs: Dict[str, Any] = {},
 ):
+    print("[BLSP-emo] WARNING: Model loading takes about 6-8 minutes and 19.2GiB on a 3090 GPU. Proceed? (y/n): ", end="")
+    proceed = input().strip().lower()
+    if proceed != "y":
+        raise RuntimeError("Model loading aborted by user.")
+
     if verbose:
         print(f"[{name}] Initializing model ...", end=" ")
     t0 = time.time()

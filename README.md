@@ -60,3 +60,5 @@ Run the following command (about 20GB VRAM required):
 ```bash
 python smoke_test_blsp_emo.py
 ```
+
+Note: model weights are automatically downloaded by `blsp_emo.py` using the HuggingFace CLI `hf`. If you want to download the weights manually, you can do so with `hf download cwang621/blsp-emo`; if weights are downloaded manually, remember to specify the path to weights when calling `BLSP_emo()`.

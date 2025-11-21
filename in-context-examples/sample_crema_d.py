@@ -3,7 +3,8 @@ import random
 import shutil
 from argparse import ArgumentParser
 import pandas as pd
-from scipy.fftpack import dst
+import itertools
+
 
 TRANSCRIPTION_MAP = {
     "IEO": "It's eleven o'clock",
@@ -20,14 +21,17 @@ TRANSCRIPTION_MAP = {
     "WSI": "We'll stop in a couple of minutes",
 }
 
+# Two emotions are excluded since our prompt only covers neutral, happy, sad, angry
 EMOTION_MAP = {
-    "ANG": "Anger",
-    "DIS": "Disgust",
-    "FEA": "Fear",
+    "ANG": "Angry",
+    # "DIS": "Disgust",
+    # "FEA": "Fear",
     "HAP": "Happy",
     "NEU": "Neutral",
     "SAD": "Sad",
 }
+
+GENDER_MAP = {}
 
 
 def parse_args():
@@ -59,7 +63,7 @@ def parse_args():
     parser.add_argument(
         "--seed",
         type=int,
-        default=42,
+        default=0,
         help="Random seed for reproducibility.",
     )
     parser.add_argument(
@@ -76,6 +80,23 @@ def get_speaker_gender_metadata(path: str) -> dict:
     return dict(zip(df["ActorID"], df["Sex"]))
 
 
+def copy_a_file(
+    i: int, src_path: str, dst_path: str, selected_file: str, metadata: list
+):
+    output_file = f"{i}.wav"
+    shutil.copy(src_path, dst_path)
+    metadata.append(
+        {
+            "filename": output_file,
+            "gender": GENDER_MAP.get(int(selected_file.split("_")[0]), "Unknown"),
+            "emotion": EMOTION_MAP.get(selected_file.split("_")[2], "Unknown"),
+            "transcription": TRANSCRIPTION_MAP.get(
+                selected_file.split("_")[1], "Unknown"
+            ),
+        }
+    )
+
+
 if __name__ == "__main__":
     args = parse_args()
     random.seed(args.seed)
@@ -89,20 +110,49 @@ if __name__ == "__main__":
         raise ValueError(
             f"Found only {len(wav_files)} wav files, need at least {args.num_files}."
         )
-    selected = random.sample(wav_files, args.num_files)
+    # qualified_wav_files = [
+    #     f for f in wav_files if f.split("_")[2] in EMOTION_MAP.keys()
+    # ]
+    # selected = random.sample(qualified_wav_files, args.num_files)
+    # pairs = list(itertools.product(TRANSCRIPTION_MAP.keys(), EMOTION_MAP.keys()))
+    # random.shuffle(pairs)
+
+    transcription_counter = {key: 0 for key in TRANSCRIPTION_MAP.keys()}
+
+    def get_least_used_transcription():
+        min_count = min(transcription_counter.values())
+        least_used = [k for k, v in transcription_counter.items() if v == min_count]
+        return random.choice(least_used)
 
     metadata = []
-    for i, f in enumerate(selected):
-        output_file = f"{i}.wav"
-        shutil.copy(os.path.join(args.src, f), os.path.join(args.dst, output_file))
-        metadata.append(
-            {
-                "filename": output_file,
-                "gender": GENDER_MAP.get(int(f.split("_")[0]), "Unknown"),
-                "emotion": EMOTION_MAP.get(f.split("_")[2], "Unknown"),
-                "transcription": TRANSCRIPTION_MAP.get(f.split("_")[1], "Unknown"),
-            }
-        )
+    i = 0
+    while i < args.num_files:
+        for emotion_key in EMOTION_MAP.keys():
+            for gender_key in ["Male", "Female"]:
+                if i >= args.num_files:
+                    break
+
+                transcription_key = get_least_used_transcription()
+
+                candidates = [
+                    f
+                    for f in wav_files
+                    if f.split("_")[1] == transcription_key
+                    and f.split("_")[2] == emotion_key
+                    and GENDER_MAP[int(f.split("_")[0])] == gender_key
+                ]
+                if candidates:
+                    selected_file = random.choice(candidates)
+                    wav_files.remove(selected_file)  # Avoid re-selection
+                    copy_a_file(
+                        i,
+                        os.path.join(args.src, selected_file),
+                        os.path.join(args.dst, f"{i}.wav"),
+                        selected_file,
+                        metadata,
+                    )
+                    transcription_counter[transcription_key] += 1
+                    i += 1
 
     df = pd.DataFrame(metadata)
     df.to_csv(args.output_metadata_path, index=False)

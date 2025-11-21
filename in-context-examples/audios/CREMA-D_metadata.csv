@@ -1,51 +1,51 @@
 filename,gender,emotion,transcription
-0.wav,Male,Sad,Don't forget a jacket
-1.wav,Male,Disgust,I think I've seen this before
-2.wav,Male,Anger,The surface is slick
-3.wav,Female,Sad,Don't forget a jacket
-4.wav,Male,Anger,That is exactly what happened
-5.wav,Female,Neutral,I wonder what this is about
-6.wav,Female,Sad,I'm on my way to the meeting
-7.wav,Female,Neutral,I would like a new alarm clock
-8.wav,Male,Fear,I think I have a doctor's appointment
-9.wav,Male,Anger,I would like a new alarm clock
-10.wav,Female,Sad,It's eleven o'clock
-11.wav,Male,Fear,I think I have a doctor's appointment
-12.wav,Male,Neutral,Don't forget a jacket
-13.wav,Male,Sad,That is exactly what happened
-14.wav,Female,Neutral,Don't forget a jacket
-15.wav,Male,Anger,I would like a new alarm clock
-16.wav,Male,Anger,I wonder what this is about
-17.wav,Female,Fear,Don't forget a jacket
-18.wav,Male,Disgust,It's eleven o'clock
-19.wav,Female,Neutral,Maybe tomorrow it will be cold
-20.wav,Female,Happy,Don't forget a jacket
-21.wav,Male,Sad,Don't forget a jacket
-22.wav,Male,Sad,That is exactly what happened
-23.wav,Male,Anger,It's eleven o'clock
-24.wav,Female,Sad,I'm on my way to the meeting
-25.wav,Female,Neutral,I wonder what this is about
-26.wav,Male,Disgust,The surface is slick
-27.wav,Male,Sad,I think I've seen this before
-28.wav,Male,Sad,Maybe tomorrow it will be cold
-29.wav,Male,Happy,I think I've seen this before
-30.wav,Female,Disgust,It's eleven o'clock
-31.wav,Male,Happy,The airplane is almost full
-32.wav,Male,Neutral,The airplane is almost full
-33.wav,Female,Sad,It's eleven o'clock
-34.wav,Female,Neutral,The surface is slick
-35.wav,Male,Happy,It's eleven o'clock
-36.wav,Male,Happy,I think I've seen this before
-37.wav,Female,Fear,Maybe tomorrow it will be cold
-38.wav,Male,Sad,That is exactly what happened
-39.wav,Female,Fear,The surface is slick
-40.wav,Male,Happy,I wonder what this is about
-41.wav,Female,Disgust,That is exactly what happened
-42.wav,Female,Fear,Maybe tomorrow it will be cold
-43.wav,Male,Happy,Don't forget a jacket
-44.wav,Male,Disgust,I think I have a doctor's appointment
-45.wav,Female,Disgust,The surface is slick
-46.wav,Female,Neutral,The airplane is almost full
-47.wav,Male,Neutral,That is exactly what happened
-48.wav,Female,Anger,It's eleven o'clock
-49.wav,Male,Happy,Maybe tomorrow it will be cold
+0.wav,Male,Angry,I would like a new alarm clock
+1.wav,Female,Angry,It's eleven o'clock
+2.wav,Male,Happy,The surface is slick
+3.wav,Female,Happy,Don't forget a jacket
+4.wav,Male,Neutral,We'll stop in a couple of minutes
+5.wav,Female,Neutral,Maybe tomorrow it will be cold
+6.wav,Male,Sad,I think I have a doctor's appointment
+7.wav,Female,Sad,I wonder what this is about
+8.wav,Male,Angry,That is exactly what happened
+9.wav,Female,Angry,The airplane is almost full
+10.wav,Male,Happy,I'm on my way to the meeting
+11.wav,Female,Happy,I think I've seen this before
+12.wav,Male,Neutral,The surface is slick
+13.wav,Female,Neutral,I think I have a doctor's appointment
+14.wav,Male,Sad,That is exactly what happened
+15.wav,Female,Sad,Don't forget a jacket
+16.wav,Male,Angry,The airplane is almost full
+17.wav,Female,Angry,Maybe tomorrow it will be cold
+18.wav,Male,Happy,I think I've seen this before
+19.wav,Female,Happy,It's eleven o'clock
+20.wav,Male,Neutral,I'm on my way to the meeting
+21.wav,Female,Neutral,I would like a new alarm clock
+22.wav,Male,Sad,I wonder what this is about
+23.wav,Female,Sad,We'll stop in a couple of minutes
+24.wav,Male,Angry,I wonder what this is about
+25.wav,Female,Angry,I would like a new alarm clock
+26.wav,Male,Happy,The airplane is almost full
+27.wav,Female,Happy,Maybe tomorrow it will be cold
+28.wav,Male,Neutral,I'm on my way to the meeting
+29.wav,Female,Neutral,Don't forget a jacket
+30.wav,Male,Sad,It's eleven o'clock
+31.wav,Female,Sad,We'll stop in a couple of minutes
+32.wav,Male,Angry,That is exactly what happened
+33.wav,Female,Angry,The surface is slick
+34.wav,Male,Happy,I think I have a doctor's appointment
+35.wav,Female,Happy,I think I've seen this before
+36.wav,Male,Neutral,I wonder what this is about
+37.wav,Female,Neutral,I think I've seen this before
+38.wav,Male,Sad,Maybe tomorrow it will be cold
+39.wav,Female,Sad,That is exactly what happened
+40.wav,Male,Angry,The surface is slick
+41.wav,Female,Angry,I think I have a doctor's appointment
+42.wav,Male,Happy,The airplane is almost full
+43.wav,Female,Happy,I'm on my way to the meeting
+44.wav,Male,Neutral,It's eleven o'clock
+45.wav,Female,Neutral,We'll stop in a couple of minutes
+46.wav,Male,Sad,Don't forget a jacket
+47.wav,Female,Sad,I would like a new alarm clock
+48.wav,Male,Angry,I'm on my way to the meeting
+49.wav,Female,Angry,That is exactly what happened

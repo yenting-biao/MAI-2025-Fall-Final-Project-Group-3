@@ -257,504 +257,504 @@
                 {
                     "audio_path": "general/0.wav",
                     "instruction": "Convert the voice content provided into written language.\nWrite everything in your response using capital letters only.",
-                    "ans": ""
+                    "ans": "I WOULD LIKE A NEW ALARM CLOCK"
                 },
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Write the spoken passage from the provided audio clip.\nEnsure the text you produce is completely in uppercase.",
-                    "ans": ""
+                    "ans": "IT'S ELEVEN O'CLOCK"
                 },
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "Transcribe the provided voice segment into written text.\nProvide a response composed solely of uppercase letters.",
-                    "ans": ""
+                    "ans": "THE SURFACE IS SLICK"
                 },
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Write the words spoken in the provided audio.\nUse capital letters for every character in your response.",
-                    "ans": ""
+                    "ans": "DON'T FORGET A JACKET"
                 },
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Produce a text form of the provided audio message.\nPlease write your answer entirely using capital letters.",
-                    "ans": ""
+                    "ans": "WE'LL STOP IN A COUPLE OF MINUTES"
                 },
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Write the content of the spoken input as text.\nAnswer exclusively with uppercase words and characters.",
-                    "ans": ""
+                    "ans": "MAYBE TOMORROW IT WILL BE COLD"
                 },
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "Transform the given audio message into text form.\nYour reply should contain only uppercase text.",
-                    "ans": ""
+                    "ans": "I THINK I HAVE A DOCTOR'S APPOINTMENT"
                 },
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Transcribe the provided voice message into text.\nWrite your full response entirely in uppercase letters.",
-                    "ans": ""
+                    "ans": "I WONDER WHAT THIS IS ABOUT"
                 },
                 {
                     "audio_path": "general/8.wav",
                     "instruction": "Write down what is said in the provided audio clip.\nAll parts of your reply must be in capital letters.",
-                    "ans": ""
+                    "ans": "THAT IS EXACTLY WHAT HAPPENED"
                 },
                 {
                     "audio_path": "general/9.wav",
                     "instruction": "Put the words from the provided voice recording into text.\nType your entire message in uppercase without exceptions.",
-                    "ans": ""
+                    "ans": "THE AIRPLANE IS ALMOST FULL"
                 },
                 {
                     "audio_path": "general/10.wav",
                     "instruction": "Produce written words corresponding to the provided spoken passage.\nYour entire written output should appear in uppercase type.",
-                    "ans": ""
+                    "ans": "I'M ON MY WAY TO THE MEETING"
                 },
                 {
                     "audio_path": "general/11.wav",
                     "instruction": "Generate the written version of the provided verbal passage.\nThe full content of your answer must be in uppercase format.",
-                    "ans": ""
+                    "ans": "I THINK I'VE SEEN THIS BEFORE"
                 },
                 {
                     "audio_path": "general/12.wav",
                     "instruction": "Turn the audio file provided into a written transcript.\nProvide your response fully in capitalized form.",
-                    "ans": ""
+                    "ans": "THE SURFACE IS SLICK"
                 },
                 {
                     "audio_path": "general/13.wav",
                     "instruction": "Write a text transcript of the spoken recording provided.\nYour entire answer should be written using only uppercase characters.",
-                    "ans": ""
+                    "ans": "I THINK I HAVE A DOCTOR'S APPOINTMENT"
                 },
                 {
                     "audio_path": "general/14.wav",
                     "instruction": "Transcribe the words contained in the given speech.\nRespond with your full text in uppercase characters.",
-                    "ans": ""
+                    "ans": "THAT IS EXACTLY WHAT HAPPENED"
                 },
                 {
                     "audio_path": "general/15.wav",
                     "instruction": "Turn the provided verbal message into a written transcript.\nEvery single word in your reply should be in uppercase format.",
-                    "ans": ""
+                    "ans": "DON'T FORGET A JACKET"
                 },
                 {
                     "audio_path": "general/16.wav",
                     "instruction": "Create a textual version of the provided spoken material.\nMake sure your entire output is in all caps.",
-                    "ans": ""
+                    "ans": "THE AIRPLANE IS ALMOST FULL"
                 },
                 {
                     "audio_path": "general/17.wav",
                     "instruction": "Create a text version of the provided spoken input.\nYour output must contain no lowercase letters at all.",
-                    "ans": ""
+                    "ans": "MAYBE TOMORROW IT WILL BE COLD"
                 },
                 {
                     "audio_path": "general/18.wav",
                     "instruction": "Transcribe the provided audio recording into written form.\nDo not use any lowercase letters in your answer.",
-                    "ans": ""
+                    "ans": "I THINK I'VE SEEN THIS BEFORE"
                 },
                 {
                     "audio_path": "general/19.wav",
                     "instruction": "Turn the provided verbal audio into a text version.\nAnswer the question using all capital letters.",
-                    "ans": ""
+                    "ans": "IT'S ELEVEN O'CLOCK"
                 },
                 {
                     "audio_path": "general/20.wav",
                     "instruction": "Make a written transcription of the provided audio clip.\nMake certain that the response is formatted in full uppercase.",
-                    "ans": ""
+                    "ans": "I'M ON MY WAY TO THE MEETING"
                 },
                 {
                     "audio_path": "general/21.wav",
                     "instruction": "Convert the given audio material into a written passage.\nEnsure your complete response consists of uppercase letters only.",
-                    "ans": ""
+                    "ans": "I WOULD LIKE A NEW ALARM CLOCK"
                 },
                 {
                     "audio_path": "general/22.wav",
                     "instruction": "Reproduce the words spoken in the audio as text.\nConstruct your answer using uppercase text only.",
-                    "ans": ""
+                    "ans": "I WONDER WHAT THIS IS ABOUT"
                 },
                 {
                     "audio_path": "general/23.wav",
                     "instruction": "Transcribe the given verbal audio into written words.\nSubmit your reply in complete uppercase lettering.",
-                    "ans": ""
+                    "ans": "WE'LL STOP IN A COUPLE OF MINUTES"
                 },
                 {
                     "audio_path": "general/24.wav",
                     "instruction": "Turn the provided verbal communication into written form.\nReply using all-capital text throughout your message.",
-                    "ans": ""
+                    "ans": "I WONDER WHAT THIS IS ABOUT"
                 },
                 {
                     "audio_path": "general/25.wav",
                     "instruction": "Generate the textual representation of the provided spoken input.\nWrite everything in your response using capital letters only.",
-                    "ans": ""
+                    "ans": "I WOULD LIKE A NEW ALARM CLOCK"
                 },
                 {
                     "audio_path": "general/26.wav",
                     "instruction": "Transform the provided voice recording into written words.\nEnsure the text you produce is completely in uppercase.",
-                    "ans": ""
+                    "ans": "THE AIRPLANE IS ALMOST FULL"
                 },
                 {
                     "audio_path": "general/27.wav",
                     "instruction": "Transcribe the content of the given audio into written form.\nProvide a response composed solely of uppercase letters.",
-                    "ans": ""
+                    "ans": "MAYBE TOMORROW IT WILL BE COLD"
                 },
                 {
                     "audio_path": "general/28.wav",
                     "instruction": "Write the text equivalent of the provided spoken content.\nUse capital letters for every character in your response.",
-                    "ans": ""
+                    "ans": "I'M ON MY WAY TO THE MEETING"
                 },
                 {
                     "audio_path": "general/29.wav",
                     "instruction": "Write the spoken material from the provided clip in text form.\nPlease write your answer entirely using capital letters.",
-                    "ans": ""
+                    "ans": "DON'T FORGET A JACKET"
                 },
                 {
                     "audio_path": "general/30.wav",
                     "instruction": "Turn the provided oral message into written words.\nAnswer exclusively with uppercase words and characters.",
-                    "ans": ""
+                    "ans": "IT'S ELEVEN O'CLOCK"
                 },
                 {
                     "audio_path": "general/31.wav",
                     "instruction": "Create a written transcript of the provided voice data.\nYour reply should contain only uppercase text.",
-                    "ans": ""
+                    "ans": "WE'LL STOP IN A COUPLE OF MINUTES"
                 },
                 {
                     "audio_path": "general/32.wav",
                     "instruction": "Produce a written transcription of the given speech.\nWrite your full response entirely in uppercase letters.",
-                    "ans": ""
+                    "ans": "THAT IS EXACTLY WHAT HAPPENED"
                 },
                 {
                     "audio_path": "general/33.wav",
                     "instruction": "Change the provided spoken material into written language.\nAll parts of your reply must be in capital letters.",
-                    "ans": ""
+                    "ans": "THE SURFACE IS SLICK"
                 },
                 {
                     "audio_path": "general/34.wav",
                     "instruction": "Render the given audio content into written words.\nType your entire message in uppercase without exceptions.",
-                    "ans": ""
+                    "ans": "I THINK I HAVE A DOCTOR'S APPOINTMENT"
                 },
                 {
                     "audio_path": "general/35.wav",
                     "instruction": "Convert the provided vocal passage into written language.\nYour entire written output should appear in uppercase type.",
-                    "ans": ""
+                    "ans": "I THINK I'VE SEEN THIS BEFORE"
                 },
                 {
                     "audio_path": "general/36.wav",
                     "instruction": "Write the text version of the provided speech.\nThe full content of your answer must be in uppercase format.",
-                    "ans": ""
+                    "ans": "I WONDER WHAT THIS IS ABOUT"
                 },
                 {
                     "audio_path": "general/37.wav",
                     "instruction": "Make a text representation of the provided voice message.\nProvide your response fully in capitalized form.",
-                    "ans": ""
+                    "ans": "I THINK I'VE SEEN THIS BEFORE"
                 },
                 {
                     "audio_path": "general/38.wav",
                     "instruction": "Transform the spoken passage into a written version.\nYour entire answer should be written using only uppercase characters.",
-                    "ans": ""
+                    "ans": "MAYBE TOMORROW IT WILL BE COLD"
                 },
                 {
                     "audio_path": "general/39.wav",
                     "instruction": "Transform the audio provided into a text transcript.\nRespond with your full text in uppercase characters.",
-                    "ans": ""
+                    "ans": "THAT IS EXACTLY WHAT HAPPENED"
                 },
                 {
                     "audio_path": "general/40.wav",
                     "instruction": "Transcribe the speech contained in the provided audio.\nEvery single word in your reply should be in uppercase format.",
-                    "ans": ""
+                    "ans": "THE SURFACE IS SLICK"
                 },
                 {
                     "audio_path": "general/41.wav",
                     "instruction": "Make a written record of the provided speech segment.\nMake sure your entire output is in all caps.",
-                    "ans": ""
+                    "ans": "I THINK I HAVE A DOCTOR'S APPOINTMENT"
                 },
                 {
                     "audio_path": "general/42.wav",
                     "instruction": "Convert the provided speech sample into written language.\nYour output must contain no lowercase letters at all.",
-                    "ans": ""
+                    "ans": "THE AIRPLANE IS ALMOST FULL"
                 },
                 {
                     "audio_path": "general/43.wav",
                     "instruction": "Write out the words from the provided audio recording.\nDo not use any lowercase letters in your answer.",
-                    "ans": ""
+                    "ans": "I'M ON MY WAY TO THE MEETING"
                 },
                 {
                     "audio_path": "general/44.wav",
                     "instruction": "Translate the given spoken recording into written form.\nAnswer the question using all capital letters.",
-                    "ans": ""
+                    "ans": "IT'S ELEVEN O'CLOCK"
                 },
                 {
                     "audio_path": "general/45.wav",
                     "instruction": "Transcribe the provided sound recording into words.\nMake certain that the response is formatted in full uppercase.",
-                    "ans": ""
+                    "ans": "WE'LL STOP IN A COUPLE OF MINUTES"
                 },
                 {
                     "audio_path": "general/46.wav",
                     "instruction": "Convert the audio you received into its written equivalent.\nEnsure your complete response consists of uppercase letters only.",
-                    "ans": ""
+                    "ans": "DON'T FORGET A JACKET"
                 },
                 {
                     "audio_path": "general/47.wav",
                     "instruction": "Produce a written output of the provided audio data.\nConstruct your answer using uppercase text only.",
-                    "ans": ""
+                    "ans": "I WOULD LIKE A NEW ALARM CLOCK"
                 },
                 {
                     "audio_path": "general/48.wav",
                     "instruction": "Turn the speech in the audio file into a text transcript.\nSubmit your reply in complete uppercase lettering.",
-                    "ans": ""
+                    "ans": "I'M ON MY WAY TO THE MEETING"
                 },
                 {
                     "audio_path": "general/49.wav",
                     "instruction": "Render the provided verbal content into text.\nReply using all-capital text throughout your message.",
-                    "ans": ""
+                    "ans": "THAT IS EXACTLY WHAT HAPPENED"
                 }
             ],
             "change_case:english_lowercase": [
                 {
                     "audio_path": "general/0.wav",
                     "instruction": "Write out the words from the provided audio recording.\nGenerate a response fully in lowercase, without exceptions.",
-                    "ans": ""
+                    "ans": "i would like a new alarm clock"
                 },
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Transcribe the provided sound recording into words.\nYour entire message should consist solely of lowercase text.",
-                    "ans": ""
+                    "ans": "it's eleven o'clock"
                 },
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "Put the words from the provided voice recording into text.\nYour full reply must be written in lowercase letters only.",
-                    "ans": ""
+                    "ans": "the surface is slick"
                 },
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Transcribe the speech contained in the provided audio.\nProduce a response composed exclusively of lowercase characters.",
-                    "ans": ""
+                    "ans": "don't forget a jacket"
                 },
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Turn the speech in the audio file into a text transcript.\nMake sure your entire output is in lowercase text.",
-                    "ans": ""
+                    "ans": "we'll stop in a couple of minutes"
                 },
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Write the text equivalent of the provided spoken content.\nEnsure the entire response is lowercase from start to finish.",
-                    "ans": ""
+                    "ans": "maybe tomorrow it will be cold"
                 },
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "Transform the given audio message into text form.\nNo uppercase letters should appear anywhere in your text.",
-                    "ans": ""
+                    "ans": "i think i have a doctor's appointment"
                 },
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Transform the audio provided into a text transcript.\nWrite your complete response without a single uppercase letter.",
-                    "ans": ""
+                    "ans": "i wonder what this is about"
                 },
                 {
                     "audio_path": "general/8.wav",
                     "instruction": "Transform the spoken passage into a written version.\nMake certain the entire message is composed of lowercase text only.",
-                    "ans": ""
+                    "ans": "that is exactly what happened"
                 },
                 {
                     "audio_path": "general/9.wav",
                     "instruction": "Transcribe the given verbal audio into written words.\nYour output must contain nothing but lowercase letters.",
-                    "ans": ""
+                    "ans": "the airplane is almost full"
                 },
                 {
                     "audio_path": "general/10.wav",
                     "instruction": "Turn the provided verbal communication into written form.\nAll letters in your reply must be lowercase—no capitals at all.",
-                    "ans": ""
+                    "ans": "i'm on my way to the meeting"
                 },
                 {
                     "audio_path": "general/11.wav",
                     "instruction": "Translate the given spoken recording into written form.\nUse lowercase characters exclusively throughout your entire reply.",
-                    "ans": ""
+                    "ans": "i think i've seen this before"
                 },
                 {
                     "audio_path": "general/12.wav",
                     "instruction": "Convert the provided speech sample into written language.\nOnly lowercase letters are permitted in your answer.",
-                    "ans": ""
+                    "ans": "the surface is slick"
                 },
                 {
                     "audio_path": "general/13.wav",
                     "instruction": "Write the spoken passage from the provided audio clip.\nType your answer completely in lowercase form.",
-                    "ans": ""
+                    "ans": "i think i have a doctor's appointment"
                 },
                 {
                     "audio_path": "general/14.wav",
                     "instruction": "Transcribe the provided audio recording into written form.\nDo not use any capital letters in your response.",
-                    "ans": ""
+                    "ans": "that is exactly what happened"
                 },
                 {
                     "audio_path": "general/15.wav",
                     "instruction": "Generate the textual representation of the provided spoken input.\nRespond only with lowercase letters in your entire message.",
-                    "ans": ""
+                    "ans": "don't forget a jacket"
                 },
                 {
                     "audio_path": "general/16.wav",
                     "instruction": "Write the spoken material from the provided clip in text form.\nUse lowercase for all characters in your answer.",
-                    "ans": ""
+                    "ans": "the airplane is almost full"
                 },
                 {
                     "audio_path": "general/17.wav",
                     "instruction": "Create a text version of the provided spoken input.\nPlease write everything in lowercase form only.",
-                    "ans": ""
+                    "ans": "maybe tomorrow it will be cold"
                 },
                 {
                     "audio_path": "general/18.wav",
                     "instruction": "Convert the voice content provided into written language.\nYour written response should be lowercase in every word and sentence.",
-                    "ans": ""
+                    "ans": "i think i've seen this before"
                 },
                 {
                     "audio_path": "general/19.wav",
                     "instruction": "Make a text representation of the provided voice message.\nWrite all content in your response using only lowercase alphabets.",
-                    "ans": ""
+                    "ans": "it's eleven o'clock"
                 },
                 {
                     "audio_path": "general/20.wav",
                     "instruction": "Transcribe the provided voice segment into written text.\nConstruct your answer entirely using lowercase alphabetic characters.",
-                    "ans": ""
+                    "ans": "i'm on my way to the meeting"
                 },
                 {
                     "audio_path": "general/21.wav",
                     "instruction": "Reproduce the words spoken in the audio as text.\nWrite your reply so that every letter is lowercase.",
-                    "ans": ""
+                    "ans": "i would like a new alarm clock"
                 },
                 {
                     "audio_path": "general/22.wav",
                     "instruction": "Transcribe the provided voice message into text.\nAnswer entirely using lowercase characters.",
-                    "ans": ""
+                    "ans": "i wonder what this is about"
                 },
                 {
                     "audio_path": "general/23.wav",
                     "instruction": "Render the provided verbal content into text.\nFormat your reply so that it uses lowercase letters only.",
-                    "ans": ""
+                    "ans": "we'll stop in a couple of minutes"
                 },
                 {
                     "audio_path": "general/24.wav",
                     "instruction": "Transform the provided voice recording into written words.\nKeep all text in lowercase—no uppercase allowed.",
-                    "ans": ""
+                    "ans": "i wonder what this is about"
                 },
                 {
                     "audio_path": "general/25.wav",
                     "instruction": "Produce a written output of the provided audio data.\nGenerate a response fully in lowercase, without exceptions.",
-                    "ans": ""
+                    "ans": "i would like a new alarm clock"
                 },
                 {
                     "audio_path": "general/26.wav",
                     "instruction": "Transcribe the words contained in the given speech.\nYour entire message should consist solely of lowercase text.",
-                    "ans": ""
+                    "ans": "the airplane is almost full"
                 },
                 {
                     "audio_path": "general/27.wav",
                     "instruction": "Generate the written version of the provided verbal passage.\nYour full reply must be written in lowercase letters only.",
-                    "ans": ""
+                    "ans": "maybe tomorrow it will be cold"
                 },
                 {
                     "audio_path": "general/28.wav",
                     "instruction": "Make a written transcription of the provided audio clip.\nProduce a response composed exclusively of lowercase characters.",
-                    "ans": ""
+                    "ans": "i'm on my way to the meeting"
                 },
                 {
                     "audio_path": "general/29.wav",
                     "instruction": "Convert the given audio material into a written passage.\nMake sure your entire output is in lowercase text.",
-                    "ans": ""
+                    "ans": "don't forget a jacket"
                 },
                 {
                     "audio_path": "general/30.wav",
                     "instruction": "Produce a written transcription of the given speech.\nEnsure the entire response is lowercase from start to finish.",
-                    "ans": ""
+                    "ans": "it's eleven o'clock"
                 },
                 {
                     "audio_path": "general/31.wav",
                     "instruction": "Turn the provided verbal audio into a text version.\nNo uppercase letters should appear anywhere in your text.",
-                    "ans": ""
+                    "ans": "we'll stop in a couple of minutes"
                 },
                 {
                     "audio_path": "general/32.wav",
                     "instruction": "Turn the audio file provided into a written transcript.\nWrite your complete response without a single uppercase letter.",
-                    "ans": ""
+                    "ans": "that is exactly what happened"
                 },
                 {
                     "audio_path": "general/33.wav",
                     "instruction": "Write a text transcript of the spoken recording provided.\nMake certain the entire message is composed of lowercase text only.",
-                    "ans": ""
+                    "ans": "the surface is slick"
                 },
                 {
                     "audio_path": "general/34.wav",
                     "instruction": "Transcribe the content of the given audio into written form.\nYour output must contain nothing but lowercase letters.",
-                    "ans": ""
+                    "ans": "i think i have a doctor's appointment"
                 },
                 {
                     "audio_path": "general/35.wav",
                     "instruction": "Change the provided spoken material into written language.\nAll letters in your reply must be lowercase—no capitals at all.",
-                    "ans": ""
+                    "ans": "i think i've seen this before"
                 },
                 {
                     "audio_path": "general/36.wav",
                     "instruction": "Create a textual version of the provided spoken material.\nUse lowercase characters exclusively throughout your entire reply.",
-                    "ans": ""
+                    "ans": "i wonder what this is about"
                 },
                 {
                     "audio_path": "general/37.wav",
                     "instruction": "Produce written words corresponding to the provided spoken passage.\nOnly lowercase letters are permitted in your answer.",
-                    "ans": ""
+                    "ans": "i think i've seen this before"
                 },
                 {
                     "audio_path": "general/38.wav",
                     "instruction": "Convert the provided vocal passage into written language.\nType your answer completely in lowercase form.",
-                    "ans": ""
+                    "ans": "maybe tomorrow it will be cold"
                 },
                 {
                     "audio_path": "general/39.wav",
                     "instruction": "Turn the provided oral message into written words.\nDo not use any capital letters in your response.",
-                    "ans": ""
+                    "ans": "that is exactly what happened"
                 },
                 {
                     "audio_path": "general/40.wav",
                     "instruction": "Make a written record of the provided speech segment.\nRespond only with lowercase letters in your entire message.",
-                    "ans": ""
+                    "ans": "the surface is slick"
                 },
                 {
                     "audio_path": "general/41.wav",
                     "instruction": "Write down what is said in the provided audio clip.\nUse lowercase for all characters in your answer.",
-                    "ans": ""
+                    "ans": "i think i have a doctor's appointment"
                 },
                 {
                     "audio_path": "general/42.wav",
                     "instruction": "Render the given audio content into written words.\nPlease write everything in lowercase form only.",
-                    "ans": ""
+                    "ans": "the airplane is almost full"
                 },
                 {
                     "audio_path": "general/43.wav",
                     "instruction": "Produce a text form of the provided audio message.\nYour written response should be lowercase in every word and sentence.",
-                    "ans": ""
+                    "ans": "i'm on my way to the meeting"
                 },
                 {
                     "audio_path": "general/44.wav",
                     "instruction": "Create a written transcript of the provided voice data.\nWrite all content in your response using only lowercase alphabets.",
-                    "ans": ""
+                    "ans": "it's eleven o'clock"
                 },
                 {
                     "audio_path": "general/45.wav",
                     "instruction": "Convert the audio you received into its written equivalent.\nConstruct your answer entirely using lowercase alphabetic characters.",
-                    "ans": ""
+                    "ans": "we'll stop in a couple of minutes"
                 },
                 {
                     "audio_path": "general/46.wav",
                     "instruction": "Write the content of the spoken input as text.\nWrite your reply so that every letter is lowercase.",
-                    "ans": ""
+                    "ans": "don't forget a jacket"
                 },
                 {
                     "audio_path": "general/47.wav",
                     "instruction": "Write the text version of the provided speech.\nAnswer entirely using lowercase characters.",
-                    "ans": ""
+                    "ans": "i would like a new alarm clock"
                 },
                 {
                     "audio_path": "general/48.wav",
                     "instruction": "Turn the provided verbal message into a written transcript.\nFormat your reply so that it uses lowercase letters only.",
-                    "ans": ""
+                    "ans": "i'm on my way to the meeting"
                 },
                 {
                     "audio_path": "general/49.wav",
                     "instruction": "Write the words spoken in the provided audio.\nKeep all text in lowercase—no uppercase allowed.",
-                    "ans": ""
+                    "ans": "that is exactly what happened"
                 }
             ],
             "detectable_format:json_format": [
@@ -3041,504 +3041,504 @@
                 {
                     "audio_path": "general/0.wav",
                     "instruction": "Analyze the speaker’s vocal characteristics—including tone, pitch, tempo, and loudness—to determine which emotion is being expressed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nThe full content of your answer must be in uppercase format.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Listen carefully to how tone, pitch, and pacing patterns reveal subtle emotional information. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour entire written output should appear in uppercase type.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "Consider the variations in tone, pitch, and volume across the utterance to deduce the underlying emotional state. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnsure the text you produce is completely in uppercase.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Listen to changes in tone brightness, intensity, and pacing to infer the emotion being conveyed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nType your entire message in uppercase without exceptions.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Evaluate the speaker’s emotion by analyzing vocal strength, tone fluctuations, and timing consistency. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAll parts of your reply must be in capital letters.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Determine the emotion being conveyed by analyzing tone, pitch movement, speech rhythm, and loudness. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnsure your complete response consists of uppercase letters only.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "Focus on whether the tone and pacing convey calmness, enthusiasm, frustration, or sorrow. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nRespond with your full text in uppercase characters.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Pay attention to whether the tone sounds lively, heavy, sharp, or calm, as these qualities indicate emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nUse capital letters for every character in your response.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/8.wav",
                     "instruction": "Examine the way the speaker’s voice modulates in tone and volume to reveal their emotional attitude. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAnswer exclusively with uppercase words and characters.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/9.wav",
                     "instruction": "Pay attention to the resonance, volume, and tone of the voice, which often reveal emotional nuances. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour reply should contain only uppercase text.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/10.wav",
                     "instruction": "Listen for emotional variation through tone dynamics, tempo changes, and volume shifts. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEvery single word in your reply should be in uppercase format.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/11.wav",
                     "instruction": "Focus on the expressiveness of the speaker’s tone, pitch, and rhythm to identify emotional intent. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nReply using all-capital text throughout your message.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/12.wav",
                     "instruction": "Infer emotion by identifying shifts in tone, pitch stability, and speech rhythm. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nSubmit your reply in complete uppercase lettering.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/13.wav",
                     "instruction": "Listen closely to how the tone and pitch of the voice evolve during the utterance to determine emotional intent. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite your full response entirely in uppercase letters.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/14.wav",
                     "instruction": "Carefully examine tone, pitch, and cadence to distinguish whether the emotion conveyed is positive, negative, or neutral. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake sure your entire output is in all caps.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/15.wav",
                     "instruction": "Examine the tonal quality, pacing, and pitch of the voice, as well as contextual cues, to identify the speaker’s emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nPlease write your answer entirely using capital letters.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/16.wav",
                     "instruction": "Evaluate whether the tone sounds flat, bright, sharp, or tense to detect the underlying emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour entire answer should be written using only uppercase characters.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/17.wav",
                     "instruction": "Identify emotional cues by focusing on how the speaker’s tone, pitch, and speed fluctuate throughout their speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nProvide a response composed solely of uppercase letters.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/18.wav",
                     "instruction": "Observe the degree of intensity and variation in pitch and tone to determine the speaker’s emotional state. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nConstruct your answer using uppercase text only.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/19.wav",
                     "instruction": "Examine fluctuations in pitch, rhythm, and loudness that could suggest emotional tension or relaxation. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake certain that the response is formatted in full uppercase.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/20.wav",
                     "instruction": "Determine the emotion expressed by analyzing the voice’s tonal warmth, pitch movement, and timing. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nDo not use any lowercase letters in your answer.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/21.wav",
                     "instruction": "Notice whether the speaker’s voice sounds calm, tense, energetic, or subdued based on tone, pitch, and pace. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nProvide your response fully in capitalized form.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/22.wav",
                     "instruction": "Listen for emotion-revealing features such as rising or falling pitch, stress, and pacing patterns. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite everything in your response using capital letters only.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/23.wav",
                     "instruction": "Listen for vocal cues such as tone, pitch, volume, and tempo, and determine the emotional quality of the speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour output must contain no lowercase letters at all.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/24.wav",
                     "instruction": "Listen for emotional indicators in tone, pitch, intensity, and pace that might reveal the speaker’s current mood. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAnswer the question using all capital letters.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/25.wav",
                     "instruction": "Focus on the expressive dynamics of the voice—pitch, tone, rhythm, and emphasis—to detect the underlying emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nThe full content of your answer must be in uppercase format.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/26.wav",
                     "instruction": "Listen for the emotional undertone in the voice by examining tone color, pitch range, and speed of delivery. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour entire written output should appear in uppercase type.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/27.wav",
                     "instruction": "Pay attention to how the voice rises and falls in pitch and tone, and how the pacing changes to indicate emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnsure the text you produce is completely in uppercase.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/28.wav",
                     "instruction": "Analyze whether the tone is steady or fluctuating, loud or soft, to deduce the emotion behind the speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nType your entire message in uppercase without exceptions.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/29.wav",
                     "instruction": "Analyze the auditory features of the voice—tone, pitch, pace, and volume—to infer the emotion expressed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAll parts of your reply must be in capital letters.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/30.wav",
                     "instruction": "Evaluate the speaker’s emotional expression by listening for variations in tone, loudness, and pacing. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnsure your complete response consists of uppercase letters only.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/31.wav",
                     "instruction": "Listen for emotional hints in tone inflection, speaking speed, and overall vocal energy. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nRespond with your full text in uppercase characters.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/32.wav",
                     "instruction": "Focus on how the speaker’s vocal delivery—speed, tone, and pitch—reflects emotional cues. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nUse capital letters for every character in your response.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/33.wav",
                     "instruction": "Evaluate the emotional character of the utterance by listening to variations in tone, pitch, and flow. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAnswer exclusively with uppercase words and characters.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/34.wav",
                     "instruction": "Assess emotional tone by listening to the interplay between pitch height, speech tempo, and vocal emphasis. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour reply should contain only uppercase text.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/35.wav",
                     "instruction": "Focus on the melodic contour of the speaker’s voice—its rise and fall—to interpret emotional meaning. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEvery single word in your reply should be in uppercase format.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/36.wav",
                     "instruction": "Listen for subtle emotional cues in pitch contour, tone balance, and pacing rhythm. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nReply using all-capital text throughout your message.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/37.wav",
                     "instruction": "Assess the emotional tone of the utterance by analyzing pitch, rhythm, tone, and speech energy. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nSubmit your reply in complete uppercase lettering.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/38.wav",
                     "instruction": "Carefully evaluate how the speaker’s tone, pacing, and pitch convey feelings through subtle changes in delivery. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite your full response entirely in uppercase letters.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/39.wav",
                     "instruction": "Pay attention to how vocal pitch, tone, and articulation change to express different emotions. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake sure your entire output is in all caps.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/40.wav",
                     "instruction": "Identify the emotional state reflected in the speaker’s tone, speech rate, and vocal strength. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nPlease write your answer entirely using capital letters.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/41.wav",
                     "instruction": "Observe how the tone and pace of speech evolve, and use these auditory signals to interpret emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour entire answer should be written using only uppercase characters.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/42.wav",
                     "instruction": "Pay attention to rhythmic and tonal shifts in the voice to uncover the emotional content behind the words. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nProvide a response composed solely of uppercase letters.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/43.wav",
                     "instruction": "Listen carefully to the emotional texture of the voice through tone, pitch variation, and pacing. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nConstruct your answer using uppercase text only.",
-                    "ans": ""
+                    "ans": "HAPPY"
                 },
                 {
                     "audio_path": "general/44.wav",
                     "instruction": "Focus on how the speaker’s tone, pitch, and rhythm shift throughout the utterance to infer the emotion behind their words. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake certain that the response is formatted in full uppercase.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/45.wav",
                     "instruction": "Analyze tone and rhythm patterns in the speech to infer the speaker’s emotional intention. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nDo not use any lowercase letters in your answer.",
-                    "ans": ""
+                    "ans": "NEUTRAL"
                 },
                 {
                     "audio_path": "general/46.wav",
                     "instruction": "Determine the emotional category by listening for patterns of stress, tone, and pace in the voice. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nProvide your response fully in capitalized form.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/47.wav",
                     "instruction": "Identify the emotional signal in the utterance by analyzing tone stability, pitch variation, and speech tempo. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite everything in your response using capital letters only.",
-                    "ans": ""
+                    "ans": "SAD"
                 },
                 {
                     "audio_path": "general/48.wav",
                     "instruction": "Identify emotion by detecting patterns in tone, pitch modulation, and pacing variation. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour output must contain no lowercase letters at all.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 },
                 {
                     "audio_path": "general/49.wav",
                     "instruction": "Observe whether the speaker’s tone is sharp, soft, or flat, and use these qualities to determine emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAnswer the question using all capital letters.",
-                    "ans": ""
+                    "ans": "ANGRY"
                 }
             ],
             "change_case:english_lowercase": [
                 {
                     "audio_path": "general/0.wav",
                     "instruction": "Carefully examine tone, pitch, and cadence to distinguish whether the emotion conveyed is positive, negative, or neutral. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour output must contain nothing but lowercase letters.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Consider the variations in tone, pitch, and volume across the utterance to deduce the underlying emotional state. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nUse lowercase for all characters in your answer.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "Evaluate whether the tone sounds flat, bright, sharp, or tense to detect the underlying emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake sure your entire output is in lowercase text.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Evaluate the speaker’s emotion by analyzing vocal strength, tone fluctuations, and timing consistency. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nDo not use any capital letters in your response.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Pay attention to the resonance, volume, and tone of the voice, which often reveal emotional nuances. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAnswer entirely using lowercase characters.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Infer emotion by identifying shifts in tone, pitch stability, and speech rhythm. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nOnly lowercase letters are permitted in your answer.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "Focus on the expressive dynamics of the voice—pitch, tone, rhythm, and emphasis—to detect the underlying emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nRespond only with lowercase letters in your entire message.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Carefully evaluate how the speaker’s tone, pacing, and pitch convey feelings through subtle changes in delivery. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nKeep all text in lowercase—no uppercase allowed.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/8.wav",
                     "instruction": "Listen closely to how the tone and pitch of the voice evolve during the utterance to determine emotional intent. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nConstruct your answer entirely using lowercase alphabetic characters.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/9.wav",
                     "instruction": "Observe the degree of intensity and variation in pitch and tone to determine the speaker’s emotional state. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite your complete response without a single uppercase letter.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/10.wav",
                     "instruction": "Pay attention to whether the tone sounds lively, heavy, sharp, or calm, as these qualities indicate emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nNo uppercase letters should appear anywhere in your text.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/11.wav",
                     "instruction": "Listen for emotional hints in tone inflection, speaking speed, and overall vocal energy. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nGenerate a response fully in lowercase, without exceptions.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/12.wav",
                     "instruction": "Listen for emotion-revealing features such as rising or falling pitch, stress, and pacing patterns. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnsure the entire response is lowercase from start to finish.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/13.wav",
                     "instruction": "Listen to changes in tone brightness, intensity, and pacing to infer the emotion being conveyed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAll letters in your reply must be lowercase—no capitals at all.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/14.wav",
                     "instruction": "Listen carefully to how tone, pitch, and pacing patterns reveal subtle emotional information. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake certain the entire message is composed of lowercase text only.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/15.wav",
                     "instruction": "Listen for vocal cues such as tone, pitch, volume, and tempo, and determine the emotional quality of the speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour full reply must be written in lowercase letters only.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/16.wav",
                     "instruction": "Focus on how the speaker’s vocal delivery—speed, tone, and pitch—reflects emotional cues. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nFormat your reply so that it uses lowercase letters only.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/17.wav",
                     "instruction": "Focus on the melodic contour of the speaker’s voice—its rise and fall—to interpret emotional meaning. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nType your answer completely in lowercase form.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/18.wav",
                     "instruction": "Examine fluctuations in pitch, rhythm, and loudness that could suggest emotional tension or relaxation. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nPlease write everything in lowercase form only.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/19.wav",
                     "instruction": "Notice whether the speaker’s voice sounds calm, tense, energetic, or subdued based on tone, pitch, and pace. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nUse lowercase characters exclusively throughout your entire reply.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/20.wav",
                     "instruction": "Listen for the emotional undertone in the voice by examining tone color, pitch range, and speed of delivery. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour entire message should consist solely of lowercase text.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/21.wav",
                     "instruction": "Examine the way the speaker’s voice modulates in tone and volume to reveal their emotional attitude. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour written response should be lowercase in every word and sentence.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/22.wav",
                     "instruction": "Focus on the expressiveness of the speaker’s tone, pitch, and rhythm to identify emotional intent. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nProduce a response composed exclusively of lowercase characters.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/23.wav",
                     "instruction": "Focus on whether the tone and pacing convey calmness, enthusiasm, frustration, or sorrow. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite all content in your response using only lowercase alphabets.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/24.wav",
                     "instruction": "Focus on how the speaker’s tone, pitch, and rhythm shift throughout the utterance to infer the emotion behind their words. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite your reply so that every letter is lowercase.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/25.wav",
                     "instruction": "Listen for subtle emotional cues in pitch contour, tone balance, and pacing rhythm. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour output must contain nothing but lowercase letters.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/26.wav",
                     "instruction": "Listen carefully to the emotional texture of the voice through tone, pitch variation, and pacing. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nUse lowercase for all characters in your answer.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/27.wav",
                     "instruction": "Identify the emotional signal in the utterance by analyzing tone stability, pitch variation, and speech tempo. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake sure your entire output is in lowercase text.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/28.wav",
                     "instruction": "Identify emotion by detecting patterns in tone, pitch modulation, and pacing variation. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nDo not use any capital letters in your response.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/29.wav",
                     "instruction": "Analyze the speaker’s vocal characteristics—including tone, pitch, tempo, and loudness—to determine which emotion is being expressed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAnswer entirely using lowercase characters.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/30.wav",
                     "instruction": "Listen for emotional variation through tone dynamics, tempo changes, and volume shifts. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nOnly lowercase letters are permitted in your answer.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/31.wav",
                     "instruction": "Listen for emotional indicators in tone, pitch, intensity, and pace that might reveal the speaker’s current mood. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nRespond only with lowercase letters in your entire message.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/32.wav",
                     "instruction": "Pay attention to rhythmic and tonal shifts in the voice to uncover the emotional content behind the words. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nKeep all text in lowercase—no uppercase allowed.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/33.wav",
                     "instruction": "Identify the emotional state reflected in the speaker’s tone, speech rate, and vocal strength. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nConstruct your answer entirely using lowercase alphabetic characters.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/34.wav",
                     "instruction": "Analyze whether the tone is steady or fluctuating, loud or soft, to deduce the emotion behind the speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite your complete response without a single uppercase letter.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/35.wav",
                     "instruction": "Analyze tone and rhythm patterns in the speech to infer the speaker’s emotional intention. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nNo uppercase letters should appear anywhere in your text.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/36.wav",
                     "instruction": "Determine the emotion being conveyed by analyzing tone, pitch movement, speech rhythm, and loudness. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nGenerate a response fully in lowercase, without exceptions.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/37.wav",
                     "instruction": "Examine the tonal quality, pacing, and pitch of the voice, as well as contextual cues, to identify the speaker’s emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnsure the entire response is lowercase from start to finish.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/38.wav",
                     "instruction": "Determine the emotion expressed by analyzing the voice’s tonal warmth, pitch movement, and timing. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAll letters in your reply must be lowercase—no capitals at all.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/39.wav",
                     "instruction": "Observe whether the speaker’s tone is sharp, soft, or flat, and use these qualities to determine emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake certain the entire message is composed of lowercase text only.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/40.wav",
                     "instruction": "Assess the emotional tone of the utterance by analyzing pitch, rhythm, tone, and speech energy. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour full reply must be written in lowercase letters only.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/41.wav",
                     "instruction": "Pay attention to how the voice rises and falls in pitch and tone, and how the pacing changes to indicate emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nFormat your reply so that it uses lowercase letters only.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/42.wav",
                     "instruction": "Analyze the auditory features of the voice—tone, pitch, pace, and volume—to infer the emotion expressed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nType your answer completely in lowercase form.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/43.wav",
                     "instruction": "Evaluate the speaker’s emotional expression by listening for variations in tone, loudness, and pacing. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nPlease write everything in lowercase form only.",
-                    "ans": ""
+                    "ans": "happy"
                 },
                 {
                     "audio_path": "general/44.wav",
                     "instruction": "Assess emotional tone by listening to the interplay between pitch height, speech tempo, and vocal emphasis. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nUse lowercase characters exclusively throughout your entire reply.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/45.wav",
                     "instruction": "Pay attention to how vocal pitch, tone, and articulation change to express different emotions. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour entire message should consist solely of lowercase text.",
-                    "ans": ""
+                    "ans": "neutral"
                 },
                 {
                     "audio_path": "general/46.wav",
                     "instruction": "Identify emotional cues by focusing on how the speaker’s tone, pitch, and speed fluctuate throughout their speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour written response should be lowercase in every word and sentence.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/47.wav",
                     "instruction": "Observe how the tone and pace of speech evolve, and use these auditory signals to interpret emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nProduce a response composed exclusively of lowercase characters.",
-                    "ans": ""
+                    "ans": "sad"
                 },
                 {
                     "audio_path": "general/48.wav",
                     "instruction": "Evaluate the emotional character of the utterance by listening to variations in tone, pitch, and flow. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite all content in your response using only lowercase alphabets.",
-                    "ans": ""
+                    "ans": "angry"
                 },
                 {
                     "audio_path": "general/49.wav",
                     "instruction": "Determine the emotional category by listening for patterns of stress, tone, and pace in the voice. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrite your reply so that every letter is lowercase.",
-                    "ans": ""
+                    "ans": "angry"
                 }
             ],
             "detectable_format:json_format": [
@@ -5822,507 +5822,509 @@
         ],
         "closed_ended_questions": {
             "change_case:english_capital": [
-                {
-                    "audio_path": "general/0.wav",
-                    "instruction": "Analyze the speech and identify the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nYour reply should contain only uppercase text.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/1.wav",
-                    "instruction": "Based on how the speaker sounds, identify their gender. Choose the answer from \"Male\" or \"Female\"\nYour entire answer should be written using only uppercase characters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/2.wav",
-                    "instruction": "From the given recording, decide if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nPlease write your answer entirely using capital letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/3.wav",
-                    "instruction": "Listen to the speaker’s voice and identify their gender. Choose the answer from \"Man\" or \"Woman\"\nDo not use any lowercase letters in your answer.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/4.wav",
-                    "instruction": "Analyze the speaker’s voice and specify their gender. Choose the answer from \"Man\" or \"Woman\"\nAnswer the question using all capital letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/5.wav",
-                    "instruction": "Use the audio cues to infer if the voice belongs to a male or a female. Choose the answer from \"Man\" or \"Woman\"\nRespond with your full text in uppercase characters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/6.wav",
-                    "instruction": "Classify the voice in this clip as male or female. Choose the answer from \"Male\" or \"Female\"\nAll parts of your reply must be in capital letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/7.wav",
-                    "instruction": "Identify whether the individual in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite everything in your response using capital letters only.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/8.wav",
-                    "instruction": "Based on this sound recording, what is the gender of the speaker? Choose the answer from \"Male\" or \"Female\"\nUse capital letters for every character in your response.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/9.wav",
-                    "instruction": "Identify the speaker’s gender category based on the audio. Choose the answer from \"Male\" or \"Female\"\nMake certain that the response is formatted in full uppercase.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/10.wav",
-                    "instruction": "Assess the characteristics of the speaker’s voice to tell their gender. Choose the answer from \"Man\" or \"Woman\"\nConstruct your answer using uppercase text only.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/11.wav",
-                    "instruction": "By listening to the clip, identify whether the voice is masculine or feminine. Choose the answer from \"Man\" or \"Woman\"\nYour entire written output should appear in uppercase type.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/12.wav",
-                    "instruction": "Indicate if the person in the recording sounds male or female. Choose the answer from \"Man\" or \"Woman\"\nEnsure your complete response consists of uppercase letters only.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/13.wav",
-                    "instruction": "Classify the voice in this audio as belonging to either a male or female speaker. Choose the answer from \"Male\" or \"Female\"\nEvery single word in your reply should be in uppercase format.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/14.wav",
-                    "instruction": "Listen and identify whether the speaker in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite your full response entirely in uppercase letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/15.wav",
-                    "instruction": "Identify whether this voice recording features a male or female speaker. Choose the answer from \"Man\" or \"Woman\"\nYour output must contain no lowercase letters at all.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/16.wav",
-                    "instruction": "Indicate the speaker’s gender in this audio segment. Choose the answer from \"Male\" or \"Female\"\nProvide your response fully in capitalized form.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/17.wav",
-                    "instruction": "Based on the tone and pitch of the voice, identify the gender of the speaker. Choose the answer from \"Man\" or \"Woman\"\nReply using all-capital text throughout your message.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/18.wav",
-                    "instruction": "From this voice sample, classify the speaker as male or female. Choose the answer from \"Man\" or \"Woman\"\nMake sure your entire output is in all caps.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/19.wav",
-                    "instruction": "By analyzing the voice, state if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nType your entire message in uppercase without exceptions.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/20.wav",
-                    "instruction": "Recognize the gender of the individual in the sound recording. Choose the answer from \"Male\" or \"Female\"\nProvide a response composed solely of uppercase letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/21.wav",
-                    "instruction": "What gender does the voice in this audio most likely belong to? Choose the answer from \"Male\" or \"Female\"\nAnswer exclusively with uppercase words and characters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/22.wav",
-                    "instruction": "From the audio provided, classify the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nThe full content of your answer must be in uppercase format.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/23.wav",
-                    "instruction": "Evaluate the voice in this audio to determine if the speaker is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nSubmit your reply in complete uppercase lettering.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/24.wav",
-                    "instruction": "Judge the gender of the individual whose voice is heard in this recording. Choose the answer from \"Male\" or \"Female\"\nEnsure the text you produce is completely in uppercase.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/25.wav",
-                    "instruction": "Is the speaker in this sound clip a man or a woman? Choose the answer from \"Man\" or \"Woman\"\nYour reply should contain only uppercase text.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/26.wav",
-                    "instruction": "Make a judgment about the gender of the speaker from this audio. Choose the answer from \"Male\" or \"Female\"\nYour entire answer should be written using only uppercase characters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/27.wav",
-                    "instruction": "What is the likely gender of the person speaking in this sound clip? Choose the answer from \"Male\" or \"Female\"\nPlease write your answer entirely using capital letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/28.wav",
-                    "instruction": "From the vocal characteristics, decide if the speaker is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nDo not use any lowercase letters in your answer.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/29.wav",
-                    "instruction": "Can you determine if the speaker is a male or a female from this recording? Choose the answer from \"Male\" or \"Female\"\nAnswer the question using all capital letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/30.wav",
-                    "instruction": "Identify whether the person speaking in this audio is male or female. Choose the answer from \"Male\" or \"Female\"\nRespond with your full text in uppercase characters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/31.wav",
-                    "instruction": "Make a determination about whether the voice in this audio is masculine or feminine. Choose the answer from \"Male\" or \"Female\"\nAll parts of your reply must be in capital letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/32.wav",
-                    "instruction": "Judge whether the speaker in this clip sounds like a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite everything in your response using capital letters only.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/33.wav",
-                    "instruction": "Decide if the voice you hear is that of a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nUse capital letters for every character in your response.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/34.wav",
-                    "instruction": "Listen to this recording and decide whether the voice belongs to a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nMake certain that the response is formatted in full uppercase.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/35.wav",
-                    "instruction": "Determine if the speaker’s voice suggests they are male or female. Choose the answer from \"Male\" or \"Female\"\nConstruct your answer using uppercase text only.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/36.wav",
-                    "instruction": "Determine whether the speaker in this recording is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nYour entire written output should appear in uppercase type.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/37.wav",
-                    "instruction": "Determine the likely gender of the speaker heard in this audio. Choose the answer from \"Man\" or \"Woman\"\nEnsure your complete response consists of uppercase letters only.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/38.wav",
-                    "instruction": "From this audio, tell whether the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nEvery single word in your reply should be in uppercase format.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/39.wav",
-                    "instruction": "Based on the audio, what is the speaker’s gender? Choose the answer from \"Male\" or \"Female\"\nWrite your full response entirely in uppercase letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/40.wav",
-                    "instruction": "From this recording, indicate the likely gender of the speaker. Choose the answer from \"Man\" or \"Woman\"\nYour output must contain no lowercase letters at all.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/41.wav",
-                    "instruction": "Determine the gender identity of the person speaking in this audio. Choose the answer from \"Male\" or \"Female\"\nProvide your response fully in capitalized form.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/42.wav",
-                    "instruction": "From the voice in this clip, identify if the speaker is male or female. Choose the answer from \"Male\" or \"Female\"\nReply using all-capital text throughout your message.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/43.wav",
-                    "instruction": "Listen to this sound clip and state the speaker’s gender. Choose the answer from \"Man\" or \"Woman\"\nMake sure your entire output is in all caps.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/44.wav",
-                    "instruction": "Determine from this clip whether the speaker is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nType your entire message in uppercase without exceptions.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/45.wav",
-                    "instruction": "Listen to the voice sample and decide on the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nProvide a response composed solely of uppercase letters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/46.wav",
-                    "instruction": "Listen carefully to the recording and determine if the speaker is male or female. Choose the answer from \"Male\" or \"Female\"\nAnswer exclusively with uppercase words and characters.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/47.wav",
-                    "instruction": "Analyze the voice in the recording to determine whether the person is male or female. Choose the answer from \"Male\" or \"Female\"\nThe full content of your answer must be in uppercase format.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/48.wav",
-                    "instruction": "Assess the voice in this recording and determine if it belongs to a male or a female. Choose the answer from \"Male\" or \"Female\"\nSubmit your reply in complete uppercase lettering.",
-                    "ans": ""
-                },
-                {
-                    "audio_path": "general/49.wav",
-                    "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nEnsure the text you produce is completely in uppercase.",
-                    "ans": ""
-                }
+                [
+                    {
+                        "audio_path": "general/0.wav",
+                        "instruction": "Analyze the speech and identify the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nYour reply should contain only uppercase text.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/1.wav",
+                        "instruction": "Based on how the speaker sounds, identify their gender. Choose the answer from \"Male\" or \"Female\"\nYour entire answer should be written using only uppercase characters.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/2.wav",
+                        "instruction": "From the given recording, decide if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nPlease write your answer entirely using capital letters.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/3.wav",
+                        "instruction": "Listen to the speaker’s voice and identify their gender. Choose the answer from \"Man\" or \"Woman\"\nDo not use any lowercase letters in your answer.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/4.wav",
+                        "instruction": "Analyze the speaker’s voice and specify their gender. Choose the answer from \"Man\" or \"Woman\"\nAnswer the question using all capital letters.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/5.wav",
+                        "instruction": "Use the audio cues to infer if the voice belongs to a male or a female. Choose the answer from \"Man\" or \"Woman\"\nRespond with your full text in uppercase characters.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/6.wav",
+                        "instruction": "Classify the voice in this clip as male or female. Choose the answer from \"Male\" or \"Female\"\nAll parts of your reply must be in capital letters.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/7.wav",
+                        "instruction": "Identify whether the individual in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite everything in your response using capital letters only.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/8.wav",
+                        "instruction": "Based on this sound recording, what is the gender of the speaker? Choose the answer from \"Male\" or \"Female\"\nUse capital letters for every character in your response.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/9.wav",
+                        "instruction": "Identify the speaker’s gender category based on the audio. Choose the answer from \"Male\" or \"Female\"\nMake certain that the response is formatted in full uppercase.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/10.wav",
+                        "instruction": "Assess the characteristics of the speaker’s voice to tell their gender. Choose the answer from \"Man\" or \"Woman\"\nConstruct your answer using uppercase text only.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/11.wav",
+                        "instruction": "By listening to the clip, identify whether the voice is masculine or feminine. Choose the answer from \"Man\" or \"Woman\"\nYour entire written output should appear in uppercase type.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/12.wav",
+                        "instruction": "Indicate if the person in the recording sounds male or female. Choose the answer from \"Man\" or \"Woman\"\nEnsure your complete response consists of uppercase letters only.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/13.wav",
+                        "instruction": "Classify the voice in this audio as belonging to either a male or female speaker. Choose the answer from \"Male\" or \"Female\"\nEvery single word in your reply should be in uppercase format.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/14.wav",
+                        "instruction": "Listen and identify whether the speaker in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite your full response entirely in uppercase letters.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/15.wav",
+                        "instruction": "Identify whether this voice recording features a male or female speaker. Choose the answer from \"Man\" or \"Woman\"\nYour output must contain no lowercase letters at all.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/16.wav",
+                        "instruction": "Indicate the speaker’s gender in this audio segment. Choose the answer from \"Male\" or \"Female\"\nProvide your response fully in capitalized form.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/17.wav",
+                        "instruction": "Based on the tone and pitch of the voice, identify the gender of the speaker. Choose the answer from \"Man\" or \"Woman\"\nReply using all-capital text throughout your message.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/18.wav",
+                        "instruction": "From this voice sample, classify the speaker as male or female. Choose the answer from \"Man\" or \"Woman\"\nMake sure your entire output is in all caps.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/19.wav",
+                        "instruction": "By analyzing the voice, state if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nType your entire message in uppercase without exceptions.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/20.wav",
+                        "instruction": "Recognize the gender of the individual in the sound recording. Choose the answer from \"Male\" or \"Female\"\nProvide a response composed solely of uppercase letters.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/21.wav",
+                        "instruction": "What gender does the voice in this audio most likely belong to? Choose the answer from \"Male\" or \"Female\"\nAnswer exclusively with uppercase words and characters.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/22.wav",
+                        "instruction": "From the audio provided, classify the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nThe full content of your answer must be in uppercase format.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/23.wav",
+                        "instruction": "Evaluate the voice in this audio to determine if the speaker is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nSubmit your reply in complete uppercase lettering.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/24.wav",
+                        "instruction": "Judge the gender of the individual whose voice is heard in this recording. Choose the answer from \"Male\" or \"Female\"\nEnsure the text you produce is completely in uppercase.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/25.wav",
+                        "instruction": "Is the speaker in this sound clip a man or a woman? Choose the answer from \"Man\" or \"Woman\"\nYour reply should contain only uppercase text.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/26.wav",
+                        "instruction": "Make a judgment about the gender of the speaker from this audio. Choose the answer from \"Male\" or \"Female\"\nYour entire answer should be written using only uppercase characters.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/27.wav",
+                        "instruction": "What is the likely gender of the person speaking in this sound clip? Choose the answer from \"Male\" or \"Female\"\nPlease write your answer entirely using capital letters.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/28.wav",
+                        "instruction": "From the vocal characteristics, decide if the speaker is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nDo not use any lowercase letters in your answer.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/29.wav",
+                        "instruction": "Can you determine if the speaker is a male or a female from this recording? Choose the answer from \"Male\" or \"Female\"\nAnswer the question using all capital letters.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/30.wav",
+                        "instruction": "Identify whether the person speaking in this audio is male or female. Choose the answer from \"Male\" or \"Female\"\nRespond with your full text in uppercase characters.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/31.wav",
+                        "instruction": "Make a determination about whether the voice in this audio is masculine or feminine. Choose the answer from \"Male\" or \"Female\"\nAll parts of your reply must be in capital letters.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/32.wav",
+                        "instruction": "Judge whether the speaker in this clip sounds like a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite everything in your response using capital letters only.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/33.wav",
+                        "instruction": "Decide if the voice you hear is that of a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nUse capital letters for every character in your response.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/34.wav",
+                        "instruction": "Listen to this recording and decide whether the voice belongs to a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nMake certain that the response is formatted in full uppercase.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/35.wav",
+                        "instruction": "Determine if the speaker’s voice suggests they are male or female. Choose the answer from \"Male\" or \"Female\"\nConstruct your answer using uppercase text only.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/36.wav",
+                        "instruction": "Determine whether the speaker in this recording is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nYour entire written output should appear in uppercase type.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/37.wav",
+                        "instruction": "Determine the likely gender of the speaker heard in this audio. Choose the answer from \"Man\" or \"Woman\"\nEnsure your complete response consists of uppercase letters only.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/38.wav",
+                        "instruction": "From this audio, tell whether the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nEvery single word in your reply should be in uppercase format.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/39.wav",
+                        "instruction": "Based on the audio, what is the speaker’s gender? Choose the answer from \"Male\" or \"Female\"\nWrite your full response entirely in uppercase letters.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/40.wav",
+                        "instruction": "From this recording, indicate the likely gender of the speaker. Choose the answer from \"Man\" or \"Woman\"\nYour output must contain no lowercase letters at all.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/41.wav",
+                        "instruction": "Determine the gender identity of the person speaking in this audio. Choose the answer from \"Male\" or \"Female\"\nProvide your response fully in capitalized form.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/42.wav",
+                        "instruction": "From the voice in this clip, identify if the speaker is male or female. Choose the answer from \"Male\" or \"Female\"\nReply using all-capital text throughout your message.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/43.wav",
+                        "instruction": "Listen to this sound clip and state the speaker’s gender. Choose the answer from \"Man\" or \"Woman\"\nMake sure your entire output is in all caps.",
+                        "ans": "WOMAN"
+                    },
+                    {
+                        "audio_path": "general/44.wav",
+                        "instruction": "Determine from this clip whether the speaker is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nType your entire message in uppercase without exceptions.",
+                        "ans": "MAN"
+                    },
+                    {
+                        "audio_path": "general/45.wav",
+                        "instruction": "Listen to the voice sample and decide on the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nProvide a response composed solely of uppercase letters.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/46.wav",
+                        "instruction": "Listen carefully to the recording and determine if the speaker is male or female. Choose the answer from \"Male\" or \"Female\"\nAnswer exclusively with uppercase words and characters.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/47.wav",
+                        "instruction": "Analyze the voice in the recording to determine whether the person is male or female. Choose the answer from \"Male\" or \"Female\"\nThe full content of your answer must be in uppercase format.",
+                        "ans": "FEMALE"
+                    },
+                    {
+                        "audio_path": "general/48.wav",
+                        "instruction": "Assess the voice in this recording and determine if it belongs to a male or a female. Choose the answer from \"Male\" or \"Female\"\nSubmit your reply in complete uppercase lettering.",
+                        "ans": "MALE"
+                    },
+                    {
+                        "audio_path": "general/49.wav",
+                        "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nEnsure the text you produce is completely in uppercase.",
+                        "ans": "WOMAN"
+                    }
+                ]
             ],
             "change_case:english_lowercase": [
                 {
                     "audio_path": "general/0.wav",
                     "instruction": "Can you determine if the speaker is a male or a female from this recording? Choose the answer from \"Male\" or \"Female\"\nYour full reply must be written in lowercase letters only.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Is the speaker in this sound clip a man or a woman? Choose the answer from \"Man\" or \"Woman\"\nPlease write everything in lowercase form only.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "Judge the gender of the individual whose voice is heard in this recording. Choose the answer from \"Male\" or \"Female\"\nAnswer entirely using lowercase characters.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Assess the voice in this recording and determine if it belongs to a male or a female. Choose the answer from \"Male\" or \"Female\"\nOnly lowercase letters are permitted in your answer.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Use the audio cues to infer if the voice belongs to a male or a female. Choose the answer from \"Man\" or \"Woman\"\nYour written response should be lowercase in every word and sentence.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Classify the voice in this clip as male or female. Choose the answer from \"Male\" or \"Female\"\nFormat your reply so that it uses lowercase letters only.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "By analyzing the voice, state if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nUse lowercase characters exclusively throughout your entire reply.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Determine whether the speaker in this recording is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nAll letters in your reply must be lowercase—no capitals at all.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/8.wav",
                     "instruction": "Based on the audio, what is the speaker’s gender? Choose the answer from \"Male\" or \"Female\"\nGenerate a response fully in lowercase, without exceptions.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/9.wav",
                     "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nWrite your reply so that every letter is lowercase.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/10.wav",
                     "instruction": "Analyze the speaker’s voice and specify their gender. Choose the answer from \"Man\" or \"Woman\"\nType your answer completely in lowercase form.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/11.wav",
                     "instruction": "Make a determination about whether the voice in this audio is masculine or feminine. Choose the answer from \"Male\" or \"Female\"\nProduce a response composed exclusively of lowercase characters.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/12.wav",
                     "instruction": "Assess the characteristics of the speaker’s voice to tell their gender. Choose the answer from \"Man\" or \"Woman\"\nWrite your complete response without a single uppercase letter.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/13.wav",
                     "instruction": "Indicate if the person in the recording sounds male or female. Choose the answer from \"Man\" or \"Woman\"\nEnsure the entire response is lowercase from start to finish.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/14.wav",
                     "instruction": "From this audio, tell whether the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nYour entire message should consist solely of lowercase text.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/15.wav",
                     "instruction": "Determine if the speaker’s voice suggests they are male or female. Choose the answer from \"Male\" or \"Female\"\nKeep all text in lowercase—no uppercase allowed.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/16.wav",
                     "instruction": "Listen to this sound clip and state the speaker’s gender. Choose the answer from \"Man\" or \"Woman\"\nNo uppercase letters should appear anywhere in your text.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/17.wav",
                     "instruction": "What gender does the voice in this audio most likely belong to? Choose the answer from \"Male\" or \"Female\"\nUse lowercase for all characters in your answer.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/18.wav",
                     "instruction": "Make a judgment about the gender of the speaker from this audio. Choose the answer from \"Male\" or \"Female\"\nYour output must contain nothing but lowercase letters.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/19.wav",
                     "instruction": "What is the likely gender of the person speaking in this sound clip? Choose the answer from \"Male\" or \"Female\"\nWrite all content in your response using only lowercase alphabets.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/20.wav",
                     "instruction": "From this voice sample, classify the speaker as male or female. Choose the answer from \"Man\" or \"Woman\"\nMake sure your entire output is in lowercase text.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/21.wav",
                     "instruction": "From the vocal characteristics, decide if the speaker is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nMake certain the entire message is composed of lowercase text only.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/22.wav",
                     "instruction": "Listen carefully to the recording and determine if the speaker is male or female. Choose the answer from \"Male\" or \"Female\"\nDo not use any capital letters in your response.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/23.wav",
                     "instruction": "Listen and identify whether the speaker in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nRespond only with lowercase letters in your entire message.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/24.wav",
                     "instruction": "Determine the likely gender of the speaker heard in this audio. Choose the answer from \"Man\" or \"Woman\"\nConstruct your answer entirely using lowercase alphabetic characters.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/25.wav",
                     "instruction": "From the given recording, decide if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nYour full reply must be written in lowercase letters only.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/26.wav",
                     "instruction": "Identify whether the person speaking in this audio is male or female. Choose the answer from \"Male\" or \"Female\"\nPlease write everything in lowercase form only.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/27.wav",
                     "instruction": "Judge whether the speaker in this clip sounds like a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nAnswer entirely using lowercase characters.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/28.wav",
                     "instruction": "Decide if the voice you hear is that of a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nOnly lowercase letters are permitted in your answer.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/29.wav",
                     "instruction": "Classify the voice in this audio as belonging to either a male or female speaker. Choose the answer from \"Male\" or \"Female\"\nYour written response should be lowercase in every word and sentence.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/30.wav",
                     "instruction": "Evaluate the voice in this audio to determine if the speaker is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nFormat your reply so that it uses lowercase letters only.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/31.wav",
                     "instruction": "From this recording, indicate the likely gender of the speaker. Choose the answer from \"Man\" or \"Woman\"\nUse lowercase characters exclusively throughout your entire reply.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/32.wav",
                     "instruction": "Listen to the speaker’s voice and identify their gender. Choose the answer from \"Man\" or \"Woman\"\nAll letters in your reply must be lowercase—no capitals at all.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/33.wav",
                     "instruction": "Listen to the voice sample and decide on the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nGenerate a response fully in lowercase, without exceptions.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/34.wav",
                     "instruction": "Determine from this clip whether the speaker is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite your reply so that every letter is lowercase.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/35.wav",
                     "instruction": "Determine the gender identity of the person speaking in this audio. Choose the answer from \"Male\" or \"Female\"\nType your answer completely in lowercase form.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/36.wav",
                     "instruction": "Recognize the gender of the individual in the sound recording. Choose the answer from \"Male\" or \"Female\"\nProduce a response composed exclusively of lowercase characters.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/37.wav",
                     "instruction": "Identify whether this voice recording features a male or female speaker. Choose the answer from \"Man\" or \"Woman\"\nWrite your complete response without a single uppercase letter.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/38.wav",
                     "instruction": "From the audio provided, classify the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nEnsure the entire response is lowercase from start to finish.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/39.wav",
                     "instruction": "Analyze the speech and identify the speaker’s gender. Choose the answer from \"Male\" or \"Female\"\nYour entire message should consist solely of lowercase text.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/40.wav",
                     "instruction": "Analyze the voice in the recording to determine whether the person is male or female. Choose the answer from \"Male\" or \"Female\"\nKeep all text in lowercase—no uppercase allowed.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/41.wav",
                     "instruction": "Based on how the speaker sounds, identify their gender. Choose the answer from \"Male\" or \"Female\"\nNo uppercase letters should appear anywhere in your text.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/42.wav",
                     "instruction": "From the voice in this clip, identify if the speaker is male or female. Choose the answer from \"Male\" or \"Female\"\nUse lowercase for all characters in your answer.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/43.wav",
                     "instruction": "Identify whether the individual in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nYour output must contain nothing but lowercase letters.",
-                    "ans": ""
+                    "ans": "woman"
                 },
                 {
                     "audio_path": "general/44.wav",
                     "instruction": "By listening to the clip, identify whether the voice is masculine or feminine. Choose the answer from \"Man\" or \"Woman\"\nWrite all content in your response using only lowercase alphabets.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/45.wav",
                     "instruction": "Indicate the speaker’s gender in this audio segment. Choose the answer from \"Male\" or \"Female\"\nMake sure your entire output is in lowercase text.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/46.wav",
                     "instruction": "Listen to this recording and decide whether the voice belongs to a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nMake certain the entire message is composed of lowercase text only.",
-                    "ans": ""
+                    "ans": "man"
                 },
                 {
                     "audio_path": "general/47.wav",
                     "instruction": "Based on this sound recording, what is the gender of the speaker? Choose the answer from \"Male\" or \"Female\"\nDo not use any capital letters in your response.",
-                    "ans": ""
+                    "ans": "female"
                 },
                 {
                     "audio_path": "general/48.wav",
                     "instruction": "Identify the speaker’s gender category based on the audio. Choose the answer from \"Male\" or \"Female\"\nRespond only with lowercase letters in your entire message.",
-                    "ans": ""
+                    "ans": "male"
                 },
                 {
                     "audio_path": "general/49.wav",
                     "instruction": "Based on the tone and pitch of the voice, identify the gender of the speaker. Choose the answer from \"Man\" or \"Woman\"\nConstruct your answer entirely using lowercase alphabetic characters.",
-                    "ans": ""
+                    "ans": "woman"
                 }
             ],
             "detectable_format:json_format": [

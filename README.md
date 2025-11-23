@@ -34,7 +34,7 @@
 Create and enter the conda env for running DiVA.
 
 ```bash
-conda create --name diva python=3.12 -y
+conda create --name diva python=3.12.12 -y
 conda activate diva
 pip install -r requirements/diva.txt
 ```
@@ -42,7 +42,7 @@ pip install -r requirements/diva.txt
 Run the following command (about 23.5GB VRAM required):
 
 ```bash
-python smoke_test_diva.py
+python smoke_test.py --model diva
 ```
 
 #### BLSP-Emo
@@ -62,3 +62,20 @@ python smoke_test_blsp_emo.py
 ```
 
 Note: model weights are automatically downloaded by `blsp_emo.py` using the HuggingFace CLI `hf`. If you want to download the weights manually, you can do so with `hf download cwang621/blsp-emo`; if weights are downloaded manually, remember to specify the path to weights when calling `BLSP_emo()`.
+
+#### SALMONN
+
+Create and enter the conda env for running SALMONN.
+
+```bash
+conda create --name salmonn python=3.10 -y
+conda activate salmonn
+pip install -r requirements/salmonn.txt
+```
+
+Run the following command (about  VRAM required):
+
+```bash
+python models/SALMONN/cli_inference.py --
+```
+

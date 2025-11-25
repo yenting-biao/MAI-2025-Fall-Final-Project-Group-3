@@ -1,89 +1,146 @@
 """
 References:
-- https://github.com/cwang621/blsp-emo/blob/main/generate.py
-- Gemini 2.5 Pro
+- https://github.com/cwang621/blsp-emo/blob/main/chat_demo.py
+- Gemini 3 Pro
 """
-
 import os
-import warnings
-from typing import List, Dict, Optional
 from shutil import which
 
-import numpy as np
-import librosa
 import torch
 from transformers import WhisperFeatureExtractor, GenerationConfig
-
-from .basemodel import BaseModel
 from .blsp_emo_package.src.modeling_blsp2 import Blsp2Model
 from .blsp_emo_package.src.tokenization_qwen import QWenTokenizer
-from .blsp_emo_package.src.qwen_generation_utils import (
-    decode_tokens,
-    get_stop_words_ids,
-)
+from .blsp_emo_package.src.instruction_dataset import get_waveform
+from .blsp_emo_package.src.qwen_generation_utils import get_stop_words_ids, decode_tokens
 
+from .basemodel import BaseModel
 
-class BLSP_emo(BaseModel):
-    """
-    Wrapper for BLSP-emo (Blsp2Model).
+class ChatHistory(object):
+    """Taken from https://github.com/cwang621/blsp-emo/blob/main/chat_demo.py"""
+    def __init__(self, 
+        tokenizer, 
+        extractor, 
+        max_window_size=6144,
+        max_new_tokens=512,
+        use_emotion=False,
+        speech_downsample_rate=16
+    ):
+        super().__init__()
+        self.tokenizer = tokenizer
+        self.extractor = extractor
+        self.max_window_size = max_window_size
+        self.max_new_tokens = max_new_tokens
+        self.speech_downsample_rate = speech_downsample_rate
 
-    This class adapts the BLSP-emo model to the BaseModel interface,
-    handling audio feature extraction, QWen tokenization, and generation.
+        self.im_start_tokens = [tokenizer.im_start_id]
+        self.im_end_tokens = [tokenizer.im_end_id]
+        self.nl_tokens = tokenizer.encode("\n")
 
-    Expected conversation format (minimal):
-        [
-            {"role": "system", "content": "..."},
-            {"role": "user", "content": "question", "audio_path": "foo.wav"},
-            ...
-        ]
+        ### add system
+        if use_emotion:
+            sys_prompt = "You are a helpful assistant. Your response should fulfill requests with empathy toward user's emotion tone."
+        else:
+            sys_prompt = "You are a helpful assistant."
+        input_ids = self.im_start_tokens + self._tokenize_str("system", f"{sys_prompt}") + self.im_end_tokens
+        input_ids = torch.LongTensor([input_ids])
+        self.system_histroy = [(input_ids,)]
+        self.system_length = input_ids.shape[1]
 
-    Like the DiVA example, this implementation:
-      - Uses ONLY the latest user message.
-      - If `audio_path` (or `audio` as np.ndarray) exists, it's processed.
-      - If not, it falls back to text-only.
-    """
+        self.reset()
+    
+    def set_system_prompt(self, prompt):
+        input_ids = self.im_start_tokens + self._tokenize_str("system", f"{prompt}") + self.im_end_tokens
+        input_ids = torch.LongTensor([input_ids])
+        self.system_histroy = [(input_ids,)]
+        self.system_length = input_ids.shape[1]
+    
+    def reset(self):
+        self.history = []
+        self.lengths = []
+        self.cur_length = self.system_length
+        self.audio_file = []
+        self.audio_to_history = True
+    
+    def _tokenize_str(self, role, content):
+        return self.tokenizer.encode(
+            role, allowed_special=set()
+        ) + self.nl_tokens + self.tokenizer.encode(content, allowed_special=set())
 
-    def __init__(
-        self,
-        model_name: str = "cwang621/blsp-emo",
-        device: Optional[str] = None,
-        sampling_rate: int = 16_000,
-        path_to_weights: Optional[str] = None,
-    ) -> None:
-        """Initialize the BLSP-emo wrapper.
+    def add_text_history(self, role, text):
+        input_ids =  self.nl_tokens + self.im_start_tokens + self._tokenize_str(role, text) + self.im_end_tokens
+        input_ids = torch.LongTensor([input_ids])
+        self.history.append(
+            (input_ids,)
+        )
+        self.lengths.append(input_ids.shape[1])
+        self.cur_length += input_ids.shape[1]
 
+    def add_audio(self, audio_file):
+        self.audio_to_history = False
+        self.audio_file.append(audio_file)
+
+    def add_speech_history(self, speech, text=""):
+        if self.audio_to_history:
+            return
+        self.audio_to_history = True
+        speech = get_waveform(speech, output_sample_rate=self.extractor.sampling_rate)
+        speech_inputs = self.extractor(
+            speech,
+            sampling_rate=self.extractor.sampling_rate,
+            return_attention_mask=True,
+            return_tensors="pt"
+        )
+        speech_values = speech_inputs.input_features.bfloat16()
+        speech_attention_mask = speech_inputs.attention_mask
+
+        input_ids = self.nl_tokens + self.im_start_tokens + self._tokenize_str("user", text)
+        input_ids = torch.LongTensor([input_ids])
+        self.history.append(
+            (input_ids,)
+        )
+        self.lengths.append(input_ids.shape[1])
+        self.cur_length += input_ids.shape[1]
+
+        self.history.append(
+            (speech_values, speech_attention_mask)
+        )
+        length = speech_attention_mask.sum().item() // self.speech_downsample_rate
+        self.lengths.append(length)
+        self.cur_length += length
+        
+
+        input_ids = [] + self.im_end_tokens
+        input_ids = torch.LongTensor([input_ids])
+        self.history.append(
+            (input_ids,)
+        )
+        self.lengths.append(input_ids.shape[1])
+        self.cur_length += input_ids.shape[1]
+    
+    def get_history(self):
+        input_ids = self.nl_tokens + self.im_start_tokens + self.tokenizer.encode("assistant")
+        input_ids = torch.LongTensor([input_ids])
+        length = input_ids.shape[1]
+
+        while self.cur_length > (self.max_window_size - self.max_new_tokens - length):
+            pop_length = self.lengths.pop(0)
+            self.history.pop(0)
+            self.cur_length -= pop_length
+        return self.system_histroy + self.history + [(input_ids,)]
+
+class BLSP_Emo(BaseModel):
+    def __init__(self, model_name: str = "BLSP_Emo", device: str = "cuda", path_to_weights: str = None):
+        """
+        Initialize the BLSP-Emo model components.
+        
         Args:
-            model_name: Name of model.
-            device: Overrides automatic device selection ("cuda" or "cpu").
-            sampling_rate: The sampling rate for audio processing.
-            path_to_weights: Path to the folder containing the files downloaded from https://huggingface.co/cwang621/blsp-emo. If None, this function either assumes the weights are stored in the folder `blsp_emo_weights`, or, if not found, will run `hf download cwang621/blsp-emo --local-dir {path_to_weights}` to download the weights to a local folder named `blsp_emo_weights`.
+            model_name (str): Path to the pretrained model directory.
+            device (str): Device to run the model on ('cuda' or 'cpu').
         """
         super().__init__(model_name)
+        self.device = device
 
-        # 1. Set up device
-        if device is None:
-            if torch.cuda.is_available():
-                self.device = "cuda"
-            else:
-                self.device = "cpu"
-                warnings.warn(
-                    "[BLSP-emo] CUDA is not available; running on CPU. "
-                    "Inference will be very slow.",
-                    RuntimeWarning,
-                )
-        else:
-            self.device = device
-            if self.device == "cpu":
-                warnings.warn(
-                    "[BLSP-emo] Model explicitly set to run on CPU. "
-                    "Inference will be very slow.",
-                    RuntimeWarning,
-                )
-
-        self.sampling_rate = sampling_rate
-        load_dtype = torch.float16 if self.device == "cuda" else torch.float32
-
-        # 2. Load model, tokenizer, and extractor
+        # Load weights
         if path_to_weights is None:
             path_to_weights = "blsp_emo_weights"
             if not os.path.isdir(path_to_weights):
@@ -96,29 +153,50 @@ class BLSP_emo(BaseModel):
                     f"hf download cwang621/blsp-emo --local-dir {path_to_weights}"
                 )
         print("[BLSP-emo] Loading model from:", path_to_weights)
-        self.tokenizer = QWenTokenizer.from_pretrained(path_to_weights)
+        
+        # Load Tokenizer
+        self.tokenizer = QWenTokenizer.from_pretrained(
+            path_to_weights,
+        )
+        
+        # Load Feature Extractor (for Audio)
         self.extractor = WhisperFeatureExtractor.from_pretrained(path_to_weights)
+        
+        # Load Model
         self.model = Blsp2Model.from_pretrained(
-            path_to_weights, torch_dtype=load_dtype, device_map="cuda",
+            path_to_weights, 
+            torch_dtype=torch.float16,
+            device_map="cuda",
+        )
+        # self.model = self.model.half()
+        self.model = self.model.bfloat16()  # don't use self.model.half() as it will cause an error; see https://github.com/meta-llama/llama/issues/380#issuecomment-1656714118
+        self.model.eval()
+        
+        # Load Generation Config
+        self.generation_config = GenerationConfig.from_pretrained(path_to_weights)
+        
+        # Setup Stop Words
+        self.stop_words_ids = get_stop_words_ids(
+            self.generation_config.chat_format, 
+            self.tokenizer
         )
 
-        if self.device == "cuda":
-            self.model = self.model.half()
-        self.model.eval()
-        self.dtype = next(
-            self.model.parameters()
-        ).dtype  # ensure input dtype matches model, otherwise may error at models/blsp_emo_package/src/plora.py line 721 `result = F.linear(x, transpose(self.weight, self.fan_in_fan_out), bias=self.bias)` "RuntimeError: mat1 and mat2 must have the same dtype"
-        print(f"[BLSP-emo] Model loaded with actual dtype: {self.dtype}")
-
-        # 3. Load generation configuration
-        self.generation_config = GenerationConfig.from_pretrained(path_to_weights)
-
-        # Get special prompt tokens
+        # Define special tokens used for constructing prompt format
+        self.im_start_tokens = [self.tokenizer.im_start_id]
+        self.im_end_tokens = [self.tokenizer.im_end_id]
         self.nl_tokens = self.tokenizer.encode("\n")
 
-        # Apply default generation settings from the script
+        # Modify config
         self.generation_config.update(
             **{
+                # original generation_config.update from chat_demo.py: (may need to tweak these settings if current window size is too small or response is cut off)
+                # "max_new_tokens": 512,
+                # "min_new_tokens": 1,
+                # "temperature": 0.5,
+                # "max_window_size": 6144,
+                # "bos_token_id": self.tokenizer.encode("\n")[0],
+                # "num_return_sequences": 1,
+
                 "max_new_tokens": 128,
                 "min_new_tokens": 1,
                 "do_sample": False,  # Greedy decoding
@@ -132,188 +210,71 @@ class BLSP_emo(BaseModel):
             }
         )
 
-        self.stop_words_ids = get_stop_words_ids(
-            self.generation_config.chat_format, self.tokenizer
-        )
+        self.history = ChatHistory(self.tokenizer, self.extractor, self.generation_config.max_window_size, self.generation_config.max_new_tokens, False)
 
-        # 4. Store prompt tokens
-        self.im_start_tokens = [self.tokenizer.im_start_id]
-        self.im_end_tokens = [self.tokenizer.im_end_id]
-
-        # 5. Internal state variables to pass data between methods
-        self._input_ids: Optional[torch.Tensor] = None
-        self._attention_mask: Optional[torch.Tensor] = None
-        self._suffix_input_ids: Optional[torch.Tensor] = None
-        self._suffix_attention_mask: Optional[torch.Tensor] = None
-        self._speech_values: Optional[torch.Tensor] = None
-        self._speech_attention_mask: Optional[torch.Tensor] = None
-
-    def _get_last_user_msg(self, conversation: List[Dict]) -> Dict:
-        """Finds the last message from the 'user' in the conversation.
-
-        For example, given:
-        conversation = [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {
-                "role": "user",
-                "content": "What does the speaker say in the audio?",
-                "audio_path": "samples/sd-qa_1008642825401516622.wav",
-            },
-        ],
-        this function returns conversation[1].
+    def process_input(self, conversation: list[dict]):
         """
-        for msg in reversed(conversation):
-            if msg.get("role") == "user":
-                return msg
-        raise ValueError("Conversation has no user message.")
-
-    def _load_audio(self, path: str) -> np.ndarray:
-        """Loads and resamples audio from a file path."""
-        if not os.path.isfile(path):
-            raise FileNotFoundError(f"Audio file not found: {path}")
-        audio, _ = librosa.load(path, sr=self.sampling_rate, mono=True)
-        return audio
-
-    def _tokenize_str(self, role: str, content: str) -> List[int]:
-        """Helper to tokenize role and content. This function is taken directly from https://github.com/cwang621/blsp-emo/blob/main/generate.py."""
-        return (
-            self.tokenizer.encode(role, allowed_special=set())
-            + self.nl_tokens
-            + self.tokenizer.encode(content, allowed_special=set())
-        )
-
-    def process_input(self, conversation: List[Dict], use_emotion: bool = False) -> None:
-        """Prepare BLSP-emo inputs from a conversation.
-
-        This function tokenizes the text and extracts audio features,
-        storing them in internal state variables for `generate()`.
-
-        Currently assumes there is only one user message in the conversation (i.e., single turn).
+        Process the raw conversation list into the format expected by Blsp2Model.chat().
+        Each dict contains: {"audio_path": ..., "instruction": ..., "answer": ...}
+        The order is [System] -> [User Text] -> [User Audio] -> [Assistant Text] -> ...
+        [User Text] and [User Audio] are delimited by "\n\nSpeech: ".
+        Note it appears from small tests that putting [User Audio] before [User Text]
+        causes model to either say it did not receive an audio input or treat 
+        the audio as part of the text instruction.
         """
-        # 1. Get the last user message
-        user_msg = self._get_last_user_msg(conversation)
+        self.history.reset()
+        
+        for turn in conversation:
+            audio_path = turn.get("audio_path")
+            instruction = turn.get("instruction", "")
+            answer = turn.get("answer")
 
-        # 2. Get text instruction (content)
-        instruction = user_msg.get("content", "") or ""
-
-        # 3. Load audio (if present)
-        speech_array: Optional[np.ndarray] = None
-        if "audio" in user_msg and isinstance(user_msg["audio"], np.ndarray):
-            speech_array = user_msg["audio"]
-        elif "audio_path" in user_msg:
-            try:
-                speech_array = self._load_audio(user_msg["audio_path"])
-            except Exception as e:
-                warnings.warn(f"Could not load audio file: {e}", RuntimeWarning)
-                speech_array = None
-        if len(instruction.strip()) > 0 and speech_array is not None:
-            # Following the example in https://github.com/cwang621/blsp-emo/blob/main/README.md,
-            # we separate user text instruction and audio with "\n\nSpeech: ", otherwise the model
-            # may think they are part of the same instruction, sometimes even
-            # getting confused and responding with something along the lines of
-            # "I do not have access to audio content".
-            # See blsp_sample_outputs.py for examples of this behavior.
-            instruction += "\n\nSpeech: "
-
-        # 4. Check that user input is not empty
-        if speech_array is None and not instruction:
-            raise ValueError(
-                "User message has neither audio nor text content; "
-                "nothing to send to BLSP-emo."
-            )
-
-        # 5. Process text inputs (build prompt as per script)
-
-        # 5.1. Set system prompt
-        if use_emotion:
-            system_prompt = "You are a helpful assistant. Your response should fulfill requests with empathy toward user's emotion tone."
-        else:
-            system_prompt = "You are a helpful assistant."
-
-        # 5.2. Build input prompt
-        input_ids_list = (
-            self.im_start_tokens
-            + self._tokenize_str("system", system_prompt)
-            + self.im_end_tokens
-            + self.nl_tokens
-            + self.im_start_tokens
-            + self._tokenize_str("user", instruction)
-        )
-
-        # 5.3. Build suffix prompt
-        suffix_input_ids_list = (
-            self.im_end_tokens
-            + self.nl_tokens
-            + self.im_start_tokens
-            + self.tokenizer.encode("assistant")
-        )
-
-        # Store as tensors (batch size 1)
-        self._input_ids = torch.LongTensor([input_ids_list]).to(self.device)
-        self._attention_mask = torch.LongTensor([[1] * len(input_ids_list)]).to(
-            self.device
-        )
-        self._suffix_input_ids = torch.LongTensor([suffix_input_ids_list]).to(
-            self.device
-        )
-        self._suffix_attention_mask = torch.LongTensor(
-            [[1] * len(suffix_input_ids_list)]
-        ).to(self.device)
-
-        # 6. Process audio input
-        if speech_array is not None:
-            # Use the extractor to get features
-            speech_inputs = self.extractor(
-                [speech_array],  # Extractor expects a list of arrays
-                sampling_rate=self.sampling_rate,
-                return_attention_mask=True,
-                return_tensors="pt",
-            )
-            self._speech_values = speech_inputs.input_features.to(self.dtype).to(
-                self.device
-            )
-            self._speech_attention_mask = speech_inputs.attention_mask.to(self.device)
-        else:
-            self._speech_values = None
-            self._speech_attention_mask = None
+            if audio_path:
+                content = instruction
+                if content:
+                    content += "\n\nSpeech: "
+                self.history.add_audio(audio_path)
+                self.history.add_speech_history(self.history.audio_file[-1], text=content)
+            elif instruction:
+                self.history.add_text_history("user", instruction)
+            else:
+                raise ValueError("User turn must have either 'instruction' or 'audio_path'.")
+            
+            if answer is not None:  # means there is an assistant response
+                self.history.add_text_history("assistant", answer)
 
     def generate(self) -> str:
-        """Run BLSP-emo generation and return a single string response."""
-        # 1. Check if process_input() has been called
-        if self._input_ids is None or self._suffix_input_ids is None:
-            raise RuntimeError("process_input() must be called before generate().")
+        if not self.history.history:
+            raise ValueError("No input processed. Call process_input or pass conversation to generate.")
 
-        # 2. Run model.generate() with all processed inputs
-        with torch.no_grad():
-            outputs = self.model.generate(
-                input_ids=self._input_ids,
-                attention_mask=self._attention_mask,
-                suffix_input_ids=self._suffix_input_ids,
-                suffix_attention_mask=self._suffix_attention_mask,
-                speech_values=self._speech_values,
-                speech_attention_mask=self._speech_attention_mask,
-                generation_config=self.generation_config,
-                stop_words_ids=self.stop_words_ids,
-            )
+        # Run the model
+        # The model expects the history list-of-tuples we built in process_input
+        output = self.model.chat(
+            history=self.history.get_history(),
+            generation_config=self.generation_config,
+            stop_words_ids=self.stop_words_ids,
+            device=self.device
+        )
 
-        # 3. Decode the output tokens to a string
-        # We assume batch size = 1
-        output_text = decode_tokens(
-            outputs[0],
+        # Decode result
+        response = decode_tokens(
+            output[0],
             self.tokenizer,
             raw_text_len=0,
             context_length=0,
             chat_format=self.generation_config.chat_format,
             verbose=False,
-            errors="replace",
+            errors='replace'
         )
 
-        # 4. Clean up state for next run
-        self._input_ids = None
-        self._attention_mask = None
-        self._suffix_input_ids = None
-        self._suffix_attention_mask = None
-        self._speech_values = None
-        self._speech_attention_mask = None
+        self.history.reset()
 
-        return output_text
+        return response
+
+    def _tokenize_str(self, role, content):
+        """Helper from chat_demo.py to encode role + newline + content"""
+        return (
+            self.tokenizer.encode(role, allowed_special=set()) + 
+            self.nl_tokens + 
+            self.tokenizer.encode(content, allowed_special=set())
+        )

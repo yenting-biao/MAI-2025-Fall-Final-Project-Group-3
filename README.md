@@ -55,6 +55,13 @@ conda activate blsp-emo
 pip install -r models/blsp_emo_package/requirements.txt
 ```
 
+Create a HuggingFace access token (if you want to use `hf` to download the weights in the next step)
+
+- Create a "fine-grained" token
+- Under "Repositories permissions" search for "cwang621/blsp-emo", select it, and check "Read access to contents of selected repos"
+- Click "Create token"
+- Run `export HF_TOKEN="<your access token>"`
+
 Run the following command (about 20GB VRAM required):
 
 ```bash

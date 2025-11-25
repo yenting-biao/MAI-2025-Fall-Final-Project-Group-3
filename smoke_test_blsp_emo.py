@@ -1,7 +1,7 @@
 import time
 from typing import List, Dict, Any
 
-from models.blsp_emo import BLSP_emo
+from models.blsp_emo import BLSP_Emo
 
 def load_model(
     model_cls,
@@ -60,6 +60,40 @@ if __name__ == "__main__":
                 "content": "Please identify the emotion tone of the speech provided below. Select from the following options: neutral, sad, angry, happy, or surprise.",
                 "audio_path": "samples/blsp_demo_1_cheerful.wav",
             },
+            {
+                "role": "assistant",
+                "content": "The emotion tone of the speech is happy.",
+            },
+            {
+                "role": "user",
+                "content": "Now, please tell me what the speaker says in the audio below.",
+                "audio_path": "samples/sd-qa_1008642825401516622.wav",
+            },
+        ],
+        [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "user",
+                "content": "Please identify the emotion tone of the speech provided below. Select from the following options: neutral, sad, angry, happy, or surprise.",
+                "audio_path": "samples/blsp_demo_1_cheerful.wav",
+            },
+            {
+                "role": "assistant",
+                "content": "The emotion tone of the speech is happy.",
+            },
+            {
+                "role": "user",
+                "content": "Now, please tell me what the speaker says in the audio below.",
+                "audio_path": "samples/sd-qa_1008642825401516622.wav",
+            },
+            {
+                "role": "assistant",
+                "content": "The speaker is asking what the most watched sport was during the last summer Olympics.",
+            },
+            {
+                "role": "user",
+                "content": "What did the speaker in the first audio say?",
+            },
         ],
         [
             {"role": "system", "content": "You are a helpful assistant."},
@@ -88,7 +122,7 @@ if __name__ == "__main__":
     ]
 
     model = load_model(
-        model_cls=BLSP_emo,
+        model_cls=BLSP_Emo,
         name="BLSP-emo",
     )
 

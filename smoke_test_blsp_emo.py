@@ -54,69 +54,53 @@ if __name__ == "__main__":
     # as that is now handled within the model's process_input method.
     TEST_CONVERSATIONS = [
         [
-            {"role": "system", "content": "You are a helpful assistant."},
             {
-                "role": "user",
-                "content": "Please identify the emotion tone of the speech provided below. Select from the following options: neutral, sad, angry, happy, or surprise.",
                 "audio_path": "samples/blsp_demo_1_cheerful.wav",
+                "instruction": "Please identify the emotion tone of the speech provided below. Select from the following options: neutral, sad, angry, happy, or surprise.",
+                "answer": "The emotion tone of the speech is happy.",
             },
             {
-                "role": "assistant",
-                "content": "The emotion tone of the speech is happy.",
-            },
-            {
-                "role": "user",
-                "content": "Now, please tell me what the speaker says in the audio below.",
                 "audio_path": "samples/sd-qa_1008642825401516622.wav",
+                "instruction": "Now, please tell me what the speaker says in the audio below.",
+                "answer": None,
             },
         ],
         [
-            {"role": "system", "content": "You are a helpful assistant."},
             {
-                "role": "user",
-                "content": "Please identify the emotion tone of the speech provided below. Select from the following options: neutral, sad, angry, happy, or surprise.",
                 "audio_path": "samples/blsp_demo_1_cheerful.wav",
+                "instruction": "Please identify the emotion tone of the speech provided below. Select from the following options: neutral, sad, angry, happy, or surprise.",
+                "answer": "The emotion tone of the speech is happy.",
             },
             {
-                "role": "assistant",
-                "content": "The emotion tone of the speech is happy.",
-            },
-            {
-                "role": "user",
-                "content": "Now, please tell me what the speaker says in the audio below.",
                 "audio_path": "samples/sd-qa_1008642825401516622.wav",
+                "instruction": "Now, please tell me what the speaker says in the audio below.",
+                "answer": "The speaker is asking what the most watched sport was during the last summer Olympics.",
             },
             {
-                "role": "assistant",
-                "content": "The speaker is asking what the most watched sport was during the last summer Olympics.",
-            },
-            {
-                "role": "user",
-                "content": "What did the speaker in the first audio say?",
+                "audio_path": None,
+                "instruction": "What did the speaker in the first audio say?",
+                "answer": None,
             },
         ],
         [
-            {"role": "system", "content": "You are a helpful assistant."},
             {
-                "role": "user",
-                "content": "What does the speaker say in the audio?",
                 "audio_path": "samples/sd-qa_1008642825401516622.wav",
+                "instruction": "What does the speaker say in the audio?",
+                "answer": None,
             },
         ],
         [
-            {"role": "system", "content": "You are a helpful assistant."},
             {
-                "role": "user",
-                "content": "What does the speaker say in the audio?",
                 "audio_path": "samples/sd-qa_6426446469024899068.wav",
+                "instruction": "What does the speaker say in the audio?",
+                "answer": None,
             },
         ],
         [
-            {"role": "system", "content": "You are a helpful assistant."},
             {
-                "role": "user",
-                "content": "Who are you?",
-                # No "audio_path" or "audio" key, testing text-only input
+                "audio_path": None,
+                "instruction": "Who are you?",
+                "answer": None,
             },
         ],
     ]

@@ -215,31 +215,33 @@ class BLSP_Emo(BaseModel):
     def process_input(self, conversation: list[dict]):
         """
         Process the raw conversation list into the format expected by Blsp2Model.chat().
-        The order is [System] -> [User Audio] -> [User Text] -> [Assistant Text] -> ...
+        Each dict contains: {"audio_path": ..., "instruction": ..., "answer": ...}
+        The order is [System] -> [User Text] -> [User Audio] -> [Assistant Text] -> ...
+        [User Text] and [User Audio] are delimited by "\n\nSpeech: ".
+        Note it appears from small tests that putting [User Audio] before [User Text]
+        causes model to either say it did not receive an audio input or treat 
+        the audio as part of the text instruction.
         """
         self.history.reset()
         
         for turn in conversation:
-            role = turn.get("role")
-            content = turn.get("content", "")
-            audio_path = turn.get("audio_path", None)
+            audio_path = turn.get("audio_path")
+            instruction = turn.get("instruction", "")
+            answer = turn.get("answer")
 
-            if role == "system":
-                self.history.set_system_prompt(content)
-
-            elif role == "user":
-                if audio_path:
-                    if content:
-                        content += "\n\nSpeech: "
-                    self.history.add_audio(audio_path)
-                    self.history.add_speech_history(self.history.audio_file[-1], text=content)
-                elif content:
-                    self.history.add_text_history(role, content)
-                else:
-                    raise ValueError("User turn must have either 'content' or 'audio_path'.")
-                
-            elif role == "assistant":
-                self.history.add_text_history(role, content)
+            if audio_path:
+                content = instruction
+                if content:
+                    content += "\n\nSpeech: "
+                self.history.add_audio(audio_path)
+                self.history.add_speech_history(self.history.audio_file[-1], text=content)
+            elif instruction:
+                self.history.add_text_history("user", instruction)
+            else:
+                raise ValueError("User turn must have either 'instruction' or 'audio_path'.")
+            
+            if answer is not None:  # means there is an assistant response
+                self.history.add_text_history("assistant", answer)
 
     def generate(self) -> str:
         if not self.history.history:

@@ -53,6 +53,7 @@ Create and enter the conda env for running DiVA.
 conda create --name blsp-emo python=3.11 -y  # Must use python=3.11 as BLSP-Emo uses some old packages like torch==2.0.1 that are not installable in newer Python versions
 conda activate blsp-emo
 pip install -r models/blsp_emo_package/requirements.txt
+pip install pyarrow==12.0.0  # needed to avoid the following error: "AttributeError: module 'pyarrow' has no attribute 'PyExtensionType'. Did you mean: 'ExtensionType'?"
 ```
 
 Create a HuggingFace access token (if you want to use `hf` to download the weights in the next step)

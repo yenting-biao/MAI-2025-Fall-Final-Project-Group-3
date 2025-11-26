@@ -47,7 +47,7 @@ python smoke_test.py --model diva
 
 #### BLSP-Emo
 
-Create and enter the conda env for running DiVA.
+Create and enter the conda env for running BLSP-Emo.
 
 ```bash
 conda create --name blsp-emo python=3.11 -y  # Must use python=3.11 as BLSP-Emo uses some old packages like torch==2.0.1 that are not installable in newer Python versions

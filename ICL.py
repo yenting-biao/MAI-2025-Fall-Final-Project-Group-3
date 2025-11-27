@@ -2,7 +2,7 @@ import argparse
 import torch
 import json
 parser = argparse.ArgumentParser(description="In-Context Learning (ICL) Configuration")
-parser.add_argument("--model_name", type=str, default="Qwen", choices=["Qwen", "Qwen2", "DeSTA2", "blsp_emo", "diva"], help="Name of the pre-trained language model to use.")
+parser.add_argument("--model_name", type=str, default="Qwen", choices=["Qwen", "Qwen2", "DeSTA2", "BLSP-Emo", "diva"], help="Name of the pre-trained language model to use.")
 parser.add_argument("--audio_task", type=str, default="ASR", help="The specific audio-related task.")
 parser.add_argument("--response_task", type=str, default="closed_ended_questions", help="The specific task for in-context learning.")
 parser.add_argument("--IF_task", type=str, default="change_case:english_capital", help="Whether to use in-context learning for the specified task.")
@@ -29,6 +29,9 @@ def load_model(model_name) -> BaseModel:
         case "DeSTA2":
             from models.DeSTA2 import DeSTA2
             return DeSTA2(device=device)
+        case "BLSP-Emo":
+            from models.blsp_emo import BLSP_Emo
+            return BLSP_Emo(device=device)
 
 def GenerateICLExamples(data:list[dict]) -> list[dict]:
     '''

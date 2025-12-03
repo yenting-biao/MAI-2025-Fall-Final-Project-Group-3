@@ -267,7 +267,7 @@
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Make a written transcription of the provided audio clip.\nRespond beginning with the line: \"Here\u2019s what we can conclude:\"",
-                    "ans": "Here’s what we can conclude:i wonder what this is about"
+                    "ans": "Here\u2019s what we can conclude:i wonder what this is about"
                 }
             ],
             "startend:end_checker": [
@@ -279,7 +279,7 @@
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Write the words spoken in the provided audio.\nPlease wrap up your response with \"That\u2019s my full explanation.\"",
-                    "ans": "it's eleven o'clock\nThat’s my full explanation."
+                    "ans": "it's eleven o'clock\nThat\u2019s my full explanation."
                 },
                 {
                     "audio_path": "general/2.wav",
@@ -289,7 +289,7 @@
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Write the text version of the provided speech.\nConclude your answer by saying \"That\u2019s all I have to explain.\"",
-                    "ans": "don't forget a jacket\nThat’s all I have to explain."
+                    "ans": "don't forget a jacket\nThat\u2019s all I have to explain."
                 },
                 {
                     "audio_path": "general/4.wav",
@@ -304,7 +304,7 @@
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "Create a textual version of the provided spoken material.\nClose your response with \"That\u2019s my complete answer on this matter.\"",
-                    "ans": "i think i have a doctor's appointment\nThat’s my complete answer on this matter."
+                    "ans": "i think i have a doctor's appointment\nThat\u2019s my complete answer on this matter."
                 },
                 {
                     "audio_path": "general/7.wav",

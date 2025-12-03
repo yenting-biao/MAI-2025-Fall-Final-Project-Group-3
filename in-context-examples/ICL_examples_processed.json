@@ -643,17 +643,17 @@
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Based on how the speaker sounds, identify their gender. Choose the answer from \"Male\" or \"Female\"\nYour entire answer should be written using only uppercase characters.",
-                    "ans": "WOMAN"
+                    "ans": "FEMALE"
                 },
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "From the given recording, decide if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nPlease write your answer entirely using capital letters.",
-                    "ans": "MALE"
+                    "ans": "MAN"
                 },
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Listen to the speaker\u2019s voice and identify their gender. Choose the answer from \"Man\" or \"Woman\"\nDo not use any lowercase letters in your answer.",
-                    "ans": "FEMALE"
+                    "ans": "WOMAN"
                 },
                 {
                     "audio_path": "general/4.wav",
@@ -663,17 +663,17 @@
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Use the audio cues to infer if the voice belongs to a male or a female. Choose the answer from \"Man\" or \"Woman\"\nRespond with your full text in uppercase characters.",
-                    "ans": "FEMALE"
+                    "ans": "WOMAN"
                 },
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "Classify the voice in this clip as male or female. Choose the answer from \"Male\" or \"Female\"\nAll parts of your reply must be in capital letters.",
-                    "ans": "MAN"
+                    "ans": "MALE"
                 },
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Identify whether the individual in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite everything in your response using capital letters only.",
-                    "ans": "FEMALE"
+                    "ans": "WOMAN"
                 }
             ],
             "change_case:english_lowercase": [
@@ -723,14 +723,14 @@
                     "audio_path": "general/0.wav",
                     "instruction": "Assess the characteristics of the speaker\u2019s voice to tell their gender. Choose the answer from \"Man\" or \"Woman\"\nRespond in valid JSON form with no explanations or markup.",
                     "ans": {
-                        "Gender": "male"
+                        "Gender": "man"
                     }
                 },
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Listen carefully to the recording and determine if the speaker is male or female. Choose the answer from \"Male\" or \"Female\"\nFormat the response as a single JSON block and omit commentary.",
                     "ans": {
-                        "Gender": "woman"
+                        "Gender": "female"
                     }
                 },
                 {
@@ -751,28 +751,28 @@
                     "audio_path": "general/4.wav",
                     "instruction": "Determine whether the speaker in this recording is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nOutput should contain just one correctly formatted JSON structure.",
                     "ans": {
-                        "Gender": "man"
+                        "Gender": "male"
                     }
                 },
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Identify whether the individual in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nOutput must be strictly JSON without any narrative or context.",
                     "ans": {
-                        "Gender": "female"
+                        "Gender": "woman"
                     }
                 },
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "What is the likely gender of the person speaking in this sound clip? Choose the answer from \"Male\" or \"Female\"\nWrite your answer as JSON and exclude all plain text elements.",
                     "ans": {
-                        "Gender": "man"
+                        "Gender": "male"
                     }
                 },
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Decide if the voice you hear is that of a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nReturn the structured information only in JSON representation.",
                     "ans": {
-                        "Gender": "female"
+                        "Gender": "woman"
                     }
                 }
             ],
@@ -780,12 +780,12 @@
                 {
                     "audio_path": "general/0.wav",
                     "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nPut your entire output inside a set of double quotes.",
-                    "ans": "\"male\""
+                    "ans": "\"man\""
                 },
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Based on how the speaker sounds, identify their gender. Choose the answer from \"Male\" or \"Female\"\nThe response must be fully contained within double quotation marks.",
-                    "ans": "\"woman\""
+                    "ans": "\"female\""
                 },
                 {
                     "audio_path": "general/2.wav",
@@ -795,17 +795,17 @@
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Assess the characteristics of the speaker\u2019s voice to tell their gender. Choose the answer from \"Man\" or \"Woman\"\nDouble quotes should encapsulate the entirety of your response.",
-                    "ans": "\"female\""
+                    "ans": "\"woman\""
                 },
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Determine the gender identity of the person speaking in this audio. Choose the answer from \"Male\" or \"Female\"\nThe text you produce should be framed within double quotes.",
-                    "ans": "\"man\""
+                    "ans": "\"male\""
                 },
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "By listening to the clip, identify whether the voice is masculine or feminine. Choose the answer from \"Man\" or \"Woman\"\nThe message must be entirely inside a pair of double quotes.",
-                    "ans": "\"female\""
+                    "ans": "\"woman\""
                 },
                 {
                     "audio_path": "general/6.wav",
@@ -815,7 +815,7 @@
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Decide if the voice you hear is that of a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nInsert double quotes enclosing the complete text of your reply.",
-                    "ans": "\"female\""
+                    "ans": "\"woman\""
                 }
             ],
             "detectable_format:title": [
@@ -832,7 +832,7 @@
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nPut the answer completely within << and >> without any outside text.",
-                    "ans": "<<male>>"
+                    "ans": "<<man>>"
                 },
                 {
                     "audio_path": "general/3.wav",
@@ -842,7 +842,7 @@
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Can you determine if the speaker is a male or a female from this recording? Choose the answer from \"Male\" or \"Female\"\nYour answer must be entirely contained inside << >> delimiters.",
-                    "ans": "<<man>>"
+                    "ans": "<<male>>"
                 },
                 {
                     "audio_path": "general/5.wav",
@@ -857,7 +857,7 @@
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Analyze the speaker\u2019s voice and specify their gender. Choose the answer from \"Man\" or \"Woman\"\nUse << >> to wrap the entire message you generate.",
-                    "ans": "<<female>>"
+                    "ans": "<<woman>>"
                 }
             ],
             "combination:repeat_prompt": [
@@ -874,7 +874,7 @@
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "Listen and identify whether the speaker in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nBegin by saying: \"In summary, the solution is:\"",
-                    "ans": "In summary, the solution is:male"
+                    "ans": "In summary, the solution is:man"
                 },
                 {
                     "audio_path": "general/3.wav",
@@ -884,7 +884,7 @@
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "From the audio provided, classify the speaker\u2019s gender. Choose the answer from \"Male\" or \"Female\"\nStart your response with: \"The resulting conclusion is:\"",
-                    "ans": "The resulting conclusion is:man"
+                    "ans": "The resulting conclusion is:male"
                 },
                 {
                     "audio_path": "general/5.wav",
@@ -899,7 +899,7 @@
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Listen to this recording and decide whether the voice belongs to a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nOpen your response by writing: \"After examination, the conclusion is:\"",
-                    "ans": "After examination, the conclusion is:female"
+                    "ans": "After examination, the conclusion is:woman"
                 }
             ],
             "startend:end_checker": [
@@ -911,12 +911,12 @@
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Determine the gender identity of the person speaking in this audio. Choose the answer from \"Male\" or \"Female\"\nEnd your answer by writing \"This completes what I intended to explain.\"",
-                    "ans": "woman\nThis completes what I intended to explain."
+                    "ans": "female\nThis completes what I intended to explain."
                 },
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "From this voice sample, classify the speaker as male or female. Choose the answer from \"Man\" or \"Woman\"\nFinish your answer with \"That\u2019s all for my response today.\"",
-                    "ans": "male\nThat\u2019s all for my response today."
+                    "ans": "man\nThat\u2019s all for my response today."
                 },
                 {
                     "audio_path": "general/3.wav",
@@ -931,7 +931,7 @@
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nEnd your reply by stating \"This brings my explanation to a close.\"",
-                    "ans": "female\nThis brings my explanation to a close."
+                    "ans": "woman\nThis brings my explanation to a close."
                 },
                 {
                     "audio_path": "general/6.wav",

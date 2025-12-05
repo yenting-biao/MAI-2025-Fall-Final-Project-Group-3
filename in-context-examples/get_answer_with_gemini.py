@@ -33,7 +33,7 @@ class Gemini:
         max_retries: int = 5,
     ):
         if not api_keys:
-            raise ValueError("GEMINI_API_KEYS environment variable is not set.")
+            raise ValueError("api_keys parameter must be provided.")
         self.api_keys = api_keys.split(
             ","
         )  # you can use multiple API keys to avoid rate limit

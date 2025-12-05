@@ -25,7 +25,7 @@ class Qwen_Audio_Chat(BaseModel):
             for cnt in range(ICLexamples):
                 messages.append({'audio': conversation[cnt]['audio_path']})
                 messages.append({'text': conversation[cnt]['instruction']})
-                if conversation[cnt]['answer'] is not None:
+                if 'answer' in conversation[cnt] and conversation[cnt]['answer'] and conversation[cnt]['answer'] != " [ANS] None ":
                     messages.append({'text': conversation[cnt]['answer']})
 
         #   Append test example

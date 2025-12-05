@@ -184,15 +184,16 @@ def GenerateMessagesResponse(
     model: BaseModel,
     icl_data: list[dict],
     icl_audio_dir: str,
+    use_test_sample: bool = False,
     debug: bool = False,
 ) -> Tuple[str, str]:
     test_case_formatted = {
         "audio_path": os.path.join(test_audio_dir, test_case["audio_filepath"]),
         "instruction": test_case["instruction"],
-    } if not args.use_test_sample else test_case
+    } if not use_test_sample else test_case
     conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug)
     model.process_input(conversation)
-    if args.debug:
+    if debug:
         print("-- Input processed. ---")
         print(f"\033[93m{model.messages}\033[0m")
 
@@ -313,7 +314,8 @@ def main(args: argparse.Namespace) -> None:
             random.shuffle(icl_data_shuffled)
             icl_data_examples = icl_data_shuffled[:args.examples]
             messages, response = GenerateMessagesResponse(
-                test_audio_dir, test_case, model, icl_data_examples, args.icl_audio_dir, args.debug
+                test_audio_dir, test_case, model, icl_data_examples,
+                args.icl_audio_dir, args.use_test_sample, args.debug
             )
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")

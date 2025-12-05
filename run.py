@@ -278,7 +278,7 @@ def verify_args(args: argparse.Namespace) -> None:
         raise ValueError(f"Audio task {args.audio_task} is not supported.")
     if args.response_task not in ["closed_ended_questions", "chain-of-thought", "creative_writing"]:
         raise ValueError(f"Response task {args.response_task} is not supported.")
-    if args.IF_task not in IMPLMENTED_IF_TASKS:
+    if args.IF_task not in IMPLEMENTED_IF_TASKS:
         raise ValueError(f"IF task {args.IF_task} is not implemented yet.")
     if args.verbose:
         print("Arguments verified successfully.")

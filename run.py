@@ -183,7 +183,7 @@ def GenerateMessagesResponse(
     test_case: dict,
     model: BaseModel,
     icl_data: list[dict],
-    icl_audio_dir,
+    icl_audio_dir: str,
     debug: bool = False,
 ) -> Tuple[str, str]:
     test_case_formatted = {

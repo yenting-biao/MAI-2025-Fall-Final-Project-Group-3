@@ -1,6 +1,47 @@
 {
     "ASR": {
-        "chain-of-thought": {},
+        "chain-of-thought": [
+            {
+                "audio_path": "general/0.wav",
+                "instruction": "Put the words from the provided voice recording into text.\nConstruct your solution by reasoning through consecutive steps.",
+                "ans": "Here is the step-by-step reasoning to transcribe the audio file:\n\n1.  The audio file is analyzed to identify the spoken words. The recording contains a single male speaker with clear enunciation.\n2.  The first phrase spoken is identified by listening to the beginning of the recording. The words are transcribed as \"I would like\".\n3.  Continuing the transcription, the next sequence of words is identified as \"a new alarm\".\n4.  The final word in the recording is isolated and transcribed as \"clock\".\n5.  By assembling the transcribed words in the sequence they were spoken, the complete sentence is formed.\n\nI would like a new alarm clock"
+            },
+            {
+                "audio_path": "general/1.wav",
+                "instruction": "Transcribe the given verbal audio into written words.\nReason through the question in a gradual, structured way.",
+                "ans": "**Reasoning:**\n\n1.  **Initial Audio Analysis:** The audio is first processed to identify key acoustic features. It contains a single human voice, which sounds high-pitched, speaking a short, clear sentence. There is minimal background noise, which aids in accurate recognition.\n\n2.  **Phonetic Segmentation and Word Identification:** The speech is broken down into its constituent phonetic sounds.\n    *   The first sound cluster /\u026ats/ is clearly identified as the common contraction \"It's\".\n    *   The next sequence of sounds, /\u0259\u02c8l\u025bv\u0259n/, is recognized as the word \"eleven\". The stress pattern on the second syllable is a key identifier.\n    *   The final sound cluster, /\u0259\u02c8kl\u0252k/, is a distinct and standard pronunciation for the term \"o'clock\".\n3.  **Sentence Assembly:** The identified words are then sequenced in the order they were spoken: \"It's\" + \"eleven\" + \"o'clock\".\n4.  **Contextual Verification:** The resulting phrase, \"It's eleven o'clock,\" is a grammatically correct and common expression used to state the time. This logical and contextual consistency confirms the accuracy of the transcription."
+            },
+            {
+                "audio_path": "general/2.wav",
+                "instruction": "Generate the textual representation of the provided spoken input.\nDecompose the question into manageable reasoning steps.",
+                "ans": "**Reasoning Steps:**\n\n1.  **Audio Ingestion:** The process starts by receiving the audio file and analyzing its sound wave characteristics, such as frequency, amplitude, and timing.\n2.  **Phonetic Segmentation:** The speech is broken down into its smallest distinct units of sound, called phonemes. The audio is identified as containing the sequence: /\u00f0\u0259/ (The) - /\u02c8s\u025c\u02d0r.f\u026as/ (surface) - /\u026az/ (is) - /sl\u026ak/ (slick).\n3.  **Word Recognition:** Each group of phonemes is matched against an extensive vocabulary model to identify the most probable words.\n    *   The sound /\u00f0\u0259/ is recognized as the article \"The\".\n    *   The sounds /\u02c8s\u025c\u02d0r.f\u026as/ are matched to the noun \"surface\".\n    *   The sound /\u026az/ is identified as the verb \"is\".\n    *   The sounds /sl\u026ak/ are recognized as the adjective \"slick\".\n4.  **Sentence Construction:** The identified words are assembled in the order they were spoken. The resulting sequence, \"The surface is slick,\" is checked for grammatical correctness, confirming it forms a coherent and valid sentence.\n5.  **Punctuation and Formatting:** Finally, standard punctuation is applied. The first word is capitalized, and a period is added at the end to signify a complete declarative sentence.\n\nThe final transcribed sentence is: \"The surface is slick.\""
+            },
+            {
+                "audio_path": "general/3.wav",
+                "instruction": "Reproduce the words spoken in the audio as text.\nExplain how you reach the solution by moving through each step logically.",
+                "ans": "**Explanation:**\n\n1.  **Initial Audio Processing:** The audio file is first processed to analyze its acoustic properties. I identify a single, clear female voice speaking a short phrase. The speech is delivered at a natural pace with standard English pronunciation.\n2.  **Phonetic Segmentation and Word Recognition:** The audio waveform is segmented into distinct phonetic units.\n    *   The first segment consists of the sounds corresponding to the words \"Don't forget,\" recognized by their distinct consonant and vowel patterns.\n    *   The second segment is a very short, unstressed vowel sound, which is identified as the article \"a\".\n    *   The final segment contains the sounds for \"jacket,\" clearly identified by the initial \"j\" sound, the \"ack\" middle, and the concluding \"et\" sound.\n3.  **Sentence Construction and Final Verification:** The recognized words\u2014\"Don't,\" \"forget,\" \"a,\" and \"jacket\"\u2014are assembled in sequential order to form the complete sentence. A final review of the audio confirms that this transcription accurately captures the spoken words and their intended meaning.\n\nThe final transcribed sentence is: \"Don't forget a jacket.\""
+            },
+            {
+                "audio_path": "general/4.wav",
+                "instruction": "Write the text equivalent of the provided spoken content.\nWork through each reasoning stage carefully before concluding.",
+                "ans": "Here is a step-by-step breakdown of the transcription process:\n\n1.  **Initial Listening:** The audio is listened to in its entirety to get a general sense of the content, speaker, and clarity. The speaker is a male with a clear and steady voice.\n\n2.  **Word-by-Word Analysis:** The audio is replayed, pausing as needed to identify each word accurately.\n    *   The first two words are identified as the contraction \"We'll\" followed by \"stop\".\n    *   The next phrase is \"in a couple of\".\n    *   The final word is clearly \"minutes\".\n\n3.  **Sentence Construction and Punctuation:** The identified words are assembled into a complete sentence. Since the sentence is a statement of intent, it concludes with a period.\n\n4.  **Final Review:** The complete transcribed sentence is compared against the audio one last time to ensure accuracy in wording and context.\n\nBased on this process, the spoken content is transcribed as:\n\nWe'll stop in a couple of minutes."
+            },
+            {
+                "audio_path": "general/5.wav",
+                "instruction": "Turn the provided verbal audio into a text version.\nDevelop your explanation in consecutive logical steps.",
+                "ans": "**Explanation:**\n\n1.  **Audio Ingestion:** The process begins by receiving and analyzing the digital audio waveform. I identify a single, clear voice speaking a complete sentence at a conversational pace.\n2.  **Phonetic Segmentation:** The continuous audio stream is broken down into its core sound units, or phonemes. The recognized sequence is approximately: /me\u026abi/ /t\u0259m\u0251ro\u028a/ /\u026at/ /w\u026al/ /bi/ /ko\u028ald/.\n3.  **Lexical Matching:** Each group of phonemes is matched against a vast vocabulary to identify the most likely words.\n    *   /me\u026abi/ corresponds to \"Maybe\".\n    *   /t\u0259m\u0251ro\u028a/ matches with \"tomorrow\".\n    *   /\u026at/ is recognized as \"it\".\n    *   /w\u026al/ is identified as \"will\".\n    *   /bi/ corresponds to \"be\".\n    *   /ko\u028ald/ is matched with \"cold\".\n4.  **Syntactic Assembly:** The identified words are arranged in sequential order. The falling intonation at the end of the phrase indicates it is a declarative statement, so a period is added to form the final, grammatically correct sentence: \"Maybe tomorrow it will be cold.\""
+            },
+            {
+                "audio_path": "general/6.wav",
+                "instruction": "Transform the given audio message into text form.\nApproach the question in a progressive, stepwise manner.",
+                "ans": "**Step-by-Step Breakdown:**\n\n1.  **Initial Audio Analysis:** The process begins by receiving the audio file and analyzing its acoustic properties. The waveform shows a single, continuous utterance from one speaker in a low-noise environment.\n\n2.  **Phonetic Segmentation:** The speech is broken down into its fundamental sound units, or phonemes. I identify the sequence of sounds as they are spoken:\n    *   \"I\" (/a\u026a/)\n    *   \"think\" (/\u03b8\u026a\u014bk/)\n    *   \"I\" (/a\u026a/)\n    *   \"have\" (/h\u00e6v/)\n    *   \"a\" (/\u0259/)\n    *   \"doctor's\" (/\u02c8d\u0251kt\u0259rz/)\n    *   \"appointment\" (/\u0259\u02c8p\u0254\u026antm\u0259nt/)\n\n3.  **Word Recognition:** Each phonetic cluster is matched against a vast linguistic dictionary to identify the most probable words.\n    *   The sounds /d\u0251kt\u0259rz/ are distinctly recognized as the possessive \"doctor's,\" not the plural \"doctors,\" due to the context provided by the next word.\n    *   The two-syllable word /\u0259\u02c8p\u0254\u026antm\u0259nt/ is clearly identified as \"appointment.\"\n\n4.  **Syntactic Assembly and Finalization:** The recognized words are assembled into a coherent sentence. A language model evaluates the sequence \"I think I have a doctor's appointment\" as a grammatically correct and highly probable phrase in English. A period is added at the end to signify the completion of a declarative statement.\n\nThe final transcribed sentence is: \"I think I have a doctor's appointment.\""
+            },
+            {
+                "audio_path": "general/7.wav",
+                "instruction": "Write the spoken material from the provided clip in text form.\nOutline your thinking path clearly from start to finish.",
+                "ans": "**Thinking Path:**\n\n1.  **Initial Audio Reception:** The first step is to process the audio file. I listen to the clip to get a general sense of the content, identifying a single human voice speaking a complete sentence. The audio is clear with minimal background noise.\n2.  **Word-by-Word Segmentation:** I then break down the continuous speech into individual, recognizable words. My internal model processes the sounds sequentially:\n    *   The first sound is a clear \"I\".\n    *   This is followed by the two-syllable word \"wonder\".\n    *   Next, the word \"what\" is distinctly heard.\n    *   This is followed by \"this\", then \"is\".\n    *   The phrase concludes with the two-syllable word \"about\".\n3.  **Sentence Reconstruction:** The identified words (\"I\", \"wonder\", \"what\", \"this\", \"is\", \"about\") are then assembled in the order they were spoken. This forms a grammatically correct and coherent sentence.\n4.  **Final Verification:** I perform a final check by re-playing the audio while simultaneously reviewing the constructed sentence: \"I wonder what this is about.\" The transcription perfectly matches the spoken words, cadence, and intonation of the audio clip, confirming its accuracy."
+            }
+        ],
         "closed_ended_questions": {
             "change_case:english_capital": [
                 {
@@ -313,10 +354,136 @@
                 }
             ]
         },
-        "creative_writing": {}
+        "creative_writing": {
+            "detectable_format:number_bullet_lists": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the key insights from the audio in exactly 4 bullet points.",
+                    "ans": "Here are the key insights from the audio:\n\n*   The speaker is expressing a personal want or making a request.\n*   The specific item desired is an alarm clock.\n*   A key condition is that the alarm clock must be \"new.\"\n*   The statement communicates a clear and specific consumer need."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "List 3 observations about the speaker\u2019s attitude in bullet points.",
+                    "ans": "Based on the audio clip, here are three observations about the speaker's attitude:\n\n*   **Alarmed and Urgent:** The speaker's loud, high-pitched tone conveys a sense of panic or urgency. They are not simply stating the time; they are exclaiming it as if it's a critical and problematic fact.\n*   **Exasperated:** There is an undercurrent of frustration, suggesting that the time \"11 o'clock\" signifies that something is very late or a deadline has been missed, possibly despite a previous warning.\n*   **Dramatic and Emphatic:** The speaker is intentionally emphasizing the time to maximize its impact on the listener. The delivery is theatrical and meant to convey a strong sense of crisis."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Explain the central conflict or issue in the audio using 2 bullet points.",
+                    "ans": "Based on the audio, here is the central issue:\n\n*   The speaker observes that a surface is slick.\n*   This condition creates a potential hazard, implying a danger of slipping, falling, or losing grip."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Provide 5 concise bullet points describing what the speaker emphasizes most.",
+                    "ans": "Based on the audio, here are five concise bullet points describing what the speaker emphasizes most:\n\n*   **A specific action:** The importance of not forgetting something.\n*   **A necessary item:** The speaker singles out a jacket as the essential object.\n*   **An implied warning:** There's an underlying suggestion about the weather being cool or unpredictable.\n*   **A direct reminder:** The tone is that of a helpful, clear, and direct piece of advice.\n*   **The need for preparedness:** The core message is to be prepared before going out."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Write 3 bullet points that capture the progression of ideas in the audio.",
+                    "ans": "Here is the progression of ideas from the audio in three bullet points:\n\n*   The speaker acknowledges that an activity is currently in progress.\n*   A decision is announced to bring the activity to a halt.\n*   A specific timeframe is provided, indicating the stop will occur in the immediate future."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "List 4 details that reveal the speaker\u2019s personality in bullet points.",
+                    "ans": "Based on the audio, here are four details that reveal the speaker\u2019s personality:\n\n*   **Pensive:** The speaker's slow, deliberate pacing suggests they are thoughtful and considering a possibility rather than making a definite statement.\n*   **Subdued:** Their quiet volume and monotone delivery indicate a reserved or low-energy disposition.\n*   **Non-committal:** Using the word \"maybe\" shows they are uncertain or hesitant to commit to a specific prediction.\n*   **Calm:** The lack of emotional inflection in their voice suggests a placid and even-keeled temperament."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Summarize the main argument and its supporting evidence in 3 bullet points.",
+                    "ans": "Based on the video, here is a summary of the main point and its evidence:\n\n*   **Main Argument:** The speaker asserts that they have a doctor's appointment.\n*   **Supporting Evidence:** The primary evidence provided is the speaker's own statement of belief, indicated by the phrase \"I think...\"\n*   **Context:** The clip does not offer any further details, such as the time, date, or reason for the appointment, to substantiate the claim."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Describe how background sounds contribute to meaning in 2 bullet points.",
+                    "ans": "Based on the audio clip, here is how the background sounds contribute to the meaning:\n\n*   The quiet background and subtle room tone establish an intimate and focused setting. The absence of other sounds (like traffic, music, or other people) directs all attention to the speaker, suggesting they are alone and the moment is one of personal thought.\n*   The silence amplifies the speaker's contemplative and curious tone. It makes the phrase \"I wonder what this is about\" feel like an internal monologue spoken aloud, heightening the sense of mystery and introspection for the listener."
+                }
+            ],
+            "keywords:existence": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Explain the conversation\u2019s hidden meaning, using the word 'mirror'.",
+                    "ans": "Of course. Here is an explanation of the conversation's hidden meaning, using the word \"mirror.\"\n\n***\n\nThe statement \"I would like a new alarm clock\" isn't about a broken device; it's a profound desire for a new life. The current alarm clock has become a **mirror** reflecting a reality the speaker wants to escape.\n\nEach morning, its sound doesn't just signal the start of a day; it reflects back a life of unwanted routine, dissatisfaction, and stagnation. Waking up is a daily confrontation with the person they've become, a life they no longer recognize as their own.\n\nBy asking for a \"new alarm clock,\" the speaker is really saying, \"I want to wake up to a different reflection.\" They are seeking a fresh start, a new beginning, a catalyst for change so that the life that greets them in the morning will finally **mirror** the one they truly desire."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Rewrite this as a diary entry that includes 'autumn' and 'rain'.",
+                    "ans": "October 26th\n\nDear Diary,\n\nThe **rain** hasn't stopped all morning, just a steady drumming against the windowpane. I must have been sitting here for hours, just watching it streak down the glass, blurring the world outside into a watercolour of rust and gold. It's a proper **autumn** day; the kind where the sky is a soft grey blanket and the last of the leaves are plastered to the wet pavement.\n\nMy tea has gone cold beside me. I was completely lost in a trance, hypnotized by the sound and the colours. A sudden glance at the clock on the wall made my heart give a little jolt. My mind just screamed it back at me: *It's 11 o'clock!*\n\nThe entire morning, just\u2026 gone. Vanished into the grey. I was supposed to have finished my history reading by now. I suppose the rain just washes the hours away sometimes. Right, I really have to get started now."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Summarize the story\u2019s moral, ensuring the word 'greed' appears.",
+                    "ans": "Based on the single line \"The surface is slick,\" we can infer a moral about hidden dangers.\n\nThe moral is a warning that **greed** can make you rush toward something that appears attractive and easy, blinding you to the fact that the surface is slick and the path is treacherous, ultimately leading to your downfall."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Depict a tense argument while using 'silence' and 'crimson'.",
+                    "ans": "Don't forget a jacket.\nOf course not. Can't have you worrying.\nI wasn't.\nRight. Just the cold, stony silence. The same you get when you're angry.\nWhat do you want me to say?\nAnything! Yell! Scream! Just stop turning that awful shade of crimson and shutting me out"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Frame this as a philosophical musing with 'existence' and 'void'.",
+                    "ans": "Within this simple utterance lies the fundamental tension of all that is.\n\n**Existence** is the present moment\u2014the hum of activity, the shared rhythm, the forward momentum of \"we.\" It is the brief, defiant flicker against an infinite backdrop. It is what *is*.\n\nBut the statement does not end there. It carries a promise, an inevitability: \"...we'll stop.\"\n\nThis is the whisper of the **Void**. Not a threat, but a certainty. It is the vast, waiting stillness that precedes and follows every act of being. The phrase \"in a couple of minutes\" is the fragile boundary we draw, the temporary dam we build against the silent ocean of non-existence.\n\nIt is a profound declaration that our current state is finite. And in that awareness, our existence gains its texture, its meaning. The sound is only precious because of the impending silence. The motion is only vital because of the coming rest. We are, for a moment, and then we will return to the great and tranquil nothing from which we emerged."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Describe the natural landscape while including 'harbor' and 'mist'.",
+                    "ans": "Dawn arrives not with color, but with a thickening of the grey. A thick, damp **mist** pours over the granite headlands and settles into the deep, protected **harbor**, a soft, sound-dampening blanket. The water is a sheet of polished slate, its surface disturbed only by the silent rings of unseen drips falling from the heavy boughs of ancient pines.\n\nOn the steep shores, the forest rises like a dark wall, its details lost in the vapor. The sharp cry of a lone gull pierces the quiet, its call instantly muffled, making it sound impossibly far away. The air is cold and clean, smelling of salt, wet stone, and pine. It is a world held in suspension, where the line between sea and sky has been erased, and the quiet, sheltered harbor waits for the sun to burn through the veil."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Turn this into a bedtime story using 'moonlight' and 'owl'.",
+                    "ans": "Of course. Snuggle in and close your eyes.\n\n***\n\nIn a cozy den, deep in a sleepy wood, a little bear cub named Barnaby was getting ready for bed. The silver **moonlight** streamed through the entrance of his burrow, painting soft stripes on his mossy pillow.\n\nHe wiggled his nose and tried to let out a great big bedtime yawn, but it felt\u2026 stuck. A sleepy feeling rumbled in his chest, but it wouldn't come out.\n\nHe blinked his drowsy eyes and mumbled into his pillow, \u201cOh, dear. **I think I have a doctor\u2019s appointment.**\u201d\n\nJust then, a gentle *Hoo-Hoo* echoed from the big oak tree outside. A moment later, a shadow drifted silently across the floor. It was the wise old **owl**, Dr. Hoot, who served as the forest\u2019s night-time doctor. He landed softly at the edge of the den, his big, kind eyes glowing in the dark.\n\n\u201cFeeling a bit fuzzy, little one?\u201d the owl cooed, his voice as soft as his feathers.\n\nBarnaby nodded. \u201cMy yawn is stuck.\u201d\n\nDr. Hoot smiled a wise owl smile. \u201cAh, a classic case of a misplaced yawn. The cure is quite simple.\u201d He fluffed his wings and began to hum a low, quiet tune, a lullaby that sounded like the wind whispering through the pines.\n\nHe told Barnaby to look at the moonbeams dancing on the floor, to listen to the crickets chirping their goodnight song, and to feel the cozy weight of his blanket.\n\nAs Barnaby listened, watching the peaceful **moonlight**, the big, rumbly feeling grew and grew until\u2026\n\n*YAAAAAWN!*\n\nA huge, wonderful, sleepy yawn finally escaped, stretching all the way to his tippy-toes.\n\nThe wise old **owl** hooted softly in satisfaction. \u201cThere now. All better.\u201d\n\nBarnaby\u2019s eyes felt heavy as stones. He curled into a tight, furry ball. \u201cThank you, Dr. Hoot,\u201d he whispered, already halfway to dreamland.\n\nThe owl gave a little nod, and as silently as he arrived, he flew back to his branch, watching over the little bear cub as he slept peacefully, bathed in the gentle, silver moonlight."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
+                    "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
+                }
+            ]
+        }
     },
     "SER": {
-        "chain-of-thought": {},
+        "chain-of-thought": [
+            {
+                "audio_path": "general/0.wav",
+                "instruction": "Examine the tonal quality, pacing, and pitch of the voice, as well as contextual cues, to identify the speaker\u2019s emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWork through this problem gradually, explaining each phase.",
+                "ans": "**Phase 1: Tonal Quality Analysis**\nThe speaker's voice is loud and has a strained, forceful quality. There is a noticeable tension in the tone, which lacks any warmth or gentleness. This harshness suggests a strong, high-arousal emotional state.\n\n**Phase 2: Pacing Analysis**\nThe speech is delivered at a deliberate, almost clipped pace. Each word is enunciated with significant force and separation, rather than flowing together in a conversational manner. This emphatic and punctuated delivery style indicates that the speaker is making a firm demand, not a casual request.\n\n**Phase 3: Pitch Analysis**\nThe pitch of the voice is elevated and maintains a high level of intensity throughout the short sentence. It does not have the melodic, rising and falling intonation typical of neutral or happy speech. Instead, the sustained high pitch contributes to the overall intensity and force of the utterance.\n\n**Phase 4: Synthesis of Cues**\nWhile the words themselves (\"I would like a new alarm clock\") could form a neutral request, the acoustic cues tell a different story. The combination of a loud, strained tone, forceful and deliberate pacing, and a high, intense pitch points to a powerful negative emotion. The speaker is clearly agitated and is expressing extreme frustration or making a non-negotiable demand. This emotional expression is far from neutral, happy, or sad.\n\nAngry"
+            },
+            {
+                "audio_path": "general/1.wav",
+                "instruction": "Determine the emotional category by listening for patterns of stress, tone, and pace in the voice. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nReason through the question in a gradual, structured way.",
+                "ans": "Based on the audio provided, here is the reasoning for the emotional category:\n\n*   **Stress:** The words are spoken with a high degree of force and intensity. There is a sharp, percussive stress placed on \"eleven\" and \"o'clock,\" making the statement sound like an exclamation or an accusation rather than a simple declaration of time.\n*   **Tone:** The pitch of the voice is high and sounds strained. This strained quality is inconsistent with a neutral, happy, or sad emotional state. It suggests significant tension and frustration.\n*   **Pace:** The phrase is delivered very quickly and abruptly. This rapid pace indicates a high state of emotional arousal, ruling out emotions typically associated with a slower pace, such as sadness or neutrality.\n\nThe combination of a fast pace, a high and strained tone, and forceful stress points to a high-arousal, negative emotion.\n\nAngry"
+            },
+            {
+                "audio_path": "general/2.wav",
+                "instruction": "Pay attention to how vocal pitch, tone, and articulation change to express different emotions. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAddress this question progressively, one stage at a time.",
+                "ans": "**Stage 1: Analysis of Vocal Characteristics**\n\nThe speaker's vocal pitch has a notable rising intonation, creating a melodic and upward contour, especially on the final word. The tone of voice is bright and clear, conveying a sense of energy. The words are articulated crisply at a moderate pace, without any signs of slowness or aggressive force.\n\n**Stage 2: Comparison and Elimination**\n\nThis vocal profile can be contrasted with the other emotion categories. The delivery is not low-pitched, slow, or flat, which would be characteristic of sadness. It also lacks the loud volume, tension, or harshness that typically signifies anger. The distinct melodic variation and energetic quality differentiate it from a monotone, neutral expression.\n\n**Stage 3: Conclusion**\n\nHappy"
+            },
+            {
+                "audio_path": "general/3.wav",
+                "instruction": "Focus on how the speaker\u2019s tone, pitch, and rhythm shift throughout the utterance to infer the emotion behind their words. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nApproach the question in a progressive, stepwise manner.",
+                "ans": "Based on the acoustic cues in the audio file, here is a stepwise analysis of the speaker's emotion:\n\n*   **Pitch:** The speaker begins in a mid-range pitch and noticeably raises it at the end of the phrase, particularly on the word \"jacket.\" This upward inflection creates a light, lilting quality, which is often associated with friendliness and positive engagement rather than a flat, neutral statement or a descending, sad one.\n\n*   **Tone:** The vocal tone is bright and clear. It lacks the strained quality of anger or the subdued, heavy quality of sadness. Instead, the tone is warm and gentle, conveying a sense of care and pleasantness.\n\n*   **Rhythm:** The pace of the speech is natural and even, with a smooth, almost melodic rhythm. This flowing cadence contributes to the overall cheerful and positive feeling of the utterance, contrasting with the clipped, sharp rhythm of anger or the slow, drawn-out pace of sadness.\n\nCombining these observations, the bright tone, melodic rhythm, and rising pitch all strongly indicate a positive emotional state.\n\nHappy"
+            },
+            {
+                "audio_path": "general/4.wav",
+                "instruction": "Identify the emotional state reflected in the speaker\u2019s tone, speech rate, and vocal strength. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nConstruct your solution by reasoning through consecutive steps.",
+                "ans": "**Step 1: Analysis of Vocal Tone**\nThe speaker's tone is characterized by a moderate pitch with minimal inflection. The pitch does not rise or fall in a way that would suggest strong positive or negative emotions. The delivery is straightforward and matter-of-fact.\n\n**Step 2: Analysis of Speech Rate**\nThe pace of the speech is steady and moderate. The speaker is not talking quickly, which might indicate excitement or anger, nor are they speaking slowly, which could suggest sadness. The even rhythm of the speech points to a composed state.\n\n**Step 3: Analysis of Vocal Strength**\nThe volume of the speaker's voice is at a normal, conversational level. There is no evidence of shouting, which would be associated with anger, or a weak, quiet voice, which could be linked to sadness. The vocal strength is consistent and clear.\n\n**Step 4: Synthesis of Observations**\nThe combination of a flat tone, a moderate speech rate, and a normal vocal strength indicates a lack of strong emotional expression. The speaker is communicating information in a clear and direct manner without any noticeable emotional coloring.\n\nNeutral"
+            },
+            {
+                "audio_path": "general/5.wav",
+                "instruction": "Identify emotion by detecting patterns in tone, pitch modulation, and pacing variation. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nSolve the question by progressing through each reasoning stage systematically.",
+                "ans": "*   **Tone Analysis**: The speaker's vocal tone is even and uninflected. There is no discernible emotional charge, such as warmth, excitement, or agitation. The delivery is straightforward, similar to someone making a simple observation or stating a possibility.\n\n*   **Pitch Modulation Analysis**: The pitch of the voice remains relatively stable throughout the sentence. There are no significant upward or downward shifts that would indicate strong feelings. The vocal range used is narrow and falls within a moderate, conversational level.\n\n*   **Pacing Variation Analysis**: The pace of speech is moderate and consistent. The words are spoken at a normal, conversational speed, without being rushed or slowed down. The rhythm is steady, lacking the sharp, abrupt quality of anger or the lethargic flow of sadness.\n\n*   **Synthesis of Observations**: The combination of an even tone, stable pitch, and moderate pacing suggests that the speaker is conveying information without emotional involvement. There are no vocal cues that point to happiness, sadness, or anger.\n\nNeutral"
+            },
+            {
+                "audio_path": "general/6.wav",
+                "instruction": "Pay attention to how the voice rises and falls in pitch and tone, and how the pacing changes to indicate emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nDecompose the question into manageable reasoning steps.",
+                "ans": "Here is a step-by-step breakdown of the vocal characteristics in the audio file:\n\n**Step 1: Pitch Analysis**\nThe speaker's pitch is low and remains in a narrow, lower range throughout the sentence. There is a distinct downward inflection at the end, where the voice falls off, rather than rising or staying level. This lack of pitch variation and downward movement suggests low energy.\n\n**Step 2: Tone Analysis**\nThe tone of the voice is subdued and lacks brightness or resonance. It sounds heavy and slightly weary, without the crispness of a neutral or happy state, or the tension of an angry one.\n\n**Step 3: Pacing Analysis**\nThe speech is delivered at a slow, deliberate pace. The words are drawn out slightly, contributing to a feeling of low energy and lethargy. The rhythm is not hurried or clipped.\n\n**Step 4: Conclusion**\nThe combination of a low and falling pitch, a heavy tone, and a slow pace are all indicators of a low-arousal, negative emotional state.\n\nSad"
+            },
+            {
+                "audio_path": "general/7.wav",
+                "instruction": "Evaluate the speaker\u2019s emotion by analyzing vocal strength, tone fluctuations, and timing consistency. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nGo through your reasoning gradually, building up to the answer.",
+                "ans": "Based on the analysis of the audio, here is an evaluation of the speaker's emotion:\n\n*   **Vocal Strength:** The speaker's voice is very soft and low in volume. It lacks force and energy, sounding subdued and almost breathy.\n\n*   **Tone Fluctuations:** The pitch is consistently low and demonstrates very little variation. The tone is flat, with a slight downward inflection at the end of the sentence, which imparts a sense of resignation or weariness.\n\n*   **Timing Consistency:** The pace of speech is slow and drawn out. The words are delivered at a deliberate, unhurried, and slightly hesitant tempo.\n\nCombining these observations, the weak vocal strength, low and monotonous tone, and slow timing all point to a low-energy, negative emotional state. The overall delivery sounds heavy and dejected.\n\nBased on this analysis, the speaker's emotion is evaluated as:\n\n**Sad**"
+            }
+        ],
         "closed_ended_questions": {
             "change_case:english_capital": [
                 {
@@ -629,10 +796,136 @@
                 }
             ]
         },
-        "creative_writing": {}
+        "creative_writing": {
+            "detectable_format:number_bullet_lists": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the key insights from the audio in exactly 4 bullet points.",
+                    "ans": "Here are the key insights from the audio:\n\n*   The speaker is expressing a personal want or making a request.\n*   The specific item desired is an alarm clock.\n*   A key condition is that the alarm clock must be \"new.\"\n*   The statement communicates a clear and specific consumer need."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "List 3 observations about the speaker\u2019s attitude in bullet points.",
+                    "ans": "Based on the audio clip, here are three observations about the speaker's attitude:\n\n*   **Alarmed and Urgent:** The speaker's loud, high-pitched tone conveys a sense of panic or urgency. They are not simply stating the time; they are exclaiming it as if it's a critical and problematic fact.\n*   **Exasperated:** There is an undercurrent of frustration, suggesting that the time \"11 o'clock\" signifies that something is very late or a deadline has been missed, possibly despite a previous warning.\n*   **Dramatic and Emphatic:** The speaker is intentionally emphasizing the time to maximize its impact on the listener. The delivery is theatrical and meant to convey a strong sense of crisis."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Explain the central conflict or issue in the audio using 2 bullet points.",
+                    "ans": "Based on the audio, here is the central issue:\n\n*   The speaker observes that a surface is slick.\n*   This condition creates a potential hazard, implying a danger of slipping, falling, or losing grip."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Provide 5 concise bullet points describing what the speaker emphasizes most.",
+                    "ans": "Based on the audio, here are five concise bullet points describing what the speaker emphasizes most:\n\n*   **A specific action:** The importance of not forgetting something.\n*   **A necessary item:** The speaker singles out a jacket as the essential object.\n*   **An implied warning:** There's an underlying suggestion about the weather being cool or unpredictable.\n*   **A direct reminder:** The tone is that of a helpful, clear, and direct piece of advice.\n*   **The need for preparedness:** The core message is to be prepared before going out."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Write 3 bullet points that capture the progression of ideas in the audio.",
+                    "ans": "Here is the progression of ideas from the audio in three bullet points:\n\n*   The speaker acknowledges that an activity is currently in progress.\n*   A decision is announced to bring the activity to a halt.\n*   A specific timeframe is provided, indicating the stop will occur in the immediate future."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "List 4 details that reveal the speaker\u2019s personality in bullet points.",
+                    "ans": "Based on the audio, here are four details that reveal the speaker\u2019s personality:\n\n*   **Pensive:** The speaker's slow, deliberate pacing suggests they are thoughtful and considering a possibility rather than making a definite statement.\n*   **Subdued:** Their quiet volume and monotone delivery indicate a reserved or low-energy disposition.\n*   **Non-committal:** Using the word \"maybe\" shows they are uncertain or hesitant to commit to a specific prediction.\n*   **Calm:** The lack of emotional inflection in their voice suggests a placid and even-keeled temperament."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Summarize the main argument and its supporting evidence in 3 bullet points.",
+                    "ans": "Based on the video, here is a summary of the main point and its evidence:\n\n*   **Main Argument:** The speaker asserts that they have a doctor's appointment.\n*   **Supporting Evidence:** The primary evidence provided is the speaker's own statement of belief, indicated by the phrase \"I think...\"\n*   **Context:** The clip does not offer any further details, such as the time, date, or reason for the appointment, to substantiate the claim."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Describe how background sounds contribute to meaning in 2 bullet points.",
+                    "ans": "Based on the audio clip, here is how the background sounds contribute to the meaning:\n\n*   The quiet background and subtle room tone establish an intimate and focused setting. The absence of other sounds (like traffic, music, or other people) directs all attention to the speaker, suggesting they are alone and the moment is one of personal thought.\n*   The silence amplifies the speaker's contemplative and curious tone. It makes the phrase \"I wonder what this is about\" feel like an internal monologue spoken aloud, heightening the sense of mystery and introspection for the listener."
+                }
+            ],
+            "keywords:existence": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Explain the conversation\u2019s hidden meaning, using the word 'mirror'.",
+                    "ans": "Of course. Here is an explanation of the conversation's hidden meaning, using the word \"mirror.\"\n\n***\n\nThe statement \"I would like a new alarm clock\" isn't about a broken device; it's a profound desire for a new life. The current alarm clock has become a **mirror** reflecting a reality the speaker wants to escape.\n\nEach morning, its sound doesn't just signal the start of a day; it reflects back a life of unwanted routine, dissatisfaction, and stagnation. Waking up is a daily confrontation with the person they've become, a life they no longer recognize as their own.\n\nBy asking for a \"new alarm clock,\" the speaker is really saying, \"I want to wake up to a different reflection.\" They are seeking a fresh start, a new beginning, a catalyst for change so that the life that greets them in the morning will finally **mirror** the one they truly desire."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Rewrite this as a diary entry that includes 'autumn' and 'rain'.",
+                    "ans": "October 26th\n\nDear Diary,\n\nThe **rain** hasn't stopped all morning, just a steady drumming against the windowpane. I must have been sitting here for hours, just watching it streak down the glass, blurring the world outside into a watercolour of rust and gold. It's a proper **autumn** day; the kind where the sky is a soft grey blanket and the last of the leaves are plastered to the wet pavement.\n\nMy tea has gone cold beside me. I was completely lost in a trance, hypnotized by the sound and the colours. A sudden glance at the clock on the wall made my heart give a little jolt. My mind just screamed it back at me: *It's 11 o'clock!*\n\nThe entire morning, just\u2026 gone. Vanished into the grey. I was supposed to have finished my history reading by now. I suppose the rain just washes the hours away sometimes. Right, I really have to get started now."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Summarize the story\u2019s moral, ensuring the word 'greed' appears.",
+                    "ans": "Based on the single line \"The surface is slick,\" we can infer a moral about hidden dangers.\n\nThe moral is a warning that **greed** can make you rush toward something that appears attractive and easy, blinding you to the fact that the surface is slick and the path is treacherous, ultimately leading to your downfall."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Depict a tense argument while using 'silence' and 'crimson'.",
+                    "ans": "Don't forget a jacket.\nOf course not. Can't have you worrying.\nI wasn't.\nRight. Just the cold, stony silence. The same you get when you're angry.\nWhat do you want me to say?\nAnything! Yell! Scream! Just stop turning that awful shade of crimson and shutting me out"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Frame this as a philosophical musing with 'existence' and 'void'.",
+                    "ans": "Within this simple utterance lies the fundamental tension of all that is.\n\n**Existence** is the present moment\u2014the hum of activity, the shared rhythm, the forward momentum of \"we.\" It is the brief, defiant flicker against an infinite backdrop. It is what *is*.\n\nBut the statement does not end there. It carries a promise, an inevitability: \"...we'll stop.\"\n\nThis is the whisper of the **Void**. Not a threat, but a certainty. It is the vast, waiting stillness that precedes and follows every act of being. The phrase \"in a couple of minutes\" is the fragile boundary we draw, the temporary dam we build against the silent ocean of non-existence.\n\nIt is a profound declaration that our current state is finite. And in that awareness, our existence gains its texture, its meaning. The sound is only precious because of the impending silence. The motion is only vital because of the coming rest. We are, for a moment, and then we will return to the great and tranquil nothing from which we emerged."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Describe the natural landscape while including 'harbor' and 'mist'.",
+                    "ans": "Dawn arrives not with color, but with a thickening of the grey. A thick, damp **mist** pours over the granite headlands and settles into the deep, protected **harbor**, a soft, sound-dampening blanket. The water is a sheet of polished slate, its surface disturbed only by the silent rings of unseen drips falling from the heavy boughs of ancient pines.\n\nOn the steep shores, the forest rises like a dark wall, its details lost in the vapor. The sharp cry of a lone gull pierces the quiet, its call instantly muffled, making it sound impossibly far away. The air is cold and clean, smelling of salt, wet stone, and pine. It is a world held in suspension, where the line between sea and sky has been erased, and the quiet, sheltered harbor waits for the sun to burn through the veil."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Turn this into a bedtime story using 'moonlight' and 'owl'.",
+                    "ans": "Of course. Snuggle in and close your eyes.\n\n***\n\nIn a cozy den, deep in a sleepy wood, a little bear cub named Barnaby was getting ready for bed. The silver **moonlight** streamed through the entrance of his burrow, painting soft stripes on his mossy pillow.\n\nHe wiggled his nose and tried to let out a great big bedtime yawn, but it felt\u2026 stuck. A sleepy feeling rumbled in his chest, but it wouldn't come out.\n\nHe blinked his drowsy eyes and mumbled into his pillow, \u201cOh, dear. **I think I have a doctor\u2019s appointment.**\u201d\n\nJust then, a gentle *Hoo-Hoo* echoed from the big oak tree outside. A moment later, a shadow drifted silently across the floor. It was the wise old **owl**, Dr. Hoot, who served as the forest\u2019s night-time doctor. He landed softly at the edge of the den, his big, kind eyes glowing in the dark.\n\n\u201cFeeling a bit fuzzy, little one?\u201d the owl cooed, his voice as soft as his feathers.\n\nBarnaby nodded. \u201cMy yawn is stuck.\u201d\n\nDr. Hoot smiled a wise owl smile. \u201cAh, a classic case of a misplaced yawn. The cure is quite simple.\u201d He fluffed his wings and began to hum a low, quiet tune, a lullaby that sounded like the wind whispering through the pines.\n\nHe told Barnaby to look at the moonbeams dancing on the floor, to listen to the crickets chirping their goodnight song, and to feel the cozy weight of his blanket.\n\nAs Barnaby listened, watching the peaceful **moonlight**, the big, rumbly feeling grew and grew until\u2026\n\n*YAAAAAWN!*\n\nA huge, wonderful, sleepy yawn finally escaped, stretching all the way to his tippy-toes.\n\nThe wise old **owl** hooted softly in satisfaction. \u201cThere now. All better.\u201d\n\nBarnaby\u2019s eyes felt heavy as stones. He curled into a tight, furry ball. \u201cThank you, Dr. Hoot,\u201d he whispered, already halfway to dreamland.\n\nThe owl gave a little nod, and as silently as he arrived, he flew back to his branch, watching over the little bear cub as he slept peacefully, bathed in the gentle, silver moonlight."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
+                    "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
+                }
+            ]
+        }
     },
     "GR": {
-        "chain-of-thought": {},
+        "chain-of-thought": [
+            {
+                "audio_path": "general/0.wav",
+                "instruction": "From the given recording, decide if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nTackle the problem progressively, explaining your logic at each stage.",
+                "ans": "**Progressive Reasoning:**\n\n1.  **Vocal Pitch Analysis:** The first step is to analyze the fundamental frequency, or pitch, of the speaker's voice. The voice in the recording has a noticeably low pitch, situated in the lower range of the human vocal spectrum.\n2.  **Timbre and Resonance Assessment:** Beyond pitch, the quality or timbre of the voice is considered. The speaker's voice has a deep, resonant quality. This suggests a larger vocal tract and the use of chest resonance, which contributes to the full-bodied sound.\n3.  **Conclusion from Acoustic Cues:** The combination of a low fundamental frequency and significant chest resonance are strong acoustic indicators. These specific vocal characteristics are typically produced by the physiological structure of a particular adult vocal anatomy.\n\n**Answer:**\n\nMan"
+            },
+            {
+                "audio_path": "general/1.wav",
+                "instruction": "Identify whether this voice recording features a male or female speaker. Choose the answer from \"Man\" or \"Woman\"\nLay out the reasoning path that leads to your final conclusion.",
+                "ans": "Based on an analysis of the vocal characteristics in the audio file, here is the reasoning:\n\n1.  **Pitch Analysis:** The speaker's voice exhibits a high fundamental frequency. This places the voice in the upper range of the typical human vocal spectrum.\n2.  **Timbre and Resonance:** The vocal quality is clear and lacks the lower-end, chest-based resonance that is characteristic of a larger larynx and vocal tract. The timbre can be described as bright rather than deep.\n3.  **Vocal Characteristics:** The combination of the high pitch and overall vocal delivery is consistent with the acoustic patterns typically produced by a specific vocal physiology.\n\nBased on these acoustic properties, the speaker is identified as a:\n\nWoman"
+            },
+            {
+                "audio_path": "general/2.wav",
+                "instruction": "Determine the gender identity of the person speaking in this audio. Choose the answer from \"Male\" or \"Female\"\nDetail each phase of your thought process clearly.",
+                "ans": "Based on the audio provided, here is a detailed breakdown of the thought process used to determine the gender identity of the speaker:\n\n**Phase 1: Initial Pitch Assessment**\nMy first step is to listen to the audio and make an immediate assessment of the speaker's vocal pitch, or fundamental frequency (F0). Upon listening to the phrase \"The surface is slick,\" the voice registers in a low-frequency range. This low pitch is a primary acoustic cue, as adult human voices typically exhibit pitch differences based on the size of the vocal folds, which are generally larger and vibrate more slowly in one gender compared to the other after puberty.\n\n**Phase 2: Analysis of Vocal Timbre and Resonance**\nBeyond just the pitch, I analyze the timbre and resonance of the voice. The voice has a full-bodied, resonant quality. This suggests a larger resonating cavity, including the pharynx and oral cavity. The perceived \"depth\" or \"fullness\" of the voice is a direct result of these physical characteristics. The sound is not thin or breathy; it has a clear, solid quality consistent with a larger and longer vocal tract.\n\n**Phase 3: Evaluation of Intonation and Speech Patterns**\nNext, I listen to the intonation of the sentence. The speaker uses a declarative tone, with a relatively flat contour that falls slightly at the end of the word \"slick.\" The speech pattern is straightforward and does not contain significant pitch modulation or upward inflections. While intonation patterns vary widely among individuals, the pattern here is neutral and does not contradict the conclusions drawn from the pitch and resonance.\n\n**Phase 4: Synthesis of Acoustic Cues**\nIn the final phase, I combine all the observations. The dominant acoustic evidence is the low fundamental frequency (pitch) and the deep vocal resonance (timbre). These two characteristics are the strongest indicators. The neutral intonation pattern provides no conflicting information. The combination of these acoustic properties strongly aligns with the typical vocal profile of one gender.\n\n**Conclusion:**\nBased on the comprehensive analysis of pitch, timbre, and intonation, the speaker in the audio is identified as a:\n\nMale"
+            },
+            {
+                "audio_path": "general/3.wav",
+                "instruction": "By analyzing the voice, state if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nDevelop your answer through a logical sequence of reasoning steps.",
+                "ans": "Based on an analysis of the audio, here is the reasoning:\n\n1.  **Pitch Analysis:** The speaker's voice exhibits a high pitch. This corresponds to a high fundamental frequency (F0), which is a primary acoustic cue for differentiating voices. The voice falls comfortably within the upper range of the typical human vocal spectrum.\n2.  **Timbre and Resonance:** The vocal quality, or timbre, is light and clear. It lacks the deep, chesty resonance often associated with a larger larynx and longer vocal tract.\n3.  **Conclusion from Acoustic Evidence:** The combination of a high fundamental frequency and a lighter vocal timbre strongly points towards specific physiological characteristics of the vocal cords and tract.\n\nBased on this reasoning, the speaker is a:\nWoman"
+            },
+            {
+                "audio_path": "general/4.wav",
+                "instruction": "From the audio provided, classify the speaker\u2019s gender. Choose the answer from \"Male\" or \"Female\"\nWork through this problem gradually, explaining each phase.",
+                "ans": "Of course. Here is a step-by-step breakdown of the process used to classify the speaker's gender based on the provided audio.\n\n### Phase 1: Initial Auditory Analysis\nThe first step is to listen to the audio clip carefully. The speaker says, \"We'll stop in a couple of minutes.\" The immediate perception is focused on the overall sound and quality of the voice without in-depth analysis.\n\n### Phase 2: Evaluation of Vocal Characteristics\nNext, specific acoustic properties of the voice are analyzed to make a classification. The most critical characteristic for this task is vocal pitch.\n\n*   **Pitch (Fundamental Frequency):** The speaker's voice has a distinctly low pitch. The fundamental frequency of the voice resides in the lower end of the typical human vocal range. This is a primary and highly reliable indicator for differentiating between the two genders.\n\n*   **Timbre and Resonance:** In addition to pitch, the voice exhibits a certain timbre, or quality. The sound is resonant and has a full-bodied quality. This type of resonance is often associated with the physical characteristics of a larger larynx and longer vocal cords.\n\n### Phase 3: Synthesis of Findings\nBy combining the observations from the previous phase, a conclusion is formed. The combination of a low fundamental frequency (pitch) and a resonant, full-bodied timbre are strong acoustic cues. These characteristics align consistently with the typical vocal patterns and physiological vocal structures of one of the two gender classifications.\n\n### Conclusion\nBased on the comprehensive analysis of the vocal characteristics, the speaker in the audio is classified as a:\n\nMale"
+            },
+            {
+                "audio_path": "general/5.wav",
+                "instruction": "Classify the voice in this audio as belonging to either a male or female speaker. Choose the answer from \"Male\" or \"Female\"\nAddress this question progressively, one stage at a time.",
+                "ans": "**Stage 1: Pitch Analysis**\nUpon initial listening, the most prominent characteristic of the voice is its pitch. The fundamental frequency of the speech is situated in a higher range of the typical human vocal spectrum. This consistent high pitch level is the primary acoustic cue for classification.\n\n**Stage 2: Intonation and Melody**\nObserving the intonation, or the melodic contour of the sentence \"Maybe tomorrow it will be cold,\" the speaker employs a varied pitch range. There is a noticeable rise and fall in the voice, particularly at the end of the phrase, which gives the speech a melodic quality rather than a flat or monotone delivery.\n\n**Stage 3: Timbre and Resonance**\nFinally, analyzing the timbre or quality of the voice, it has a lighter resonance. The sound seems to emanate more from the head and less from the chest, resulting in a clearer and less bass-heavy vocal quality. There is also a slight softness or breathiness to the articulation, which contributes to the overall vocal character.\n\nFemale"
+            },
+            {
+                "audio_path": "general/6.wav",
+                "instruction": "Determine whether the speaker in this recording is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nGo step by step through your logic until the answer becomes clear.",
+                "ans": "Here is a step-by-step breakdown of the logic used to determine the speaker's gender:\n\n1.  **Initial Listening:** The first step is to listen to the audio recording to get a general impression of the speaker's voice.\n2.  **Pitch Analysis:** The primary characteristic to analyze is the vocal pitch. The speaker's voice has a low fundamental frequency, which places it in the lower range of the typical human vocal spectrum.\n3.  **Timbre and Resonance Analysis:** Beyond pitch, the quality or timbre of the voice is considered. The voice has a certain depth and resonance, suggesting a larger vocal tract and chest cavity, which influences the sound's quality.\n4.  **Conclusion from Acoustic Evidence:** The combination of a low pitch and a deep, resonant quality are characteristic acoustic cues. These features strongly align with the typical vocal patterns of an adult man.\n\n**Final Answer:**\n\nMale"
+            },
+            {
+                "audio_path": "general/7.wav",
+                "instruction": "Listen to this sound clip and state the speaker\u2019s gender. Choose the answer from \"Man\" or \"Woman\"\nConstruct your solution by reasoning through consecutive steps.",
+                "ans": "Based on the audio clip, here is a step-by-step reasoning for determining the speaker's gender:\n\n1.  **Analyze the Pitch:** The first step is to listen to the fundamental frequency, or pitch, of the speaker's voice.\n2.  **Characterize the Pitch:** The voice in the recording has a noticeably high pitch.\n3.  **Compare to Vocal Norms:** In general, adult female voices have a higher pitch range than adult male voices due to physiological differences in the vocal cords. The high pitch of the speaker in this clip is consistent with the typical vocal range of an adult female.\n\nWoman"
+            }
+        ],
         "closed_ended_questions": {
             "change_case:english_capital": [
                 {
@@ -945,6 +1238,91 @@
                 }
             ]
         },
-        "creative_writing": {}
+        "creative_writing": {
+            "detectable_format:number_bullet_lists": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the key insights from the audio in exactly 4 bullet points.",
+                    "ans": "Here are the key insights from the audio:\n\n*   The speaker is expressing a personal want or making a request.\n*   The specific item desired is an alarm clock.\n*   A key condition is that the alarm clock must be \"new.\"\n*   The statement communicates a clear and specific consumer need."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "List 3 observations about the speaker\u2019s attitude in bullet points.",
+                    "ans": "Based on the audio clip, here are three observations about the speaker's attitude:\n\n*   **Alarmed and Urgent:** The speaker's loud, high-pitched tone conveys a sense of panic or urgency. They are not simply stating the time; they are exclaiming it as if it's a critical and problematic fact.\n*   **Exasperated:** There is an undercurrent of frustration, suggesting that the time \"11 o'clock\" signifies that something is very late or a deadline has been missed, possibly despite a previous warning.\n*   **Dramatic and Emphatic:** The speaker is intentionally emphasizing the time to maximize its impact on the listener. The delivery is theatrical and meant to convey a strong sense of crisis."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Explain the central conflict or issue in the audio using 2 bullet points.",
+                    "ans": "Based on the audio, here is the central issue:\n\n*   The speaker observes that a surface is slick.\n*   This condition creates a potential hazard, implying a danger of slipping, falling, or losing grip."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Provide 5 concise bullet points describing what the speaker emphasizes most.",
+                    "ans": "Based on the audio, here are five concise bullet points describing what the speaker emphasizes most:\n\n*   **A specific action:** The importance of not forgetting something.\n*   **A necessary item:** The speaker singles out a jacket as the essential object.\n*   **An implied warning:** There's an underlying suggestion about the weather being cool or unpredictable.\n*   **A direct reminder:** The tone is that of a helpful, clear, and direct piece of advice.\n*   **The need for preparedness:** The core message is to be prepared before going out."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Write 3 bullet points that capture the progression of ideas in the audio.",
+                    "ans": "Here is the progression of ideas from the audio in three bullet points:\n\n*   The speaker acknowledges that an activity is currently in progress.\n*   A decision is announced to bring the activity to a halt.\n*   A specific timeframe is provided, indicating the stop will occur in the immediate future."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "List 4 details that reveal the speaker\u2019s personality in bullet points.",
+                    "ans": "Based on the audio, here are four details that reveal the speaker\u2019s personality:\n\n*   **Pensive:** The speaker's slow, deliberate pacing suggests they are thoughtful and considering a possibility rather than making a definite statement.\n*   **Subdued:** Their quiet volume and monotone delivery indicate a reserved or low-energy disposition.\n*   **Non-committal:** Using the word \"maybe\" shows they are uncertain or hesitant to commit to a specific prediction.\n*   **Calm:** The lack of emotional inflection in their voice suggests a placid and even-keeled temperament."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Summarize the main argument and its supporting evidence in 3 bullet points.",
+                    "ans": "Based on the video, here is a summary of the main point and its evidence:\n\n*   **Main Argument:** The speaker asserts that they have a doctor's appointment.\n*   **Supporting Evidence:** The primary evidence provided is the speaker's own statement of belief, indicated by the phrase \"I think...\"\n*   **Context:** The clip does not offer any further details, such as the time, date, or reason for the appointment, to substantiate the claim."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Describe how background sounds contribute to meaning in 2 bullet points.",
+                    "ans": "Based on the audio clip, here is how the background sounds contribute to the meaning:\n\n*   The quiet background and subtle room tone establish an intimate and focused setting. The absence of other sounds (like traffic, music, or other people) directs all attention to the speaker, suggesting they are alone and the moment is one of personal thought.\n*   The silence amplifies the speaker's contemplative and curious tone. It makes the phrase \"I wonder what this is about\" feel like an internal monologue spoken aloud, heightening the sense of mystery and introspection for the listener."
+                }
+            ],
+            "keywords:existence": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Explain the conversation\u2019s hidden meaning, using the word 'mirror'.",
+                    "ans": "Of course. Here is an explanation of the conversation's hidden meaning, using the word \"mirror.\"\n\n***\n\nThe statement \"I would like a new alarm clock\" isn't about a broken device; it's a profound desire for a new life. The current alarm clock has become a **mirror** reflecting a reality the speaker wants to escape.\n\nEach morning, its sound doesn't just signal the start of a day; it reflects back a life of unwanted routine, dissatisfaction, and stagnation. Waking up is a daily confrontation with the person they've become, a life they no longer recognize as their own.\n\nBy asking for a \"new alarm clock,\" the speaker is really saying, \"I want to wake up to a different reflection.\" They are seeking a fresh start, a new beginning, a catalyst for change so that the life that greets them in the morning will finally **mirror** the one they truly desire."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Rewrite this as a diary entry that includes 'autumn' and 'rain'.",
+                    "ans": "October 26th\n\nDear Diary,\n\nThe **rain** hasn't stopped all morning, just a steady drumming against the windowpane. I must have been sitting here for hours, just watching it streak down the glass, blurring the world outside into a watercolour of rust and gold. It's a proper **autumn** day; the kind where the sky is a soft grey blanket and the last of the leaves are plastered to the wet pavement.\n\nMy tea has gone cold beside me. I was completely lost in a trance, hypnotized by the sound and the colours. A sudden glance at the clock on the wall made my heart give a little jolt. My mind just screamed it back at me: *It's 11 o'clock!*\n\nThe entire morning, just\u2026 gone. Vanished into the grey. I was supposed to have finished my history reading by now. I suppose the rain just washes the hours away sometimes. Right, I really have to get started now."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Summarize the story\u2019s moral, ensuring the word 'greed' appears.",
+                    "ans": "Based on the single line \"The surface is slick,\" we can infer a moral about hidden dangers.\n\nThe moral is a warning that **greed** can make you rush toward something that appears attractive and easy, blinding you to the fact that the surface is slick and the path is treacherous, ultimately leading to your downfall."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Depict a tense argument while using 'silence' and 'crimson'.",
+                    "ans": "Don't forget a jacket.\nOf course not. Can't have you worrying.\nI wasn't.\nRight. Just the cold, stony silence. The same you get when you're angry.\nWhat do you want me to say?\nAnything! Yell! Scream! Just stop turning that awful shade of crimson and shutting me out"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Frame this as a philosophical musing with 'existence' and 'void'.",
+                    "ans": "Within this simple utterance lies the fundamental tension of all that is.\n\n**Existence** is the present moment\u2014the hum of activity, the shared rhythm, the forward momentum of \"we.\" It is the brief, defiant flicker against an infinite backdrop. It is what *is*.\n\nBut the statement does not end there. It carries a promise, an inevitability: \"...we'll stop.\"\n\nThis is the whisper of the **Void**. Not a threat, but a certainty. It is the vast, waiting stillness that precedes and follows every act of being. The phrase \"in a couple of minutes\" is the fragile boundary we draw, the temporary dam we build against the silent ocean of non-existence.\n\nIt is a profound declaration that our current state is finite. And in that awareness, our existence gains its texture, its meaning. The sound is only precious because of the impending silence. The motion is only vital because of the coming rest. We are, for a moment, and then we will return to the great and tranquil nothing from which we emerged."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Describe the natural landscape while including 'harbor' and 'mist'.",
+                    "ans": "Dawn arrives not with color, but with a thickening of the grey. A thick, damp **mist** pours over the granite headlands and settles into the deep, protected **harbor**, a soft, sound-dampening blanket. The water is a sheet of polished slate, its surface disturbed only by the silent rings of unseen drips falling from the heavy boughs of ancient pines.\n\nOn the steep shores, the forest rises like a dark wall, its details lost in the vapor. The sharp cry of a lone gull pierces the quiet, its call instantly muffled, making it sound impossibly far away. The air is cold and clean, smelling of salt, wet stone, and pine. It is a world held in suspension, where the line between sea and sky has been erased, and the quiet, sheltered harbor waits for the sun to burn through the veil."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Turn this into a bedtime story using 'moonlight' and 'owl'.",
+                    "ans": "Of course. Snuggle in and close your eyes.\n\n***\n\nIn a cozy den, deep in a sleepy wood, a little bear cub named Barnaby was getting ready for bed. The silver **moonlight** streamed through the entrance of his burrow, painting soft stripes on his mossy pillow.\n\nHe wiggled his nose and tried to let out a great big bedtime yawn, but it felt\u2026 stuck. A sleepy feeling rumbled in his chest, but it wouldn't come out.\n\nHe blinked his drowsy eyes and mumbled into his pillow, \u201cOh, dear. **I think I have a doctor\u2019s appointment.**\u201d\n\nJust then, a gentle *Hoo-Hoo* echoed from the big oak tree outside. A moment later, a shadow drifted silently across the floor. It was the wise old **owl**, Dr. Hoot, who served as the forest\u2019s night-time doctor. He landed softly at the edge of the den, his big, kind eyes glowing in the dark.\n\n\u201cFeeling a bit fuzzy, little one?\u201d the owl cooed, his voice as soft as his feathers.\n\nBarnaby nodded. \u201cMy yawn is stuck.\u201d\n\nDr. Hoot smiled a wise owl smile. \u201cAh, a classic case of a misplaced yawn. The cure is quite simple.\u201d He fluffed his wings and began to hum a low, quiet tune, a lullaby that sounded like the wind whispering through the pines.\n\nHe told Barnaby to look at the moonbeams dancing on the floor, to listen to the crickets chirping their goodnight song, and to feel the cozy weight of his blanket.\n\nAs Barnaby listened, watching the peaceful **moonlight**, the big, rumbly feeling grew and grew until\u2026\n\n*YAAAAAWN!*\n\nA huge, wonderful, sleepy yawn finally escaped, stretching all the way to his tippy-toes.\n\nThe wise old **owl** hooted softly in satisfaction. \u201cThere now. All better.\u201d\n\nBarnaby\u2019s eyes felt heavy as stones. He curled into a tight, furry ball. \u201cThank you, Dr. Hoot,\u201d he whispered, already halfway to dreamland.\n\nThe owl gave a little nod, and as silently as he arrived, he flew back to his branch, watching over the little bear cub as he slept peacefully, bathed in the gentle, silver moonlight."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
+                    "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
+                }
+            ]
+        }
     }
 }

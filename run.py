@@ -305,7 +305,7 @@ def main(args: argparse.Namespace) -> None:
     # Process each test case, generate a response, and save the response with metadata
     output_fn = GetOutputFilePath(args)
     print("\n\nStarting inference on test cases...\n")
-    pbar = enumerate(test_cases) if args.debug or args.verbose else tqdm(enumerate(test_cases))
+    pbar = enumerate(test_cases) if args.debug or args.verbose else enumerate(tqdm(test_cases))
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)

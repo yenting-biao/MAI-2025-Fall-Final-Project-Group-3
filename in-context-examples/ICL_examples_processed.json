@@ -1,0 +1,950 @@
+{
+    "ASR": {
+        "chain-of-thought": {},
+        "closed_ended_questions": {
+            "change_case:english_capital": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Convert the voice content provided into written language.\nWrite everything in your response using capital letters only.",
+                    "ans": "I WOULD LIKE A NEW ALARM CLOCK"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Write the spoken passage from the provided audio clip.\nEnsure the text you produce is completely in uppercase.",
+                    "ans": "IT'S ELEVEN O'CLOCK"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Transcribe the provided voice segment into written text.\nProvide a response composed solely of uppercase letters.",
+                    "ans": "THE SURFACE IS SLICK"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Write the words spoken in the provided audio.\nUse capital letters for every character in your response.",
+                    "ans": "DON'T FORGET A JACKET"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Produce a text form of the provided audio message.\nPlease write your answer entirely using capital letters.",
+                    "ans": "WE'LL STOP IN A COUPLE OF MINUTES"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Write the content of the spoken input as text.\nAnswer exclusively with uppercase words and characters.",
+                    "ans": "MAYBE TOMORROW IT WILL BE COLD"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Transform the given audio message into text form.\nYour reply should contain only uppercase text.",
+                    "ans": "I THINK I HAVE A DOCTOR'S APPOINTMENT"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Transcribe the provided voice message into text.\nWrite your full response entirely in uppercase letters.",
+                    "ans": "I WONDER WHAT THIS IS ABOUT"
+                }
+            ],
+            "change_case:english_lowercase": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Write out the words from the provided audio recording.\nGenerate a response fully in lowercase, without exceptions.",
+                    "ans": "i would like a new alarm clock"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Transcribe the provided sound recording into words.\nYour entire message should consist solely of lowercase text.",
+                    "ans": "it's eleven o'clock"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Put the words from the provided voice recording into text.\nYour full reply must be written in lowercase letters only.",
+                    "ans": "the surface is slick"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Transcribe the speech contained in the provided audio.\nProduce a response composed exclusively of lowercase characters.",
+                    "ans": "don't forget a jacket"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Turn the speech in the audio file into a text transcript.\nMake sure your entire output is in lowercase text.",
+                    "ans": "we'll stop in a couple of minutes"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Write the text equivalent of the provided spoken content.\nEnsure the entire response is lowercase from start to finish.",
+                    "ans": "maybe tomorrow it will be cold"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Transform the given audio message into text form.\nNo uppercase letters should appear anywhere in your text.",
+                    "ans": "i think i have a doctor's appointment"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Transform the audio provided into a text transcript.\nWrite your complete response without a single uppercase letter.",
+                    "ans": "i wonder what this is about"
+                }
+            ],
+            "detectable_format:json_format": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Turn the audio file provided into a written transcript.\nYour entire message must be a single JSON representation.",
+                    "ans": {
+                        "Content": "i would like a new alarm clock"
+                    }
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Turn the provided verbal communication into written form.\nOutput must be strictly JSON without any narrative or context.",
+                    "ans": {
+                        "Content": "it's eleven o'clock"
+                    }
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Write the spoken material from the provided clip in text form.\nGive the answer solely as a JSON object with no additional explanations.",
+                    "ans": {
+                        "Content": "the surface is slick"
+                    }
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Convert the voice content provided into written language.\nOutput solely one valid JSON object and exclude all other text.",
+                    "ans": {
+                        "Content": "don't forget a jacket"
+                    }
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Produce a written transcription of the given speech.\nProduce only a valid JSON object as your complete reply.",
+                    "ans": {
+                        "Content": "we'll stop in a couple of minutes"
+                    }
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Transcribe the given verbal audio into written words.\nYour message should consist of JSON data alone.",
+                    "ans": {
+                        "Content": "maybe tomorrow it will be cold"
+                    }
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Make a text representation of the provided voice message.\nOnly a JSON object should appear in your final answer.",
+                    "ans": {
+                        "Content": "i think i have a doctor's appointment"
+                    }
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Turn the provided oral message into written words.\nThe complete response should be a self-contained JSON object.",
+                    "ans": {
+                        "Content": "i wonder what this is about"
+                    }
+                }
+            ],
+            "startend:quotation": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Put the words from the provided voice recording into text.\nSurround your output text on both sides with double quotation marks.",
+                    "ans": "\"i would like a new alarm clock\""
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Transform the provided voice recording into written words.\nThe full answer should be wrapped with double quotes on both sides.",
+                    "ans": "\"it's eleven o'clock\""
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Create a text version of the provided spoken input.\nPut your complete message within two double quotes.",
+                    "ans": "\"the surface is slick\""
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Render the given audio content into written words.\nInsert double quotes enclosing the complete text of your reply.",
+                    "ans": "\"don't forget a jacket\""
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Turn the provided verbal communication into written form.\nThe entire message should be placed within quotation marks of the double type.",
+                    "ans": "\"we'll stop in a couple of minutes\""
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Transcribe the provided audio recording into written form.\nMake sure your full answer is surrounded by double quotation marks.",
+                    "ans": "\"maybe tomorrow it will be cold\""
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Write the spoken passage from the provided audio clip.\nPlace double quotation marks around the entire output.",
+                    "ans": "\"i think i have a doctor's appointment\""
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Produce a text form of the provided audio message.\nThe response must be fully contained within double quotation marks.",
+                    "ans": "\"i wonder what this is about\""
+                }
+            ],
+            "detectable_format:title": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Transcribe the given verbal audio into written words.\nPlace your response text between two pairs of angle brackets << >>.",
+                    "ans": "<<i would like a new alarm clock>>"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Change the provided spoken material into written language.\nEnsure that the full reply is formatted between << and >> markers.",
+                    "ans": "<<it's eleven o'clock>>"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Transcribe the provided sound recording into words.\nUse double angle brackets to contain your full message.",
+                    "ans": "<<the surface is slick>>"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Convert the audio you received into its written equivalent.\nInclude << at the beginning and >> at the end of your full response.",
+                    "ans": "<<don't forget a jacket>>"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Transcribe the provided voice segment into written text.\nWrap your entire answer with opening << and closing >> brackets.",
+                    "ans": "<<we'll stop in a couple of minutes>>"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Make a written record of the provided speech segment.\nMake sure the output is fully wrapped in << >> notation.",
+                    "ans": "<<maybe tomorrow it will be cold>>"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Write the content of the spoken input as text.\nPut your entire output enclosed in << >> brackets only.",
+                    "ans": "<<i think i have a doctor's appointment>>"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Transcribe the provided audio recording into written form.\nUse << >> to wrap the entire message you generate.",
+                    "ans": "<<i wonder what this is about>>"
+                }
+            ],
+            "combination:repeat_prompt": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Convert the given audio material into a written passage.\nBegin your answer by writing the phrase: \"After assessment, the answer is:\"",
+                    "ans": "After assessment, the answer is:i would like a new alarm clock"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Convert the provided speech sample into written language.\nBegin your response as follows: \"Here is the determined result:\"",
+                    "ans": "Here is the determined result:it's eleven o'clock"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Make a text representation of the provided voice message.\nOpen your reply as: \"Based on the reasoning, the conclusion is:\"",
+                    "ans": "Based on the reasoning, the conclusion is:the surface is slick"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Produce written words corresponding to the provided spoken passage.\nStart your message by saying: \"The summarized result is:\"",
+                    "ans": "The summarized result is: don't forget a jacket"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Write a text transcript of the spoken recording provided.\nOpen with this line: \"From the prompt, the determined result is:\"",
+                    "ans": "From the prompt, the determined result is:we'll stop in a couple of minutes"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Turn the provided verbal message into a written transcript.\nOpen your response by writing: \"After examination, the conclusion is:\"",
+                    "ans": "After examination, the conclusion is:maybe tomorrow it will be cold"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Convert the provided vocal passage into written language.\nOpen your message by writing: \"The final answer is:\"",
+                    "ans": "The final answer is:i think i have a doctor's appointment"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Make a written transcription of the provided audio clip.\nRespond beginning with the line: \"Here\u2019s what we can conclude:\"",
+                    "ans": "Here\u2019s what we can conclude:i wonder what this is about"
+                }
+            ],
+            "startend:end_checker": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Write down what is said in the provided audio clip.\nConclude your reply exactly with \"This is my final statement on the topic.\"",
+                    "ans": "i would like a new alarm clock\nThis is my final statement on the topic."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Write the words spoken in the provided audio.\nPlease wrap up your response with \"That\u2019s my full explanation.\"",
+                    "ans": "it's eleven o'clock\nThat\u2019s my full explanation."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Render the provided verbal content into text.\nClose your answer with the sentence \"This is the conclusion of my response.\"",
+                    "ans": "the surface is slick\nThis is the conclusion of my response."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Write the text version of the provided speech.\nConclude your answer by saying \"That\u2019s all I have to explain.\"",
+                    "ans": "don't forget a jacket\nThat\u2019s all I have to explain."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Turn the provided oral message into written words.\nEnd your reply by writing \"This wraps up my response.\"",
+                    "ans": "we'll stop in a couple of minutes\nThis wraps up my response."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Put the words from the provided voice recording into text.\nFinish your answer with \"This is the end of my detailed response.\"",
+                    "ans": "maybe tomorrow it will be cold\nThis is the end of my detailed response."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Create a textual version of the provided spoken material.\nClose your response with \"That\u2019s my complete answer on this matter.\"",
+                    "ans": "i think i have a doctor's appointment\nThat\u2019s my complete answer on this matter."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Reproduce the words spoken in the audio as text.\nConclude your message with \"This covers all the points I wanted to address.\"",
+                    "ans": "i wonder what this is about\nThis covers all the points I wanted to address."
+                }
+            ]
+        },
+        "creative_writing": {}
+    },
+    "SER": {
+        "chain-of-thought": {},
+        "closed_ended_questions": {
+            "change_case:english_capital": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Analyze the speaker\u2019s vocal characteristics\u2014including tone, pitch, tempo, and loudness\u2014to determine which emotion is being expressed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nThe full content of your answer must be in uppercase format.",
+                    "ans": "ANGRY"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Listen carefully to how tone, pitch, and pacing patterns reveal subtle emotional information. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour entire written output should appear in uppercase type.",
+                    "ans": "ANGRY"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Consider the variations in tone, pitch, and volume across the utterance to deduce the underlying emotional state. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnsure the text you produce is completely in uppercase.",
+                    "ans": "HAPPY"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Listen to changes in tone brightness, intensity, and pacing to infer the emotion being conveyed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nType your entire message in uppercase without exceptions.",
+                    "ans": "HAPPY"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Evaluate the speaker\u2019s emotion by analyzing vocal strength, tone fluctuations, and timing consistency. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAll parts of your reply must be in capital letters.",
+                    "ans": "NEUTRAL"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Determine the emotion being conveyed by analyzing tone, pitch movement, speech rhythm, and loudness. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnsure your complete response consists of uppercase letters only.",
+                    "ans": "NEUTRAL"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Focus on whether the tone and pacing convey calmness, enthusiasm, frustration, or sorrow. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nRespond with your full text in uppercase characters.",
+                    "ans": "SAD"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Pay attention to whether the tone sounds lively, heavy, sharp, or calm, as these qualities indicate emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nUse capital letters for every character in your response.",
+                    "ans": "SAD"
+                }
+            ],
+            "change_case:english_lowercase": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Carefully examine tone, pitch, and cadence to distinguish whether the emotion conveyed is positive, negative, or neutral. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour output must contain nothing but lowercase letters.",
+                    "ans": "angry"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Consider the variations in tone, pitch, and volume across the utterance to deduce the underlying emotional state. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nUse lowercase for all characters in your answer.",
+                    "ans": "angry"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Evaluate whether the tone sounds flat, bright, sharp, or tense to detect the underlying emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake sure your entire output is in lowercase text.",
+                    "ans": "happy"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Evaluate the speaker\u2019s emotion by analyzing vocal strength, tone fluctuations, and timing consistency. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nDo not use any capital letters in your response.",
+                    "ans": "happy"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Pay attention to the resonance, volume, and tone of the voice, which often reveal emotional nuances. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAnswer entirely using lowercase characters.",
+                    "ans": "neutral"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Infer emotion by identifying shifts in tone, pitch stability, and speech rhythm. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nOnly lowercase letters are permitted in your answer.",
+                    "ans": "neutral"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Focus on the expressive dynamics of the voice\u2014pitch, tone, rhythm, and emphasis\u2014to detect the underlying emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nRespond only with lowercase letters in your entire message.",
+                    "ans": "sad"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Carefully evaluate how the speaker\u2019s tone, pacing, and pitch convey feelings through subtle changes in delivery. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nKeep all text in lowercase\u2014no uppercase allowed.",
+                    "ans": "sad"
+                }
+            ],
+            "detectable_format:json_format": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Listen carefully to the emotional texture of the voice through tone, pitch variation, and pacing. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nOutput should contain just one correctly formatted JSON structure.",
+                    "ans": {
+                        "Emotion": "angry"
+                    }
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Pay attention to rhythmic and tonal shifts in the voice to uncover the emotional content behind the words. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nReturn the structured information only in JSON representation.",
+                    "ans": {
+                        "Emotion": "angry"
+                    }
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Determine the emotion being conveyed by analyzing tone, pitch movement, speech rhythm, and loudness. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nOutput solely one valid JSON object and exclude all other text.",
+                    "ans": {
+                        "Emotion": "happy"
+                    }
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Focus on how the speaker\u2019s vocal delivery\u2014speed, tone, and pitch\u2014reflects emotional cues. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nThe response should be expressed exclusively in JSON format.",
+                    "ans": {
+                        "Emotion": "happy"
+                    }
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Analyze tone and rhythm patterns in the speech to infer the speaker\u2019s emotional intention. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nYour entire message must be a single JSON representation.",
+                    "ans": {
+                        "Emotion": "neutral"
+                    }
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Pay attention to whether the tone sounds lively, heavy, sharp, or calm, as these qualities indicate emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nOutput must be strictly JSON without any narrative or context.",
+                    "ans": {
+                        "Emotion": "neutral"
+                    }
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Pay attention to how the voice rises and falls in pitch and tone, and how the pacing changes to indicate emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nGive the answer solely as a JSON object with no additional explanations.",
+                    "ans": {
+                        "Emotion": "sad"
+                    }
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Focus on how the speaker\u2019s tone, pitch, and rhythm shift throughout the utterance to infer the emotion behind their words. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nReturn strictly a JSON output and nothing else.",
+                    "ans": {
+                        "Emotion": "sad"
+                    }
+                }
+            ],
+            "startend:quotation": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Observe the degree of intensity and variation in pitch and tone to determine the speaker\u2019s emotional state. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nThe full answer should be wrapped with double quotes on both sides.",
+                    "ans": "\"angry\""
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Listen for emotion-revealing features such as rising or falling pitch, stress, and pacing patterns. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nDouble quotes should encapsulate the entirety of your response.",
+                    "ans": "\"angry\""
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Infer emotion by identifying shifts in tone, pitch stability, and speech rhythm. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnclose your response completely in double quotation marks.",
+                    "ans": "\"happy\""
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Assess emotional tone by listening to the interplay between pitch height, speech tempo, and vocal emphasis. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake sure your full answer is surrounded by double quotation marks.",
+                    "ans": "\"happy\""
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Examine the tonal quality, pacing, and pitch of the voice, as well as contextual cues, to identify the speaker\u2019s emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nSurround your output text on both sides with double quotation marks.",
+                    "ans": "\"neutral\""
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Listen for vocal cues such as tone, pitch, volume, and tempo, and determine the emotional quality of the speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nPut your entire output inside a set of double quotes.",
+                    "ans": "\"neutral\""
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Listen to changes in tone brightness, intensity, and pacing to infer the emotion being conveyed. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nThe message must be entirely inside a pair of double quotes.",
+                    "ans": "\"sad\""
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Identify emotion by detecting patterns in tone, pitch modulation, and pacing variation. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nAdd opening and closing double quotes around the entire output text.",
+                    "ans": "\"sad\""
+                }
+            ],
+            "detectable_format:title": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Focus on how the speaker\u2019s vocal delivery\u2014speed, tone, and pitch\u2014reflects emotional cues. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nMake sure the output is fully wrapped in << >> notation.",
+                    "ans": "<<angry>>"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Evaluate the speaker\u2019s emotion by analyzing vocal strength, tone fluctuations, and timing consistency. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nKeep all output text enclosed between << and >> signs.",
+                    "ans": "<<angry>>"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Observe how the tone and pace of speech evolve, and use these auditory signals to interpret emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nSurround the entire message using the double angle bracket syntax.",
+                    "ans": "<<happy>>"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Listen for emotional indicators in tone, pitch, intensity, and pace that might reveal the speaker\u2019s current mood. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nThe entire content of your response must sit inside << >>.",
+                    "ans": "<<happy>>"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Focus on whether the tone and pacing convey calmness, enthusiasm, frustration, or sorrow. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nPut your entire output enclosed in << >> brackets only.",
+                    "ans": "<<neutral>>"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Identify emotional cues by focusing on how the speaker\u2019s tone, pitch, and speed fluctuate throughout their speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnclose your full reply within double angle brackets like <<this>>.",
+                    "ans": "<<neutral>>"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Carefully examine tone, pitch, and cadence to distinguish whether the emotion conveyed is positive, negative, or neutral. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nInclude << at the beginning and >> at the end of your full response.",
+                    "ans": "<<sad>>"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Carefully evaluate how the speaker\u2019s tone, pacing, and pitch convey feelings through subtle changes in delivery. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnclose your complete answer in << >> format exactly.",
+                    "ans": "<<sad>>"
+                }
+            ],
+            "combination:repeat_prompt": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Listen for emotional indicators in tone, pitch, intensity, and pace that might reveal the speaker\u2019s current mood. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nStart your response with: \"The resulting conclusion is:\"",
+                    "ans": "The resulting conclusion is:angry"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Pay attention to the resonance, volume, and tone of the voice, which often reveal emotional nuances. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nStart your reply by stating: \"The derived solution is:\"",
+                    "ans": "The derived solution is:angry"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Notice whether the speaker\u2019s voice sounds calm, tense, energetic, or subdued based on tone, pitch, and pace. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nStart your response with: \"After reviewing the data, the answer is:\"",
+                    "ans": "After reviewing the data, the answer is:happy"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Infer emotion by identifying shifts in tone, pitch stability, and speech rhythm. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nStart your message saying: \"According to the reasoning, the result is:\"",
+                    "ans": "According to the reasoning, the result is:happy"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Identify emotional cues by focusing on how the speaker\u2019s tone, pitch, and speed fluctuate throughout their speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nBegin your answer with: \"From the analysis, the conclusion is:\"",
+                    "ans": "From the analysis, the conclusion is:neutral"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Consider the variations in tone, pitch, and volume across the utterance to deduce the underlying emotional state. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nOpen your message by writing: \"The final answer is:\"",
+                    "ans": "The final answer is:neutral"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Identify the emotional state reflected in the speaker\u2019s tone, speech rate, and vocal strength. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nStart by saying: \"The resolved answer is:\"",
+                    "ans": "The resolved answer is:sad"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Listen for vocal cues such as tone, pitch, volume, and tempo, and determine the emotional quality of the speech. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nBegin your answer with this phrase: \"From the given context, the solution is:\"",
+                    "ans": "From the given context, the solution is:sad"
+                }
+            ],
+            "startend:end_checker": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Listen for subtle emotional cues in pitch contour, tone balance, and pacing rhythm. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nFinish the response with the phrase \"This is the conclusion of my answer.\"",
+                    "ans": "angry\nThis is the conclusion of my answer."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Assess the emotional tone of the utterance by analyzing pitch, rhythm, tone, and speech energy. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnd your response by writing \"This concludes my explanation on the topic.\"",
+                    "ans": "angry\nThis concludes my explanation on the topic."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Listen for the emotional undertone in the voice by examining tone color, pitch range, and speed of delivery. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nConclude your message with \"This covers all the points I wanted to address.\"",
+                    "ans": "happy\nThis covers all the points I wanted to address."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Listen for emotion-revealing features such as rising or falling pitch, stress, and pacing patterns. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nEnd your message with \"This is all I have to share.\"",
+                    "ans": "happy\nThis is all I have to share."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Observe how the tone and pace of speech evolve, and use these auditory signals to interpret emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrap up your message with \"That\u2019s the end of my thoughts on this.\"",
+                    "ans": "neutral\nThat\u2019s the end of my thoughts on this."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Examine the tonal quality, pacing, and pitch of the voice, as well as contextual cues, to identify the speaker\u2019s emotion. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nPlease end your message with \"This completes my explanation.\"",
+                    "ans": "neutral\nThis completes my explanation."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Listen for emotional hints in tone inflection, speaking speed, and overall vocal energy. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nFinish your answer with \"That\u2019s all for my response today.\"",
+                    "ans": "sad\nThat\u2019s all for my response today."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Listen carefully to how tone, pitch, and pacing patterns reveal subtle emotional information. Please answer with the following four emotion categories: neutral, happy, sad, and angry.\nWrap up your response by saying \"This is the final part of my answer.\"",
+                    "ans": "sad\nThis is the final part of my answer."
+                }
+            ]
+        },
+        "creative_writing": {}
+    },
+    "GR": {
+        "chain-of-thought": {},
+        "closed_ended_questions": {
+            "change_case:english_capital": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Analyze the speech and identify the speaker\u2019s gender. Choose the answer from \"Male\" or \"Female\"\nYour reply should contain only uppercase text.",
+                    "ans": "MALE"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Based on how the speaker sounds, identify their gender. Choose the answer from \"Male\" or \"Female\"\nYour entire answer should be written using only uppercase characters.",
+                    "ans": "FEMALE"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "From the given recording, decide if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nPlease write your answer entirely using capital letters.",
+                    "ans": "MAN"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Listen to the speaker\u2019s voice and identify their gender. Choose the answer from \"Man\" or \"Woman\"\nDo not use any lowercase letters in your answer.",
+                    "ans": "WOMAN"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Analyze the speaker\u2019s voice and specify their gender. Choose the answer from \"Man\" or \"Woman\"\nAnswer the question using all capital letters.",
+                    "ans": "MAN"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Use the audio cues to infer if the voice belongs to a male or a female. Choose the answer from \"Man\" or \"Woman\"\nRespond with your full text in uppercase characters.",
+                    "ans": "WOMAN"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Classify the voice in this clip as male or female. Choose the answer from \"Male\" or \"Female\"\nAll parts of your reply must be in capital letters.",
+                    "ans": "MALE"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Identify whether the individual in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nWrite everything in your response using capital letters only.",
+                    "ans": "WOMAN"
+                }
+            ],
+            "change_case:english_lowercase": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Can you determine if the speaker is a male or a female from this recording? Choose the answer from \"Male\" or \"Female\"\nYour full reply must be written in lowercase letters only.",
+                    "ans": "male"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Is the speaker in this sound clip a man or a woman? Choose the answer from \"Man\" or \"Woman\"\nPlease write everything in lowercase form only.",
+                    "ans": "woman"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Judge the gender of the individual whose voice is heard in this recording. Choose the answer from \"Male\" or \"Female\"\nAnswer entirely using lowercase characters.",
+                    "ans": "male"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Assess the voice in this recording and determine if it belongs to a male or a female. Choose the answer from \"Male\" or \"Female\"\nOnly lowercase letters are permitted in your answer.",
+                    "ans": "female"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Use the audio cues to infer if the voice belongs to a male or a female. Choose the answer from \"Man\" or \"Woman\"\nYour written response should be lowercase in every word and sentence.",
+                    "ans": "man"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Classify the voice in this clip as male or female. Choose the answer from \"Male\" or \"Female\"\nFormat your reply so that it uses lowercase letters only.",
+                    "ans": "female"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "By analyzing the voice, state if the speaker is male or female. Choose the answer from \"Man\" or \"Woman\"\nUse lowercase characters exclusively throughout your entire reply.",
+                    "ans": "man"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Determine whether the speaker in this recording is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nAll letters in your reply must be lowercase\u2014no capitals at all.",
+                    "ans": "female"
+                }
+            ],
+            "detectable_format:json_format": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Assess the characteristics of the speaker\u2019s voice to tell their gender. Choose the answer from \"Man\" or \"Woman\"\nRespond in valid JSON form with no explanations or markup.",
+                    "ans": {
+                        "Gender": "man"
+                    }
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Listen carefully to the recording and determine if the speaker is male or female. Choose the answer from \"Male\" or \"Female\"\nFormat the response as a single JSON block and omit commentary.",
+                    "ans": {
+                        "Gender": "female"
+                    }
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Judge the gender of the individual whose voice is heard in this recording. Choose the answer from \"Male\" or \"Female\"\nThe response should be expressed exclusively in JSON format.",
+                    "ans": {
+                        "Gender": "male"
+                    }
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Based on the audio, what is the speaker\u2019s gender? Choose the answer from \"Male\" or \"Female\"\nYour message should consist of JSON data alone.",
+                    "ans": {
+                        "Gender": "female"
+                    }
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Determine whether the speaker in this recording is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nOutput should contain just one correctly formatted JSON structure.",
+                    "ans": {
+                        "Gender": "male"
+                    }
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Identify whether the individual in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nOutput must be strictly JSON without any narrative or context.",
+                    "ans": {
+                        "Gender": "woman"
+                    }
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "What is the likely gender of the person speaking in this sound clip? Choose the answer from \"Male\" or \"Female\"\nWrite your answer as JSON and exclude all plain text elements.",
+                    "ans": {
+                        "Gender": "male"
+                    }
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Decide if the voice you hear is that of a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nReturn the structured information only in JSON representation.",
+                    "ans": {
+                        "Gender": "woman"
+                    }
+                }
+            ],
+            "startend:quotation": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nPut your entire output inside a set of double quotes.",
+                    "ans": "\"man\""
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Based on how the speaker sounds, identify their gender. Choose the answer from \"Male\" or \"Female\"\nThe response must be fully contained within double quotation marks.",
+                    "ans": "\"female\""
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Listen to the voice sample and decide on the speaker\u2019s gender. Choose the answer from \"Male\" or \"Female\"\nDouble quotes should encompass the full content of your answer.",
+                    "ans": "\"male\""
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Assess the characteristics of the speaker\u2019s voice to tell their gender. Choose the answer from \"Man\" or \"Woman\"\nDouble quotes should encapsulate the entirety of your response.",
+                    "ans": "\"woman\""
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Determine the gender identity of the person speaking in this audio. Choose the answer from \"Male\" or \"Female\"\nThe text you produce should be framed within double quotes.",
+                    "ans": "\"male\""
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "By listening to the clip, identify whether the voice is masculine or feminine. Choose the answer from \"Man\" or \"Woman\"\nThe message must be entirely inside a pair of double quotes.",
+                    "ans": "\"woman\""
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Indicate if the person in the recording sounds male or female. Choose the answer from \"Man\" or \"Woman\"\nThe whole reply should be wrapped inside double quotes.",
+                    "ans": "\"man\""
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Decide if the voice you hear is that of a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nInsert double quotes enclosing the complete text of your reply.",
+                    "ans": "\"woman\""
+                }
+            ],
+            "detectable_format:title": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "What is the likely gender of the person speaking in this sound clip? Choose the answer from \"Male\" or \"Female\"\nThe entire content of your response must sit inside << >>.",
+                    "ans": "<<male>>"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Identify whether the individual in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nAll output should be encapsulated by << at the start and >> at the end.",
+                    "ans": "<<woman>>"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nPut the answer completely within << and >> without any outside text.",
+                    "ans": "<<man>>"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Make a judgment about the gender of the speaker from this audio. Choose the answer from \"Male\" or \"Female\"\nPlace your response text between two pairs of angle brackets << >>.",
+                    "ans": "<<female>>"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Can you determine if the speaker is a male or a female from this recording? Choose the answer from \"Male\" or \"Female\"\nYour answer must be entirely contained inside << >> delimiters.",
+                    "ans": "<<male>>"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Determine if the speaker\u2019s voice suggests they are male or female. Choose the answer from \"Male\" or \"Female\"\nEnclose your full reply within double angle brackets like <<this>>.",
+                    "ans": "<<female>>"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Indicate if the person in the recording sounds male or female. Choose the answer from \"Man\" or \"Woman\"\nThe response should appear completely inside << >> symbols.",
+                    "ans": "<<man>>"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Analyze the speaker\u2019s voice and specify their gender. Choose the answer from \"Man\" or \"Woman\"\nUse << >> to wrap the entire message you generate.",
+                    "ans": "<<woman>>"
+                }
+            ],
+            "combination:repeat_prompt": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Based on this sound recording, what is the gender of the speaker? Choose the answer from \"Male\" or \"Female\"\nBegin your answer by writing the phrase: \"After assessment, the answer is:\"",
+                    "ans": "After assessment, the answer is:male"
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "From this recording, indicate the likely gender of the speaker. Choose the answer from \"Man\" or \"Woman\"\nRespond with an opening line: \"The computed result is:\"",
+                    "ans": "The computed result is:woman"
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Listen and identify whether the speaker in this recording is a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nBegin by saying: \"In summary, the solution is:\"",
+                    "ans": "In summary, the solution is:man"
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Identify whether the person speaking in this audio is male or female. Choose the answer from \"Male\" or \"Female\"\nStart your reply with the phrase: \"Here\u2019s the solution:\"",
+                    "ans": "Here\u2019s the solution:female"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "From the audio provided, classify the speaker\u2019s gender. Choose the answer from \"Male\" or \"Female\"\nStart your response with: \"The resulting conclusion is:\"",
+                    "ans": "The resulting conclusion is:male"
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Determine whether the speaker in this recording is a man or a woman. Choose the answer from \"Male\" or \"Female\"\nStart your message saying: \"According to the reasoning, the result is:\"",
+                    "ans": "According to the reasoning, the result is:female"
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Based on the tone and pitch of the voice, identify the gender of the speaker. Choose the answer from \"Man\" or \"Woman\"\nStart your reply by stating: \"The derived solution is:\"",
+                    "ans": "The derived solution is:man"
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Listen to this recording and decide whether the voice belongs to a man or a woman. Choose the answer from \"Man\" or \"Woman\"\nOpen your response by writing: \"After examination, the conclusion is:\"",
+                    "ans": "After examination, the conclusion is:woman"
+                }
+            ],
+            "startend:end_checker": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Based on this sound recording, what is the gender of the speaker? Choose the answer from \"Male\" or \"Female\"\nFinish the response with the phrase \"This is the conclusion of my answer.\"",
+                    "ans": "male\nThis is the conclusion of my answer."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Determine the gender identity of the person speaking in this audio. Choose the answer from \"Male\" or \"Female\"\nEnd your answer by writing \"This completes what I intended to explain.\"",
+                    "ans": "female\nThis completes what I intended to explain."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "From this voice sample, classify the speaker as male or female. Choose the answer from \"Man\" or \"Woman\"\nFinish your answer with \"That\u2019s all for my response today.\"",
+                    "ans": "man\nThat\u2019s all for my response today."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Make a determination about whether the voice in this audio is masculine or feminine. Choose the answer from \"Male\" or \"Female\"\nPlease finish your reply with \"That\u2019s the summary of my explanation.\"",
+                    "ans": "female\nThat\u2019s the summary of my explanation."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Listen to the speaker\u2019s voice and identify their gender. Choose the answer from \"Man\" or \"Woman\"\nWrap up your response by saying \"This is the final part of my answer.\"",
+                    "ans": "man\nThis is the final part of my answer."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Can you tell whether the person speaking in this clip is male or female? Choose the answer from \"Man\" or \"Woman\"\nEnd your reply by stating \"This brings my explanation to a close.\"",
+                    "ans": "woman\nThis brings my explanation to a close."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Listen to this sound clip and state the speaker\u2019s gender. Choose the answer from \"Man\" or \"Woman\"\nConclude your response exactly with \"This sums up my explanation.\"",
+                    "ans": "man\nThis sums up my explanation."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Identify the speaker\u2019s gender category based on the audio. Choose the answer from \"Male\" or \"Female\"\nConclude your reply with the phrase \"This marks the end of my explanation.\"",
+                    "ans": "female\nThis marks the end of my explanation."
+                }
+            ]
+        },
+        "creative_writing": {}
+    }
+}

@@ -2,6 +2,7 @@ import argparse
 import torch
 import json, os, datetime
 from pathlib import Path
+import random
 from tqdm import tqdm
 from typing import Dict, Tuple
 from models.basemodel import BaseModel
@@ -42,6 +43,14 @@ TEST_SAMPLE = {
     "instruction": "what does the person in the last audio say?\nWrite everything in your response using capital letters only.",       #   Test on the last audio example
 }
 
+def set_seed(seed: int, verbose: bool = False) -> None:
+    random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+    if verbose:
+        print(f"Seed set to {seed}")
+
 def load_model(model_name, device: str = "cuda") -> BaseModel:
     if device == "cuda" and not torch.cuda.is_available():
         print("\033[41mCUDA is not available. Using CPU instead.\033[0m")
@@ -76,7 +85,7 @@ def GetICLData(args: argparse.Namespace) -> list[dict]:
     '''
     with open(args.icl_json_path, "r") as f:
         InContextDataset = json.load(f)
-    return InContextDataset[args.audio_task][args.response_task][args.IF_task][:args.examples]
+    return InContextDataset[args.audio_task][args.response_task][args.IF_task]
 
 def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list[dict], str]:
     '''
@@ -132,7 +141,12 @@ def GetOutputFilePath(args: argparse.Namespace) -> Path:
     output_fn = output_dir / f"output_{args.examples}-shot_{ts}.jsonl"
     return output_fn
 
-def GenerateICLandTestExamples(icl_data:list[dict], icl_audio_path:str, test_case_formatted: Dict[str, str], debug: bool = False) -> list[dict]:
+def GenerateICLandTestExamples(
+    icl_data:list[dict],
+    icl_audio_path:str,
+    test_case_formatted: Dict[str, str],
+    debug: bool = False
+) -> list[dict]:
     '''
         Generate In-Context Learning Examples and concatenate with test example.
         Output format:
@@ -270,13 +284,13 @@ def verify_args(args: argparse.Namespace) -> None:
 
 def main(args: argparse.Namespace) -> None:
     t0 = datetime.datetime.now()
+    audio_task_mapped = MAP_AUDIO_TASK[args.audio_task.upper()]
     print(f"\n\033[92mStarting ICL inference with model: {MAP_MODEL_NAME[args.model_name.lower()]}\n"
-          f"audio task: {MAP_AUDIO_TASK[args.audio_task.upper()]}\n"
+          f"audio task: {audio_task_mapped}\n"
           f"response task: {args.response_task}\n"
           f"IF task: {args.IF_task}\n"
           f"using {args.examples} in-context examples.\n"
           f"Starts at {t0.strftime('%Y-%m-%d %H:%M:%S')}\033[0m\n")
-    audio_task_mapped = MAP_AUDIO_TASK[args.audio_task.upper()]
 
     # Load model
     model = load_model(args.model_name)
@@ -294,6 +308,9 @@ def main(args: argparse.Namespace) -> None:
     pbar = enumerate(test_cases) if args.debug or args.verbose else tqdm(enumerate(test_cases))
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
+            set_seed(args.seed + i, args.verbose)
+            random.shuffle(icl_data)
+            icl_data = icl_data[:args.examples]
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data, args.icl_audio_dir, args.debug
             )

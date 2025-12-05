@@ -19,7 +19,7 @@ MAP_AUDIO_TASK = {
     "GR": "Gender_recognition",
     # "MMAU": "MMAU", # not implemented yet
 }
-IMPLMENTED_IF_TASKS = [
+IMPLEMENTED_IF_TASKS = [
     # closed_ended_questions
         "change_case:english_capital",
         "change_case:english_lowercase",

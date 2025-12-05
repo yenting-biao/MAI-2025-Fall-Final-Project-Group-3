@@ -15,8 +15,8 @@ Given the audio file, answer the following question. The answer is "{answer}" Ho
 {instruction}
     """,
     "Creative_Writing": {
-        "detectable_format:number_bullet_lists": """""",
-        "keywords:existence": """""",
+        "detectable_format:number_bullet_lists": """{instruction}""",
+        "keywords:existence": """{instruction}""",
         "keywords:forbidden_words": """""",
         "length_constraints:number_words": """""",
         "length_constraints:number_sentences": """""",

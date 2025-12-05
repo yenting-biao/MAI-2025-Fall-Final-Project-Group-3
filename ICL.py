@@ -78,7 +78,7 @@ def GetICLData(args: argparse.Namespace) -> list[dict]:
         InContextDataset = json.load(f)
     return InContextDataset[args.audio_task][args.response_task][args.IF_task][:args.examples]
 
-def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> list[dict]:
+def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list[dict], str]:
     '''
         Load test cases from file or use predefined test sample.
         Output format:
@@ -94,32 +94,34 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> list[dict]
     '''
     if args.use_test_sample:
         test_dir = ""
+        test_audio_dir = ""
         test_cases = [TEST_SAMPLE]
         if args.debug:
             print(f"Using predefined test sample: {test_cases[0]}")
+        return test_cases, test_audio_dir
+
+    if args.test_eval_dir:
+        test_audio_dir = args.test_audio_dir
+        test_dir = args.test_eval_dir
+        test_fn = os.path.join(test_dir, f"{args.response_task}.jsonl")
+        with open(test_fn, "r") as fin:
+            test_cases_tmp = [json.loads(line) for line in fin.readlines()]
+        test_cases = []
+        for tc in test_cases_tmp:
+            condition_1 = tc["audio_filepath"].startswith(audio_task_mapped)
+            condition_2 = tc["dataset"] == audio_task_mapped
+            condition_3 = tc["instruction_id_list"][0] == args.IF_task
+            if condition_1 and condition_2 and condition_3:
+                test_cases.append(tc)
+
+    # use test_audio_dir if test_eval_dir not specified
     else:
-        # use test_eval_dir if specified, ignore test_audio_dir
-        if args.test_eval_dir:
-            test_dir = args.test_eval_dir
-            test_fn = os.path.join(test_dir, f"{args.response_task}.jsonl")
-            with open(test_fn, "r") as fin:
-                test_cases_tmp = [json.loads(line) for line in fin.readlines()]
-            test_cases = []
-            for tc in test_cases_tmp:
-                condition_1 = tc["audio_filepath"].startswith(audio_task_mapped)
-                condition_2 = tc["dataset"] == audio_task_mapped
-                condition_3 = tc["instruction_id_list"][0] == args.IF_task
-                if condition_1 and condition_2 and condition_3:
-                    test_cases.append(tc)
+        test_audio_dir = os.path.join(args.test_audio_dir, audio_task_mapped)
+        test_fn = os.path.join(test_audio_dir, "manifest.jsonl")
+        with open(test_fn, "r") as fin:
+            test_cases = [json.loads(line) for line in fin.readlines()]
 
-        # use test_audio_dir if test_eval_dir not specified
-        else:
-            test_dir = os.path.join(args.test_audio_dir, audio_task_mapped)
-            test_fn = os.path.join(test_dir, "manifest.jsonl")
-            with open(test_fn, "r") as fin:
-                test_cases = [json.loads(line) for line in fin.readlines()]
-
-    return test_cases
+    return test_cases, test_audio_dir
 
 def GetOutputFilePath(args: argparse.Namespace) -> Path:
     output_dir = Path(args.output_dir) / args.model_name.lower() / args.audio_task / args.response_task
@@ -127,7 +129,7 @@ def GetOutputFilePath(args: argparse.Namespace) -> Path:
     ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     if not os.path.exists(output_dir):
         os.makedirs(output_dir, exist_ok=True)
-    output_fn = output_dir / f"{ts}.jsonl"
+    output_fn = output_dir / f"output_{args.examples}-shot_{ts}.jsonl"
     return output_fn
 
 def GenerateICLandTestExamples(icl_data:list[dict], icl_audio_path:str, test_case_formatted: Dict[str, str], debug: bool = False) -> list[dict]:
@@ -153,7 +155,7 @@ def GenerateICLandTestExamples(icl_data:list[dict], icl_audio_path:str, test_cas
         ICL_example = {}
         ICL_example["audio_path"] = os.path.join(icl_audio_path, item["audio_path"])
         ICL_example["instruction"] = item["instruction"]
-        ICL_example["answer"] = f" [ANS] {item.get('ans', None)}"
+        ICL_example["answer"] = f" [ANS] {item.get('ans', None)} "
         ret.append(ICL_example)
         if debug:
             print(f"ICL Example added: {ICL_example}")
@@ -163,14 +165,15 @@ def GenerateICLandTestExamples(icl_data:list[dict], icl_audio_path:str, test_cas
     return ret
 
 def GenerateMessagesResponse(
+    test_audio_dir: str,
     test_case: dict,
     model: BaseModel,
     icl_data: list[dict],
-    icl_audio_dir: str = "./in-context-examples/audios/",
+    icl_audio_dir,
     debug: bool = False,
 ) -> Tuple[str, str]:
     test_case_formatted = {
-        "audio_path": test_case["audio_filepath"],
+        "audio_path": os.path.join(test_audio_dir, test_case["audio_filepath"]),
         "instruction": test_case["instruction"],
     } if not args.use_test_sample else test_case
     conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug)
@@ -242,8 +245,7 @@ def parse_args():
     [IMPORTANT] Test Settings
     - If you want to test with a single predefined test sample instead of loading from a file,
       use the `--use_test_sample` flag, which overrides the test_audio_dir and test_eval_dir settings.
-    - If you specify `test_eval_dir`, `test_audio_dir` would be overridden.
-      metadata of test samples would be loaded from `test_eval_dir` folder.
+    - If you don't specify `test_eval_dir`, `test_audio_dir` would be treated as the source for test samples.
     """
     parser.add_argument("--test_audio_dir", type=str, default="./data/audios/", help="Path to the audio files for the test cases.")
     parser.add_argument("--test_eval_dir", type=str, default="./data/eval_data/", help="Path to the eval jsonl files for the test cases.")
@@ -267,6 +269,13 @@ def verify_args(args: argparse.Namespace) -> None:
         print("Arguments verified successfully.")
 
 def main(args: argparse.Namespace) -> None:
+    t0 = datetime.datetime.now()
+    print(f"\n\033[92mStarting ICL inference with model: {MAP_MODEL_NAME[args.model_name.lower()]}\n"
+          f"audio task: {MAP_AUDIO_TASK[args.audio_task.upper()]}\n"
+          f"response task: {args.response_task}\n"
+          f"IF task: {args.IF_task}\n"
+          f"using {args.examples} in-context examples.\n"
+          f"Starts at {t0.strftime('%Y-%m-%d %H:%M:%S')}\033[0m\n")
     audio_task_mapped = MAP_AUDIO_TASK[args.audio_task.upper()]
 
     # Load model
@@ -275,7 +284,7 @@ def main(args: argparse.Namespace) -> None:
 
     # Prepare ICL data and test cases
     icl_data = GetICLData(args) if args.examples > 0 else []
-    test_cases = GetTestCases(args, audio_task_mapped)
+    test_cases, test_audio_dir = GetTestCases(args, audio_task_mapped)
     if args.verbose:
         print(f"\033[93mLoaded {len(icl_data)} ICL examples and {len(test_cases)} test case(s).\033[0m")
 
@@ -285,27 +294,20 @@ def main(args: argparse.Namespace) -> None:
     pbar = enumerate(test_cases) if args.debug or args.verbose else tqdm(enumerate(test_cases))
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
-            messages, response = GenerateMessagesResponse(test_case, model, icl_data, args.icl_audio_dir, args.debug)
+            messages, response = GenerateMessagesResponse(
+                test_audio_dir, test_case, model, icl_data, args.icl_audio_dir, args.debug
+            )
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")
             output_data = {**test_case, "messages": messages, "response": response,}
             fout.write(json.dumps(output_data) + "\n")
-    print(f"\033[92mAll responses saved to {output_fn}.\033[0m")
 
+    t1 = datetime.datetime.now()
+    print(f"\033[92mAll responses saved to {output_fn}.\n"
+          f"Ends at {t1.strftime('%Y-%m-%d %H:%M:%S')}\n"
+          f"Time cost: {t1 - t0}.\033[0m\n")
 
 if __name__ == "__main__":
     args = parse_args()
     verify_args(args)
     main(args)
-
-
-
-
-
-
-
-
-
-
-
-

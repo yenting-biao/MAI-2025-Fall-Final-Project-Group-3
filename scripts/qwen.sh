@@ -12,7 +12,7 @@ IF_TASKS=(
 EXAMPLES=(0 1 2 3 4 5 6 7 8)
 MODEL_NAMES=("qwen")
 SEEDS=(42)
-OUTPUT_DIR="model_responses/jayliao_lugia/"
+OUTPUT_DIR="${OUTPUT_DIR:-model_responses/default_output/}"
 
 for model_name in "${MODEL_NAMES[@]}"; do
   for audio_task in "${AUDIO_TASKS[@]}"; do

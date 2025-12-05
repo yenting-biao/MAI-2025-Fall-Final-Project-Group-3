@@ -1,3 +1,5 @@
+#!/bin/bash
+
 AUDIO_TASKS=("ASR" "SER" "GR")
 RESPONSE_TASKS=("closed_ended_questions")
 IF_TASKS=(

@@ -309,10 +309,11 @@ def main(args: argparse.Namespace) -> None:
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)
-            random.shuffle(icl_data)
-            icl_data = icl_data[:args.examples]
+            icl_data_shuffled = icl_data.copy()
+            random.shuffle(icl_data_shuffled)
+            icl_data_examples = icl_data_shuffled[:args.examples]
             messages, response = GenerateMessagesResponse(
-                test_audio_dir, test_case, model, icl_data, args.icl_audio_dir, args.debug
+                test_audio_dir, test_case, model, icl_data_examples, args.icl_audio_dir, args.debug
             )
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")

@@ -2276,53 +2276,53 @@
             "keywords:forbidden_words": [
                 {
                     "audio_path": "general/0.wav",
-                    "instruction": "Summarize the narrative while avoiding the term **window** or **garden**.",
-                    "ans": ""
+                    "instruction": "Summarize the audio while avoiding the term **alarm** or **clock**.",
+                    "ans": "The speaker would like a new wake-up device."
                 },
                 {
                     "audio_path": "general/1.wav",
-                    "instruction": "Describe the conflict without mentioning **battle** or **sword**.",
-                    "ans": ""
+                    "instruction": "Describe the situation without mentioning **clock**.",
+                    "ans": "A young-sounding person makes an urgent announcement, exclaiming that the time is eleven."
                 },
                 {
                     "audio_path": "general/2.wav",
-                    "instruction": "Explain the feeling conveyed but do not use **fear** or **panic**.",
-                    "ans": ""
+                    "instruction": "Describe the object mentioned but do not use **slick**.",
+                    "ans": "Based on the audio description, the object has a very **smooth and polished surface** with a slight sheen. It appears **slippery** to the touch, allowing a hand to glide across it with no resistance."
                 },
                 {
                     "audio_path": "general/3.wav",
-                    "instruction": "Recount the event while excluding **mirror** or **reflection**.",
-                    "ans": ""
+                    "instruction": "Paraphrase the statement while excluding **forget** and **jacket**.",
+                    "ans": "Remember to bring a coat!"
                 },
                 {
                     "audio_path": "general/4.wav",
-                    "instruction": "Interpret the speaker\u2019s tone without using **sarcasm**.",
-                    "ans": ""
+                    "instruction": "Describe what the group is going to do without using **stop**.",
+                    "ans": "Based on the audio, the group is going to take a break in a couple of minutes."
                 },
                 {
                     "audio_path": "general/5.wav",
-                    "instruction": "Describe the emotional change while avoiding **anger** or **grief**.",
-                    "ans": ""
+                    "instruction": "Provide a summary of the audio without using the words **tomorrow** or **cold**.",
+                    "ans": "The speaker speculates that the temperature may drop on the following day."
                 },
                 {
                     "audio_path": "general/6.wav",
-                    "instruction": "Explain the setting but exclude **forest** or **tree**.",
-                    "ans": ""
+                    "instruction": "Mention what the man remembered but omit **doctor** and **appointment**.",
+                    "ans": "The man remembered that he has a medical consultation."
                 },
                 {
                     "audio_path": "general/7.wav",
-                    "instruction": "Summarize the character\u2019s goal without mentioning **revenge** or **justice**.",
-                    "ans": ""
+                    "instruction": "Depict the character\u2019s confusion without mentioning **wonder**.",
+                    "ans": "Her brow creased slightly, her gaze distant as she tried to piece it all together. \"What is this about?\" she murmured, the question hanging in the air unanswered."
                 },
                 {
                     "audio_path": "general/8.wav",
-                    "instruction": "Depict the dialogue while avoiding **promise** or **secret**.",
-                    "ans": ""
+                    "instruction": "Depict the dialogue while avoiding **exactly** or **happened**.",
+                    "ans": "That is precisely what occurred."
                 },
                 {
                     "audio_path": "general/9.wav",
-                    "instruction": "Analyze the plot development but do not use **betrayal**.",
-                    "ans": ""
+                    "instruction": "Analyze the character\u2019s source of distress but do not use **airplane** or **full**.",
+                    "ans": "Based on the character's urgent tone and statement, her distress stems from a sense of scarcity and the immediate risk of being left behind. The flying conveyance she needs to board is approaching its maximum occupancy. This lack of available room creates a high-stakes situation, suggesting her travel plans are in jeopardy because there may not be a spot left for her."
                 },
                 {
                     "audio_path": "general/10.wav",

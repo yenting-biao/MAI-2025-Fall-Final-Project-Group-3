@@ -438,6 +438,514 @@
                     "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
                     "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
                 }
+            ],
+            "keywords:forbidden_words": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the audio while avoiding the term **alarm** or **clock**.",
+                    "ans": "The speaker would like a new wake-up device."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Describe the situation without mentioning **clock**.",
+                    "ans": "A young-sounding person makes an urgent announcement, exclaiming that the time is eleven."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Describe the object mentioned but do not use **slick**.",
+                    "ans": "Based on the audio description, the object has a very **smooth and polished surface** with a slight sheen. It appears **slippery** to the touch, allowing a hand to glide across it with no resistance."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Paraphrase the statement while excluding **forget** and **jacket**.",
+                    "ans": "Remember to bring a coat!"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Describe what the group is going to do without using **stop**.",
+                    "ans": "Based on the audio, the group is going to take a break in a couple of minutes."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Provide a summary of the audio without using the words **tomorrow** or **cold**.",
+                    "ans": "The speaker speculates that the temperature may drop on the following day."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Mention what the man remembered but omit **doctor** and **appointment**.",
+                    "ans": "The man remembered that he has a medical consultation."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Depict the character\u2019s confusion without mentioning **wonder**.",
+                    "ans": "Her brow creased slightly, her gaze distant as she tried to piece it all together. \"What is this about?\" she murmured, the question hanging in the air unanswered."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Depict the dialogue while avoiding **exactly** or **happened**.",
+                    "ans": "That is precisely what occurred."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Analyze the character\u2019s source of distress but do not use **airplane** or **full**.",
+                    "ans": "Based on the character's urgent tone and statement, her distress stems from a sense of scarcity and the immediate risk of being left behind. The flying conveyance she needs to board is approaching its maximum occupancy. This lack of available room creates a high-stakes situation, suggesting her travel plans are in jeopardy because there may not be a spot left for her."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Explain the relationship dynamics without saying **love** or **marriage**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Describe the main conflict while excluding **king** or **crown**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Interpret the outcome of the scene but avoid **victory** or **failure**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Summarize the atmosphere without mentioning **storm** or **rain**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Describe the speaker\u2019s motivation but do not use **greed** or **power**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Explain the cause of tension while avoiding **argument** or **fight**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Rephrase the event but exclude **river** and **boat**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Depict the environment while avoiding **snow** or **cold**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Summarize the moral of the story without saying **lesson** or **virtue**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Interpret the transformation described but exclude **light** or **shadow**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Describe the narrative progression while avoiding **journey** or **road**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Explain the emotional response but do not use **joy** or **relief**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Recount the moment of realization without mentioning **truth** or **understand**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Summarize the speaker\u2019s dilemma while avoiding **choice** or **decision**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Interpret the passage\u2019s symbolism but exclude **fire** or **phoenix**.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_words": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Write a diary entry from the perspective of someone who just experienced the events in the audio, using at least 70 words.",
+                    "ans": "Dear Diary,\n\nI was jolted awake this morning, but not by the usual frantic beeping. It was a voice. A deep, booming, almost mechanical voice that seemed to shake the entire room. For a second, I thought it was a dream, but my eyes were wide open. The voice declared, clear as day, \"I would like a new alarm clock.\" I'm writing this from the kitchen because I'm genuinely too afraid to go back in my bedroom. My alarm clock just quit its job."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Imagine the audio is part of a movie scene. Describe what is happening visually in at least 60 words.",
+                    "ans": "A young girl jolts awake on a plush living room sofa, her cheek creased from a velvet pillow. The only light comes from the flickering blue of a television playing the credits of a movie she'd fallen asleep to. Her eyes, wide with sudden panic, dart to a tall grandfather clock in the shadowy corner. As its final, resonant chime rings out, her hand flies to her mouth. She's hours past her bedtime."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Summarize the emotional progression of the audio from start to finish in no fewer than 50 words.",
+                    "ans": "The audio captures a man's voice rising with genuine amazement as he declares, \"The surface is slick!\" His tone conveys a mix of surprise and admiration, as though he's just run his hand across something unexpectedly smooth—perhaps polished marble or a freshly waxed floor—and can't help but vocally marvel at its remarkable slipperiness."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Create a dialogue between two characters reacting to the audio, with at least 80 words total.",
+                    "ans": "**Alex:** \"Did you hear that? I swear I just heard a voice come from the hallway. It sounded like my grandma.\"\n\n**Ben:** \"I didn't hear anything... what did it say?\"\n\n**Alex:** \"Something about not forgetting a jacket. It's just so weird. She used to say that to me every single time I left her house, without fail. It sounded so clear, like she was standing right there.\"\n\n**Ben:** \"That's... unsettling. But also kind of sweet, in a way. Maybe it's just a fond memory bubbling up?\"\n\n**Alex:** \"Maybe. But I'm still grabbing my jacket, just in case.\""
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Explain how the tone of the audio would change if it were performed by a different speaker, in no less than 60 words.",
+                    "ans": "The original speaker has a deep, calm, and authoritative voice, making the statement sound like a simple, factual announcement. If this same line were performed by a young child, the tone would shift dramatically. The pitch would be much higher, and the delivery could be impatient or whiny, transforming the calm statement into an eager plea. The sense of authority would be lost, replaced by a feeling of anticipation or restlessness."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Write a review or critique of the audio as if it were a podcast episode, containing at least 100 words.",
+                    "ans": "Welcome back to \"Audio Atlas,\" the podcast where we explore the vast landscapes of sound. Today, we're looking at a fascinatingly minimalist piece, a new micro-episode that's been making waves, titled \"A Simple Prediction.\"\n\nOn the surface, the piece is remarkably simple: a woman's voice speaks a single, unadorned sentence—\"Maybe tomorrow it will be cold.\" Yet, there's a profound depth here. The speaker's delivery is perfectly understated—not anxious, not hopeful, just a calm statement of possibility. It's a masterclass in conveying the quiet uncertainty we all live with. The audio quality itself adds to this; the subtle room tone makes it feel intimate and real, as if overheard in a private moment of reflection.\n\nOur only critique is that its brevity, while powerful, is also its biggest challenge. It feels less like a complete story and more like a prologue to a much larger narrative we're now desperate to hear. It's a compelling, thought-provoking morsel of audio, but it undeniably leaves the listener wanting more. A bold, if slightly unsatisfying, experiment in sonic storytelling."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Describe how sound elements such as rhythm, pitch, or pauses affect the mood of the audio in no fewer than 70 words.",
+                    "ans": "The audio projects a contemplative and slightly weary mood, shaped primarily by its sound elements. The rhythm is slow and deliberate, suggesting the speaker is recalling information rather than stating it with urgency. The pitch is low and remains relatively monotonous, which strips the statement of strong emotion and imparts a feeling of mundane resignation. A brief, natural pause after \"I think\" reinforces this thoughtful quality, making the delivery feel authentic and unscripted. These elements combine to create a calm, everyday atmosphere."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Rewrite the audio\u2019s message as if it were a motivational speech in at least 80 words.",
+                    "ans": "Friends, how many times have you stood at a new threshold and whispered those exact words: \"I wonder what this is about\"? That question is not a sign of doubt; it is the spark of discovery! It is the sound of your potential calling out from the unknown. Opportunity rarely arrives with clear instructions; it comes as a challenge, a new path. Your choice is not to silence the wonder, but to answer it with action! Step forward and embrace that uncertainty, because *you* get to define what this is about. This is your moment. Go find out."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Compose a descriptive paragraph that translates the feelings from the audio into visual imagery, using a minimum of 60 words.",
+                    "ans": "The slow, gravelly tone conjures the image of a dimly lit, wood-paneled study where the air is thick with the scent of old paper and dust motes dance in a single, weak shaft of afternoon light. The words themselves land with the heavy, final thud of a massive, leather-bound book being closed forever, its story now sealed as an unchangeable part of history."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Imagine you are explaining the audio to someone who cannot hear. Describe it in at least 75 words.",
+                    "ans": "This is an audio announcement, likely from an airport's public address system. A woman\u2019s voice, clear and slightly high-pitched, speaks with a sense of urgency. The sound has a slight echo, suggesting it's being broadcast in a large, open space like a boarding gate terminal. She states plainly and quickly, \"The airplane is almost full.\" Her tone implies this is an important, time-sensitive update for passengers, perhaps signaling the final moments before the gate closes for departure."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write a fictional letter to the speaker in the audio, responding to their message in no fewer than 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Analyze the relationship between the audio\u2019s tone and its possible purpose in at least 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Transform the audio\u2019s content into a short monologue or soliloquy of no fewer than 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Describe how you would visually represent the emotions in the audio through colors or shapes in a response of at least 50 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Summarize what you believe the speaker\u2019s intentions or goals are in a minimum of 60 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Imagine the audio as a conversation between two people. Write what the other person might have said in at least 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Write a film synopsis inspired by the themes or emotions of the audio, containing no fewer than 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Describe how the pacing and delivery of the audio influence its emotional impact in at least 50 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Create a narrative that reverses the perspective of the audio\u2019s speaker in a minimum of 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Explain how the background sounds or silence in the audio contribute to its meaning in at least 60 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Write a brief essay analyzing the message of the audio and its social implications, at least 100 words long.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Transform the content of the audio into a short news report in no fewer than 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Describe how you would teach the main ideas of the audio to someone unfamiliar with the topic in at least 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Imagine the audio is part of a historical record. Write a contextual explanation of its significance using at least 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Write a creative reinterpretation of the audio as if it were told from the perspective of an observer, no less than 75 words.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_sentences": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the audio\u2019s main message in at least 3 complete sentences.",
+                    "ans": "The speaker in the audio clearly states their desire to obtain a new alarm clock. This is a direct and straightforward request, leaving no room for ambiguity. The entire message is focused on communicating this single need for a new time-keeping device."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Describe the speaker\u2019s tone in 4 sentences or more.",
+                    "ans": "Based on the audio clip, the speaker\u2019s tone is extremely high-pitched and frantic, bordering on a panicked shriek. They deliver the line with a sense of extreme urgency and alarm, as if the time is critically important. The voice is loud and projects a feeling of exasperation, suggesting something is late or has been forgotten. Overall, the child-like quality combined with the intense delivery creates a tone that is both demanding and agitated."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Write a brief analysis of the kind of object the speaker is talking about using no fewer than 3 sentences.",
+                    "ans": "Based on the description \"slick,\" the speaker is referring to an object with a very smooth, low-friction, and possibly glossy surface. This quality suggests the object could be made of a non-porous material like polished stone, glazed ceramic, glass, or a surface covered in a liquid like water or oil. The speaker's neutral, observational tone implies they are making a simple tactile or visual assessment of the object's texture."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Explain what kind of audience the speaker is addressing, using at least 3 sentences.",
+                    "ans": "Based on the audio, the speaker is likely addressing a child or a close loved one for whom they feel a sense of responsibility. The phrase \"Don't forget a jacket\" is a common, caring reminder given to someone who is about to go outside. The speaker's gentle and instructive tone suggests a familiar, personal relationship, such as a parent speaking to their child before school or a partner reminding their significant other before they leave for the day."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Describe the overall mood of the audio and support your description with examples in 4 sentences.",
+                    "ans": "The overall mood of the audio is calm and informative. This is conveyed through the speaker's steady and even-toned voice, which lacks any sense of urgency or emotion. The phrase itself, \"We'll stop in a couple of minutes,\" is a simple, direct statement of fact. Consequently, the audio feels like a routine announcement rather than a dramatic or emotional declaration."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Suppose the speaker's message is directed at another person. Depict their reaction in at least 5 sentences.",
+                    "ans": "He looked up from the newspaper, a thoughtful expression replacing his concentration. A slight, wistful smile touched the corners of his mouth as he considered the possibility. \"I hope so,\" he said, his voice softer than before. \"Cold weather always makes me think of our first winter here, when we'd huddle on the couch with that scratchy wool blanket.\" He finally set the paper down, giving his full attention, a nostalgic warmth in his eyes that defied any coming chill."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Hypothesize the speaker's age in 3 or more sentences.",
+                    "ans": "Based on the vocal characteristics, the speaker is likely a middle-aged or older adult, perhaps in his 50s to 70s. His voice has a developed, medium-low pitch and a steady, measured cadence that suggests maturity. There is no youthful inflection or the vocal frailty that can sometimes be associated with very advanced age."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Interpret the speaker's tone in a minimum of 4 sentences.",
+                    "ans": "Based on the audio, the speaker's tone is pensive and filled with a sense of apprehension. Her slow, quiet delivery gives the impression that she is musing to herself rather than asking a question to someone else. There is an undercurrent of concern or mild worry in her voice, suggesting she anticipates the subject matter to be serious or unpleasant. Overall, the tone is one of quiet, anxious contemplation about an unknown but potentially negative situation."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Describe the events that may have prompted the speaker to say what he said in at least 3 sentences.",
+                    "ans": "Based on the speaker's calm, definitive, and slightly weary tone, the speaker is likely a witness or an expert being questioned by an investigator. The investigator has just spent time laying out a complex theory of how a crime or an accident occurred, step-by-step. The speaker, who saw it all unfold, is now providing his unwavering confirmation that the investigator's hypothesis is entirely correct."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Paraphrase the speaker\u2019s message as if you were reporting it to someone else in at least 4 sentences.",
+                    "ans": "The speaker just made an announcement regarding the flight's capacity. She stated that the airplane is almost completely full. This means there are very few, if any, empty seats remaining for passengers. Based on her message, we should expect it to be a very crowded flight."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write an editorial response to the ideas expressed in the audio in no fewer than 5 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Imagine this audio as part of a movie scene\u2014describe that scene in 4 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Explain the likely motivation behind the speaker\u2019s message in at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Summarize the conflict or tension implied within the audio in a minimum of 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Describe how background sounds or pauses contribute to the mood in at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Explain how you would rephrase the audio\u2019s core message for a professional audience using at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Imagine the audio was recorded in another setting\u2014describe how it would differ in 4 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Summarize the emotional progression from beginning to end of the audio in 3 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Discuss how the speaker\u2019s word choice affects the tone and meaning in at least 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Write a short analytical summary focusing on the audio\u2019s persuasive elements in 3 sentences or more.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Describe the possible social or cultural context of the audio using at least 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Explain how the audio\u2019s pacing influences its emotional impact in a minimum of 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Imagine you are the producer of this audio\u2014describe what improvements you would make in 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Interpret the key takeaway message of the audio and justify your interpretation in 3 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Write a detailed impression of the audio as if reviewing it for a publication, using at least 4 sentences.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_paragraphs": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the emotion of the speaker in 2 well-structured paragraphs.",
+                    "ans": "Based on the vocal delivery, the speaker's emotion is one of intense frustration and exasperation. This is not a casual or polite request but a forceful, emphatic demand born from a breaking point. The statement is delivered in a loud, strained voice that borders on a shout, indicating that a recent event\u2014almost certainly the failure of their current alarm clock\u2014has caused significant stress and annoyance. The deliberate, almost clipped pronunciation of each word serves to underline their complete and utter fed-up state.\n\nFurthermore, there is a strong undercurrent of anger and urgency in the speaker's tone. The raw, direct nature of the declaration leaves no room for negotiation or misunderstanding; they are past the point of pleasantries and are now issuing a command for an immediate solution. This emotional state suggests the speaker is reacting to a negative consequence, such as being late for a crucial appointment or work. The overall feeling is that of a person who has endured one inconvenience too many and is now taking decisive, albeit agitated, action to resolve the problem."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Explain the central conflict presented in the audio within 3 paragraphs.",
+                    "ans": "Based on the audio clip, the central conflict is a desperate struggle against the unforgiving and relentless passage of time. The speaker, in a panicked and distressed tone, exclaims, \"It's 11 o'clock!\" This is not a simple statement of fact but a cry of realization that a critical deadline has been reached or passed. The time itself acts as the antagonist, representing an irreversible point of no return that has just occurred, immediately plunging the character into a state of crisis.\n\nThe conflict is powerfully implied rather than explicitly stated. The listener is left to imagine what was supposed to happen by 11 o'clock, but the speaker's tone makes it clear the consequences are severe. This could be a curfew that has been broken, a magical spell that has just expired (as in the story of Cinderella), or a crucial opportunity that has been irrevocably missed. The core of the struggle lies in the character's powerlessness; they have failed to meet a specific temporal requirement and are now forced to face the dramatic fallout of their tardiness.\n\nUltimately, the audio captures the precise moment where hope is lost and the consequences become real. The conflict is not about a person or a physical obstacle, but about the human failure to control time. The dramatic tension is derived entirely from the realization that it is \"too late.\" The struggle is no longer about trying to make the deadline, but about dealing with the immediate and frightening reality of having failed."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Guess what object the speaker could be referring to in 1 paragraph using your own words.",
+                    "ans": "Based on the speaker's observation that \"the surface is slick,\" they are likely describing an object with a very smooth, low-friction, and possibly wet or polished finish. This could be something like a frozen ice rink, a freshly waxed floor, or a polished stone countertop, all of which are known for their slippery and glossy nature. The term \"slick\" implies a surface that is easy to slide across, whether by design, like a bowling lane, or as a warning, like a wet patch of tile."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Imagine you were the intended recipient of this message. Reply to the speaker in 2 paragraphs.",
+                    "ans": "Oh, thank you so much for the reminder! You know me so well; I was just about to rush out the door and would have completely forgotten. I just went back and grabbed my blue one from the closet, so I\u2019ll be all set for when it gets cooler later. You're a lifesaver!\n\nIt really means a lot that you're always thinking of me and looking out for my well-being like this. It\u2019s comforting to know you\u2019ve got my back, even with the small stuff. I appreciate you more than you know. Anyway, I'm heading out now, but I'll see you tonight"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Respond to the speaker in 3 paragraph as if you were in that situation.",
+                    "ans": "Okay, thank you for the heads-up. That\u2019s good to know. I\u2019ll just finish jotting down this last point you made so I don't lose my train of thought. It helps to have a clear stopping point to aim for, so I'll use these next couple of minutes to review my notes and make sure they\u2019re organized and make sense before we pause.\n\nTo be honest, I was so absorbed in what we were covering that I hadn't even noticed the time. This last section has been particularly dense, and I've been trying my best to keep up and connect all the pieces. It feels like we've made some significant progress, and my mind is still buzzing with a few questions that have come up.\n\nThat timing works perfectly, then. A short break will be a welcome chance to stand up, stretch my legs, and let all of this information settle in a bit. I\u2019ll be ready to pick things back up with a fresh perspective whenever we're scheduled to start again. I appreciate you keeping us on track."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Interpret the underlying motivation of the speaker based on the audio in 1 paragraph.",
+                    "ans": "Based on the neutral, speculative tone, the speaker's underlying motivation is likely one of simple foresight and practical preparation. The phrase is not delivered with any strong emotion like excitement or dread, but rather as a casual, matter-of-fact observation. This suggests the speaker is mentally processing a potential change in their environment and perhaps contemplating its minor consequences, such as what to wear or how to plan their day. It is a musing expressed aloud, serving as a mental note for the immediate future."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Summarize the mood in the audio in 1 paragraph.",
+                    "ans": "The mood in this audio is neutral and informational. The speaker's tone is calm and matter-of-fact, lacking any strong emotional inflection. It sounds like a simple, declarative statement, as if someone is casually recalling a piece of their schedule or thinking aloud. There is no sense of urgency, anxiety, or any other particular feeling, creating a very straightforward and everyday atmosphere."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Write a background story based on the audio in 4 paragraphs.",
+                    "ans": "Elara\u2019s life was a carefully curated collection of quiet moments. As a rare book restorer, her days were spent in the hushed company of brittle paper and faded ink, mending the histories of others while her own remained deliberately uneventful. Her small apartment, filled with the scent of old leather and brewing tea, was a sanctuary from a world she found too loud, too unpredictable. She preferred the predictable rhythm of her work, the familiar faces at the local market, and the comforting weight of a book in her lap each evening. Surprises were unwelcome guests, and she had built walls of routine high enough to keep them out.\n\nThose walls were breached on a Tuesday by a single, thick, cream-colored envelope that arrived in the mail. It bore no return address, only a single, unfamiliar crest pressed into a dark wax seal\u2014a raven clutching a key. The heavy, expensive paper felt alien in her hands, a stark contrast to the usual bills and catalogues. It was addressed to her in a swirling, archaic script that spoke of generations of wealth and secrets. For hours, the letter sat unopened on her small kitchen table, a silent accusation against the peaceful order of her life. It represented a connection to a past she knew nothing about, a disruption she wasn't prepared to face.\n\nThis was the source of her deep unease. Elara was an orphan, raised by a foster system that offered safety but few answers. She had no known family, no heirlooms, no stories of her lineage. The crest on the seal, the elegant script\u2014it all pointed to a world she had never been a part of, a history that had been deliberately kept from her. Every instinct she had honed over a lifetime of self-preservation screamed at her to throw it away, to pretend it never arrived. Yet, a deeper, long-dormant flicker of curiosity began to stir within her, a yearning for the one thing she never had: a beginning.\n\nWith a trembling hand, she finally picked up the envelope, the wax seal cool against her thumb. The silence in her apartment seemed to deepen, amplifying the frantic beat of her own heart. The apathetic calm she had cultivated for so long had shattered, replaced by a nervous, almost frightening, anticipation. As she stared at the mysterious seal, her a lifetime of questions coalesced into a single, whispered thought that hung in the still air. \"I wonder what this is about.\" The words were not just a question about the letter's contents, but about the identity, the history, and the future that might be locked within it."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Reimagine the content of the audio as a diary entry in 2 paragraphs.",
+                    "ans": "Dear Diary,\n\nI feel no triumph in being right, only a hollow, aching dread. For weeks, I\u2019ve tried to warn them, pointing out the subtle shifts and the cracks forming just beneath the surface. They dismissed my concerns as anxiety, telling me I was seeing ghosts where there were none. I described the inevitable outcome with such clarity, detailing the sequence of events as if I had already lived through it. They just laughed and told me to stop being so dramatic, to trust that everything would be fine.\n\nBut it isn't fine. Tonight, the silence that fell over the room was proof enough, long before the news was confirmed. Every fear I voiced, every terrible scenario I laid out for them, has come to pass. There's nothing left to say, no \"I told you so\" that could possibly matter now. We are standing in the rubble I predicted, and the weight of it is crushing. That is exactly what happened."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Retell the story from the audio as if it were a personal memory in 2 paragraphs.",
+                    "ans": "I remember shuffling down the narrow aisle, finding my window seat, and finally settling in for the long flight. I looked up and down the cabin, watching the last few people find their spots, hoisting bags into the overhead bins. There was a constant, low murmur of conversation mixed with the clicks of seatbelts and the rustle of jackets. It was in that moment I realized the airplane was almost full; nearly every seat was taken, creating a sense of a shared, crowded journey about to begin.\n\nThat feeling of being in a full cabin didn't bother me; it actually added to the excitement. It felt like we were all part of a collective exodus, each person with a story and a destination. I leaned my head against the cool plastic of the window, feeling the gentle vibration of the plane as it waited on the tarmac. I was ready for takeoff, ready for the adventure to start, and being surrounded by so many fellow travelers made the anticipation feel even more real."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write a two-paragraph commentary discussing how the audio relates to modern life.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Summarize the contrasting viewpoints expressed in the audio in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Analyze how background sounds or pauses shape the message in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Interpret the audio\u2019s meaning through a psychological lens in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Recreate the audio\u2019s narrative from the listener\u2019s perspective in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Discuss how cultural context might influence the interpretation of the audio in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Evaluate the persuasiveness of the speaker\u2019s argument in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Compare the tone of the audio to a similar speech or situation in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Explore how the audio\u2019s ideas could be applied in real-life scenarios in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Imagine the events before the audio began and narrate them in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Write an analysis of the speaker\u2019s use of language and emotion in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Describe how the message of the audio could change if spoken by a different person in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Write an imagined letter responding to the speaker\u2019s ideas in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Analyze the cause-and-effect relationships within the audio\u2019s story in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Discuss how the audio might evoke different interpretations among various audiences in 3 paragraphs.",
+                    "ans": ""
+                }
             ]
         }
     },
@@ -880,6 +1388,514 @@
                     "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
                     "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
                 }
+            ],
+            "keywords:forbidden_words": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the audio while avoiding the term **alarm** or **clock**.",
+                    "ans": "The speaker would like a new wake-up device."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Describe the situation without mentioning **clock**.",
+                    "ans": "A young-sounding person makes an urgent announcement, exclaiming that the time is eleven."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Describe the object mentioned but do not use **slick**.",
+                    "ans": "Based on the audio description, the object has a very **smooth and polished surface** with a slight sheen. It appears **slippery** to the touch, allowing a hand to glide across it with no resistance."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Paraphrase the statement while excluding **forget** and **jacket**.",
+                    "ans": "Remember to bring a coat!"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Describe what the group is going to do without using **stop**.",
+                    "ans": "Based on the audio, the group is going to take a break in a couple of minutes."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Provide a summary of the audio without using the words **tomorrow** or **cold**.",
+                    "ans": "The speaker speculates that the temperature may drop on the following day."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Mention what the man remembered but omit **doctor** and **appointment**.",
+                    "ans": "The man remembered that he has a medical consultation."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Depict the character\u2019s confusion without mentioning **wonder**.",
+                    "ans": "Her brow creased slightly, her gaze distant as she tried to piece it all together. \"What is this about?\" she murmured, the question hanging in the air unanswered."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Depict the dialogue while avoiding **exactly** or **happened**.",
+                    "ans": "That is precisely what occurred."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Analyze the character\u2019s source of distress but do not use **airplane** or **full**.",
+                    "ans": "Based on the character's urgent tone and statement, her distress stems from a sense of scarcity and the immediate risk of being left behind. The flying conveyance she needs to board is approaching its maximum occupancy. This lack of available room creates a high-stakes situation, suggesting her travel plans are in jeopardy because there may not be a spot left for her."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Explain the relationship dynamics without saying **love** or **marriage**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Describe the main conflict while excluding **king** or **crown**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Interpret the outcome of the scene but avoid **victory** or **failure**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Summarize the atmosphere without mentioning **storm** or **rain**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Describe the speaker\u2019s motivation but do not use **greed** or **power**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Explain the cause of tension while avoiding **argument** or **fight**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Rephrase the event but exclude **river** and **boat**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Depict the environment while avoiding **snow** or **cold**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Summarize the moral of the story without saying **lesson** or **virtue**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Interpret the transformation described but exclude **light** or **shadow**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Describe the narrative progression while avoiding **journey** or **road**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Explain the emotional response but do not use **joy** or **relief**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Recount the moment of realization without mentioning **truth** or **understand**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Summarize the speaker\u2019s dilemma while avoiding **choice** or **decision**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Interpret the passage\u2019s symbolism but exclude **fire** or **phoenix**.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_words": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Write a diary entry from the perspective of someone who just experienced the events in the audio, using at least 70 words.",
+                    "ans": "Dear Diary,\n\nI was jolted awake this morning, but not by the usual frantic beeping. It was a voice. A deep, booming, almost mechanical voice that seemed to shake the entire room. For a second, I thought it was a dream, but my eyes were wide open. The voice declared, clear as day, \"I would like a new alarm clock.\" I'm writing this from the kitchen because I'm genuinely too afraid to go back in my bedroom. My alarm clock just quit its job."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Imagine the audio is part of a movie scene. Describe what is happening visually in at least 60 words.",
+                    "ans": "A young girl jolts awake on a plush living room sofa, her cheek creased from a velvet pillow. The only light comes from the flickering blue of a television playing the credits of a movie she'd fallen asleep to. Her eyes, wide with sudden panic, dart to a tall grandfather clock in the shadowy corner. As its final, resonant chime rings out, her hand flies to her mouth. She's hours past her bedtime."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Summarize the emotional progression of the audio from start to finish in no fewer than 50 words.",
+                    "ans": "The audio captures a man's voice rising with genuine amazement as he declares, \"The surface is slick!\" His tone conveys a mix of surprise and admiration, as though he's just run his hand across something unexpectedly smooth—perhaps polished marble or a freshly waxed floor—and can't help but vocally marvel at its remarkable slipperiness."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Create a dialogue between two characters reacting to the audio, with at least 80 words total.",
+                    "ans": "**Alex:** \"Did you hear that? I swear I just heard a voice come from the hallway. It sounded like my grandma.\"\n\n**Ben:** \"I didn't hear anything... what did it say?\"\n\n**Alex:** \"Something about not forgetting a jacket. It's just so weird. She used to say that to me every single time I left her house, without fail. It sounded so clear, like she was standing right there.\"\n\n**Ben:** \"That's... unsettling. But also kind of sweet, in a way. Maybe it's just a fond memory bubbling up?\"\n\n**Alex:** \"Maybe. But I'm still grabbing my jacket, just in case.\""
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Explain how the tone of the audio would change if it were performed by a different speaker, in no less than 60 words.",
+                    "ans": "The original speaker has a deep, calm, and authoritative voice, making the statement sound like a simple, factual announcement. If this same line were performed by a young child, the tone would shift dramatically. The pitch would be much higher, and the delivery could be impatient or whiny, transforming the calm statement into an eager plea. The sense of authority would be lost, replaced by a feeling of anticipation or restlessness."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Write a review or critique of the audio as if it were a podcast episode, containing at least 100 words.",
+                    "ans": "Welcome back to \"Audio Atlas,\" the podcast where we explore the vast landscapes of sound. Today, we're looking at a fascinatingly minimalist piece, a new micro-episode that's been making waves, titled \"A Simple Prediction.\"\n\nOn the surface, the piece is remarkably simple: a woman's voice speaks a single, unadorned sentence—\"Maybe tomorrow it will be cold.\" Yet, there's a profound depth here. The speaker's delivery is perfectly understated—not anxious, not hopeful, just a calm statement of possibility. It's a masterclass in conveying the quiet uncertainty we all live with. The audio quality itself adds to this; the subtle room tone makes it feel intimate and real, as if overheard in a private moment of reflection.\n\nOur only critique is that its brevity, while powerful, is also its biggest challenge. It feels less like a complete story and more like a prologue to a much larger narrative we're now desperate to hear. It's a compelling, thought-provoking morsel of audio, but it undeniably leaves the listener wanting more. A bold, if slightly unsatisfying, experiment in sonic storytelling."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Describe how sound elements such as rhythm, pitch, or pauses affect the mood of the audio in no fewer than 70 words.",
+                    "ans": "The audio projects a contemplative and slightly weary mood, shaped primarily by its sound elements. The rhythm is slow and deliberate, suggesting the speaker is recalling information rather than stating it with urgency. The pitch is low and remains relatively monotonous, which strips the statement of strong emotion and imparts a feeling of mundane resignation. A brief, natural pause after \"I think\" reinforces this thoughtful quality, making the delivery feel authentic and unscripted. These elements combine to create a calm, everyday atmosphere."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Rewrite the audio\u2019s message as if it were a motivational speech in at least 80 words.",
+                    "ans": "Friends, how many times have you stood at a new threshold and whispered those exact words: \"I wonder what this is about\"? That question is not a sign of doubt; it is the spark of discovery! It is the sound of your potential calling out from the unknown. Opportunity rarely arrives with clear instructions; it comes as a challenge, a new path. Your choice is not to silence the wonder, but to answer it with action! Step forward and embrace that uncertainty, because *you* get to define what this is about. This is your moment. Go find out."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Compose a descriptive paragraph that translates the feelings from the audio into visual imagery, using a minimum of 60 words.",
+                    "ans": "The slow, gravelly tone conjures the image of a dimly lit, wood-paneled study where the air is thick with the scent of old paper and dust motes dance in a single, weak shaft of afternoon light. The words themselves land with the heavy, final thud of a massive, leather-bound book being closed forever, its story now sealed as an unchangeable part of history."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Imagine you are explaining the audio to someone who cannot hear. Describe it in at least 75 words.",
+                    "ans": "This is an audio announcement, likely from an airport's public address system. A woman\u2019s voice, clear and slightly high-pitched, speaks with a sense of urgency. The sound has a slight echo, suggesting it's being broadcast in a large, open space like a boarding gate terminal. She states plainly and quickly, \"The airplane is almost full.\" Her tone implies this is an important, time-sensitive update for passengers, perhaps signaling the final moments before the gate closes for departure."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write a fictional letter to the speaker in the audio, responding to their message in no fewer than 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Analyze the relationship between the audio\u2019s tone and its possible purpose in at least 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Transform the audio\u2019s content into a short monologue or soliloquy of no fewer than 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Describe how you would visually represent the emotions in the audio through colors or shapes in a response of at least 50 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Summarize what you believe the speaker\u2019s intentions or goals are in a minimum of 60 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Imagine the audio as a conversation between two people. Write what the other person might have said in at least 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Write a film synopsis inspired by the themes or emotions of the audio, containing no fewer than 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Describe how the pacing and delivery of the audio influence its emotional impact in at least 50 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Create a narrative that reverses the perspective of the audio\u2019s speaker in a minimum of 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Explain how the background sounds or silence in the audio contribute to its meaning in at least 60 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Write a brief essay analyzing the message of the audio and its social implications, at least 100 words long.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Transform the content of the audio into a short news report in no fewer than 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Describe how you would teach the main ideas of the audio to someone unfamiliar with the topic in at least 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Imagine the audio is part of a historical record. Write a contextual explanation of its significance using at least 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Write a creative reinterpretation of the audio as if it were told from the perspective of an observer, no less than 75 words.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_sentences": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the audio\u2019s main message in at least 3 complete sentences.",
+                    "ans": "The speaker in the audio clearly states their desire to obtain a new alarm clock. This is a direct and straightforward request, leaving no room for ambiguity. The entire message is focused on communicating this single need for a new time-keeping device."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Describe the speaker\u2019s tone in 4 sentences or more.",
+                    "ans": "Based on the audio clip, the speaker\u2019s tone is extremely high-pitched and frantic, bordering on a panicked shriek. They deliver the line with a sense of extreme urgency and alarm, as if the time is critically important. The voice is loud and projects a feeling of exasperation, suggesting something is late or has been forgotten. Overall, the child-like quality combined with the intense delivery creates a tone that is both demanding and agitated."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Write a brief analysis of the kind of object the speaker is talking about using no fewer than 3 sentences.",
+                    "ans": "Based on the description \"slick,\" the speaker is referring to an object with a very smooth, low-friction, and possibly glossy surface. This quality suggests the object could be made of a non-porous material like polished stone, glazed ceramic, glass, or a surface covered in a liquid like water or oil. The speaker's neutral, observational tone implies they are making a simple tactile or visual assessment of the object's texture."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Explain what kind of audience the speaker is addressing, using at least 3 sentences.",
+                    "ans": "Based on the audio, the speaker is likely addressing a child or a close loved one for whom they feel a sense of responsibility. The phrase \"Don't forget a jacket\" is a common, caring reminder given to someone who is about to go outside. The speaker's gentle and instructive tone suggests a familiar, personal relationship, such as a parent speaking to their child before school or a partner reminding their significant other before they leave for the day."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Describe the overall mood of the audio and support your description with examples in 4 sentences.",
+                    "ans": "The overall mood of the audio is calm and informative. This is conveyed through the speaker's steady and even-toned voice, which lacks any sense of urgency or emotion. The phrase itself, \"We'll stop in a couple of minutes,\" is a simple, direct statement of fact. Consequently, the audio feels like a routine announcement rather than a dramatic or emotional declaration."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Suppose the speaker's message is directed at another person. Depict their reaction in at least 5 sentences.",
+                    "ans": "He looked up from the newspaper, a thoughtful expression replacing his concentration. A slight, wistful smile touched the corners of his mouth as he considered the possibility. \"I hope so,\" he said, his voice softer than before. \"Cold weather always makes me think of our first winter here, when we'd huddle on the couch with that scratchy wool blanket.\" He finally set the paper down, giving his full attention, a nostalgic warmth in his eyes that defied any coming chill."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Hypothesize the speaker's age in 3 or more sentences.",
+                    "ans": "Based on the vocal characteristics, the speaker is likely a middle-aged or older adult, perhaps in his 50s to 70s. His voice has a developed, medium-low pitch and a steady, measured cadence that suggests maturity. There is no youthful inflection or the vocal frailty that can sometimes be associated with very advanced age."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Interpret the speaker's tone in a minimum of 4 sentences.",
+                    "ans": "Based on the audio, the speaker's tone is pensive and filled with a sense of apprehension. Her slow, quiet delivery gives the impression that she is musing to herself rather than asking a question to someone else. There is an undercurrent of concern or mild worry in her voice, suggesting she anticipates the subject matter to be serious or unpleasant. Overall, the tone is one of quiet, anxious contemplation about an unknown but potentially negative situation."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Describe the events that may have prompted the speaker to say what he said in at least 3 sentences.",
+                    "ans": "Based on the speaker's calm, definitive, and slightly weary tone, the speaker is likely a witness or an expert being questioned by an investigator. The investigator has just spent time laying out a complex theory of how a crime or an accident occurred, step-by-step. The speaker, who saw it all unfold, is now providing his unwavering confirmation that the investigator's hypothesis is entirely correct."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Paraphrase the speaker\u2019s message as if you were reporting it to someone else in at least 4 sentences.",
+                    "ans": "The speaker just made an announcement regarding the flight's capacity. She stated that the airplane is almost completely full. This means there are very few, if any, empty seats remaining for passengers. Based on her message, we should expect it to be a very crowded flight."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write an editorial response to the ideas expressed in the audio in no fewer than 5 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Imagine this audio as part of a movie scene\u2014describe that scene in 4 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Explain the likely motivation behind the speaker\u2019s message in at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Summarize the conflict or tension implied within the audio in a minimum of 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Describe how background sounds or pauses contribute to the mood in at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Explain how you would rephrase the audio\u2019s core message for a professional audience using at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Imagine the audio was recorded in another setting\u2014describe how it would differ in 4 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Summarize the emotional progression from beginning to end of the audio in 3 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Discuss how the speaker\u2019s word choice affects the tone and meaning in at least 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Write a short analytical summary focusing on the audio\u2019s persuasive elements in 3 sentences or more.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Describe the possible social or cultural context of the audio using at least 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Explain how the audio\u2019s pacing influences its emotional impact in a minimum of 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Imagine you are the producer of this audio\u2014describe what improvements you would make in 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Interpret the key takeaway message of the audio and justify your interpretation in 3 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Write a detailed impression of the audio as if reviewing it for a publication, using at least 4 sentences.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_paragraphs": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the emotion of the speaker in 2 well-structured paragraphs.",
+                    "ans": "Based on the vocal delivery, the speaker's emotion is one of intense frustration and exasperation. This is not a casual or polite request but a forceful, emphatic demand born from a breaking point. The statement is delivered in a loud, strained voice that borders on a shout, indicating that a recent event\u2014almost certainly the failure of their current alarm clock\u2014has caused significant stress and annoyance. The deliberate, almost clipped pronunciation of each word serves to underline their complete and utter fed-up state.\n\nFurthermore, there is a strong undercurrent of anger and urgency in the speaker's tone. The raw, direct nature of the declaration leaves no room for negotiation or misunderstanding; they are past the point of pleasantries and are now issuing a command for an immediate solution. This emotional state suggests the speaker is reacting to a negative consequence, such as being late for a crucial appointment or work. The overall feeling is that of a person who has endured one inconvenience too many and is now taking decisive, albeit agitated, action to resolve the problem."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Explain the central conflict presented in the audio within 3 paragraphs.",
+                    "ans": "Based on the audio clip, the central conflict is a desperate struggle against the unforgiving and relentless passage of time. The speaker, in a panicked and distressed tone, exclaims, \"It's 11 o'clock!\" This is not a simple statement of fact but a cry of realization that a critical deadline has been reached or passed. The time itself acts as the antagonist, representing an irreversible point of no return that has just occurred, immediately plunging the character into a state of crisis.\n\nThe conflict is powerfully implied rather than explicitly stated. The listener is left to imagine what was supposed to happen by 11 o'clock, but the speaker's tone makes it clear the consequences are severe. This could be a curfew that has been broken, a magical spell that has just expired (as in the story of Cinderella), or a crucial opportunity that has been irrevocably missed. The core of the struggle lies in the character's powerlessness; they have failed to meet a specific temporal requirement and are now forced to face the dramatic fallout of their tardiness.\n\nUltimately, the audio captures the precise moment where hope is lost and the consequences become real. The conflict is not about a person or a physical obstacle, but about the human failure to control time. The dramatic tension is derived entirely from the realization that it is \"too late.\" The struggle is no longer about trying to make the deadline, but about dealing with the immediate and frightening reality of having failed."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Guess what object the speaker could be referring to in 1 paragraph using your own words.",
+                    "ans": "Based on the speaker's observation that \"the surface is slick,\" they are likely describing an object with a very smooth, low-friction, and possibly wet or polished finish. This could be something like a frozen ice rink, a freshly waxed floor, or a polished stone countertop, all of which are known for their slippery and glossy nature. The term \"slick\" implies a surface that is easy to slide across, whether by design, like a bowling lane, or as a warning, like a wet patch of tile."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Imagine you were the intended recipient of this message. Reply to the speaker in 2 paragraphs.",
+                    "ans": "Oh, thank you so much for the reminder! You know me so well; I was just about to rush out the door and would have completely forgotten. I just went back and grabbed my blue one from the closet, so I\u2019ll be all set for when it gets cooler later. You're a lifesaver!\n\nIt really means a lot that you're always thinking of me and looking out for my well-being like this. It\u2019s comforting to know you\u2019ve got my back, even with the small stuff. I appreciate you more than you know. Anyway, I'm heading out now, but I'll see you tonight"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Respond to the speaker in 3 paragraph as if you were in that situation.",
+                    "ans": "Okay, thank you for the heads-up. That\u2019s good to know. I\u2019ll just finish jotting down this last point you made so I don't lose my train of thought. It helps to have a clear stopping point to aim for, so I'll use these next couple of minutes to review my notes and make sure they\u2019re organized and make sense before we pause.\n\nTo be honest, I was so absorbed in what we were covering that I hadn't even noticed the time. This last section has been particularly dense, and I've been trying my best to keep up and connect all the pieces. It feels like we've made some significant progress, and my mind is still buzzing with a few questions that have come up.\n\nThat timing works perfectly, then. A short break will be a welcome chance to stand up, stretch my legs, and let all of this information settle in a bit. I\u2019ll be ready to pick things back up with a fresh perspective whenever we're scheduled to start again. I appreciate you keeping us on track."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Interpret the underlying motivation of the speaker based on the audio in 1 paragraph.",
+                    "ans": "Based on the neutral, speculative tone, the speaker's underlying motivation is likely one of simple foresight and practical preparation. The phrase is not delivered with any strong emotion like excitement or dread, but rather as a casual, matter-of-fact observation. This suggests the speaker is mentally processing a potential change in their environment and perhaps contemplating its minor consequences, such as what to wear or how to plan their day. It is a musing expressed aloud, serving as a mental note for the immediate future."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Summarize the mood in the audio in 1 paragraph.",
+                    "ans": "The mood in this audio is neutral and informational. The speaker's tone is calm and matter-of-fact, lacking any strong emotional inflection. It sounds like a simple, declarative statement, as if someone is casually recalling a piece of their schedule or thinking aloud. There is no sense of urgency, anxiety, or any other particular feeling, creating a very straightforward and everyday atmosphere."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Write a background story based on the audio in 4 paragraphs.",
+                    "ans": "Elara\u2019s life was a carefully curated collection of quiet moments. As a rare book restorer, her days were spent in the hushed company of brittle paper and faded ink, mending the histories of others while her own remained deliberately uneventful. Her small apartment, filled with the scent of old leather and brewing tea, was a sanctuary from a world she found too loud, too unpredictable. She preferred the predictable rhythm of her work, the familiar faces at the local market, and the comforting weight of a book in her lap each evening. Surprises were unwelcome guests, and she had built walls of routine high enough to keep them out.\n\nThose walls were breached on a Tuesday by a single, thick, cream-colored envelope that arrived in the mail. It bore no return address, only a single, unfamiliar crest pressed into a dark wax seal\u2014a raven clutching a key. The heavy, expensive paper felt alien in her hands, a stark contrast to the usual bills and catalogues. It was addressed to her in a swirling, archaic script that spoke of generations of wealth and secrets. For hours, the letter sat unopened on her small kitchen table, a silent accusation against the peaceful order of her life. It represented a connection to a past she knew nothing about, a disruption she wasn't prepared to face.\n\nThis was the source of her deep unease. Elara was an orphan, raised by a foster system that offered safety but few answers. She had no known family, no heirlooms, no stories of her lineage. The crest on the seal, the elegant script\u2014it all pointed to a world she had never been a part of, a history that had been deliberately kept from her. Every instinct she had honed over a lifetime of self-preservation screamed at her to throw it away, to pretend it never arrived. Yet, a deeper, long-dormant flicker of curiosity began to stir within her, a yearning for the one thing she never had: a beginning.\n\nWith a trembling hand, she finally picked up the envelope, the wax seal cool against her thumb. The silence in her apartment seemed to deepen, amplifying the frantic beat of her own heart. The apathetic calm she had cultivated for so long had shattered, replaced by a nervous, almost frightening, anticipation. As she stared at the mysterious seal, her a lifetime of questions coalesced into a single, whispered thought that hung in the still air. \"I wonder what this is about.\" The words were not just a question about the letter's contents, but about the identity, the history, and the future that might be locked within it."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Reimagine the content of the audio as a diary entry in 2 paragraphs.",
+                    "ans": "Dear Diary,\n\nI feel no triumph in being right, only a hollow, aching dread. For weeks, I\u2019ve tried to warn them, pointing out the subtle shifts and the cracks forming just beneath the surface. They dismissed my concerns as anxiety, telling me I was seeing ghosts where there were none. I described the inevitable outcome with such clarity, detailing the sequence of events as if I had already lived through it. They just laughed and told me to stop being so dramatic, to trust that everything would be fine.\n\nBut it isn't fine. Tonight, the silence that fell over the room was proof enough, long before the news was confirmed. Every fear I voiced, every terrible scenario I laid out for them, has come to pass. There's nothing left to say, no \"I told you so\" that could possibly matter now. We are standing in the rubble I predicted, and the weight of it is crushing. That is exactly what happened."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Retell the story from the audio as if it were a personal memory in 2 paragraphs.",
+                    "ans": "I remember shuffling down the narrow aisle, finding my window seat, and finally settling in for the long flight. I looked up and down the cabin, watching the last few people find their spots, hoisting bags into the overhead bins. There was a constant, low murmur of conversation mixed with the clicks of seatbelts and the rustle of jackets. It was in that moment I realized the airplane was almost full; nearly every seat was taken, creating a sense of a shared, crowded journey about to begin.\n\nThat feeling of being in a full cabin didn't bother me; it actually added to the excitement. It felt like we were all part of a collective exodus, each person with a story and a destination. I leaned my head against the cool plastic of the window, feeling the gentle vibration of the plane as it waited on the tarmac. I was ready for takeoff, ready for the adventure to start, and being surrounded by so many fellow travelers made the anticipation feel even more real."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write a two-paragraph commentary discussing how the audio relates to modern life.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Summarize the contrasting viewpoints expressed in the audio in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Analyze how background sounds or pauses shape the message in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Interpret the audio\u2019s meaning through a psychological lens in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Recreate the audio\u2019s narrative from the listener\u2019s perspective in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Discuss how cultural context might influence the interpretation of the audio in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Evaluate the persuasiveness of the speaker\u2019s argument in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Compare the tone of the audio to a similar speech or situation in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Explore how the audio\u2019s ideas could be applied in real-life scenarios in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Imagine the events before the audio began and narrate them in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Write an analysis of the speaker\u2019s use of language and emotion in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Describe how the message of the audio could change if spoken by a different person in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Write an imagined letter responding to the speaker\u2019s ideas in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Analyze the cause-and-effect relationships within the audio\u2019s story in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Discuss how the audio might evoke different interpretations among various audiences in 3 paragraphs.",
+                    "ans": ""
+                }
             ]
         }
     },
@@ -1321,6 +2337,514 @@
                     "audio_path": "general/7.wav",
                     "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
                     "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
+                }
+            ],
+            "keywords:forbidden_words": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the audio while avoiding the term **alarm** or **clock**.",
+                    "ans": "The speaker would like a new wake-up device."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Describe the situation without mentioning **clock**.",
+                    "ans": "A young-sounding person makes an urgent announcement, exclaiming that the time is eleven."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Describe the object mentioned but do not use **slick**.",
+                    "ans": "Based on the audio description, the object has a very **smooth and polished surface** with a slight sheen. It appears **slippery** to the touch, allowing a hand to glide across it with no resistance."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Paraphrase the statement while excluding **forget** and **jacket**.",
+                    "ans": "Remember to bring a coat!"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Describe what the group is going to do without using **stop**.",
+                    "ans": "Based on the audio, the group is going to take a break in a couple of minutes."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Provide a summary of the audio without using the words **tomorrow** or **cold**.",
+                    "ans": "The speaker speculates that the temperature may drop on the following day."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Mention what the man remembered but omit **doctor** and **appointment**.",
+                    "ans": "The man remembered that he has a medical consultation."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Depict the character\u2019s confusion without mentioning **wonder**.",
+                    "ans": "Her brow creased slightly, her gaze distant as she tried to piece it all together. \"What is this about?\" she murmured, the question hanging in the air unanswered."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Depict the dialogue while avoiding **exactly** or **happened**.",
+                    "ans": "That is precisely what occurred."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Analyze the character\u2019s source of distress but do not use **airplane** or **full**.",
+                    "ans": "Based on the character's urgent tone and statement, her distress stems from a sense of scarcity and the immediate risk of being left behind. The flying conveyance she needs to board is approaching its maximum occupancy. This lack of available room creates a high-stakes situation, suggesting her travel plans are in jeopardy because there may not be a spot left for her."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Explain the relationship dynamics without saying **love** or **marriage**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Describe the main conflict while excluding **king** or **crown**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Interpret the outcome of the scene but avoid **victory** or **failure**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Summarize the atmosphere without mentioning **storm** or **rain**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Describe the speaker\u2019s motivation but do not use **greed** or **power**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Explain the cause of tension while avoiding **argument** or **fight**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Rephrase the event but exclude **river** and **boat**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Depict the environment while avoiding **snow** or **cold**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Summarize the moral of the story without saying **lesson** or **virtue**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Interpret the transformation described but exclude **light** or **shadow**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Describe the narrative progression while avoiding **journey** or **road**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Explain the emotional response but do not use **joy** or **relief**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Recount the moment of realization without mentioning **truth** or **understand**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Summarize the speaker\u2019s dilemma while avoiding **choice** or **decision**.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Interpret the passage\u2019s symbolism but exclude **fire** or **phoenix**.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_words": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Write a diary entry from the perspective of someone who just experienced the events in the audio, using at least 70 words.",
+                    "ans": "Dear Diary,\n\nI was jolted awake this morning, but not by the usual frantic beeping. It was a voice. A deep, booming, almost mechanical voice that seemed to shake the entire room. For a second, I thought it was a dream, but my eyes were wide open. The voice declared, clear as day, \"I would like a new alarm clock.\" I'm writing this from the kitchen because I'm genuinely too afraid to go back in my bedroom. My alarm clock just quit its job."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Imagine the audio is part of a movie scene. Describe what is happening visually in at least 60 words.",
+                    "ans": "A young girl jolts awake on a plush living room sofa, her cheek creased from a velvet pillow. The only light comes from the flickering blue of a television playing the credits of a movie she'd fallen asleep to. Her eyes, wide with sudden panic, dart to a tall grandfather clock in the shadowy corner. As its final, resonant chime rings out, her hand flies to her mouth. She's hours past her bedtime."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Summarize the emotional progression of the audio from start to finish in no fewer than 50 words.",
+                    "ans": "The audio captures a man's voice rising with genuine amazement as he declares, \"The surface is slick!\" His tone conveys a mix of surprise and admiration, as though he's just run his hand across something unexpectedly smooth—perhaps polished marble or a freshly waxed floor—and can't help but vocally marvel at its remarkable slipperiness."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Create a dialogue between two characters reacting to the audio, with at least 80 words total.",
+                    "ans": "**Alex:** \"Did you hear that? I swear I just heard a voice come from the hallway. It sounded like my grandma.\"\n\n**Ben:** \"I didn't hear anything... what did it say?\"\n\n**Alex:** \"Something about not forgetting a jacket. It's just so weird. She used to say that to me every single time I left her house, without fail. It sounded so clear, like she was standing right there.\"\n\n**Ben:** \"That's... unsettling. But also kind of sweet, in a way. Maybe it's just a fond memory bubbling up?\"\n\n**Alex:** \"Maybe. But I'm still grabbing my jacket, just in case.\""
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Explain how the tone of the audio would change if it were performed by a different speaker, in no less than 60 words.",
+                    "ans": "The original speaker has a deep, calm, and authoritative voice, making the statement sound like a simple, factual announcement. If this same line were performed by a young child, the tone would shift dramatically. The pitch would be much higher, and the delivery could be impatient or whiny, transforming the calm statement into an eager plea. The sense of authority would be lost, replaced by a feeling of anticipation or restlessness."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Write a review or critique of the audio as if it were a podcast episode, containing at least 100 words.",
+                    "ans": "Welcome back to \"Audio Atlas,\" the podcast where we explore the vast landscapes of sound. Today, we're looking at a fascinatingly minimalist piece, a new micro-episode that's been making waves, titled \"A Simple Prediction.\"\n\nOn the surface, the piece is remarkably simple: a woman's voice speaks a single, unadorned sentence—\"Maybe tomorrow it will be cold.\" Yet, there's a profound depth here. The speaker's delivery is perfectly understated—not anxious, not hopeful, just a calm statement of possibility. It's a masterclass in conveying the quiet uncertainty we all live with. The audio quality itself adds to this; the subtle room tone makes it feel intimate and real, as if overheard in a private moment of reflection.\n\nOur only critique is that its brevity, while powerful, is also its biggest challenge. It feels less like a complete story and more like a prologue to a much larger narrative we're now desperate to hear. It's a compelling, thought-provoking morsel of audio, but it undeniably leaves the listener wanting more. A bold, if slightly unsatisfying, experiment in sonic storytelling."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Describe how sound elements such as rhythm, pitch, or pauses affect the mood of the audio in no fewer than 70 words.",
+                    "ans": "The audio projects a contemplative and slightly weary mood, shaped primarily by its sound elements. The rhythm is slow and deliberate, suggesting the speaker is recalling information rather than stating it with urgency. The pitch is low and remains relatively monotonous, which strips the statement of strong emotion and imparts a feeling of mundane resignation. A brief, natural pause after \"I think\" reinforces this thoughtful quality, making the delivery feel authentic and unscripted. These elements combine to create a calm, everyday atmosphere."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Rewrite the audio\u2019s message as if it were a motivational speech in at least 80 words.",
+                    "ans": "Friends, how many times have you stood at a new threshold and whispered those exact words: \"I wonder what this is about\"? That question is not a sign of doubt; it is the spark of discovery! It is the sound of your potential calling out from the unknown. Opportunity rarely arrives with clear instructions; it comes as a challenge, a new path. Your choice is not to silence the wonder, but to answer it with action! Step forward and embrace that uncertainty, because *you* get to define what this is about. This is your moment. Go find out."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Compose a descriptive paragraph that translates the feelings from the audio into visual imagery, using a minimum of 60 words.",
+                    "ans": "The slow, gravelly tone conjures the image of a dimly lit, wood-paneled study where the air is thick with the scent of old paper and dust motes dance in a single, weak shaft of afternoon light. The words themselves land with the heavy, final thud of a massive, leather-bound book being closed forever, its story now sealed as an unchangeable part of history."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Imagine you are explaining the audio to someone who cannot hear. Describe it in at least 75 words.",
+                    "ans": "This is an audio announcement, likely from an airport's public address system. A woman\u2019s voice, clear and slightly high-pitched, speaks with a sense of urgency. The sound has a slight echo, suggesting it's being broadcast in a large, open space like a boarding gate terminal. She states plainly and quickly, \"The airplane is almost full.\" Her tone implies this is an important, time-sensitive update for passengers, perhaps signaling the final moments before the gate closes for departure."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write a fictional letter to the speaker in the audio, responding to their message in no fewer than 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Analyze the relationship between the audio\u2019s tone and its possible purpose in at least 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Transform the audio\u2019s content into a short monologue or soliloquy of no fewer than 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Describe how you would visually represent the emotions in the audio through colors or shapes in a response of at least 50 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Summarize what you believe the speaker\u2019s intentions or goals are in a minimum of 60 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Imagine the audio as a conversation between two people. Write what the other person might have said in at least 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Write a film synopsis inspired by the themes or emotions of the audio, containing no fewer than 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Describe how the pacing and delivery of the audio influence its emotional impact in at least 50 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Create a narrative that reverses the perspective of the audio\u2019s speaker in a minimum of 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Explain how the background sounds or silence in the audio contribute to its meaning in at least 60 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Write a brief essay analyzing the message of the audio and its social implications, at least 100 words long.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Transform the content of the audio into a short news report in no fewer than 70 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Describe how you would teach the main ideas of the audio to someone unfamiliar with the topic in at least 80 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Imagine the audio is part of a historical record. Write a contextual explanation of its significance using at least 90 words.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Write a creative reinterpretation of the audio as if it were told from the perspective of an observer, no less than 75 words.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_sentences": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the audio\u2019s main message in at least 3 complete sentences.",
+                    "ans": "The speaker in the audio clearly states their desire to obtain a new alarm clock. This is a direct and straightforward request, leaving no room for ambiguity. The entire message is focused on communicating this single need for a new time-keeping device."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Describe the speaker\u2019s tone in 4 sentences or more.",
+                    "ans": "Based on the audio clip, the speaker\u2019s tone is extremely high-pitched and frantic, bordering on a panicked shriek. They deliver the line with a sense of extreme urgency and alarm, as if the time is critically important. The voice is loud and projects a feeling of exasperation, suggesting something is late or has been forgotten. Overall, the child-like quality combined with the intense delivery creates a tone that is both demanding and agitated."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Write a brief analysis of the kind of object the speaker is talking about using no fewer than 3 sentences.",
+                    "ans": "Based on the description \"slick,\" the speaker is referring to an object with a very smooth, low-friction, and possibly glossy surface. This quality suggests the object could be made of a non-porous material like polished stone, glazed ceramic, glass, or a surface covered in a liquid like water or oil. The speaker's neutral, observational tone implies they are making a simple tactile or visual assessment of the object's texture."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Explain what kind of audience the speaker is addressing, using at least 3 sentences.",
+                    "ans": "Based on the audio, the speaker is likely addressing a child or a close loved one for whom they feel a sense of responsibility. The phrase \"Don't forget a jacket\" is a common, caring reminder given to someone who is about to go outside. The speaker's gentle and instructive tone suggests a familiar, personal relationship, such as a parent speaking to their child before school or a partner reminding their significant other before they leave for the day."
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Describe the overall mood of the audio and support your description with examples in 4 sentences.",
+                    "ans": "The overall mood of the audio is calm and informative. This is conveyed through the speaker's steady and even-toned voice, which lacks any sense of urgency or emotion. The phrase itself, \"We'll stop in a couple of minutes,\" is a simple, direct statement of fact. Consequently, the audio feels like a routine announcement rather than a dramatic or emotional declaration."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Suppose the speaker's message is directed at another person. Depict their reaction in at least 5 sentences.",
+                    "ans": "He looked up from the newspaper, a thoughtful expression replacing his concentration. A slight, wistful smile touched the corners of his mouth as he considered the possibility. \"I hope so,\" he said, his voice softer than before. \"Cold weather always makes me think of our first winter here, when we'd huddle on the couch with that scratchy wool blanket.\" He finally set the paper down, giving his full attention, a nostalgic warmth in his eyes that defied any coming chill."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Hypothesize the speaker's age in 3 or more sentences.",
+                    "ans": "Based on the vocal characteristics, the speaker is likely a middle-aged or older adult, perhaps in his 50s to 70s. His voice has a developed, medium-low pitch and a steady, measured cadence that suggests maturity. There is no youthful inflection or the vocal frailty that can sometimes be associated with very advanced age."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Interpret the speaker's tone in a minimum of 4 sentences.",
+                    "ans": "Based on the audio, the speaker's tone is pensive and filled with a sense of apprehension. Her slow, quiet delivery gives the impression that she is musing to herself rather than asking a question to someone else. There is an undercurrent of concern or mild worry in her voice, suggesting she anticipates the subject matter to be serious or unpleasant. Overall, the tone is one of quiet, anxious contemplation about an unknown but potentially negative situation."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Describe the events that may have prompted the speaker to say what he said in at least 3 sentences.",
+                    "ans": "Based on the speaker's calm, definitive, and slightly weary tone, the speaker is likely a witness or an expert being questioned by an investigator. The investigator has just spent time laying out a complex theory of how a crime or an accident occurred, step-by-step. The speaker, who saw it all unfold, is now providing his unwavering confirmation that the investigator's hypothesis is entirely correct."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Paraphrase the speaker\u2019s message as if you were reporting it to someone else in at least 4 sentences.",
+                    "ans": "The speaker just made an announcement regarding the flight's capacity. She stated that the airplane is almost completely full. This means there are very few, if any, empty seats remaining for passengers. Based on her message, we should expect it to be a very crowded flight."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write an editorial response to the ideas expressed in the audio in no fewer than 5 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Imagine this audio as part of a movie scene\u2014describe that scene in 4 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Explain the likely motivation behind the speaker\u2019s message in at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Summarize the conflict or tension implied within the audio in a minimum of 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Describe how background sounds or pauses contribute to the mood in at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Explain how you would rephrase the audio\u2019s core message for a professional audience using at least 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Imagine the audio was recorded in another setting\u2014describe how it would differ in 4 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Summarize the emotional progression from beginning to end of the audio in 3 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Discuss how the speaker\u2019s word choice affects the tone and meaning in at least 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Write a short analytical summary focusing on the audio\u2019s persuasive elements in 3 sentences or more.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Describe the possible social or cultural context of the audio using at least 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Explain how the audio\u2019s pacing influences its emotional impact in a minimum of 3 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Imagine you are the producer of this audio\u2014describe what improvements you would make in 4 sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Interpret the key takeaway message of the audio and justify your interpretation in 3 or more sentences.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Write a detailed impression of the audio as if reviewing it for a publication, using at least 4 sentences.",
+                    "ans": ""
+                }
+            ],
+            "length_constraints:number_paragraphs": [
+                {
+                    "audio_path": "general/0.wav",
+                    "instruction": "Summarize the emotion of the speaker in 2 well-structured paragraphs.",
+                    "ans": "Based on the vocal delivery, the speaker's emotion is one of intense frustration and exasperation. This is not a casual or polite request but a forceful, emphatic demand born from a breaking point. The statement is delivered in a loud, strained voice that borders on a shout, indicating that a recent event\u2014almost certainly the failure of their current alarm clock\u2014has caused significant stress and annoyance. The deliberate, almost clipped pronunciation of each word serves to underline their complete and utter fed-up state.\n\nFurthermore, there is a strong undercurrent of anger and urgency in the speaker's tone. The raw, direct nature of the declaration leaves no room for negotiation or misunderstanding; they are past the point of pleasantries and are now issuing a command for an immediate solution. This emotional state suggests the speaker is reacting to a negative consequence, such as being late for a crucial appointment or work. The overall feeling is that of a person who has endured one inconvenience too many and is now taking decisive, albeit agitated, action to resolve the problem."
+                },
+                {
+                    "audio_path": "general/1.wav",
+                    "instruction": "Explain the central conflict presented in the audio within 3 paragraphs.",
+                    "ans": "Based on the audio clip, the central conflict is a desperate struggle against the unforgiving and relentless passage of time. The speaker, in a panicked and distressed tone, exclaims, \"It's 11 o'clock!\" This is not a simple statement of fact but a cry of realization that a critical deadline has been reached or passed. The time itself acts as the antagonist, representing an irreversible point of no return that has just occurred, immediately plunging the character into a state of crisis.\n\nThe conflict is powerfully implied rather than explicitly stated. The listener is left to imagine what was supposed to happen by 11 o'clock, but the speaker's tone makes it clear the consequences are severe. This could be a curfew that has been broken, a magical spell that has just expired (as in the story of Cinderella), or a crucial opportunity that has been irrevocably missed. The core of the struggle lies in the character's powerlessness; they have failed to meet a specific temporal requirement and are now forced to face the dramatic fallout of their tardiness.\n\nUltimately, the audio captures the precise moment where hope is lost and the consequences become real. The conflict is not about a person or a physical obstacle, but about the human failure to control time. The dramatic tension is derived entirely from the realization that it is \"too late.\" The struggle is no longer about trying to make the deadline, but about dealing with the immediate and frightening reality of having failed."
+                },
+                {
+                    "audio_path": "general/2.wav",
+                    "instruction": "Guess what object the speaker could be referring to in 1 paragraph using your own words.",
+                    "ans": "Based on the speaker's observation that \"the surface is slick,\" they are likely describing an object with a very smooth, low-friction, and possibly wet or polished finish. This could be something like a frozen ice rink, a freshly waxed floor, or a polished stone countertop, all of which are known for their slippery and glossy nature. The term \"slick\" implies a surface that is easy to slide across, whether by design, like a bowling lane, or as a warning, like a wet patch of tile."
+                },
+                {
+                    "audio_path": "general/3.wav",
+                    "instruction": "Imagine you were the intended recipient of this message. Reply to the speaker in 2 paragraphs.",
+                    "ans": "Oh, thank you so much for the reminder! You know me so well; I was just about to rush out the door and would have completely forgotten. I just went back and grabbed my blue one from the closet, so I\u2019ll be all set for when it gets cooler later. You're a lifesaver!\n\nIt really means a lot that you're always thinking of me and looking out for my well-being like this. It\u2019s comforting to know you\u2019ve got my back, even with the small stuff. I appreciate you more than you know. Anyway, I'm heading out now, but I'll see you tonight"
+                },
+                {
+                    "audio_path": "general/4.wav",
+                    "instruction": "Respond to the speaker in 3 paragraph as if you were in that situation.",
+                    "ans": "Okay, thank you for the heads-up. That\u2019s good to know. I\u2019ll just finish jotting down this last point you made so I don't lose my train of thought. It helps to have a clear stopping point to aim for, so I'll use these next couple of minutes to review my notes and make sure they\u2019re organized and make sense before we pause.\n\nTo be honest, I was so absorbed in what we were covering that I hadn't even noticed the time. This last section has been particularly dense, and I've been trying my best to keep up and connect all the pieces. It feels like we've made some significant progress, and my mind is still buzzing with a few questions that have come up.\n\nThat timing works perfectly, then. A short break will be a welcome chance to stand up, stretch my legs, and let all of this information settle in a bit. I\u2019ll be ready to pick things back up with a fresh perspective whenever we're scheduled to start again. I appreciate you keeping us on track."
+                },
+                {
+                    "audio_path": "general/5.wav",
+                    "instruction": "Interpret the underlying motivation of the speaker based on the audio in 1 paragraph.",
+                    "ans": "Based on the neutral, speculative tone, the speaker's underlying motivation is likely one of simple foresight and practical preparation. The phrase is not delivered with any strong emotion like excitement or dread, but rather as a casual, matter-of-fact observation. This suggests the speaker is mentally processing a potential change in their environment and perhaps contemplating its minor consequences, such as what to wear or how to plan their day. It is a musing expressed aloud, serving as a mental note for the immediate future."
+                },
+                {
+                    "audio_path": "general/6.wav",
+                    "instruction": "Summarize the mood in the audio in 1 paragraph.",
+                    "ans": "The mood in this audio is neutral and informational. The speaker's tone is calm and matter-of-fact, lacking any strong emotional inflection. It sounds like a simple, declarative statement, as if someone is casually recalling a piece of their schedule or thinking aloud. There is no sense of urgency, anxiety, or any other particular feeling, creating a very straightforward and everyday atmosphere."
+                },
+                {
+                    "audio_path": "general/7.wav",
+                    "instruction": "Write a background story based on the audio in 4 paragraphs.",
+                    "ans": "Elara\u2019s life was a carefully curated collection of quiet moments. As a rare book restorer, her days were spent in the hushed company of brittle paper and faded ink, mending the histories of others while her own remained deliberately uneventful. Her small apartment, filled with the scent of old leather and brewing tea, was a sanctuary from a world she found too loud, too unpredictable. She preferred the predictable rhythm of her work, the familiar faces at the local market, and the comforting weight of a book in her lap each evening. Surprises were unwelcome guests, and she had built walls of routine high enough to keep them out.\n\nThose walls were breached on a Tuesday by a single, thick, cream-colored envelope that arrived in the mail. It bore no return address, only a single, unfamiliar crest pressed into a dark wax seal\u2014a raven clutching a key. The heavy, expensive paper felt alien in her hands, a stark contrast to the usual bills and catalogues. It was addressed to her in a swirling, archaic script that spoke of generations of wealth and secrets. For hours, the letter sat unopened on her small kitchen table, a silent accusation against the peaceful order of her life. It represented a connection to a past she knew nothing about, a disruption she wasn't prepared to face.\n\nThis was the source of her deep unease. Elara was an orphan, raised by a foster system that offered safety but few answers. She had no known family, no heirlooms, no stories of her lineage. The crest on the seal, the elegant script\u2014it all pointed to a world she had never been a part of, a history that had been deliberately kept from her. Every instinct she had honed over a lifetime of self-preservation screamed at her to throw it away, to pretend it never arrived. Yet, a deeper, long-dormant flicker of curiosity began to stir within her, a yearning for the one thing she never had: a beginning.\n\nWith a trembling hand, she finally picked up the envelope, the wax seal cool against her thumb. The silence in her apartment seemed to deepen, amplifying the frantic beat of her own heart. The apathetic calm she had cultivated for so long had shattered, replaced by a nervous, almost frightening, anticipation. As she stared at the mysterious seal, her a lifetime of questions coalesced into a single, whispered thought that hung in the still air. \"I wonder what this is about.\" The words were not just a question about the letter's contents, but about the identity, the history, and the future that might be locked within it."
+                },
+                {
+                    "audio_path": "general/8.wav",
+                    "instruction": "Reimagine the content of the audio as a diary entry in 2 paragraphs.",
+                    "ans": "Dear Diary,\n\nI feel no triumph in being right, only a hollow, aching dread. For weeks, I\u2019ve tried to warn them, pointing out the subtle shifts and the cracks forming just beneath the surface. They dismissed my concerns as anxiety, telling me I was seeing ghosts where there were none. I described the inevitable outcome with such clarity, detailing the sequence of events as if I had already lived through it. They just laughed and told me to stop being so dramatic, to trust that everything would be fine.\n\nBut it isn't fine. Tonight, the silence that fell over the room was proof enough, long before the news was confirmed. Every fear I voiced, every terrible scenario I laid out for them, has come to pass. There's nothing left to say, no \"I told you so\" that could possibly matter now. We are standing in the rubble I predicted, and the weight of it is crushing. That is exactly what happened."
+                },
+                {
+                    "audio_path": "general/9.wav",
+                    "instruction": "Retell the story from the audio as if it were a personal memory in 2 paragraphs.",
+                    "ans": "I remember shuffling down the narrow aisle, finding my window seat, and finally settling in for the long flight. I looked up and down the cabin, watching the last few people find their spots, hoisting bags into the overhead bins. There was a constant, low murmur of conversation mixed with the clicks of seatbelts and the rustle of jackets. It was in that moment I realized the airplane was almost full; nearly every seat was taken, creating a sense of a shared, crowded journey about to begin.\n\nThat feeling of being in a full cabin didn't bother me; it actually added to the excitement. It felt like we were all part of a collective exodus, each person with a story and a destination. I leaned my head against the cool plastic of the window, feeling the gentle vibration of the plane as it waited on the tarmac. I was ready for takeoff, ready for the adventure to start, and being surrounded by so many fellow travelers made the anticipation feel even more real."
+                },
+                {
+                    "audio_path": "general/10.wav",
+                    "instruction": "Write a two-paragraph commentary discussing how the audio relates to modern life.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/11.wav",
+                    "instruction": "Summarize the contrasting viewpoints expressed in the audio in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/12.wav",
+                    "instruction": "Analyze how background sounds or pauses shape the message in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/13.wav",
+                    "instruction": "Interpret the audio\u2019s meaning through a psychological lens in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/14.wav",
+                    "instruction": "Recreate the audio\u2019s narrative from the listener\u2019s perspective in 2 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/15.wav",
+                    "instruction": "Discuss how cultural context might influence the interpretation of the audio in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/16.wav",
+                    "instruction": "Evaluate the persuasiveness of the speaker\u2019s argument in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/17.wav",
+                    "instruction": "Compare the tone of the audio to a similar speech or situation in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/18.wav",
+                    "instruction": "Explore how the audio\u2019s ideas could be applied in real-life scenarios in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/19.wav",
+                    "instruction": "Imagine the events before the audio began and narrate them in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/20.wav",
+                    "instruction": "Write an analysis of the speaker\u2019s use of language and emotion in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/21.wav",
+                    "instruction": "Describe how the message of the audio could change if spoken by a different person in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/22.wav",
+                    "instruction": "Write an imagined letter responding to the speaker\u2019s ideas in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/23.wav",
+                    "instruction": "Analyze the cause-and-effect relationships within the audio\u2019s story in 3 paragraphs.",
+                    "ans": ""
+                },
+                {
+                    "audio_path": "general/24.wav",
+                    "instruction": "Discuss how the audio might evoke different interpretations among various audiences in 3 paragraphs.",
+                    "ans": ""
                 }
             ]
         }

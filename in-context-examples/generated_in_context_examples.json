@@ -2404,52 +2404,52 @@
                 {
                     "audio_path": "general/0.wav",
                     "instruction": "Write a diary entry from the perspective of someone who just experienced the events in the audio, using at least 70 words.",
-                    "ans": ""
+                    "ans": "Dear Diary,\n\nI was jolted awake this morning, but not by the usual frantic beeping. It was a voice. A deep, booming, almost mechanical voice that seemed to shake the entire room. For a second, I thought it was a dream, but my eyes were wide open. The voice declared, clear as day, \"I would like a new alarm clock.\" I'm writing this from the kitchen because I'm genuinely too afraid to go back in my bedroom. My alarm clock just quit its job."
                 },
                 {
                     "audio_path": "general/1.wav",
                     "instruction": "Imagine the audio is part of a movie scene. Describe what is happening visually in at least 60 words.",
-                    "ans": ""
+                    "ans": "A young girl jolts awake on a plush living room sofa, her cheek creased from a velvet pillow. The only light comes from the flickering blue of a television playing the credits of a movie she'd fallen asleep to. Her eyes, wide with sudden panic, dart to a tall grandfather clock in the shadowy corner. As its final, resonant chime rings out, her hand flies to her mouth. She's hours past her bedtime."
                 },
                 {
                     "audio_path": "general/2.wav",
                     "instruction": "Summarize the emotional progression of the audio from start to finish in no fewer than 50 words.",
-                    "ans": ""
+                    "ans": "The audio captures a man's voice rising with genuine amazement as he declares, \"The surface is slick!\" His tone conveys a mix of surprise and admiration, as though he's just run his hand across something unexpectedly smooth—perhaps polished marble or a freshly waxed floor—and can't help but vocally marvel at its remarkable slipperiness."
                 },
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Create a dialogue between two characters reacting to the audio, with at least 80 words total.",
-                    "ans": ""
+                    "ans": "**Alex:** \"Did you hear that? I swear I just heard a voice come from the hallway. It sounded like my grandma.\"\n\n**Ben:** \"I didn't hear anything... what did it say?\"\n\n**Alex:** \"Something about not forgetting a jacket. It's just so weird. She used to say that to me every single time I left her house, without fail. It sounded so clear, like she was standing right there.\"\n\n**Ben:** \"That's... unsettling. But also kind of sweet, in a way. Maybe it's just a fond memory bubbling up?\"\n\n**Alex:** \"Maybe. But I'm still grabbing my jacket, just in case.\""
                 },
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Explain how the tone of the audio would change if it were performed by a different speaker, in no less than 60 words.",
-                    "ans": ""
+                    "ans": "The original speaker has a deep, calm, and authoritative voice, making the statement sound like a simple, factual announcement. If this same line were performed by a young child, the tone would shift dramatically. The pitch would be much higher, and the delivery could be impatient or whiny, transforming the calm statement into an eager plea. The sense of authority would be lost, replaced by a feeling of anticipation or restlessness."
                 },
                 {
                     "audio_path": "general/5.wav",
                     "instruction": "Write a review or critique of the audio as if it were a podcast episode, containing at least 100 words.",
-                    "ans": ""
+                    "ans": "Welcome back to \"Audio Atlas,\" the podcast where we explore the vast landscapes of sound. Today, we're looking at a fascinatingly minimalist piece, a new micro-episode that's been making waves, titled \"A Simple Prediction.\"\n\nOn the surface, the piece is remarkably simple: a woman's voice speaks a single, unadorned sentence—\"Maybe tomorrow it will be cold.\" Yet, there's a profound depth here. The speaker's delivery is perfectly understated—not anxious, not hopeful, just a calm statement of possibility. It's a masterclass in conveying the quiet uncertainty we all live with. The audio quality itself adds to this; the subtle room tone makes it feel intimate and real, as if overheard in a private moment of reflection.\n\nOur only critique is that its brevity, while powerful, is also its biggest challenge. It feels less like a complete story and more like a prologue to a much larger narrative we're now desperate to hear. It's a compelling, thought-provoking morsel of audio, but it undeniably leaves the listener wanting more. A bold, if slightly unsatisfying, experiment in sonic storytelling."
                 },
                 {
                     "audio_path": "general/6.wav",
                     "instruction": "Describe how sound elements such as rhythm, pitch, or pauses affect the mood of the audio in no fewer than 70 words.",
-                    "ans": ""
+                    "ans": "The audio projects a contemplative and slightly weary mood, shaped primarily by its sound elements. The rhythm is slow and deliberate, suggesting the speaker is recalling information rather than stating it with urgency. The pitch is low and remains relatively monotonous, which strips the statement of strong emotion and imparts a feeling of mundane resignation. A brief, natural pause after \"I think\" reinforces this thoughtful quality, making the delivery feel authentic and unscripted. These elements combine to create a calm, everyday atmosphere."
                 },
                 {
                     "audio_path": "general/7.wav",
                     "instruction": "Rewrite the audio\u2019s message as if it were a motivational speech in at least 80 words.",
-                    "ans": ""
+                    "ans": "Friends, how many times have you stood at a new threshold and whispered those exact words: \"I wonder what this is about\"? That question is not a sign of doubt; it is the spark of discovery! It is the sound of your potential calling out from the unknown. Opportunity rarely arrives with clear instructions; it comes as a challenge, a new path. Your choice is not to silence the wonder, but to answer it with action! Step forward and embrace that uncertainty, because *you* get to define what this is about. This is your moment. Go find out."
                 },
                 {
                     "audio_path": "general/8.wav",
                     "instruction": "Compose a descriptive paragraph that translates the feelings from the audio into visual imagery, using a minimum of 60 words.",
-                    "ans": ""
+                    "ans": "The slow, gravelly tone conjures the image of a dimly lit, wood-paneled study where the air is thick with the scent of old paper and dust motes dance in a single, weak shaft of afternoon light. The words themselves land with the heavy, final thud of a massive, leather-bound book being closed forever, its story now sealed as an unchangeable part of history."
                 },
                 {
                     "audio_path": "general/9.wav",
                     "instruction": "Imagine you are explaining the audio to someone who cannot hear. Describe it in at least 75 words.",
-                    "ans": ""
+                    "ans": "This is an audio announcement, likely from an airport's public address system. A woman\u2019s voice, clear and slightly high-pitched, speaks with a sense of urgency. The sound has a slight echo, suggesting it's being broadcast in a large, open space like a boarding gate terminal. She states plainly and quickly, \"The airplane is almost full.\" Her tone implies this is an important, time-sensitive update for passengers, perhaps signaling the final moments before the gate closes for departure."
                 },
                 {
                     "audio_path": "general/10.wav",

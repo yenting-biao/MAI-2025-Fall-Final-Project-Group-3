@@ -1,10 +1,13 @@
 import argparse
 import torch
 import json, os, datetime
-from pathlib import Path
 import random
-from tqdm import tqdm
+import numpy as np
 from typing import Dict, Tuple
+
+from pathlib import Path
+from tqdm import tqdm
+
 from models.basemodel import BaseModel
 
 MAP_MODEL_NAME = {
@@ -43,11 +46,23 @@ TEST_SAMPLE = {
     "instruction": "what does the person in the last audio say?\nWrite everything in your response using capital letters only.",       #   Test on the last audio example
 }
 
-def set_seed(seed: int, verbose: bool = False) -> None:
+def set_seed(seed: int = 42, verbose: bool = False) -> None:
+    # Python & OS
     random.seed(seed)
+    np.random.seed(seed)
+    os.environ["PYTHONHASHSEED"] = str(seed)
+
+    # PyTorch: CPU & GPU
     torch.manual_seed(seed)
     if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
+
+    # deterministic
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    torch.use_deterministic_algorithms(True)
+
     if verbose:
         print(f"Seed set to {seed}")
 

@@ -208,3 +208,6 @@ __marimo__/
 
 blsp_emo_weights
 cache/
+data/
+output_old/
+outputs_old/

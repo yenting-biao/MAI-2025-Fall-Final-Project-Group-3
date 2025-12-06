@@ -71,19 +71,45 @@ python smoke_test_blsp_emo.py
 
 Note: model weights are automatically downloaded by `blsp_emo.py` using the HuggingFace CLI `hf`. If you want to download the weights manually, you can do so with `hf download cwang621/blsp-emo`; if weights are downloaded manually, remember to specify the path to weights when calling `BLSP_emo()`.
 
-#### SALMONN
+## How to test and run ICL experiments
 
-Create and enter the conda env for running SALMONN.
+### Environment setup
 
-```bash
-conda create --name salmonn python=3.10 -y
-conda activate salmonn
-pip install -r requirements/salmonn.txt
-```
-
-Run the following command (about  VRAM required):
+Create and enter the conda env for running ICL experiments.
 
 ```bash
-python models/SALMONN/cli_inference.py --
+conda create --name <your_env_name> python=3.11.2 -y
+conda activate <your_env_name>
+pip install -r requirements/<model_name>.txt
+conda install -c conda-forge ffmpeg
 ```
 
+### Arguments
+
+For args details, please refer to the help message of `run.py`:
+
+```bash
+python run.py --help
+```
+
+### Test
+
+To test the setup, you can run a smoke test with a small number of examples:
+
+```bash
+python run.py --model_name qwen --audio_task ASR --response_task closed_ended_questions --IF_task change_case:english_capital --examples 2 --use_test_sample --verbose --debug
+```
+
+### Run ICL experiments
+
+To run In-Context Learning (ICL) experiments, use the following command:
+
+```bash
+python run.py --model_name <model_name> --audio_task <audio_task> --response_task <response_task> --IF_task <IF_task> --examples <number_of_examples>
+```
+
+Replace `<model_name>`, `<audio_task>`, `<response_task>`, `<IF_task>`, and `<number_of_examples>` with your desired values. For example:
+
+```bash
+python run.py --model_name qwen --audio_task ASR --response_task closed_ended_questions --IF_task change_case:english_capital --examples 3
+```

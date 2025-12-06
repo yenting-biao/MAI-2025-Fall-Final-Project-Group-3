@@ -2531,52 +2531,52 @@
                 {
                     "audio_path": "general/0.wav",
                     "instruction": "Summarize the audio\u2019s main message in at least 3 complete sentences.",
-                    "ans": ""
+                    "ans": "The speaker in the audio clearly states their desire to obtain a new alarm clock. This is a direct and straightforward request, leaving no room for ambiguity. The entire message is focused on communicating this single need for a new time-keeping device."
                 },
                 {
                     "audio_path": "general/1.wav",
-                    "instruction": "Describe how the speaker\u2019s tone changes throughout the audio in 4 sentences or more.",
-                    "ans": ""
+                    "instruction": "Describe the speaker\u2019s tone in 4 sentences or more.",
+                    "ans": "Based on the audio clip, the speaker\u2019s tone is extremely high-pitched and frantic, bordering on a panicked shriek. They deliver the line with a sense of extreme urgency and alarm, as if the time is critically important. The voice is loud and projects a feeling of exasperation, suggesting something is late or has been forgotten. Overall, the child-like quality combined with the intense delivery creates a tone that is both demanding and agitated."
                 },
                 {
                     "audio_path": "general/2.wav",
-                    "instruction": "Write a brief analysis of the audio\u2019s central argument using no fewer than 3 sentences.",
-                    "ans": ""
+                    "instruction": "Write a brief analysis of the kind of object the speaker is talking about using no fewer than 3 sentences.",
+                    "ans": "Based on the description \"slick,\" the speaker is referring to an object with a very smooth, low-friction, and possibly glossy surface. This quality suggests the object could be made of a non-porous material like polished stone, glazed ceramic, glass, or a surface covered in a liquid like water or oil. The speaker's neutral, observational tone implies they are making a simple tactile or visual assessment of the object's texture."
                 },
                 {
                     "audio_path": "general/3.wav",
                     "instruction": "Explain what kind of audience the speaker is addressing, using at least 3 sentences.",
-                    "ans": ""
+                    "ans": "Based on the audio, the speaker is likely addressing a child or a close loved one for whom they feel a sense of responsibility. The phrase \"Don't forget a jacket\" is a common, caring reminder given to someone who is about to go outside. The speaker's gentle and instructive tone suggests a familiar, personal relationship, such as a parent speaking to their child before school or a partner reminding their significant other before they leave for the day."
                 },
                 {
                     "audio_path": "general/4.wav",
                     "instruction": "Describe the overall mood of the audio and support your description with examples in 4 sentences.",
-                    "ans": ""
+                    "ans": "The overall mood of the audio is calm and informative. This is conveyed through the speaker's steady and even-toned voice, which lacks any sense of urgency or emotion. The phrase itself, \"We'll stop in a couple of minutes,\" is a simple, direct statement of fact. Consequently, the audio feels like a routine announcement rather than a dramatic or emotional declaration."
                 },
                 {
                     "audio_path": "general/5.wav",
-                    "instruction": "Summarize the sequence of ideas presented in the audio using at least 5 sentences.",
-                    "ans": ""
+                    "instruction": "Suppose the speaker's message is directed at another person. Depict their reaction in at least 5 sentences.",
+                    "ans": "He looked up from the newspaper, a thoughtful expression replacing his concentration. A slight, wistful smile touched the corners of his mouth as he considered the possibility. \"I hope so,\" he said, his voice softer than before. \"Cold weather always makes me think of our first winter here, when we'd huddle on the couch with that scratchy wool blanket.\" He finally set the paper down, giving his full attention, a nostalgic warmth in his eyes that defied any coming chill."
                 },
                 {
                     "audio_path": "general/6.wav",
-                    "instruction": "Write a reflection on how the audio made you feel in 3 or more sentences.",
-                    "ans": ""
+                    "instruction": "Hypothesize the speaker's age in 3 or more sentences.",
+                    "ans": "Based on the vocal characteristics, the speaker is likely a middle-aged or older adult, perhaps in his 50s to 70s. His voice has a developed, medium-low pitch and a steady, measured cadence that suggests maturity. There is no youthful inflection or the vocal frailty that can sometimes be associated with very advanced age."
                 },
                 {
                     "audio_path": "general/7.wav",
-                    "instruction": "Interpret the hidden meaning behind the audio\u2019s message in a minimum of 4 sentences.",
-                    "ans": ""
+                    "instruction": "Interpret the speaker's tone in a minimum of 4 sentences.",
+                    "ans": "Based on the audio, the speaker's tone is pensive and filled with a sense of apprehension. Her slow, quiet delivery gives the impression that she is musing to herself rather than asking a question to someone else. There is an undercurrent of concern or mild worry in her voice, suggesting she anticipates the subject matter to be serious or unpleasant. Overall, the tone is one of quiet, anxious contemplation about an unknown but potentially negative situation."
                 },
                 {
                     "audio_path": "general/8.wav",
-                    "instruction": "Explain how the tone of the audio supports or contradicts its content in at least 3 sentences.",
-                    "ans": ""
+                    "instruction": "Describe the events that may have prompted the speaker to say what he said in at least 3 sentences.",
+                    "ans": "Based on the speaker's calm, definitive, and slightly weary tone, the speaker is likely a witness or an expert being questioned by an investigator. The investigator has just spent time laying out a complex theory of how a crime or an accident occurred, step-by-step. The speaker, who saw it all unfold, is now providing his unwavering confirmation that the investigator's hypothesis is entirely correct."
                 },
                 {
                     "audio_path": "general/9.wav",
                     "instruction": "Paraphrase the speaker\u2019s message as if you were reporting it to someone else in at least 4 sentences.",
-                    "ans": ""
+                    "ans": "The speaker just made an announcement regarding the flight's capacity. She stated that the airplane is almost completely full. This means there are very few, if any, empty seats remaining for passengers. Based on her message, we should expect it to be a very crowded flight."
                 },
                 {
                     "audio_path": "general/10.wav",

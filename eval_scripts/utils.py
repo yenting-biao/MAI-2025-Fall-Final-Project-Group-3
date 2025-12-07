@@ -45,6 +45,19 @@ class VLLMInference:
         return messages
 
     def generate_response(self, prompts: List[str]) -> List[str]:
+        """
+        Generate responses from the language model for a list of prompts.
+
+        Args:
+            prompts (List[str]): A list of input strings, each representing a user prompt.
+
+        Returns:
+            List[str]: A list of generated responses, one for each input prompt.
+
+        Behavior:
+            This method formats each prompt as a chat message, sends them to the model,
+            and returns the model's responses as a list of strings.
+        """
         messages = self._prepare_input(prompts)
 
         outputs = self.llm.chat(

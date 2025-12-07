@@ -400,43 +400,43 @@
             "keywords:existence": [
                 {
                     "audio_path": "general/0.wav",
-                    "instruction": "Explain the conversation\u2019s hidden meaning, using the word 'mirror'.",
-                    "ans": "Of course. Here is an explanation of the conversation's hidden meaning, using the word \"mirror.\"\n\n***\n\nThe statement \"I would like a new alarm clock\" isn't about a broken device; it's a profound desire for a new life. The current alarm clock has become a **mirror** reflecting a reality the speaker wants to escape.\n\nEach morning, its sound doesn't just signal the start of a day; it reflects back a life of unwanted routine, dissatisfaction, and stagnation. Waking up is a daily confrontation with the person they've become, a life they no longer recognize as their own.\n\nBy asking for a \"new alarm clock,\" the speaker is really saying, \"I want to wake up to a different reflection.\" They are seeking a fresh start, a new beginning, a catalyst for change so that the life that greets them in the morning will finally **mirror** the one they truly desire."
+                    "instruction": "Summarize the audio while using the term 'alarm' and 'clock'.",
+                    "ans": "The speaker states that they would like a new alarm clock."
                 },
                 {
                     "audio_path": "general/1.wav",
-                    "instruction": "Rewrite this as a diary entry that includes 'autumn' and 'rain'.",
-                    "ans": "October 26th\n\nDear Diary,\n\nThe **rain** hasn't stopped all morning, just a steady drumming against the windowpane. I must have been sitting here for hours, just watching it streak down the glass, blurring the world outside into a watercolour of rust and gold. It's a proper **autumn** day; the kind where the sky is a soft grey blanket and the last of the leaves are plastered to the wet pavement.\n\nMy tea has gone cold beside me. I was completely lost in a trance, hypnotized by the sound and the colours. A sudden glance at the clock on the wall made my heart give a little jolt. My mind just screamed it back at me: *It's 11 o'clock!*\n\nThe entire morning, just\u2026 gone. Vanished into the grey. I was supposed to have finished my history reading by now. I suppose the rain just washes the hours away sometimes. Right, I really have to get started now."
+                    "instruction": "Describe the situation mentioning 'clock'.",
+                    "ans": "Based on the audio, a child's voice excitedly announces the time, shouting, \"It's 11 o'clock!\""
                 },
                 {
                     "audio_path": "general/2.wav",
-                    "instruction": "Summarize the story\u2019s moral, ensuring the word 'greed' appears.",
-                    "ans": "Based on the single line \"The surface is slick,\" we can infer a moral about hidden dangers.\n\nThe moral is a warning that **greed** can make you rush toward something that appears attractive and easy, blinding you to the fact that the surface is slick and the path is treacherous, ultimately leading to your downfall."
+                    "instruction": "Describe the object mentioned using the word 'slick'.",
+                    "ans": "Based on the audio, the **surface** is described as being **slick**."
                 },
                 {
                     "audio_path": "general/3.wav",
-                    "instruction": "Depict a tense argument while using 'silence' and 'crimson'.",
-                    "ans": "Don't forget a jacket.\nOf course not. Can't have you worrying.\nI wasn't.\nRight. Just the cold, stony silence. The same you get when you're angry.\nWhat do you want me to say?\nAnything! Yell! Scream! Just stop turning that awful shade of crimson and shutting me out"
+                    "instruction": "Paraphrase the statement including 'forget' and 'jacket'.",
+                    "ans": "You shouldn't forget a jacket."
                 },
                 {
                     "audio_path": "general/4.wav",
-                    "instruction": "Frame this as a philosophical musing with 'existence' and 'void'.",
-                    "ans": "Within this simple utterance lies the fundamental tension of all that is.\n\n**Existence** is the present moment\u2014the hum of activity, the shared rhythm, the forward momentum of \"we.\" It is the brief, defiant flicker against an infinite backdrop. It is what *is*.\n\nBut the statement does not end there. It carries a promise, an inevitability: \"...we'll stop.\"\n\nThis is the whisper of the **Void**. Not a threat, but a certainty. It is the vast, waiting stillness that precedes and follows every act of being. The phrase \"in a couple of minutes\" is the fragile boundary we draw, the temporary dam we build against the silent ocean of non-existence.\n\nIt is a profound declaration that our current state is finite. And in that awareness, our existence gains its texture, its meaning. The sound is only precious because of the impending silence. The motion is only vital because of the coming rest. We are, for a moment, and then we will return to the great and tranquil nothing from which we emerged."
+                    "instruction": "Describe what the group is going to do using 'stop'.",
+                    "ans": "Based on the audio, the group is going to **stop** in a couple of minutes."
                 },
                 {
                     "audio_path": "general/5.wav",
-                    "instruction": "Describe the natural landscape while including 'harbor' and 'mist'.",
-                    "ans": "Dawn arrives not with color, but with a thickening of the grey. A thick, damp **mist** pours over the granite headlands and settles into the deep, protected **harbor**, a soft, sound-dampening blanket. The water is a sheet of polished slate, its surface disturbed only by the silent rings of unseen drips falling from the heavy boughs of ancient pines.\n\nOn the steep shores, the forest rises like a dark wall, its details lost in the vapor. The sharp cry of a lone gull pierces the quiet, its call instantly muffled, making it sound impossibly far away. The air is cold and clean, smelling of salt, wet stone, and pine. It is a world held in suspension, where the line between sea and sky has been erased, and the quiet, sheltered harbor waits for the sun to burn through the veil."
+                    "instruction": "Provide a summary of the audio using the words 'tomorrow' or 'cold'.",
+                    "ans": "The speaker says that maybe tomorrow it will be cold."
                 },
                 {
                     "audio_path": "general/6.wav",
-                    "instruction": "Turn this into a bedtime story using 'moonlight' and 'owl'.",
-                    "ans": "Of course. Snuggle in and close your eyes.\n\n***\n\nIn a cozy den, deep in a sleepy wood, a little bear cub named Barnaby was getting ready for bed. The silver **moonlight** streamed through the entrance of his burrow, painting soft stripes on his mossy pillow.\n\nHe wiggled his nose and tried to let out a great big bedtime yawn, but it felt\u2026 stuck. A sleepy feeling rumbled in his chest, but it wouldn't come out.\n\nHe blinked his drowsy eyes and mumbled into his pillow, \u201cOh, dear. **I think I have a doctor\u2019s appointment.**\u201d\n\nJust then, a gentle *Hoo-Hoo* echoed from the big oak tree outside. A moment later, a shadow drifted silently across the floor. It was the wise old **owl**, Dr. Hoot, who served as the forest\u2019s night-time doctor. He landed softly at the edge of the den, his big, kind eyes glowing in the dark.\n\n\u201cFeeling a bit fuzzy, little one?\u201d the owl cooed, his voice as soft as his feathers.\n\nBarnaby nodded. \u201cMy yawn is stuck.\u201d\n\nDr. Hoot smiled a wise owl smile. \u201cAh, a classic case of a misplaced yawn. The cure is quite simple.\u201d He fluffed his wings and began to hum a low, quiet tune, a lullaby that sounded like the wind whispering through the pines.\n\nHe told Barnaby to look at the moonbeams dancing on the floor, to listen to the crickets chirping their goodnight song, and to feel the cozy weight of his blanket.\n\nAs Barnaby listened, watching the peaceful **moonlight**, the big, rumbly feeling grew and grew until\u2026\n\n*YAAAAAWN!*\n\nA huge, wonderful, sleepy yawn finally escaped, stretching all the way to his tippy-toes.\n\nThe wise old **owl** hooted softly in satisfaction. \u201cThere now. All better.\u201d\n\nBarnaby\u2019s eyes felt heavy as stones. He curled into a tight, furry ball. \u201cThank you, Dr. Hoot,\u201d he whispered, already halfway to dreamland.\n\nThe owl gave a little nod, and as silently as he arrived, he flew back to his branch, watching over the little bear cub as he slept peacefully, bathed in the gentle, silver moonlight."
+                    "instruction": "Mention what the man remembered including these words: 'doctor' and 'appointment'.",
+                    "ans": "The man remembered that he has a doctor's appointment."
                 },
                 {
                     "audio_path": "general/7.wav",
-                    "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
-                    "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
+                    "instruction": "Depict the character\u2019s confusion mentioning 'wonder'.",
+                    "ans": "The character expresses their confusion as they wonder aloud about the nature of the situation they are in."
                 }
             ]
         }
@@ -842,43 +842,43 @@
             "keywords:existence": [
                 {
                     "audio_path": "general/0.wav",
-                    "instruction": "Explain the conversation\u2019s hidden meaning, using the word 'mirror'.",
-                    "ans": "Of course. Here is an explanation of the conversation's hidden meaning, using the word \"mirror.\"\n\n***\n\nThe statement \"I would like a new alarm clock\" isn't about a broken device; it's a profound desire for a new life. The current alarm clock has become a **mirror** reflecting a reality the speaker wants to escape.\n\nEach morning, its sound doesn't just signal the start of a day; it reflects back a life of unwanted routine, dissatisfaction, and stagnation. Waking up is a daily confrontation with the person they've become, a life they no longer recognize as their own.\n\nBy asking for a \"new alarm clock,\" the speaker is really saying, \"I want to wake up to a different reflection.\" They are seeking a fresh start, a new beginning, a catalyst for change so that the life that greets them in the morning will finally **mirror** the one they truly desire."
+                    "instruction": "Summarize the audio while using the term 'alarm' and 'clock'.",
+                    "ans": "The speaker states that they would like a new alarm clock."
                 },
                 {
                     "audio_path": "general/1.wav",
-                    "instruction": "Rewrite this as a diary entry that includes 'autumn' and 'rain'.",
-                    "ans": "October 26th\n\nDear Diary,\n\nThe **rain** hasn't stopped all morning, just a steady drumming against the windowpane. I must have been sitting here for hours, just watching it streak down the glass, blurring the world outside into a watercolour of rust and gold. It's a proper **autumn** day; the kind where the sky is a soft grey blanket and the last of the leaves are plastered to the wet pavement.\n\nMy tea has gone cold beside me. I was completely lost in a trance, hypnotized by the sound and the colours. A sudden glance at the clock on the wall made my heart give a little jolt. My mind just screamed it back at me: *It's 11 o'clock!*\n\nThe entire morning, just\u2026 gone. Vanished into the grey. I was supposed to have finished my history reading by now. I suppose the rain just washes the hours away sometimes. Right, I really have to get started now."
+                    "instruction": "Describe the situation mentioning 'clock'.",
+                    "ans": "Based on the audio, a child's voice excitedly announces the time, shouting, \"It's 11 o'clock!\""
                 },
                 {
                     "audio_path": "general/2.wav",
-                    "instruction": "Summarize the story\u2019s moral, ensuring the word 'greed' appears.",
-                    "ans": "Based on the single line \"The surface is slick,\" we can infer a moral about hidden dangers.\n\nThe moral is a warning that **greed** can make you rush toward something that appears attractive and easy, blinding you to the fact that the surface is slick and the path is treacherous, ultimately leading to your downfall."
+                    "instruction": "Describe the object mentioned using the word 'slick'.",
+                    "ans": "Based on the audio, the **surface** is described as being **slick**."
                 },
                 {
                     "audio_path": "general/3.wav",
-                    "instruction": "Depict a tense argument while using 'silence' and 'crimson'.",
-                    "ans": "Don't forget a jacket.\nOf course not. Can't have you worrying.\nI wasn't.\nRight. Just the cold, stony silence. The same you get when you're angry.\nWhat do you want me to say?\nAnything! Yell! Scream! Just stop turning that awful shade of crimson and shutting me out"
+                    "instruction": "Paraphrase the statement including 'forget' and 'jacket'.",
+                    "ans": "You shouldn't forget a jacket."
                 },
                 {
                     "audio_path": "general/4.wav",
-                    "instruction": "Frame this as a philosophical musing with 'existence' and 'void'.",
-                    "ans": "Within this simple utterance lies the fundamental tension of all that is.\n\n**Existence** is the present moment\u2014the hum of activity, the shared rhythm, the forward momentum of \"we.\" It is the brief, defiant flicker against an infinite backdrop. It is what *is*.\n\nBut the statement does not end there. It carries a promise, an inevitability: \"...we'll stop.\"\n\nThis is the whisper of the **Void**. Not a threat, but a certainty. It is the vast, waiting stillness that precedes and follows every act of being. The phrase \"in a couple of minutes\" is the fragile boundary we draw, the temporary dam we build against the silent ocean of non-existence.\n\nIt is a profound declaration that our current state is finite. And in that awareness, our existence gains its texture, its meaning. The sound is only precious because of the impending silence. The motion is only vital because of the coming rest. We are, for a moment, and then we will return to the great and tranquil nothing from which we emerged."
+                    "instruction": "Describe what the group is going to do using 'stop'.",
+                    "ans": "Based on the audio, the group is going to **stop** in a couple of minutes."
                 },
                 {
                     "audio_path": "general/5.wav",
-                    "instruction": "Describe the natural landscape while including 'harbor' and 'mist'.",
-                    "ans": "Dawn arrives not with color, but with a thickening of the grey. A thick, damp **mist** pours over the granite headlands and settles into the deep, protected **harbor**, a soft, sound-dampening blanket. The water is a sheet of polished slate, its surface disturbed only by the silent rings of unseen drips falling from the heavy boughs of ancient pines.\n\nOn the steep shores, the forest rises like a dark wall, its details lost in the vapor. The sharp cry of a lone gull pierces the quiet, its call instantly muffled, making it sound impossibly far away. The air is cold and clean, smelling of salt, wet stone, and pine. It is a world held in suspension, where the line between sea and sky has been erased, and the quiet, sheltered harbor waits for the sun to burn through the veil."
+                    "instruction": "Provide a summary of the audio using the words 'tomorrow' or 'cold'.",
+                    "ans": "The speaker says that maybe tomorrow it will be cold."
                 },
                 {
                     "audio_path": "general/6.wav",
-                    "instruction": "Turn this into a bedtime story using 'moonlight' and 'owl'.",
-                    "ans": "Of course. Snuggle in and close your eyes.\n\n***\n\nIn a cozy den, deep in a sleepy wood, a little bear cub named Barnaby was getting ready for bed. The silver **moonlight** streamed through the entrance of his burrow, painting soft stripes on his mossy pillow.\n\nHe wiggled his nose and tried to let out a great big bedtime yawn, but it felt\u2026 stuck. A sleepy feeling rumbled in his chest, but it wouldn't come out.\n\nHe blinked his drowsy eyes and mumbled into his pillow, \u201cOh, dear. **I think I have a doctor\u2019s appointment.**\u201d\n\nJust then, a gentle *Hoo-Hoo* echoed from the big oak tree outside. A moment later, a shadow drifted silently across the floor. It was the wise old **owl**, Dr. Hoot, who served as the forest\u2019s night-time doctor. He landed softly at the edge of the den, his big, kind eyes glowing in the dark.\n\n\u201cFeeling a bit fuzzy, little one?\u201d the owl cooed, his voice as soft as his feathers.\n\nBarnaby nodded. \u201cMy yawn is stuck.\u201d\n\nDr. Hoot smiled a wise owl smile. \u201cAh, a classic case of a misplaced yawn. The cure is quite simple.\u201d He fluffed his wings and began to hum a low, quiet tune, a lullaby that sounded like the wind whispering through the pines.\n\nHe told Barnaby to look at the moonbeams dancing on the floor, to listen to the crickets chirping their goodnight song, and to feel the cozy weight of his blanket.\n\nAs Barnaby listened, watching the peaceful **moonlight**, the big, rumbly feeling grew and grew until\u2026\n\n*YAAAAAWN!*\n\nA huge, wonderful, sleepy yawn finally escaped, stretching all the way to his tippy-toes.\n\nThe wise old **owl** hooted softly in satisfaction. \u201cThere now. All better.\u201d\n\nBarnaby\u2019s eyes felt heavy as stones. He curled into a tight, furry ball. \u201cThank you, Dr. Hoot,\u201d he whispered, already halfway to dreamland.\n\nThe owl gave a little nod, and as silently as he arrived, he flew back to his branch, watching over the little bear cub as he slept peacefully, bathed in the gentle, silver moonlight."
+                    "instruction": "Mention what the man remembered including these words: 'doctor' and 'appointment'.",
+                    "ans": "The man remembered that he has a doctor's appointment."
                 },
                 {
                     "audio_path": "general/7.wav",
-                    "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
-                    "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
+                    "instruction": "Depict the character\u2019s confusion mentioning 'wonder'.",
+                    "ans": "The character expresses their confusion as they wonder aloud about the nature of the situation they are in."
                 }
             ]
         }
@@ -1284,43 +1284,43 @@
             "keywords:existence": [
                 {
                     "audio_path": "general/0.wav",
-                    "instruction": "Explain the conversation\u2019s hidden meaning, using the word 'mirror'.",
-                    "ans": "Of course. Here is an explanation of the conversation's hidden meaning, using the word \"mirror.\"\n\n***\n\nThe statement \"I would like a new alarm clock\" isn't about a broken device; it's a profound desire for a new life. The current alarm clock has become a **mirror** reflecting a reality the speaker wants to escape.\n\nEach morning, its sound doesn't just signal the start of a day; it reflects back a life of unwanted routine, dissatisfaction, and stagnation. Waking up is a daily confrontation with the person they've become, a life they no longer recognize as their own.\n\nBy asking for a \"new alarm clock,\" the speaker is really saying, \"I want to wake up to a different reflection.\" They are seeking a fresh start, a new beginning, a catalyst for change so that the life that greets them in the morning will finally **mirror** the one they truly desire."
+                    "instruction": "Summarize the audio while using the term 'alarm' and 'clock'.",
+                    "ans": "The speaker states that they would like a new alarm clock."
                 },
                 {
                     "audio_path": "general/1.wav",
-                    "instruction": "Rewrite this as a diary entry that includes 'autumn' and 'rain'.",
-                    "ans": "October 26th\n\nDear Diary,\n\nThe **rain** hasn't stopped all morning, just a steady drumming against the windowpane. I must have been sitting here for hours, just watching it streak down the glass, blurring the world outside into a watercolour of rust and gold. It's a proper **autumn** day; the kind where the sky is a soft grey blanket and the last of the leaves are plastered to the wet pavement.\n\nMy tea has gone cold beside me. I was completely lost in a trance, hypnotized by the sound and the colours. A sudden glance at the clock on the wall made my heart give a little jolt. My mind just screamed it back at me: *It's 11 o'clock!*\n\nThe entire morning, just\u2026 gone. Vanished into the grey. I was supposed to have finished my history reading by now. I suppose the rain just washes the hours away sometimes. Right, I really have to get started now."
+                    "instruction": "Describe the situation mentioning 'clock'.",
+                    "ans": "Based on the audio, a child's voice excitedly announces the time, shouting, \"It's 11 o'clock!\""
                 },
                 {
                     "audio_path": "general/2.wav",
-                    "instruction": "Summarize the story\u2019s moral, ensuring the word 'greed' appears.",
-                    "ans": "Based on the single line \"The surface is slick,\" we can infer a moral about hidden dangers.\n\nThe moral is a warning that **greed** can make you rush toward something that appears attractive and easy, blinding you to the fact that the surface is slick and the path is treacherous, ultimately leading to your downfall."
+                    "instruction": "Describe the object mentioned using the word 'slick'.",
+                    "ans": "Based on the audio, the **surface** is described as being **slick**."
                 },
                 {
                     "audio_path": "general/3.wav",
-                    "instruction": "Depict a tense argument while using 'silence' and 'crimson'.",
-                    "ans": "Don't forget a jacket.\nOf course not. Can't have you worrying.\nI wasn't.\nRight. Just the cold, stony silence. The same you get when you're angry.\nWhat do you want me to say?\nAnything! Yell! Scream! Just stop turning that awful shade of crimson and shutting me out"
+                    "instruction": "Paraphrase the statement including 'forget' and 'jacket'.",
+                    "ans": "You shouldn't forget a jacket."
                 },
                 {
                     "audio_path": "general/4.wav",
-                    "instruction": "Frame this as a philosophical musing with 'existence' and 'void'.",
-                    "ans": "Within this simple utterance lies the fundamental tension of all that is.\n\n**Existence** is the present moment\u2014the hum of activity, the shared rhythm, the forward momentum of \"we.\" It is the brief, defiant flicker against an infinite backdrop. It is what *is*.\n\nBut the statement does not end there. It carries a promise, an inevitability: \"...we'll stop.\"\n\nThis is the whisper of the **Void**. Not a threat, but a certainty. It is the vast, waiting stillness that precedes and follows every act of being. The phrase \"in a couple of minutes\" is the fragile boundary we draw, the temporary dam we build against the silent ocean of non-existence.\n\nIt is a profound declaration that our current state is finite. And in that awareness, our existence gains its texture, its meaning. The sound is only precious because of the impending silence. The motion is only vital because of the coming rest. We are, for a moment, and then we will return to the great and tranquil nothing from which we emerged."
+                    "instruction": "Describe what the group is going to do using 'stop'.",
+                    "ans": "Based on the audio, the group is going to **stop** in a couple of minutes."
                 },
                 {
                     "audio_path": "general/5.wav",
-                    "instruction": "Describe the natural landscape while including 'harbor' and 'mist'.",
-                    "ans": "Dawn arrives not with color, but with a thickening of the grey. A thick, damp **mist** pours over the granite headlands and settles into the deep, protected **harbor**, a soft, sound-dampening blanket. The water is a sheet of polished slate, its surface disturbed only by the silent rings of unseen drips falling from the heavy boughs of ancient pines.\n\nOn the steep shores, the forest rises like a dark wall, its details lost in the vapor. The sharp cry of a lone gull pierces the quiet, its call instantly muffled, making it sound impossibly far away. The air is cold and clean, smelling of salt, wet stone, and pine. It is a world held in suspension, where the line between sea and sky has been erased, and the quiet, sheltered harbor waits for the sun to burn through the veil."
+                    "instruction": "Provide a summary of the audio using the words 'tomorrow' or 'cold'.",
+                    "ans": "The speaker says that maybe tomorrow it will be cold."
                 },
                 {
                     "audio_path": "general/6.wav",
-                    "instruction": "Turn this into a bedtime story using 'moonlight' and 'owl'.",
-                    "ans": "Of course. Snuggle in and close your eyes.\n\n***\n\nIn a cozy den, deep in a sleepy wood, a little bear cub named Barnaby was getting ready for bed. The silver **moonlight** streamed through the entrance of his burrow, painting soft stripes on his mossy pillow.\n\nHe wiggled his nose and tried to let out a great big bedtime yawn, but it felt\u2026 stuck. A sleepy feeling rumbled in his chest, but it wouldn't come out.\n\nHe blinked his drowsy eyes and mumbled into his pillow, \u201cOh, dear. **I think I have a doctor\u2019s appointment.**\u201d\n\nJust then, a gentle *Hoo-Hoo* echoed from the big oak tree outside. A moment later, a shadow drifted silently across the floor. It was the wise old **owl**, Dr. Hoot, who served as the forest\u2019s night-time doctor. He landed softly at the edge of the den, his big, kind eyes glowing in the dark.\n\n\u201cFeeling a bit fuzzy, little one?\u201d the owl cooed, his voice as soft as his feathers.\n\nBarnaby nodded. \u201cMy yawn is stuck.\u201d\n\nDr. Hoot smiled a wise owl smile. \u201cAh, a classic case of a misplaced yawn. The cure is quite simple.\u201d He fluffed his wings and began to hum a low, quiet tune, a lullaby that sounded like the wind whispering through the pines.\n\nHe told Barnaby to look at the moonbeams dancing on the floor, to listen to the crickets chirping their goodnight song, and to feel the cozy weight of his blanket.\n\nAs Barnaby listened, watching the peaceful **moonlight**, the big, rumbly feeling grew and grew until\u2026\n\n*YAAAAAWN!*\n\nA huge, wonderful, sleepy yawn finally escaped, stretching all the way to his tippy-toes.\n\nThe wise old **owl** hooted softly in satisfaction. \u201cThere now. All better.\u201d\n\nBarnaby\u2019s eyes felt heavy as stones. He curled into a tight, furry ball. \u201cThank you, Dr. Hoot,\u201d he whispered, already halfway to dreamland.\n\nThe owl gave a little nod, and as silently as he arrived, he flew back to his branch, watching over the little bear cub as he slept peacefully, bathed in the gentle, silver moonlight."
+                    "instruction": "Mention what the man remembered including these words: 'doctor' and 'appointment'.",
+                    "ans": "The man remembered that he has a doctor's appointment."
                 },
                 {
                     "audio_path": "general/7.wav",
-                    "instruction": "Create a brief poem with the words 'memory' and 'sea'.",
-                    "ans": "The quiet shore, the endless blue,\nA wave of thought brings me to you.\nA fragile memory, found for me,\nWashed from the salt and silver sea."
+                    "instruction": "Depict the character\u2019s confusion mentioning 'wonder'.",
+                    "ans": "The character expresses their confusion as they wonder aloud about the nature of the situation they are in."
                 }
             ]
         }

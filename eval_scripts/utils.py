@@ -58,3 +58,14 @@ class VLLMINference:
         responses = [output.outputs[0].text for output in outputs]
 
         return responses
+
+if __name__ == "__main__":
+    # This block is for demonstration and testing purposes.
+    judge = VLLMINference()
+    prompts = [
+        "What is the capital of France?",
+        "Explain the theory of relativity in simple terms.",
+    ]
+    responses = judge.generate_response(prompts)
+    for response in responses:
+        print(response)

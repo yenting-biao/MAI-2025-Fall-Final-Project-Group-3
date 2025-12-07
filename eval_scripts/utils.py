@@ -4,7 +4,7 @@ from typing import List
 os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
 
 
-class VLLMINference:
+class VLLMInference:
     """
     A class for performing inference using vllm.
     This class wraps the vllm library to provide a simplified interface for generating
@@ -38,13 +38,13 @@ class VLLMINference:
             temperature=temperature, top_p=top_p, top_k=top_k, max_tokens=max_tokens
         )
 
-    def _prepare_input(self, prompts: List[int]):
+    def _prepare_input(self, prompts: List[str]) -> List[List[dict[str, str]]]:
         messages = []
         for prompt in prompts:
             messages.append([{"role": "user", "content": prompt}])
         return messages
 
-    def generate_response(self, prompts: List[str]):
+    def generate_response(self, prompts: List[str]) -> List[str]:
         messages = self._prepare_input(prompts)
 
         outputs = self.llm.chat(
@@ -61,7 +61,7 @@ class VLLMINference:
 
 if __name__ == "__main__":
     # This block is for demonstration and testing purposes.
-    judge = VLLMINference()
+    judge = VLLMInference()
     prompts = [
         "What is the capital of France?",
         "Explain the theory of relativity in simple terms.",

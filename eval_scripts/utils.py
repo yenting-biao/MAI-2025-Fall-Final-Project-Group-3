@@ -1,4 +1,4 @@
-import os
+import os, time
 from typing import List
 
 os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
@@ -74,11 +74,17 @@ class VLLMInference:
 
 if __name__ == "__main__":
     # This block is for demonstration and testing purposes.
+
+    t0 = time.time()
     judge = VLLMInference()
     prompts = [
         "What is the capital of France?",
         "Explain the theory of relativity in simple terms.",
     ]
     responses = judge.generate_response(prompts)
-    for response in responses:
-        print(response)
+    for prompt, response in zip(prompts, responses):
+        print(f"Prompt: \033[1;34m{prompt}\033[0m\n"
+              f"Response: \033[1;32m{response}\033[0m\n")
+
+    t1 = time.time()
+    print(f"Time taken: {t1 - t0:.2f} seconds")

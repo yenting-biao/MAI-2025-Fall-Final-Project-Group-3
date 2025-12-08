@@ -264,6 +264,7 @@ def parse_args():
     parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility.")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose output.")
     parser.add_argument("--debug", action="store_true", help="Enable debug mode with verbose logging.")
+    parser.add_argument("--debug_examples", type=int, default=10, help="Number of test examples to run in debug mode.")
 
 
     # Dir Settings
@@ -295,6 +296,8 @@ def verify_args(args: argparse.Namespace) -> None:
         raise ValueError(f"Response task {args.response_task} is not supported.")
     if args.IF_task not in IMPLEMENTED_IF_TASKS:
         raise ValueError(f"IF task {args.IF_task} is not implemented yet.")
+    if args.debug and args.debug_examples <= 0:
+        raise ValueError("Number of debug examples must be greater than 0 when debug mode is enabled.")
     if args.verbose:
         print("Arguments verified successfully.")
 
@@ -315,6 +318,8 @@ def main(args: argparse.Namespace) -> None:
     # Prepare ICL data and test cases
     icl_data = GetICLData(args) if args.examples > 0 else []
     test_cases, test_audio_dir = GetTestCases(args, audio_task_mapped)
+    if args.debug:
+        test_cases = test_cases[:min(args.debug_examples, len(test_cases))]
     if args.verbose:
         print(f"\033[93mLoaded {len(icl_data)} ICL examples and {len(test_cases)} test case(s).\033[0m")
 

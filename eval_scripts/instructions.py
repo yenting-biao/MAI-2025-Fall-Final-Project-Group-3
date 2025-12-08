@@ -24,7 +24,7 @@ from typing import Dict, Optional, Sequence, Union
 from absl import logging
 import langdetect
 
-from instruction_following_eval import instructions_util
+from eval_scripts import instructions_util
 
 
 _InstructionArgsDtype = Optional[Dict[str, Union[int, str, Sequence[str]]]]
@@ -575,7 +575,7 @@ class ParagraphChecker(Instruction):
     paragraphs = re.split(r"\s*\*\*\*\s*|\n{1,}", value.strip())
 
     num_paragraphs = len(paragraphs)
-    
+
     for index, paragraph in enumerate(paragraphs):
         if not paragraph.strip():
             # If empty, reduce count if it's at start or end, otherwise return False
@@ -583,7 +583,7 @@ class ParagraphChecker(Instruction):
                 num_paragraphs -= 1
             else:
                 return False
-            
+
     return num_paragraphs == self._num_paragraphs
 
 

@@ -19,12 +19,13 @@ import collections
 import dataclasses
 import json
 import os
-from typing import Dict, Optional, Sequence, Union
+import re
+from typing import Dict, Optional, Sequence, Union, List
 
 from absl import flags
 from absl import logging
 
-from instruction_following_eval import instructions_registry
+from eval_scripts import instructions_registry
 from pathlib import Path
 
 import argparse
@@ -63,6 +64,93 @@ class OutputExample:
   follow_instruction_list: list[bool]
 
 
+def _normalize_for_wer(text: str) -> List[str]:
+    """Normalize text into a list of word tokens for WER.
+
+    - Uppercase
+    - Remove non-letter characters (except apostrophe)
+    - Split on whitespace
+    """
+    text = text.upper()
+    text = re.sub(r"[^A-Z']+", " ", text)
+    tokens = text.split()
+    return tokens
+
+
+def _edit_distance(ref: List[str], hyp: List[str]) -> int:
+    """Standard Levenshtein distance on token sequences."""
+    n = len(ref)
+    m = len(hyp)
+    # dp[i][j]: distance between ref[:i] and hyp[:j]
+    dp = [[0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n + 1):
+        dp[i][0] = i
+    for j in range(m + 1):
+        dp[0][j] = j
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            if ref[i - 1] == hyp[j - 1]:
+                cost = 0
+            else:
+                cost = 1
+            dp[i][j] = min(
+                dp[i - 1][j] + 1,      # deletion
+                dp[i][j - 1] + 1,      # insertion
+                dp[i - 1][j - 1] + cost,  # substitution
+            )
+    return dp[n][m]
+
+
+def compute_wer(ref_text: str, hyp_text: str) -> float:
+    """Compute word error rate (WER) between reference and hypothesis."""
+    ref_tokens = _normalize_for_wer(ref_text)
+    hyp_tokens = _normalize_for_wer(hyp_text)
+    if not ref_tokens:
+        return 0.0
+    distance = _edit_distance(ref_tokens, hyp_tokens)
+    return distance / float(len(ref_tokens))
+
+
+def annotate_answer_correctness(result: dict) -> dict:
+    """Annotate each result dict with answer correctness.
+
+    Adds:
+      - 'wer' (float) when metric == 'wer'
+      - 'exact_match' (bool)
+      - 'answer_correct' (bool) as a generic flag
+    """
+    metric = result.get("metric")
+    label = result.get("label")
+    response = result.get("response", "")
+
+    # Only handle examples with a label.
+    if not metric or label is None:
+        return result
+
+    if metric == "wer":
+        wer_value = compute_wer(label, response)
+        result["wer"] = wer_value
+        # "Correct" == perfect transcription by default
+        exact = (wer_value == 0.0)
+        result["exact_match"] = exact
+        result["answer_correct"] = exact
+
+    elif metric == "exact":
+        def _norm(s: str) -> str:
+            return re.sub(r"\s+", " ", s).strip().lower()
+
+        exact = _norm(response) == _norm(label)
+        result["exact_match"] = exact
+        result["answer_correct"] = exact
+
+    else:
+        # For 'open', 'keyword_exist', etc., we do not define correctness here.
+        # You can extend this branch later if needed.
+        pass
+
+    return result
+
+
 def read_prompt_list(input_jsonl_filename):
   """Read inputs from jsonl."""
   inputs = []
@@ -99,87 +187,89 @@ def write_outputs(output_jsonl_filename, outputs):
       f.write("\n")
 
 
-def test_instruction_following_strict(
-    inp,
-    result
-):
-  """Tests response to see if instrutions are followed."""
-  response = result["response"]
+def test_instruction_following_strict(inp: dict, result: dict) -> dict[str, Union[bool, list[bool], str, list[str]]]:
+    """Tests response to see if instructions are followed (strict)."""
+    response = result["response"]
+    instruction_list = inp["instruction_id_list"]
+    is_following_list = []
+
+    for index, instruction_id in enumerate(instruction_list):
+        instruction_cls = instructions_registry.INSTRUCTION_DICT[instruction_id]
+        instruction = instruction_cls(instruction_id)
+        instruction.build_description(**inp["kwargs"][index])
+        args = instruction.get_instruction_args()
+        if args and "prompt" in args:
+            instruction.build_description(prompt=inp["prompt"])
+
+        if response.strip() and instruction.check_following(response):
+            is_following_list.append(True)
+        else:
+            is_following_list.append(False)
+
+    # Original fields (for backward compatibility)
+    result["follow_instruction_list"] = is_following_list
+    result["follow_all_instructions"] = all(is_following_list)
+
+    # Explicit "strict" aliases
+    result["strict_follow_instruction_list"] = is_following_list
+    result["strict_follow_all_instructions"] = all(is_following_list)
+
+    return result
 
 
-  instruction_list = inp["instruction_id_list"]
-  is_following_list = []
+def test_instruction_following_loose_inplace(inp, result):
+    """Upper bound for following instructions (looser matching).
 
-  for index, instruction_id in enumerate(instruction_list):
-    instruction_cls = instructions_registry.INSTRUCTION_DICT[instruction_id]
-    instruction = instruction_cls(instruction_id)
+    Tries multiple lightly-edited versions of the response:
+    - removing first / last line
+    - stripping '*' characters
+    and marks an instruction as followed if ANY of these variants passes.
+    """
+    response = result["response"]
 
-    instruction.build_description(**inp["kwargs"][index])
-    args = instruction.get_instruction_args()
-    if args and "prompt" in args:
-      instruction.build_description(prompt=inp["prompt"])
+    # Generate relaxed variants of the response
+    lines = response.split("\n")
+    response_remove_first = "\n".join(lines[1:]).strip()
+    response_remove_last = "\n".join(lines[:-1]).strip()
+    response_remove_both = "\n".join(lines[1:-1]).strip()
 
-    if response.strip() and instruction.check_following(response):
-      is_following_list.append(True)
-    else:
-      is_following_list.append(False)
+    revised_response = response.replace("*", "")
+    revised_response_remove_first = response_remove_first.replace("*", "")
+    revised_response_remove_last = response_remove_last.replace("*", "")
+    revised_response_remove_both = response_remove_both.replace("*", "")
 
-  result["follow_instruction_list"] = is_following_list
-  result["follow_all_instructions"] = all(is_following_list)
-  return result
+    all_responses = [
+        response,
+        revised_response,
+        response_remove_first,
+        response_remove_last,
+        response_remove_both,
+        revised_response_remove_first,
+        revised_response_remove_last,
+        revised_response_remove_both,
+    ]
 
+    instruction_list = inp["instruction_id_list"]
+    is_following_list = []
 
+    for index, instruction_id in enumerate(instruction_list):
+        instruction_cls = instructions_registry.INSTRUCTION_DICT[instruction_id]
+        instruction = instruction_cls(instruction_id)
+        instruction.build_description(**inp["kwargs"][index])
+        args = instruction.get_instruction_args()
+        if args and "prompt" in args:
+            instruction.build_description(prompt=inp["prompt"])
 
-def test_instruction_following_loose(
-    inp,
-    response,
-):
-  """Tests response for an upper bound for following instructions."""
-  r = response.split("\n")
-  response_remove_first = "\n".join(r[1:]).strip()
-  response_remove_last = "\n".join(r[:-1]).strip()
-  response_remove_both = "\n".join(r[1:-1]).strip()
-  revised_response = response.replace("*", "")
-  revised_response_remove_first = response_remove_first.replace("*", "")
-  revised_response_remove_last = response_remove_last.replace("*", "")
-  revised_response_remove_both = response_remove_both.replace("*", "")
-  all_responses = [
-      response,
-      revised_response,
-      response_remove_first,
-      response_remove_last,
-      response_remove_both,
-      revised_response_remove_first,
-      revised_response_remove_last,
-      revised_response_remove_both,
-  ]
-  instruction_list = inp.instruction_id_list
-  is_following_list = []
+        is_following = False
+        for r in all_responses:
+            if r.strip() and instruction.check_following(r):
+                is_following = True
+                break
+        is_following_list.append(is_following)
 
-  for index, instruction_id in enumerate(instruction_list):
-    instruction_cls = instructions_registry.INSTRUCTION_DICT[instruction_id]
-    instruction = instruction_cls(instruction_id)
-
-    instruction.build_description(**inp.kwargs[index])
-    args = instruction.get_instruction_args()
-    if args and "prompt" in args:
-      instruction.build_description(prompt=inp.prompt)
-
-    is_following = False
-    for r in all_responses:
-      if r.strip() and instruction.check_following(r):
-        is_following = True
-        break
-
-    is_following_list.append(is_following)
-
-  return OutputExample(
-      instruction_id_list=inp.instruction_id_list,
-      prompt=inp.prompt,
-      response=response,
-      follow_all_instructions=all(is_following_list),
-      follow_instruction_list=is_following_list,
-  )
+    result["loose_follow_instruction_list"] = is_following_list
+    result["loose_follow_all_instructions"] = all(is_following_list)
+    return result
 
 
 def read_result_list(input_jsonl_filename):
@@ -292,47 +382,67 @@ def parse_args():
 
 
 def main():
-  args = parse_args()
+    args = parse_args()
+    results = read_result_list(args.input_response_data)
+    print(len(results))
 
-  # inputs = read_key_to_prompt_dict(_INPUT_DATA.value)
-  results = read_result_list(args.input_response_data)
-  print(len(results))
+    outputs = []
 
-  # get instruction following results
-  for func in [
-      test_instruction_following_strict,
-  ]:
     input_file_name = args.input_response_data.split("/")[-1]
     output_file_name = f"rule_eval@{input_file_name}"
     logging.info("Generating %s...", output_file_name)
-    outputs = []
 
     for result in results:
-      condition = {
-        "key": result["id"],
-        "instruction_id_list": result["instruction_id_list"],
-        "kwargs": result["kwargs"],
-      }
+        condition = {
+            "key": result["id"],
+            "instruction_id_list": result["instruction_id_list"],
+            "kwargs": result["kwargs"],
+            # Use the per-example instruction as prompt for IFEval
+            "prompt": result.get("instruction", ""),
+        }
 
-      outputs.append(func(condition, result))
+        # 1) Strict instruction following
+        result = test_instruction_following_strict(condition, result)
 
-    # for inp in inputs:
-    #   outputs.append(func(inp, key_to_response))
+        # 2) Loose instruction following
+        result = test_instruction_following_loose_inplace(condition, result)
+
+        # 3) Answer correctness (WER / exact match)
+        result = annotate_answer_correctness(result)
+
+        outputs.append(result)
+
+    # Aggregate strict IF stats (as before).
     follow_all_instructions = [o["follow_all_instructions"] for o in outputs]
     accuracy = sum(follow_all_instructions) / len(outputs)
-    logging.info("Accuracy: %f", accuracy)
+    logging.info("Strict IF Accuracy: %f", accuracy)
 
-    (Path(args.input_response_data).parent / "reports").mkdir(parents=True, exist_ok=True)
-
-    output_file_name = str((Path(args.input_response_data).parent / "reports") / f"{output_file_name}.jsonl")
+    (Path(args.input_response_data).parent / "reports").mkdir(
+        parents=True, exist_ok=True
+    )
+    output_file_name = str(
+        (Path(args.input_response_data).parent / "reports")
+        / f"{output_file_name}.jsonl"
+    )
     write_outputs(output_file_name, outputs)
     logging.info("Generated: %s", output_file_name)
 
-    # Prints instruction following accuracy report.
+    # Prints instruction-following accuracy report (strict).
     print("=" * 64)
     print(f"{output_file_name} Accuracy Scores:")
     print_report(outputs)
-  print(output_file_name)
+    print(output_file_name)
+
+    # Print simple semantic-accuracy summary for debugging.
+    wer_values = [o["wer"] for o in outputs if "wer" in o]
+    if wer_values:
+        mean_wer = sum(wer_values) / len(wer_values)
+        print(f"Mean WER over {len(wer_values)} examples: {mean_wer:.4f}")
+
+    answer_flags = [o["answer_correct"] for o in outputs if "answer_correct" in o]
+    if answer_flags:
+        ans_acc = sum(answer_flags) / len(answer_flags)
+        print(f"Answer-correct accuracy over labeled examples: {ans_acc:.4f}")
 
 
 if __name__ == "__main__":

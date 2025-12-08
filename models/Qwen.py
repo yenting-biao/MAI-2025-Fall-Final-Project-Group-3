@@ -14,7 +14,9 @@ class Qwen_Audio_Chat(BaseModel):
         self.device = device
         #   Load actual model
         self.tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-Audio-Chat", trust_remote_code=True, cache_dir="./cache")
-        self.model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-Audio-Chat", device_map=device, trust_remote_code=True, cache_dir="./cache").eval()
+        self.model = AutoModelForCausalLM.from_pretrained(
+            "Qwen/Qwen-Audio-Chat", device_map=device, trust_remote_code=True, cache_dir="./cache", bf16=True
+        ).eval()
 
 
     def process_input(self, conversation:list[dict]) -> None:

@@ -71,11 +71,12 @@ python smoke_test_blsp_emo.py
 
 Note: model weights are automatically downloaded by `blsp_emo.py` using the HuggingFace CLI `hf`. If you want to download the weights manually, you can do so with `hf download cwang621/blsp-emo`; if weights are downloaded manually, remember to specify the path to weights when calling `BLSP_emo()`.
 
+
 ## How to test and run ICL experiments
 
 ### Environment setup
 
-Create and enter the conda env for running ICL experiments.
+Create and enter the conda env for running ICL experiments in Qwen, Qwen2 and blsp_emo.
 
 ```bash
 conda create --name <your_env_name> python=3.11.2 -y
@@ -84,6 +85,19 @@ pip install -r requirements/<model_name>.txt
 conda install -c conda-forge ffmpeg
 ```
 
+For DeSTA2_5, we need to download the model manually. 
+```bash
+git clone https://github.com/kehanlu/DeSTA2.5-Audio.git
+cd DeSTA2.5-Audio
+pip install -e .
+```
+
+```bash
+conda create --name <your_env_name> python=3.11.2 -y
+conda activate <your_env_name>
+pip install -r requirements/DeSTA2_5.txt
+conda install -c conda-forge ffmpeg
+```
 ### Arguments
 
 For args details, please refer to the help message of `run.py`:

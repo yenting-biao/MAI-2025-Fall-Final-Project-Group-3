@@ -13,7 +13,7 @@ from models.basemodel import BaseModel
 MAP_MODEL_NAME = {
     "qwen": "Qwen",
     "qwen2": "Qwen2",
-    "desta2": "DeSTA2",
+    "desta2_5": "desta2_5",
     "blsp-emo": "BLSP-Emo",
 }
 MAP_AUDIO_TASK = {
@@ -77,9 +77,9 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
         case "qwen2":
             from models.Qwen2 import Qwen2_Audio_Chat
             return Qwen2_Audio_Chat(device=device)
-        case "desta2":
-            from models.DeSTA2 import DeSTA2
-            return DeSTA2(device=device)
+        case "desta2_5":
+            from models.DeSTA2_5 import DeSTA2_5
+            return DeSTA2_5(device=device)
         case "blsp-emo":
             from models.blsp_emo import BLSP_Emo
             return BLSP_Emo(device=device)
@@ -223,7 +223,7 @@ def parse_args():
 
     # Model and Task Settings
     parser.add_argument("--model_name", type=str, default="qwen",
-                        choices=["qwen", "qwen2", "desta2", "blsp-emo"],
+                        choices=["qwen", "qwen2", "desta2_5", "blsp-emo"],
                         help="Name of the pre-trained language model to use.")
 
     parser.add_argument("--audio_task", type=str, default="ASR",

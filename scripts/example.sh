@@ -1,4 +1,6 @@
 #!/bin/bash
+export CUBLAS_WORKSPACE_CONFIG=:4096:8
+export CUBLAS_WORKSPACE_CONFIG=:16:8
 
 audio_task="ASR"
 # audio_task="SER"
@@ -23,7 +25,7 @@ IF_task="detectable_format:number_bullet_lists"
 # IF_task="length_constraints:number_sentences"
 # IF_task="length_constraints:number_paragraphs"
 
-examples=0
+examples=1
 model_name="qwen"
 seed=42
 OUTPUT_DIR="${OUTPUT_DIR:-model_responses/test/}"
@@ -35,4 +37,7 @@ python run.py \
   --IF_task "${IF_task}" \
   --seed "${seed}" \
   --examples "${examples}" \
-  --output_dir "${OUTPUT_DIR}"
+  --output_dir "${OUTPUT_DIR}" \
+  --verbose \
+  --debug \
+  --debug_examples 5

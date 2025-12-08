@@ -31,13 +31,13 @@ IMPLEMENTED_IF_TASKS = [
         "detectable_format:title",
         "combination:repeat_prompt",
         "startend:end_checker",
-#    # creative_writing (not implemented yet)
-#         "detectable_format:number_bullet_lists",
-#         "keywords:existence",
-#         "keywords:forbidden_words",
-#         "length_constraints:number_words",
-#         "length_constraints:number_sentences",
-#         "length_constraints:number_paragraphs",
+   # creative_writing (not implemented yet)
+        "detectable_format:number_bullet_lists",
+        "keywords:existence",
+        "keywords:forbidden_words",
+        "length_constraints:number_words",
+        "length_constraints:number_sentences",
+        "length_constraints:number_paragraphs",
 ]
 
 TEST_SAMPLE = {

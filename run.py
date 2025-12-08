@@ -31,13 +31,15 @@ IMPLEMENTED_IF_TASKS = [
         "detectable_format:title",
         "combination:repeat_prompt",
         "startend:end_checker",
-   # creative_writing (not implemented yet)
+   # creative_writing
         "detectable_format:number_bullet_lists",
         "keywords:existence",
         "keywords:forbidden_words",
         "length_constraints:number_words",
         "length_constraints:number_sentences",
         "length_constraints:number_paragraphs",
+    # chain-of-thought
+        "chain-of-thought",
 ]
 
 TEST_SAMPLE = {
@@ -100,7 +102,10 @@ def GetICLData(args: argparse.Namespace) -> list[dict]:
     '''
     with open(args.icl_json_path, "r") as f:
         InContextDataset = json.load(f)
-    return InContextDataset[args.audio_task][args.response_task][args.IF_task]
+    if args.response_task == "chain-of-thought":
+        return InContextDataset[args.audio_task][args.response_task]
+    else: # closed_ended_questions or creative_writing
+        return InContextDataset[args.audio_task][args.response_task][args.IF_task]
 
 def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list[dict], str]:
     '''
@@ -134,7 +139,7 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list
         for tc in test_cases_tmp:
             condition_1 = tc["audio_filepath"].startswith(audio_task_mapped)
             condition_2 = tc["dataset"] == audio_task_mapped
-            condition_3 = tc["instruction_id_list"][0] == args.IF_task
+            condition_3 = tc["instruction_id_list"][0] == args.IF_task if args.response_task != "chain-of-thought" else True
             if condition_1 and condition_2 and condition_3:
                 test_cases.append(tc)
 
@@ -234,12 +239,12 @@ def parse_args():
         "--response_task", type=str, default="closed_ended_questions",
         choices=[
             "closed_ended_questions",
-            "chain-of-thought", # not implemented yet
-            "creative_writing", # not implemented yet
+            "chain-of-thought",
+            "creative_writing",
         ], help="The specific task for in-context learning.")
 
     parser.add_argument(
-        "--IF_task", type=str, default="change_case:english_capital",
+        "--IF_task", type=str, default=None,
         choices=[
             # closed_ended_questions
                 "change_case:english_capital",
@@ -256,6 +261,8 @@ def parse_args():
                 "length_constraints:number_words",
                 "length_constraints:number_sentences",
                 "length_constraints:number_paragraphs",
+            # chain-of-thought
+                "chain-of-thought",
         ], help="The format constraint task (i.e., instruction) for the model's response.")
 
     # ICL Settings

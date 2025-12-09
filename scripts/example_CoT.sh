@@ -8,8 +8,8 @@ audio_task="ASR"
 # audio_task="GR"
 
 # response_task="closed_ended_questions"
-# response_task="chain-of-thought"
-response_task="creative_writing"
+response_task="chain-of-thought"
+# response_task="creative_writing"
 
 # IF_task="change_case:english_capital"
 # IF_task="change_case:english_lowercase"
@@ -19,16 +19,15 @@ response_task="creative_writing"
 # IF_task="combination:repeat_prompt"
 # IF_task="startend:end_checker"
 
-IF_task="detectable_format:number_bullet_lists"
+# IF_task="detectable_format:number_bullet_lists"
 # IF_task="keywords:existence"
 # IF_task="keywords:forbidden_words"
 # IF_task="length_constraints:number_words"
 # IF_task="length_constraints:number_sentences"
 # IF_task="length_constraints:number_paragraphs"
 
-# IF_task="chain-of-thought"
-
-examples=2
+IF_task="chain-of-thought"
+examples=4
 model_name="qwen"
 seed=42
 OUTPUT_DIR="${OUTPUT_DIR:-model_responses/test/}"

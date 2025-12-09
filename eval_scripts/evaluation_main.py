@@ -15,21 +15,18 @@
 
 """Binary of evaluating instruction following. See README.md."""
 
+import argparse
 import collections
 import dataclasses
 import json
 import os
 import re
 from typing import Dict, Optional, Sequence, Union, List
-
+from pathlib import Path
 from absl import flags
 from absl import logging
-
 from eval_scripts import instructions_registry
-from pathlib import Path
-
-import argparse
-
+from config import get_task_parser
 
 _INPUT_DATA = flags.DEFINE_string(
     "input_data", None, "path to input data", required=False
@@ -370,12 +367,12 @@ def print_report(outputs):
 
 def parse_args():
   """Parses command line arguments."""
-  parser = argparse.ArgumentParser(description="Instruction Following Evaluation")
+  parser = get_task_parser()
   parser.add_argument(
       "--input_response_data",
       "-i",
       type=str,
-      required=True,
+      default=None,
       help="Path to input response data in JSONL format.",
   )
   return parser.parse_args()
@@ -383,12 +380,27 @@ def parse_args():
 
 def main():
     args = parse_args()
-    results = read_result_list(args.input_response_data)
+
+    if args.input_response_data:
+      input_response_data = args.input_response_data
+      input_file_name = input_response_data.split("/")[-1]
+    else:
+      input_response_data_dir = os.path.join("model_responses", args.model_name, args.audio_task, args.response_task)
+      if args.response_task != "chain-of-thought" and args.IF_task:
+        input_response_data_dir = os.path.join(input_response_data_dir, args.IF_task.replace(":", "_"))
+      input_file_name = ""
+      for file in os.listdir(input_response_data_dir):
+        if file.startswith(f"output_{args.examples}-shot") and file.endswith(".jsonl"):
+          if file > input_file_name:
+            input_file_name = file
+      if not input_file_name:
+        raise ValueError("No response file found.")
+      input_response_data = os.path.join(input_response_data_dir, input_file_name)
+
+    results = read_result_list(input_response_data)
     print(len(results))
 
     outputs = []
-
-    input_file_name = args.input_response_data.split("/")[-1]
     output_file_name = f"rule_eval@{input_file_name}"
     logging.info("Generating %s...", output_file_name)
 
@@ -417,11 +429,11 @@ def main():
     accuracy = sum(follow_all_instructions) / len(outputs)
     logging.info("Strict IF Accuracy: %f", accuracy)
 
-    (Path(args.input_response_data).parent / "reports").mkdir(
+    (Path(input_response_data).parent / "reports").mkdir(
         parents=True, exist_ok=True
     )
     output_file_name = str(
-        (Path(args.input_response_data).parent / "reports")
+        (Path(input_response_data).parent / "reports")
         / f"{output_file_name}.jsonl"
     )
     write_outputs(output_file_name, outputs)

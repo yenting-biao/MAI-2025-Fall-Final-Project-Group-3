@@ -15,6 +15,65 @@
 * [requirements](./requirements)
      * [diva.txt](./requirements/diva.txt)
 
+### Model response dir format
+
+ * [qwen](./qwen)
+  * [ASR](./qwen/ASR)
+    * [closed_ended_questions](./qwen/AR/closed_ended_questions)
+      * [change_case_english_capital](./qwen/AR/closed_ended_questions/change_case_english_capital)
+      * [change_case_english_lowercase](./qwen/AR/closed_ended_questions/change_case_english_lowercase)
+      * [detectable_format_json_format](./qwen/AR/closed_ended_questions/detectable_format_json_format)
+      * [startend_quotation](./qwen/AR/closed_ended_questions/startend_quotation)
+      * [detectable_format_title](./qwen/AR/closed_ended_questions/detectable_format_title)
+      * [combination_repeat_prompt](./qwen/AR/closed_ended_questions/combination_repeat_prompt)
+      * [startend_end_checker](./qwen/AR/closed_ended_questions/startend_end_checker)
+    * [creative_writing](./qwen/AR/creative_writing)
+        * [detectable_format_number_bullet_lists](./qwen/AR/creative_writing/detectable_format_number_bullet_lists)
+        * [keywords_existence](./qwen/AR/creative_writing/keywords_existence)
+        * [keywords_forbidden_words](./qwen/AR/creative_writing/keywords_forbidden_words)
+        * [length_constraints_number_words](./qwen/AR/creative_writing/length_constraints_number_words)
+        * [length_constraints_number_sentences](./qwen/AR/creative_writing/length_constraints_number_sentences)
+        * [length_constraints_number_paragraphs](./qwen/AR/creative_writing/length_constraints_number_paragraphs)
+    * [chain-of-thought](./qwen/AR/chain-of-thought)
+      * [chain-of-thought](./qwen/AR/chain-of-thought/chain-of-thought)
+  * [SER](./qwen/SER)
+    * [closed_ended_questions](./qwen/SER/closed_ended_questions)
+      * [change_case_english_capital](./qwen/SER/closed_ended_questions/change_case_english_capital)
+      * [change_case_english_lowercase](./qwen/SER/closed_ended_questions/change_case_english_lowercase)
+      * [detectable_format_json_format](./qwen/SER/closed_ended_questions/detectable_format_json_format)
+      * [startend_quotation](./qwen/SER/closed_ended_questions/startend_quotation)
+      * [detectable_format_title](./qwen/SER/closed_ended_questions/detectable_format_title)
+      * [combination_repeat_prompt](./qwen/SER/closed_ended_questions/combination_repeat_prompt)
+      * [startend_end_checker](./qwen/SER/closed_ended_questions/startend_end_checker)
+    * [creative_writing](./qwen/SER/creative_writing)
+      * [detectable_format_number_bullet_lists](./qwen/SER/creative_writing/detectable_format_number_bullet_lists)
+      * [keywords_existence](./qwen/SER/creative_writing/keywords_existence)
+      * [keywords_forbidden_words](./qwen/SER/creative_writing/keywords_forbidden_words)
+      * [length_constraints_number_words](./qwen/SER/creative_writing/length_constraints_number_words)
+      * [length_constraints_number_sentences](./qwen/SER/creative_writing/length_constraints_number_sentences)
+      * [length_constraints_number_paragraphs](./qwen/SER/creative_writing/length_constraints_number_paragraphs)
+    * [chain-of-thought](./qwen/SER/chain-of-thought)
+      * [chain-of-thought](./qwen/SER/chain-of-thought/chain-of-thought)
+  * [GR](./qwen/GR)
+    * [closed_ended_questions](./qwen/GR/closed_ended_questions)
+      * [change_case_english_capital](./qwen/GR/closed_ended_questions/change_case_english_capital)
+      * [change_case_english_lowercase](./qwen/GR/closed_ended_questions/change_case_english_lowercase)
+      * [detectable_format_json_format](./qwen/GR/closed_ended_questions/detectable_format_json_format)
+      * [startend_quotation](./qwen/GR/closed_ended_questions/startend_quotation)
+      * [detectable_format_title](./qwen/GR/closed_ended_questions/detectable_format_title)
+      * [combination_repeat_prompt](./qwen/GR/closed_ended_questions/combination_repeat_prompt)
+      * [startend_end_checker](./qwen/GR/closed_ended_questions/startend_end_checker)
+    * [creative_writing](./qwen/GR/creative_writing)
+      * [detectable_format_number_bullet_lists](./qwen/GR/creative_writing/detectable_format_number_bullet_lists)
+      * [keywords_existence](./qwen/GR/creative_writing/keywords_existence)
+      * [keywords_forbidden_words](./qwen/GR/creative_writing/keywords_forbidden_words)
+      * [length_constraints_number_words](./qwen/GR/creative_writing/length_constraints_number_words)
+      * [length_constraints_number_sentences](./qwen/GR/creative_writing/length_constraints_number_sentences)
+      * [length_constraints_number_paragraphs](./qwen/GR/creative_writing/length_constraints_number_paragraphs)
+    * [chain-of-thought](./qwen/GR/chain-of-thought)
+      * [chain-of-thought](./qwen/GR/chain-of-thought/chain-of-thought)
+
+
 - Tool for printing directory tree
 
     ```bash
@@ -85,7 +144,7 @@ pip install -r requirements/<model_name>.txt
 conda install -c conda-forge ffmpeg
 ```
 
-For DeSTA2_5, we need to download the model manually. 
+For DeSTA2_5, we need to download the model manually.
 ```bash
 git clone https://github.com/kehanlu/DeSTA2.5-Audio.git
 cd DeSTA2.5-Audio
@@ -127,3 +186,55 @@ Replace `<model_name>`, `<audio_task>`, `<response_task>`, `<IF_task>`, and `<nu
 ```bash
 python run.py --model_name qwen --audio_task ASR --response_task closed_ended_questions --IF_task change_case:english_capital --examples 3
 ```
+
+## Experiment Suite
+
+### Generate and save LALMs' responses.
+
+```bash
+bash scripts/<model_name>_ceq
+bash scripts/<model_name>_cw
+bash scripts/<model_name>_CoT
+```
+
+The query with metadata (e.g., instruction, the entire messages) and the model responses would be stored in the following dir structure.
+
+```
+- model_response/
+  - <model_name>
+    - ASR/
+      - chain-of-thought/
+        - chain-of-thought/
+          - outout_{examples}-shot_{timestamp}.jsonl
+          - ...jsonl
+      - closed_ended_questions/
+        - ...
+      - creative_writing/
+        ...
+    - GR/
+      - chain-of-thought/
+        - chain-of-thought/
+      - closed_ended_questions/
+        - ...
+      - creative_writing/
+        ...
+    - SER/
+      - chain-of-thought/
+        - chain-of-thought/
+      - closed_ended_questions/
+        - ...
+      - creative_writing/
+        ...
+```
+
+Evaluate LALMs' responses w/o LLM judge (for `closed_ended_questions`).
+
+```bash
+conda acitvate <your-env>
+pip install -r eval_scripts/requirements.txt
+bash scripts/eval.sh
+```
+
+Evaluate LALMs' responses with LLM judge (for `creative_writing` and `chain-of-thought`).
+
+NOT IMPLEMENTED YET.

@@ -9,42 +9,8 @@ from pathlib import Path
 from tqdm import tqdm
 
 from models.basemodel import BaseModel
-
-MAP_MODEL_NAME = {
-    "qwen": "Qwen",
-    "qwen2": "Qwen2",
-    "desta2_5": "desta2_5",
-    "blsp-emo": "BLSP-Emo",
-}
-MAP_AUDIO_TASK = {
-    "ASR": "Automatic_speech_recognition",
-    "SER": "Speech_emotion_recognition",
-    "GR": "Gender_recognition",
-    # "MMAU": "MMAU", # not implemented yet
-}
-IMPLEMENTED_IF_TASKS = [
-    # closed_ended_questions
-        "change_case:english_capital",
-        "change_case:english_lowercase",
-        "detectable_format:json_format",
-        "startend:quotation",
-        "detectable_format:title",
-        "combination:repeat_prompt",
-        "startend:end_checker",
-#    # creative_writing (not implemented yet)
-#         "detectable_format:number_bullet_lists",
-#         "keywords:existence",
-#         "keywords:forbidden_words",
-#         "length_constraints:number_words",
-#         "length_constraints:number_sentences",
-#         "length_constraints:number_paragraphs",
-]
-
-TEST_SAMPLE = {
-    "audio_path": "./data/audios/Automatic_speech_recognition/7176-92135-0019.flac",
-    # "instruction": "what does the person in the first audio say?\nWrite everything in your response using capital letters only.",
-    "instruction": "what does the person in the last audio say?\nWrite everything in your response using capital letters only.",       #   Test on the last audio example
-}
+from config import get_task_parser
+from config import MAP_MODEL_NAME, MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS, TEST_SAMPLE
 
 def set_seed(seed: int = 42, verbose: bool = False) -> None:
     # Python & OS
@@ -100,7 +66,10 @@ def GetICLData(args: argparse.Namespace) -> list[dict]:
     '''
     with open(args.icl_json_path, "r") as f:
         InContextDataset = json.load(f)
-    return InContextDataset[args.audio_task][args.response_task][args.IF_task]
+    if args.response_task == "chain-of-thought":
+        return InContextDataset[args.audio_task][args.response_task]
+    else: # closed_ended_questions or creative_writing
+        return InContextDataset[args.audio_task][args.response_task][args.IF_task]
 
 def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list[dict], str]:
     '''
@@ -134,7 +103,7 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list
         for tc in test_cases_tmp:
             condition_1 = tc["audio_filepath"].startswith(audio_task_mapped)
             condition_2 = tc["dataset"] == audio_task_mapped
-            condition_3 = tc["instruction_id_list"][0] == args.IF_task
+            condition_3 = tc["instruction_id_list"][0] == args.IF_task if args.response_task != "chain-of-thought" else True
             if condition_1 and condition_2 and condition_3:
                 test_cases.append(tc)
 
@@ -219,52 +188,15 @@ def GenerateMessagesResponse(
     return messages_str, response
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="In-Context Learning (ICL) Configuration")
-
     # Model and Task Settings
-    parser.add_argument("--model_name", type=str, default="qwen",
-                        choices=["qwen", "qwen2", "desta2_5", "blsp-emo"],
-                        help="Name of the pre-trained language model to use.")
-
-    parser.add_argument("--audio_task", type=str, default="ASR",
-                        choices=["ASR", "SER", "GR", "MMAU"], # MMAU is not implemented yet
-                        help="The specific audio-related task.")
-
-    parser.add_argument(
-        "--response_task", type=str, default="closed_ended_questions",
-        choices=[
-            "closed_ended_questions",
-            "chain-of-thought", # not implemented yet
-            "creative_writing", # not implemented yet
-        ], help="The specific task for in-context learning.")
-
-    parser.add_argument(
-        "--IF_task", type=str, default="change_case:english_capital",
-        choices=[
-            # closed_ended_questions
-                "change_case:english_capital",
-                "change_case:english_lowercase",
-                "detectable_format:json_format",
-                "startend:quotation",
-                "detectable_format:title",
-                "combination:repeat_prompt",
-                "startend:end_checker",
-            # creative_writing
-                "detectable_format:number_bullet_lists",
-                "keywords:existence",
-                "keywords:forbidden_words",
-                "length_constraints:number_words",
-                "length_constraints:number_sentences",
-                "length_constraints:number_paragraphs",
-        ], help="The format constraint task (i.e., instruction) for the model's response.")
+    parser = get_task_parser()
 
     # ICL Settings
-    parser.add_argument("--examples", type=int, default=5, help="Number of in-context examples to use. Select from [0, 8]")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu", help="Device to run the model on.")
     parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility.")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose output.")
     parser.add_argument("--debug", action="store_true", help="Enable debug mode with verbose logging.")
-
+    parser.add_argument("--debug_examples", type=int, default=10, help="Number of test examples to run in debug mode.")
 
     # Dir Settings
     parser.add_argument("--output_dir", type=str, default="./model_responses/", help="Directory to save the outputs.")
@@ -295,6 +227,8 @@ def verify_args(args: argparse.Namespace) -> None:
         raise ValueError(f"Response task {args.response_task} is not supported.")
     if args.IF_task not in IMPLEMENTED_IF_TASKS:
         raise ValueError(f"IF task {args.IF_task} is not implemented yet.")
+    if args.debug and args.debug_examples <= 0:
+        raise ValueError("Number of debug examples must be greater than 0 when debug mode is enabled.")
     if args.verbose:
         print("Arguments verified successfully.")
 
@@ -315,6 +249,8 @@ def main(args: argparse.Namespace) -> None:
     # Prepare ICL data and test cases
     icl_data = GetICLData(args) if args.examples > 0 else []
     test_cases, test_audio_dir = GetTestCases(args, audio_task_mapped)
+    if args.debug:
+        test_cases = test_cases[:min(args.debug_examples, len(test_cases))]
     if args.verbose:
         print(f"\033[93mLoaded {len(icl_data)} ICL examples and {len(test_cases)} test case(s).\033[0m")
 

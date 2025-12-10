@@ -14,7 +14,9 @@ class Qwen_Audio_Chat(BaseModel):
         self.device = device
         #   Load actual model
         self.tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-Audio-Chat", trust_remote_code=True, cache_dir="./cache")
-        self.model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-Audio-Chat", device_map=device, trust_remote_code=True, cache_dir="./cache").eval()
+        self.model = AutoModelForCausalLM.from_pretrained(
+            "Qwen/Qwen-Audio-Chat", device_map=device, trust_remote_code=True, cache_dir="./cache", bf16=True
+        ).eval()
 
 
     def process_input(self, conversation:list[dict]) -> None:
@@ -34,7 +36,7 @@ class Qwen_Audio_Chat(BaseModel):
 
         #   Prepare the final message
         if ICLexamples > 0:
-            self.messages = f"Here are {ICLexamples} examples with answers:\n"
+            self.messages = f"You will be provided with {ICLexamples} example pairs of questions and answers. You should follow the examples to answer the last question."
         else:
             self.messages = "Here are an audio and an instruction:\n"
         self.messages += self.tokenizer.from_list_format(messages)

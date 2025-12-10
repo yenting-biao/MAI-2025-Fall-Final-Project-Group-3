@@ -192,9 +192,9 @@ python run.py --model_name qwen --audio_task ASR --response_task closed_ended_qu
 ### Generate and save LALMs' responses.
 
 ```bash
-bash scripts/<model_name>_ceq
-bash scripts/<model_name>_cw
-bash scripts/<model_name>_CoT
+bash scripts/<model_name>_ceq.sh
+bash scripts/<model_name>_cw.sh
+bash scripts/<model_name>_CoT.sh
 ```
 
 The query with metadata (e.g., instruction, the entire messages) and the model responses would be stored in the following dir structure.
@@ -232,9 +232,14 @@ Evaluate LALMs' responses w/o LLM judge (for `closed_ended_questions`).
 ```bash
 conda acitvate <your-env>
 pip install -r eval_scripts/requirements.txt
-bash scripts/eval.sh
+bash eval_scripts/<model_name>_ceq.sh
 ```
 
 Evaluate LALMs' responses with LLM judge (for `creative_writing` and `chain-of-thought`).
 
 NOT IMPLEMENTED YET.
+
+```bash
+# bash eval_scripts/<model_name>_cw.sh # not implemented yet
+# bash eval_scripts/<model_name>_CoT.sh # not implemented yet
+```

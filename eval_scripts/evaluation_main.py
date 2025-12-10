@@ -434,7 +434,7 @@ def main():
     )
     output_file_name = str(
         (Path(input_response_data).parent / "reports")
-        / f"{output_file_name}.jsonl"
+        / f"{output_file_name}"
     )
     write_outputs(output_file_name, outputs)
     logging.info("Generated: %s", output_file_name)

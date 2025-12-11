@@ -3,9 +3,15 @@
 import argparse
 import json
 import os
+import sys
 from typing import Dict, Any, List
 
 from tqdm import tqdm
+
+# Add project root (parent of eval_scripts) to sys.path
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
 
 from utils import VLLMInference  # uses Qwen/Qwen3-8B by default
 from config import get_task_parser
@@ -197,13 +203,13 @@ def parse_args():
     parser.add_argument(
         "--input_path",
         type=str,
-        required=True,
-        help="Path to input .jsonl (e.g., output_0-shot_20251208-210047.jsonl).",
+        default=None,
+        help="Path to input .jsonl (e.g., <model_name>/<audio_task>/<response_task>/<if_task>/output_<k>-shot_<timestamp>.jsonl).",
     )
     parser.add_argument(
         "--output_path",
         type=str,
-        required=True,
+        default=None,
         help="Path to output .jsonl with Qwen IF judgments.",
     )
     parser.add_argument(
@@ -285,6 +291,18 @@ def main(args):
         top_k=-1,
         max_tokens=512,  # judging prompt is short
     )
+
+    if args.input_path and args.output_path:
+        evaluate_if_level_with_qwen(
+            judge=judge,
+            input_path=args.input_path,
+            output_path=args.output_path,
+            batch_size=args.batch_size,
+            max_samples=args.max_samples,
+            instruction_key=args.instruction_key,
+            response_key=args.response_key,
+        )
+        exit(0)
 
     test_model = args.model_name
     audio_task, response_task, if_tasks = get_task_names(args)

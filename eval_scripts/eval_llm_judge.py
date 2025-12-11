@@ -17,16 +17,14 @@ def build_if_judge_prompt(
     response: str,
 ) -> str:
     """
-    Build a prompt for Qwen3 that asks it to judge how well the response
-    follows the instruction *format and explicit constraints*, ignoring
-    factual correctness.
+    Ask Qwen to give a single instruction-following score in [0, 1].
     """
     prompt = f"""
 You are grading how well a model response follows a natural-language instruction.
 
 IMPORTANT:
 - Focus ONLY on whether the response respects the *format, style, and explicit constraints* in the instruction.
-  Examples of explicit constraints include:
+  Examples of explicit constraints:
   - required number of items or bullet points,
   - required answer options (e.g., "answer with yes or no"),
   - requested output format (e.g., JSON, a single word, a list),
@@ -34,20 +32,18 @@ IMPORTANT:
 - IGNORE whether the content itself is factually correct or relevant.
 - Look only at instruction-following.
 
-You must assign one of three levels:
+You must output a single score in [0, 1], called "if_score":
 
-1. "strict"      – The response fully follows all explicit constraints.
-2. "loose"       – The response partially or approximately follows them,
-                   but there are noticeable issues (wrong number of items,
-                   extra explanation when a pure JSON was requested, mild format errors, etc.).
-3. "not_follow"  – The response clearly ignores or violates the main constraints.
+- 1.0  = perfectly follows all explicit constraints.
+- 0.8  = almost perfect; only tiny cosmetic issues.
+- 0.6  = mostly follows; some noticeable issues but the main constraints are respected.
+- 0.3  = only partially follows; major constraints are violated.
+- 0.0  = does not follow the instruction at all.
+
+You may use any real value in [0, 1], but it should reflect this rubric.
 
 Your output MUST be a single valid JSON object, with exactly these fields:
-- "level": one of "strict", "loose", "not_follow"
-- "score": a number in [0, 1], where
-    * 1.0  = strict
-    * 0.5  = loose
-    * 0.0  = not_follow
+- "if_score": a number in [0, 1]
 - "reason": a short explanation in one sentence
 
 Do NOT include any text before or after the JSON.
@@ -61,7 +57,6 @@ Return ONLY the JSON.
 {response}
 """
     return prompt.strip()
-
 
 # ---------- Helper to parse JSON from Qwen output ----------
 
@@ -170,31 +165,35 @@ def evaluate_if_level_with_qwen(
 
 
 def _run_batch_and_write(
-    batch_records: List[Dict[str, Any]],
-    batch_prompts: List[str],
+    batch_records: list[dict],
+    batch_prompts: list[str],
     judge: VLLMInference,
     fout,
 ) -> None:
-    """
-    Call Qwen on a batch of prompts and write augmented records line-by-line.
-    """
     outputs = judge.generate_response(batch_prompts)
 
     for record, raw_out in zip(batch_records, outputs):
         try:
             verdict = extract_json_from_text(raw_out)
-            level = verdict.get("level", "not_follow")
-            score = float(verdict.get("score", 0.0))
+            if_score = float(verdict.get("if_score", 0.0))
+            if_score = max(0.0, min(1.0, if_score))  # clamp just in case
             reason = verdict.get("reason", "")
         except Exception as e:
-            # Fallback: treat as not_follow if we cannot parse the JSON.
-            level = "not_follow"
-            score = 0.0
+            if_score = 0.0
             reason = f"Failed to parse judge JSON: {e}"
 
-        record["if_level"] = level
-        record["if_score"] = score
+        # Always log the continuous score
+        record["if_score"] = if_score
         record["if_reason"] = reason
+
+        # Optional: derive a categorical label for later analysis
+        if if_score >= 0.8:
+            level = "strict"
+        elif if_score >= 0.4:
+            level = "loose"
+        else:
+            level = "not_follow"
+        record["if_level"] = level
 
         fout.write(json.dumps(record, ensure_ascii=False) + "\n")
 

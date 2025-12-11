@@ -8,7 +8,8 @@ from typing import Dict, Any, List
 from tqdm import tqdm
 
 from utils import VLLMInference  # uses Qwen/Qwen3-8B by default
-
+from config import get_task_parser
+from config import MAP_MODEL_NAME, MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS
 
 # ---------- Prompt builder ----------
 
@@ -101,9 +102,9 @@ def extract_json_from_text(text: str) -> Dict[str, Any]:
 # ---------- Main evaluation logic ----------
 
 def evaluate_if_level_with_qwen(
+    judge: VLLMInference,
     input_path: str,
     output_path: str,
-    model_name: str = "Qwen/Qwen3-8B",
     batch_size: int = 4,
     max_samples: int | None = None,
     instruction_key: str = "instruction",
@@ -118,15 +119,6 @@ def evaluate_if_level_with_qwen(
         - "if_score":  1.0 | 0.5 | 0.0
         - "if_reason": short explanation string
     """
-    # Instantiate Qwen3 judge; use deterministic-ish decoding.
-    judge = VLLMInference(
-        model_name=model_name,
-        temperature=0.0,
-        top_p=1.0,
-        top_k=-1,
-        max_tokens=512,  # judging prompt is short
-    )
-
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
 
     with open(input_path, "r", encoding="utf-8") as fin, \
@@ -201,9 +193,7 @@ def _run_batch_and_write(
 # ---------- CLI ----------
 
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description="Use Qwen3 to judge instruction-following level of LLM responses."
-    )
+    parser = get_task_parser()
     parser.add_argument(
         "--input_path",
         type=str,
@@ -217,7 +207,7 @@ def parse_args():
         help="Path to output .jsonl with Qwen IF judgments.",
     )
     parser.add_argument(
-        "--model_name",
+        "--judge_name",
         type=str,
         default="Qwen/Qwen3-8B",
         help="Qwen3 model name for vLLM (default: Qwen/Qwen3-8B).",
@@ -249,17 +239,82 @@ def parse_args():
 
     return parser.parse_args()
 
+def get_task_names(args):
+    audio_task = MAP_AUDIO_TASK[args.audio_task]
+
+    if args.response_task == "creative_writing":
+        response_task = args.response_task
+        if args.IF_task is None:
+            if_tasks = [
+                "detectable_format_number_bullet_lists",
+                "length_constraints_number_words",
+                "length_constraints_number_sentences",
+                "length_constraints_number_paragraphs",
+            ]
+            if args.audio_task == "ASR":
+                if_tasks.append("keywords_existence")
+                if_tasks.append("keywords_forbidden_words")
+        else:
+            if_task = args.IF_task
+            if if_task not in IMPLEMENTED_IF_TASKS:
+                raise ValueError(f"IF task {if_task} not implemented.")
+            if if_task.startswith("keywords"):
+                if args.audio_task != "ASR":
+                    raise ValueError(f"IF task {if_task} only supported for ASR audio task.")
+            if_tasks = [if_task]
+    elif args.response_task == "chain-of-thought":
+        response_task = args.response_task
+        if args.IF_task is None or args.IF_task == "chain-of-thought":
+            if_tasks = ["chain-of-thought"]
+        else:
+            raise ValueError(f"IF task {args.IF_task} not supported for chain-of-thought.")
+    elif args.response_task == "closed_ended_questions":
+        raise ValueError("closed_ended_questions is not supported in eval_llm_judge.py")
+    else:
+        raise ValueError(f"Unknown response task: {args.response_task}")
+
+    return audio_task, response_task, if_tasks
+
 
 def main(args):
-    evaluate_if_level_with_qwen(
-        input_path=args.input_path,
-        output_path=args.output_path,
-        model_name=args.model_name,
-        batch_size=args.batch_size,
-        max_samples=args.max_samples,
-        instruction_key=args.instruction_key,
-        response_key=args.response_key,
+    # Initialize the Qwen3 judge
+    judge = VLLMInference(
+        model_name=args.judge_name,
+        temperature=0.0,
+        top_p=1.0,
+        top_k=-1,
+        max_tokens=512,  # judging prompt is short
     )
+
+    test_model = args.model_name
+    audio_task, response_task, if_tasks = get_task_names(args)
+    print(f"Evaluating IF level for model={test_model}, audio_task={audio_task}, "
+          f"response_task={response_task},\nif_tasks={if_tasks}")
+
+    for if_task in if_tasks:
+        print(f"\nEvaluating IF task: {if_task}")
+        if_task_formatted = if_task.replace(":", "_")
+        input_dir = f"model_responses/{test_model}/{audio_task}/{response_task}/{if_task_formatted}"
+        output_dir = f"model_responses/{test_model}/{audio_task}/{response_task}/{if_task_formatted}/reports"
+        os.makedirs(output_dir, exist_ok=True)
+
+        for input_file in os.listdir(input_dir): # iterate over all output_{k}.jsonl, where k = 0, ..., 8
+            if not input_file.startswith("output_") or not input_file.endswith(".jsonl"):
+                continue
+            input_path = os.path.join(input_dir, input_file)
+            output_path = os.path.join(output_dir, f"judge@{input_file}")
+            print(f"Input: {input_path}")
+            print(f"Output: {output_path}")
+
+            evaluate_if_level_with_qwen(
+                judge=judge,
+                input_path=input_path,
+                output_path=output_path,
+                batch_size=args.batch_size,
+                max_samples=args.max_samples,
+                instruction_key=args.instruction_key,
+                response_key=args.response_key,
+            )
 
 if __name__ == "__main__":
     args = parse_args()

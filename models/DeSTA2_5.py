@@ -18,8 +18,8 @@ class DeSTA2_5(BaseModel):
     
     def process_input(self, conversation):
         messages = []
-        messages.append({"role": "system", "content": "You are a helpful voice assistant."})
         ICL_examples = len(conversation) - 1
+        messages.append({"role": "system", "content": "You are a helpful voice assistant. You will be provided with {} example pairs of questions and answers based on audio inputs. You should follow the examples to answer the last question.".format(ICL_examples)})
         for i in range(ICL_examples):
             info :dict = conversation[i]
             messages.append({"role": "user", 
@@ -43,7 +43,7 @@ class DeSTA2_5(BaseModel):
             temperature=0.6,
             top_p=0.9,
         )
-        return outputs.text
+        return outputs.text[0]
         # return super().generate()
 
 

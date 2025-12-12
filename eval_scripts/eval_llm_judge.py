@@ -14,7 +14,7 @@ if ROOT_DIR not in sys.path:
 
 from utils import VLLMInference  # uses Qwen/Qwen3-8B by default
 from config import get_task_parser
-from config import MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS
+from config import IMPLEMENTED_IF_TASKS
 
 # ---------- Prompt builder ----------
 
@@ -226,7 +226,7 @@ def parse_args():
     return parser.parse_args()
 
 def get_task_names(args):
-    audio_task = args.audio_task #MAP_AUDIO_TASK[args.audio_task]
+    audio_task = args.audio_task
 
     if args.response_task == "creative_writing":
         response_task = args.response_task

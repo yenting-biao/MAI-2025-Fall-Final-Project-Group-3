@@ -226,7 +226,7 @@ def parse_args():
     return parser.parse_args()
 
 def get_task_names(args):
-    audio_task = MAP_AUDIO_TASK[args.audio_task]
+    audio_task = args.audio_task #MAP_AUDIO_TASK[args.audio_task]
 
     if args.response_task == "creative_writing":
         response_task = args.response_task

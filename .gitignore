@@ -211,3 +211,5 @@ cache/
 data/
 output_old/
 outputs_old/
+
+slurm-*.out

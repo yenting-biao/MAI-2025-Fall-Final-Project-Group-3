@@ -283,13 +283,7 @@ def get_task_names(args):
 
 def main(args):
     # Initialize the Qwen3 judge
-    judge = VLLMInference(
-        model_name=args.judge_name,
-        temperature=0.0,
-        top_p=1.0,
-        top_k=-1,
-        max_tokens=512,  # judging prompt is short
-    )
+    judge = VLLMInference(model_name=args.judge_name)
 
     if args.input_path and args.output_path:
         evaluate_if_level_with_qwen(

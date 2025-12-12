@@ -108,7 +108,7 @@ def compute_wer(ref_text: str, hyp_text: str) -> float:
     return distance / float(len(ref_tokens))
 
 
-def annotate_answer_correctness(result: dict) -> dict:
+def annotate_answer_correctness(result: dict, audio_task: str = "") -> dict:
     """Annotate each result dict with answer correctness.
 
     Adds:
@@ -129,20 +129,17 @@ def annotate_answer_correctness(result: dict) -> dict:
         result["wer"] = wer_value
         # "Correct" == perfect transcription by default
         exact = (wer_value == 0.0)
-        result["exact_match"] = exact
         result["answer_correct"] = exact
 
-    elif metric == "exact":
+    elif metric == "accuracy":
         def _norm(s: str) -> str:
             return re.sub(r"\s+", " ", s).strip().lower()
 
-        exact = _norm(response) == _norm(label)
-        result["exact_match"] = exact
-        result["answer_correct"] = exact
+        correct = _norm(response) == _norm(label)
+        result["answer_correct"] = correct
 
     else:
         # For 'open', 'keyword_exist', etc., we do not define correctness here.
-        # You can extend this branch later if needed.
         pass
 
     return result
@@ -398,13 +395,14 @@ def main():
       input_response_data = os.path.join(input_response_data_dir, input_file_name)
 
     results = read_result_list(input_response_data)
-    print(len(results))
+    # print(len(results))
 
     outputs = []
     output_file_name = f"rule_eval@{input_file_name}"
     logging.info("Generating %s...", output_file_name)
 
     for result in results:
+        audio_task = result.get("dataset", "")
         condition = {
             "key": result["id"],
             "instruction_id_list": result["instruction_id_list"],
@@ -420,14 +418,14 @@ def main():
         result = test_instruction_following_loose_inplace(condition, result)
 
         # 3) Answer correctness (WER / exact match)
-        result = annotate_answer_correctness(result)
+        result = annotate_answer_correctness(result, audio_task)
 
         outputs.append(result)
 
     # Aggregate strict IF stats (as before).
     follow_all_instructions = [o["follow_all_instructions"] for o in outputs]
-    accuracy = sum(follow_all_instructions) / len(outputs)
-    logging.info("Strict IF Accuracy: %f", accuracy)
+    IF_rate = sum(follow_all_instructions) / len(outputs)
+    logging.info("Strict IF Rate: %f", IF_rate)
 
     (Path(input_response_data).parent / "reports").mkdir(
         parents=True, exist_ok=True
@@ -440,21 +438,21 @@ def main():
     logging.info("Generated: %s", output_file_name)
 
     # Prints instruction-following accuracy report (strict).
-    print("=" * 64)
-    print(f"{output_file_name} Accuracy Scores:")
-    print_report(outputs)
-    print(output_file_name)
+    # print("=" * 64)
+    print(f"output_file_name: {output_file_name}")
+    # print_report(outputs)
+    # print(output_file_name)
 
     # Print simple semantic-accuracy summary for debugging.
-    wer_values = [o["wer"] for o in outputs if "wer" in o]
-    if wer_values:
-        mean_wer = sum(wer_values) / len(wer_values)
-        print(f"Mean WER over {len(wer_values)} examples: {mean_wer:.4f}")
+    # wer_values = [o["wer"] for o in outputs if "wer" in o]
+    # if wer_values:
+    #     mean_wer = sum(wer_values) / len(wer_values)
+    #     print(f"Mean WER over {len(wer_values)} examples: {mean_wer:.4f}")
 
-    answer_flags = [o["answer_correct"] for o in outputs if "answer_correct" in o]
-    if answer_flags:
-        ans_acc = sum(answer_flags) / len(answer_flags)
-        print(f"Answer-correct accuracy over labeled examples: {ans_acc:.4f}")
+    # answer_flags = [o["answer_correct"] for o in outputs if "answer_correct" in o]
+    # if answer_flags:
+    #     ans_acc = sum(answer_flags) / len(answer_flags)
+    #     print(f"Answer-correct accuracy over labeled examples: {ans_acc:.4f}")
 
 
 if __name__ == "__main__":

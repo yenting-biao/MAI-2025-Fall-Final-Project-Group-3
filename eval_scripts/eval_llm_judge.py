@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import argparse
 import json
 import os
 import sys
@@ -15,7 +14,7 @@ if ROOT_DIR not in sys.path:
 
 from utils import VLLMInference  # uses Qwen/Qwen3-8B by default
 from config import get_task_parser
-from config import MAP_MODEL_NAME, MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS
+from config import MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS
 
 # ---------- Prompt builder ----------
 

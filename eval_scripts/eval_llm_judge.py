@@ -110,7 +110,6 @@ def evaluate_if_level_with_qwen(
     judge: VLLMInference,
     input_path: str,
     output_path: str,
-    batch_size: int = 4,
     max_samples: int | None = None,
     instruction_key: str = "instruction",
     response_key: str = "response",
@@ -132,6 +131,7 @@ def evaluate_if_level_with_qwen(
         batch_records: List[Dict[str, Any]] = []
         batch_prompts: List[str] = []
 
+        # prepare all prompts first
         for line_idx, line in enumerate(tqdm(fin, desc="Evaluating IF level")):
             line = line.strip()
             if not line:
@@ -151,48 +151,35 @@ def evaluate_if_level_with_qwen(
             batch_records.append(record)
             batch_prompts.append(prompt)
 
-            # When batch is full, query Qwen and write results
-            if len(batch_prompts) >= batch_size:
-                _run_batch_and_write(batch_records, batch_prompts, judge, fout)
-                batch_records, batch_prompts = [], []
+        # Feed into vllm
+        outputs = judge.generate_response(batch_prompts)
 
-        # Last partial batch
-        if batch_prompts:
-            _run_batch_and_write(batch_records, batch_prompts, judge, fout)
+        # Process outputs
+        for record, raw_out in zip(batch_records, outputs):
+            try:
+                verdict = extract_json_from_text(raw_out)
+                if_score = float(verdict.get("if_score", 0.0))
+                if_score = max(0.0, min(1.0, if_score))  # clamp just in case
+                reason = verdict.get("reason", "")
+            except Exception as e:
+                if_score = 0.0
+                reason = f"Failed to parse judge JSON: {e}"
 
+            # Always log the continuous score
+            record["if_judge_raw_output"] = raw_out
+            record["if_score"] = if_score
+            record["if_reason"] = reason
 
-def _run_batch_and_write(
-    batch_records: list[dict],
-    batch_prompts: list[str],
-    judge: VLLMInference,
-    fout,
-) -> None:
-    outputs = judge.generate_response(batch_prompts)
+            # Optional: derive a categorical label for later analysis
+            if if_score >= 0.8:
+                level = "strict"
+            elif if_score >= 0.4:
+                level = "loose"
+            else:
+                level = "not_follow"
+            record["if_level"] = level
 
-    for record, raw_out in zip(batch_records, outputs):
-        try:
-            verdict = extract_json_from_text(raw_out)
-            if_score = float(verdict.get("if_score", 0.0))
-            if_score = max(0.0, min(1.0, if_score))  # clamp just in case
-            reason = verdict.get("reason", "")
-        except Exception as e:
-            if_score = 0.0
-            reason = f"Failed to parse judge JSON: {e}"
-
-        # Always log the continuous score
-        record["if_score"] = if_score
-        record["if_reason"] = reason
-
-        # Optional: derive a categorical label for later analysis
-        if if_score >= 0.8:
-            level = "strict"
-        elif if_score >= 0.4:
-            level = "loose"
-        else:
-            level = "not_follow"
-        record["if_level"] = level
-
-        fout.write(json.dumps(record, ensure_ascii=False) + "\n")
+            fout.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
 # ---------- CLI ----------
@@ -216,12 +203,6 @@ def parse_args():
         type=str,
         default="Qwen/Qwen3-8B",
         help="Qwen3 model name for vLLM (default: Qwen/Qwen3-8B).",
-    )
-    parser.add_argument(
-        "--batch_size",
-        type=int,
-        default=4,
-        help="Batch size for vLLM inference.",
     )
     parser.add_argument(
         "--max_samples",
@@ -290,7 +271,6 @@ def main(args):
             judge=judge,
             input_path=args.input_path,
             output_path=args.output_path,
-            batch_size=args.batch_size,
             max_samples=args.max_samples,
             instruction_key=args.instruction_key,
             response_key=args.response_key,
@@ -321,7 +301,6 @@ def main(args):
                 judge=judge,
                 input_path=input_path,
                 output_path=output_path,
-                batch_size=args.batch_size,
                 max_samples=args.max_samples,
                 instruction_key=args.instruction_key,
                 response_key=args.response_key,

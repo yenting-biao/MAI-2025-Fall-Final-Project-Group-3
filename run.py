@@ -51,7 +51,7 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
             return BLSP_Emo(device=device)
     raise ValueError(f"Model {model_name} not supported.")
 
-def GetICLData(args: argparse.Namespace) -> list[dict]:
+def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:
     '''
         Load ICL examples from JSON file.
         Output format:
@@ -67,9 +67,17 @@ def GetICLData(args: argparse.Namespace) -> list[dict]:
     with open(args.icl_json_path, "r") as f:
         InContextDataset = json.load(f)
     if args.response_task == "chain-of-thought":
-        return InContextDataset[args.audio_task][args.response_task]
+        IclData = InContextDataset[args.audio_task][args.response_task]
     else: # closed_ended_questions or creative_writing
-        return InContextDataset[args.audio_task][args.response_task][args.IF_task]
+        IclData = InContextDataset[args.audio_task][args.response_task][args.IF_task]
+    
+    # Verify ICL data
+    assert len(IclData) == max_examples, \
+        f"ICL data does not have the required number of examples: expected {max_examples}, got {len(IclData)}."
+    assert all(item.get("audio_path") and item.get("instruction") and item.get("ans") for item in IclData), \
+        "ICL data is not properly formatted: missing or empty 'audio_path', 'instruction', or 'ans' fields."
+    
+    return IclData
 
 def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list[dict], str]:
     '''

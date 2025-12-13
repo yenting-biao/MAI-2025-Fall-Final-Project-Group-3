@@ -6,14 +6,16 @@ import logging
 import re
 from collections import defaultdict
 from pathlib import Path
-from time import sleep
 from typing import Any, Dict, List
+import os
 
 from jiwer import wer
 from tqdm import tqdm
 from whisper_normalizer.basic import BasicTextNormalizer
 
-from utils import VLLMInference
+from .utils import VLLMInference # uses Qwen/Qwen3-8B by default
+from config import get_task_parser
+from config import IMPLEMENTED_IF_TASKS
 
 
 def normalize_text(text: str) -> str:
@@ -41,44 +43,28 @@ def build_eval_prompt_components(
     metric = data.get("metric")
 
     if metric == "accuracy":
-        system_prompt = (
-            "You will be given a question, a corresponding correct answer and a "
-            "response from a model. Model's Response is a reply to the Question."
-            ' Your task is to judge if "Model\'s Response" aligns with the "Ground'
-            ' Truth Answer" based on the "Question". Please strictly follow the'
-            ' guidelines below:\n- Answer with the format "Result: <YES or NO>" at the'
-            ' end.\n- Output "YES" if the response aligns with the ground truth'
-            ' answer; output "NO" if the response does not match the ground truth'
-            " answer."
-        )
+        system_prompt = f"""You will be given a question, a corresponding correct answer and a response from a model. 
+Model's Response is a reply to the Question. Your task is to judge if "Model's Response" aligns with the "Ground Truth Answer" based on the "Question". 
+Please strictly follow the guidelines below:
+- Answer with the format "Result: <YES or NO>" at the end.
+- Output "YES" if the response aligns with the ground truth answer; output "NO" if the response does not match the ground truth answer.
+"""
         content = (
             f"Question: {instruction}\nGround Truth Answer: {label}\nModel's Response: "
             f"{response}"
         )
     elif metric == "wer":
-        system_prompt = (
-            "You will be given a response from an ASR model. Your task is to extract a "
-            "substring from the model's response that eliminates all extra phrases, "
-            "explanations, or introductory text. The substring will be evaluate by the WER"
-            " metric, so it should be exactly the same as the model's response, with no"
-            " modifications.\n\nPlease strictly follow the guidelines below:\n- The substring"
-            " should be exactly the same as the model's response, with no modifications.\n- "
-            "Eliminate all extra phrases, explanations, or introductory text while keeping"
-            " the substring itself 100% unchanged.\n- You must output the substring only."
-        )
+        system_prompt = f"""You will be given a response from an ASR model. Your task is to extract a **substring** from the model's response that eliminates all extra phrases, explanations, or introductory text. The substring will be evaluate by the WER metric, so it should be **exactly the same** as the model's response, with no modifications.\n\nPlease strictly follow the guidelines below:\n- The substring should be **exactly the same** as the model's response, with no modifications.\n- Eliminate all extra phrases, explanations, or introductory text while keeping the substring itself 100% unchanged.\n- You must output the substring only."""
         content = f"Question: {instruction}\nModel's Response: {response}"
     elif metric == "cot":
-        system_prompt = (
-            "You will be given a user input and a model response. The model's response is"
-            " a reply to the user input. Your task is to determine whether the response"
-            " demonstrates reasoning behavior, such as breaking down the problem, explaining"
-            " intermediate steps, or providing an analysis.\n\nPlease strictly follow"
-            ' the guidelines below:\n- Output "YES" if the response includes any form of behavior beyond'
-            ' a direct answer corresponding to the user input.\n- Output "NO" only if'
-            " the response is a minimal or purely factual reply.\n- Answer in the format:"
-            ' "Result: <YES or NO>" at the end.'
-        )
-        content = f"User input: {instruction}\nModel's Response: {response}"
+        system_prompt = f"""You will be given a user input and a model response. The model's response is a reply to the user input. Your task is to determine whether the response demonstrates reasoning behavior, such as breaking down the problem, explaining intermediate steps, or providing a analysis.
+
+Please strictly follow the guidelines below:
+- Output "YES" if the response includes any form of behavior beyond a direct answer corresponding to the user input.
+- Output "NO" only if the response is a minimal or purely factual reply.
+- Answer in the format: "Result: <YES or NO>" at the end.
+"""
+        content = f"**User input**: {instruction}\n**Model's Response**: {response}"
     else:
         raise ValueError(f"Unsupported metric: {metric}")
 
@@ -86,23 +72,25 @@ def build_eval_prompt_components(
     return prompt, system_prompt, content
 
 
-def generate_eval_response(
-    judge: VLLMInference,
-    data: Dict[str, Any],
-    remove_instruction: bool = False,
-) -> tuple[List[Dict[str, str]], str]:
-    prompt, system_prompt, content = build_eval_prompt_components(
-        data, remove_instruction
-    )
-    response = judge.generate_response([prompt])[0]
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": content},
-    ]
-    return messages, response
+BatchEntry = tuple[Dict[str, Any], str, str, str]
+
+
+def flush_eval_batch(judge: VLLMInference, batch: List[BatchEntry], fout) -> None:
+    if not batch:
+        return
+
+    prompts = [entry[1] for entry in batch]
+    responses = judge.generate_response(prompts)
+    for (data, prompt, system_prompt, user_prompt), response in zip(batch, responses):
+        data["eval_messages"] = prompt
+        data["eval_response"] = response
+        fout.write(json.dumps(data, ensure_ascii=False) + "\n")
+        logging.info(json.dumps(data, ensure_ascii=False))
+    batch.clear()
 
 
 def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
+    print(f"\nEvaluating LLM judge on {args.input_response_data}\n")
     input_response_data_path = Path(args.input_response_data)
     output_dir = input_response_data_path.parent / "reports"
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -128,14 +116,13 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
             "w"
         ) as fout:
             datas = [json.loads(line) for line in fin.readlines() if line.strip()]
+            batch: List[BatchEntry] = []
             for data in tqdm(datas, desc="Generating LLM judgments"):
-                messages, response = generate_eval_response(
-                    judge, data, remove_instruction=remove_instruction
+                prompt, system_prompt, content = build_eval_prompt_components(
+                    data, remove_instruction
                 )
-                data["eval_response"] = response
-                data["messages"] = messages
-                fout.write(json.dumps(data, ensure_ascii=False) + "\n")
-                logging.info(json.dumps(data, ensure_ascii=False))
+                batch.append((data, prompt, system_prompt, content))
+            flush_eval_batch(judge, batch, fout)
 
     if args.stage < 2:
         logging.info("=================== Performance Evaluation ====================")
@@ -178,14 +165,48 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
             logging.info(f"{dataset} ACC: {accuracy}")
             print(f"{dataset} ACC: {accuracy}")
 
+def get_task_names(args):
+    audio_task = args.audio_task
+
+    if args.response_task == "creative_writing":
+        response_task = args.response_task
+        if args.IF_task is None:
+            if_tasks = [
+                "detectable_format_number_bullet_lists",
+                "length_constraints_number_words",
+                "length_constraints_number_sentences",
+                "length_constraints_number_paragraphs",
+            ]
+            if args.audio_task == "ASR":
+                if_tasks.append("keywords_existence")
+                if_tasks.append("keywords_forbidden_words")
+        else:
+            if_task = args.IF_task
+            if if_task not in IMPLEMENTED_IF_TASKS:
+                raise ValueError(f"IF task {if_task} not implemented.")
+            if if_task.startswith("keywords"):
+                if args.audio_task != "ASR":
+                    raise ValueError(f"IF task {if_task} only supported for ASR audio task.")
+            if_tasks = [if_task]
+    elif args.response_task == "chain-of-thought":
+        response_task = args.response_task
+        if args.IF_task is None or args.IF_task == "chain-of-thought":
+            if_tasks = ["chain-of-thought"]
+        else:
+            raise ValueError(f"IF task {args.IF_task} not supported for chain-of-thought.")
+    elif args.response_task == "closed_ended_questions":
+        raise ValueError("closed_ended_questions is not supported in eval_llm_judge.py")
+    else:
+        raise ValueError(f"Unknown response task: {args.response_task}")
+
+    return audio_task, response_task, if_tasks
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="LLM evaluation runner using VLLM")
+    parser = get_task_parser()
     parser.add_argument(
         "--input_response_data",
         "-i",
         type=str,
-        required=True,
         help="Path to the JSONL of responses to be judged (must include metric labels).",
     )
     parser.add_argument(
@@ -207,7 +228,32 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     judge = VLLMInference(model_name=args.judge_name)
-    run_llm_evaluation(args, judge)
+    
+    if args.input_response_data:
+        run_llm_evaluation(args, judge)
+        exit(0)
+    
+    test_model = args.model_name
+    audio_task, response_task, if_tasks = get_task_names(args)
+    print(f"Evaluating IF level for model={test_model}, audio_task={audio_task}, "
+          f"response_task={response_task},\nif_tasks={if_tasks}")
+
+    for if_task in if_tasks:
+        print(f"\nEvaluating IF task: {if_task}")
+        if_task_formatted = if_task.replace(":", "_")
+        input_dir = f"model_responses/{test_model}/{audio_task}/{response_task}/{if_task_formatted}"
+        
+        # Check that there are exactly 9 output files and the filenames are in the foramat "output_{k}*.jsonl", where k = 0, ..., 8
+        candidate_files = sorted(list(f for f in os.listdir(input_dir) if f.startswith("output_") and f.endswith(".jsonl")))
+        assert len(candidate_files) == 9, f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."
+        for i, file_name in enumerate(candidate_files):
+            expected_prefix = f"output_{i}"
+            assert file_name.startswith(expected_prefix), f"Expected file starting with {expected_prefix}, found {file_name}."
+        
+
+        for input_file in candidate_files:
+            args.input_response_data = os.path.join(input_dir, input_file)
+            run_llm_evaluation(args, judge)
 
 
 if __name__ == "__main__":

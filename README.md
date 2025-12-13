@@ -133,6 +133,9 @@ Note: model weights are automatically downloaded by `blsp_emo.py` using the Hugg
 
 ## How to test and run ICL experiments
 
+### Testing data 
+To download the testing data, please refer to the README file of https://github.com/kehanlu/Speech-IFEval/tree/main
+
 ### Environment setup
 
 Create and enter the conda env for running ICL experiments in Qwen, Qwen2 and blsp_emo.
@@ -164,6 +167,10 @@ For args details, please refer to the help message of `run.py`:
 ```bash
 python run.py --help
 ```
+
+### Data
+To download the data, please refer to the README file of https://github.com/kehanlu/Speech-IFEval/tree/main
+
 
 ### Test
 

@@ -23,14 +23,19 @@ class DeSTA2_5(BaseModel):
         for i in range(ICL_examples):
             info :dict = conversation[i]
             messages.append({"role": "user", 
-                             "content": "<|AUDIO|>"+info["instruction"] + ("" if info["answer"] is None else f"\n{info['answer']}"), 
+                             "content": "<|AUDIO|>"+info["instruction"], 
                              "audios": [{
                                  "audio" : info["audio_path"],
                                  "text": None
                              }]})
+            messages.append({"role": "assistant", "content": info["answer"]})
         #   Append test example
-        messages.append({"role": "audio", "content": conversation[-1]["audio_path"]})   
-        messages.append({"role": "user", "content": conversation[-1]["instruction"]})
+        messages.append({"role": "user", 
+                         "content": "<|AUDIO|>"+conversation[-1]["instruction"], 
+                         "audios": [{
+                             "audio" : conversation[-1]["audio_path"],
+                             "text": None
+                         }]})
         self.messages = messages
         return 
         # return super().process_input(conversation)

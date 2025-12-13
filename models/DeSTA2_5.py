@@ -43,10 +43,10 @@ class DeSTA2_5(BaseModel):
     def generate(self):
         outputs = self.model.generate(
             messages=self.messages,
+            do_sample=False,
+            temperature=1.0,
+            top_p=1.0,
             max_new_tokens=512,
-            do_sample=True,
-            temperature=0.6,
-            top_p=0.9,
         )
         return outputs.text[0]
         # return super().generate()

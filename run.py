@@ -72,8 +72,10 @@ def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:
         IclData = InContextDataset[args.audio_task][args.response_task][args.IF_task]
     
     # Verify ICL data
-    assert len(IclData) == max_examples and all(item["audio_path"] and item["instruction"] and item["ans"] for item in IclData), \
-        "ICL data is not properly formatted or does not have enough examples."
+    assert len(IclData) == max_examples, \
+        f"ICL data does not have the required number of examples: expected {max_examples}, got {len(IclData)}."
+    assert all(item.get("audio_path") and item.get("instruction") and item.get("ans") for item in IclData), \
+        "ICL data is not properly formatted: missing or empty 'audio_path', 'instruction', or 'ans' fields."
     
     return IclData
 

@@ -1,229 +1,169 @@
 #!/usr/bin/env python
 
+import argparse
 import json
+import logging
+import re
+from collections import defaultdict
+from pathlib import Path
+from typing import Any, Dict, List
 import os
-import sys
-from typing import Dict, Any, List
 
+from jiwer import wer
 from tqdm import tqdm
+from whisper_normalizer.basic import BasicTextNormalizer
 
-# Add project root (parent of eval_scripts) to sys.path
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if ROOT_DIR not in sys.path:
-    sys.path.insert(0, ROOT_DIR)
-
-from utils import VLLMInference  # uses Qwen/Qwen3-8B by default
+from .utils import VLLMInference # uses Qwen/Qwen3-8B by default
 from config import get_task_parser
 from config import IMPLEMENTED_IF_TASKS
 
-# ---------- Prompt builder ----------
 
-def build_if_judge_prompt(
-    instruction: str,
-    response: str,
-) -> str:
-    """
-    Ask Qwen to give a single instruction-following score in [0, 1].
-    """
-    prompt = f"""
-You are grading how well a model response follows a natural-language instruction.
+def normalize_text(text: str) -> str:
+    normalizer = BasicTextNormalizer()
+    normalized_text = text.replace("<", "").replace(">", "")
+    return normalizer(normalized_text).strip()
 
-IMPORTANT:
-- Focus ONLY on whether the response respects the *format, style, and explicit constraints* in the instruction.
-  Examples of explicit constraints:
-  - required number of items or bullet points,
-  - required answer options (e.g., "answer with yes or no"),
-  - requested output format (e.g., JSON, a single word, a list),
-  - requested language (e.g., English only).
-- IGNORE whether the content itself is factually correct or relevant.
-- Look only at instruction-following.
 
-You must output a single score in [0, 1], called "if_score":
+def extract_result(text: str) -> str | None:
+    pattern = r"(?i)(?<=result:\s)(yes|no)"
+    match = re.search(pattern, text)
+    if match:
+        return match.group(0)
+    return None
 
-- 1.0  = perfectly follows all explicit constraints.
-- 0.8  = almost perfect; only tiny cosmetic issues.
-- 0.6  = mostly follows; some noticeable issues but the main constraints are respected.
-- 0.3  = only partially follows; major constraints are violated.
-- 0.0  = does not follow the instruction at all.
 
-You may use any real value in [0, 1], but it should reflect this rubric.
+def build_eval_prompt_components(
+    data: Dict[str, Any], remove_instruction: bool = False
+) -> tuple[str, str, str]:
+    instruction = data.get("instruction", "")
+    if remove_instruction:
+        instruction = instruction.split("\n")[0]
+    label = data.get("label", "")
+    response = data.get("response", "")
+    metric = data.get("metric")
 
-Your output MUST be a single valid JSON object, with exactly these fields:
-- "if_score": a number in [0, 1]
-- "reason": a short explanation in one sentence
-
-Do NOT include any text before or after the JSON.
-Do NOT wrap the JSON in markdown.
-Return ONLY the JSON.
-
-=== Instruction ===
-{instruction}
-
-=== Model Response ===
-{response}
+    if metric == "accuracy":
+        system_prompt = f"""You will be given a question, a corresponding correct answer and a response from a model. 
+Model's Response is a reply to the Question. Your task is to judge if "Model's Response" aligns with the "Ground Truth Answer" based on the "Question". 
+Please strictly follow the guidelines below:
+- Answer with the format "Result: <YES or NO>" at the end.
+- Output "YES" if the response aligns with the ground truth answer; output "NO" if the response does not match the ground truth answer.
 """
-    return prompt.strip()
+        content = (
+            f"Question: {instruction}\nGround Truth Answer: {label}\nModel's Response: "
+            f"{response}"
+        )
+    elif metric == "wer":
+        system_prompt = f"""You will be given a response from an ASR model. Your task is to extract a **substring** from the model's response that eliminates all extra phrases, explanations, or introductory text. The substring will be evaluate by the WER metric, so it should be **exactly the same** as the model's response, with no modifications.\n\nPlease strictly follow the guidelines below:\n- The substring should be **exactly the same** as the model's response, with no modifications.\n- Eliminate all extra phrases, explanations, or introductory text while keeping the substring itself 100% unchanged.\n- You must output the substring only."""
+        content = f"Question: {instruction}\nModel's Response: {response}"
+    elif metric == "cot":
+        system_prompt = f"""You will be given a user input and a model response. The model's response is a reply to the user input. Your task is to determine whether the response demonstrates reasoning behavior, such as breaking down the problem, explaining intermediate steps, or providing a analysis.
 
-# ---------- Helper to parse JSON from Qwen output ----------
-
-def extract_json_from_text(text: str) -> Dict[str, Any]:
-    """
-    Robustly extract a JSON object from the model output.
-    Handles the case where Qwen produces <think>...</think>{...}.
-    """
-    # If Qwen is in "thinking" mode, strip everything before the last </think>.
-    lower = text.lower()
-    think_tag = "</think>"
-    pos = lower.rfind(think_tag)
-    if pos != -1:
-        candidate = text[pos + len(think_tag):]
+Please strictly follow the guidelines below:
+- Output "YES" if the response includes any form of behavior beyond a direct answer corresponding to the user input.
+- Output "NO" only if the response is a minimal or purely factual reply.
+- Answer in the format: "Result: <YES or NO>" at the end.
+"""
+        content = f"**User input**: {instruction}\n**Model's Response**: {response}"
     else:
-        candidate = text
+        raise ValueError(f"Unsupported metric: {metric}")
 
-    # Find first '{'
-    start = candidate.find("{")
-    if start == -1:
-        raise ValueError(f"No '{{' found in model output: {repr(text[:200])}...")
-
-    # Simple brace matching to find the end of the JSON object
-    depth = 0
-    end = None
-    for i, ch in enumerate(candidate[start:], start=start):
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                end = i + 1
-                break
-
-    if end is None:
-        raise ValueError(f"No matching '}}' found in model output: {repr(text[:200])}...")
-
-    json_str = candidate[start:end].strip()
-    return json.loads(json_str)
+    prompt = f"{system_prompt}\n\n{content}"
+    return prompt, system_prompt, content
 
 
-# ---------- Main evaluation logic ----------
+BatchEntry = tuple[Dict[str, Any], str, str, str]
 
-def evaluate_if_level_with_qwen(
-    judge: VLLMInference,
-    input_path: str,
-    output_path: str,
-    max_samples: int | None = None,
-    instruction_key: str = "instruction",
-    response_key: str = "response",
-) -> None:
-    """
-    For each line in input_path (.jsonl), ask Qwen3 to judge how well the
-    model response follows the instruction, and write an augmented .jsonl.
 
-    New fields added per record:
-        - "if_level":  "strict" | "loose" | "not_follow"
-        - "if_score":  1.0 | 0.5 | 0.0
-        - "if_reason": short explanation string
-    """
-    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+def flush_eval_batch(judge: VLLMInference, batch: List[BatchEntry], fout) -> None:
+    if not batch:
+        return
 
-    with open(input_path, "r", encoding="utf-8") as fin, \
-         open(output_path, "w", encoding="utf-8") as fout:
+    prompts = [entry[1] for entry in batch]
+    responses = judge.generate_response(prompts)
+    for (data, prompt, system_prompt, user_prompt), response in zip(batch, responses):
+        data["eval_messages"] = prompt
+        data["eval_response"] = response
+        fout.write(json.dumps(data, ensure_ascii=False) + "\n")
+        logging.info(json.dumps(data, ensure_ascii=False))
+    batch.clear()
 
-        batch_records: List[Dict[str, Any]] = []
-        batch_prompts: List[str] = []
 
-        # prepare all prompts first
-        for line_idx, line in enumerate(tqdm(fin, desc="Evaluating IF level")):
-            line = line.strip()
-            if not line:
+def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
+    print(f"\nEvaluating LLM judge on {args.input_response_data}\n")
+    input_response_data_path = Path(args.input_response_data)
+    output_dir = input_response_data_path.parent / "reports"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    tmp_dir = output_dir / "tmp"
+    tmp_dir.mkdir(parents=True, exist_ok=True)
+    logs_dir = output_dir / "logs"
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    logging.basicConfig(
+        filename=logs_dir / f"{input_response_data_path.stem}.log",
+        level=logging.INFO,
+        force=True,
+    )
+
+    tmp_output_file = tmp_dir / f"{input_response_data_path.stem}.jsonl"
+    output_file = output_dir / f"llm_eval@{input_response_data_path.stem}.jsonl"
+    remove_instruction = input_response_data_path.stem in ["close", "close.1"]
+
+    if args.stage < 1:
+        logging.info("=================== LLM evaluation ====================")
+        logging.info(f"Processing {input_response_data_path}")
+        logging.info(f"Output file: {tmp_output_file}")
+        with input_response_data_path.open("r") as fin, tmp_output_file.open(
+            "w"
+        ) as fout:
+            datas = [json.loads(line) for line in fin.readlines() if line.strip()]
+            batch: List[BatchEntry] = []
+            for data in tqdm(datas, desc="Generating LLM judgments"):
+                prompt, system_prompt, content = build_eval_prompt_components(
+                    data, remove_instruction
+                )
+                batch.append((data, prompt, system_prompt, content))
+            flush_eval_batch(judge, batch, fout)
+
+    if args.stage < 2:
+        logging.info("=================== Performance Evaluation ====================")
+        dataset_group: dict[str, list[int]] = defaultdict(list)
+        hyps: List[str] = []
+        refs: List[str] = []
+        with tmp_output_file.open("r") as fin, output_file.open("w") as fout:
+            datas = [json.loads(line) for line in fin.readlines() if line.strip()]
+            for data in tqdm(datas, desc="Aggregating metrics"):
+                metric = data.get("metric")
+                dataset = data.get("dataset", "unknown")
+                if metric == "accuracy":
+                    result = extract_result(data.get("eval_response", ""))
+                    correct = bool(result and result.lower() == "yes")
+                    dataset_group[dataset].append(1 if correct else 0)
+                    data["correct"] = correct
+                elif metric == "wer":
+                    hyp = normalize_text(data.get("eval_response", ""))
+                    ref = normalize_text(data.get("label", ""))
+                    hyps.append(hyp)
+                    refs.append(ref)
+                    data["correct"] = wer(truth=[ref], hypothesis=[hyp])
+                elif metric == "cot":
+                    result = extract_result(data.get("eval_response", ""))
+                    correct = bool(result and result.lower() == "yes")
+                    dataset_group["cot"].append(1 if correct else 0)
+                    data["correct"] = correct
+                else:
+                    logging.warning(f"Skipping unsupported metric {metric}")
+                fout.write(json.dumps(data, ensure_ascii=False) + "\n")
+
+        if refs:
+            wer_score = wer(truth=refs, hypothesis=hyps)
+            logging.info(f"WER: {wer_score}")
+            print(f"WER: {wer_score}")
+        for dataset, corrects in dataset_group.items():
+            if not corrects:
                 continue
-
-            record = json.loads(line)
-
-            # Optionally limit number of samples
-            if max_samples is not None and line_idx >= max_samples:
-                break
-
-            instruction = record.get(instruction_key, "")
-            response = record.get(response_key, "")
-
-            prompt = build_if_judge_prompt(instruction, response)
-
-            batch_records.append(record)
-            batch_prompts.append(prompt)
-
-        # Feed into vllm
-        outputs = judge.generate_response(batch_prompts)
-
-        # Process outputs
-        for record, raw_out in zip(batch_records, outputs):
-            try:
-                verdict = extract_json_from_text(raw_out)
-                if_score = float(verdict.get("if_score", 0.0))
-                if_score = max(0.0, min(1.0, if_score))  # clamp just in case
-                reason = verdict.get("reason", "")
-            except Exception as e:
-                if_score = 0.0
-                reason = f"Failed to parse judge JSON: {e}"
-
-            # Always log the continuous score
-            record["if_judge_raw_output"] = raw_out
-            record["if_score"] = if_score
-            record["if_reason"] = reason
-
-            # Optional: derive a categorical label for later analysis
-            if if_score >= 0.8:
-                level = "strict"
-            elif if_score >= 0.4:
-                level = "loose"
-            else:
-                level = "not_follow"
-            record["if_level"] = level
-
-            fout.write(json.dumps(record, ensure_ascii=False) + "\n")
-
-
-# ---------- CLI ----------
-
-def parse_args():
-    parser = get_task_parser()
-    parser.add_argument(
-        "--input_path",
-        type=str,
-        default=None,
-        help="Path to input .jsonl (e.g., <model_name>/<audio_task>/<response_task>/<if_task>/output_<k>-shot_<timestamp>.jsonl).",
-    )
-    parser.add_argument(
-        "--output_path",
-        type=str,
-        default=None,
-        help="Path to output .jsonl with Qwen IF judgments.",
-    )
-    parser.add_argument(
-        "--judge_name",
-        type=str,
-        default="Qwen/Qwen3-8B",
-        help="Qwen3 model name for vLLM (default: Qwen/Qwen3-8B).",
-    )
-    parser.add_argument(
-        "--max_samples",
-        type=int,
-        default=None,
-        help="Optional: limit number of samples for quick testing.",
-    )
-    parser.add_argument(
-        "--instruction_key",
-        type=str,
-        default="instruction",
-        help="Key for instruction field in input JSONL (default: 'instruction').",
-    )
-    parser.add_argument(
-        "--response_key",
-        type=str,
-        default="response",
-        help="Key for response field in input JSONL (default: 'response').",
-    )
-
-    return parser.parse_args()
+            accuracy = sum(corrects) / len(corrects)
+            logging.info(f"{dataset} ACC: {accuracy}")
+            print(f"{dataset} ACC: {accuracy}")
 
 def get_task_names(args):
     audio_task = args.audio_task
@@ -261,22 +201,38 @@ def get_task_names(args):
 
     return audio_task, response_task, if_tasks
 
+def parse_args() -> argparse.Namespace:
+    parser = get_task_parser()
+    parser.add_argument(
+        "--input_response_data",
+        "-i",
+        type=str,
+        help="Path to the JSONL of responses to be judged (must include metric labels).",
+    )
+    parser.add_argument(
+        "--stage",
+        type=int,
+        choices=[0, 1],
+        default=0,
+        help="Pipeline stage (0: generate & save judge outputs; 1: aggregate metrics).",
+    )
+    parser.add_argument(
+        "--judge_name",
+        type=str,
+        default="Qwen/Qwen3-8B",
+        help="Model name passed to vLLM (default: Qwen/Qwen3-8B).",
+    )
+    return parser.parse_args()
 
-def main(args):
-    # Initialize the Qwen3 judge
+
+def main() -> None:
+    args = parse_args()
     judge = VLLMInference(model_name=args.judge_name)
-
-    if args.input_path and args.output_path:
-        evaluate_if_level_with_qwen(
-            judge=judge,
-            input_path=args.input_path,
-            output_path=args.output_path,
-            max_samples=args.max_samples,
-            instruction_key=args.instruction_key,
-            response_key=args.response_key,
-        )
+    
+    if args.input_response_data:
+        run_llm_evaluation(args, judge)
         exit(0)
-
+    
     test_model = args.model_name
     audio_task, response_task, if_tasks = get_task_names(args)
     print(f"Evaluating IF level for model={test_model}, audio_task={audio_task}, "
@@ -286,26 +242,19 @@ def main(args):
         print(f"\nEvaluating IF task: {if_task}")
         if_task_formatted = if_task.replace(":", "_")
         input_dir = f"model_responses/{test_model}/{audio_task}/{response_task}/{if_task_formatted}"
-        output_dir = f"model_responses/{test_model}/{audio_task}/{response_task}/{if_task_formatted}/reports"
-        os.makedirs(output_dir, exist_ok=True)
+        
+        # Check that there are exactly 9 output files and the filenames are in the foramat "output_{k}*.jsonl", where k = 0, ..., 8
+        candidate_files = sorted(list(f for f in os.listdir(input_dir) if f.startswith("output_") and f.endswith(".jsonl")))
+        assert len(candidate_files) == 9, f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."
+        for i, file_name in enumerate(candidate_files):
+            expected_prefix = f"output_{i}"
+            assert file_name.startswith(expected_prefix), f"Expected file starting with {expected_prefix}, found {file_name}."
+        
 
-        for input_file in os.listdir(input_dir): # iterate over all output_{k}.jsonl, where k = 0, ..., 8
-            if not input_file.startswith("output_") or not input_file.endswith(".jsonl"):
-                continue
-            input_path = os.path.join(input_dir, input_file)
-            output_path = os.path.join(output_dir, f"judge@{input_file}")
-            print(f"Input: {input_path}")
-            print(f"Output: {output_path}")
+        for input_file in candidate_files:
+            args.input_response_data = os.path.join(input_dir, input_file)
+            run_llm_evaluation(args, judge)
 
-            evaluate_if_level_with_qwen(
-                judge=judge,
-                input_path=input_path,
-                output_path=output_path,
-                max_samples=args.max_samples,
-                instruction_key=args.instruction_key,
-                response_key=args.response_key,
-            )
 
 if __name__ == "__main__":
-    args = parse_args()
-    main(args)
+    main()

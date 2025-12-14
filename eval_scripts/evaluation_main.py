@@ -106,36 +106,202 @@ def compute_wer(ref_text: str, hyp_text: str) -> float:
         return 0.0
     distance = _edit_distance(ref_tokens, hyp_tokens)
     return distance / float(len(ref_tokens))
+  
+
+def _strip_code_fences(s: str) -> str:
+    s = (s or "").strip()
+    # Handles ```json ... ``` or ``` ... ```
+    s = re.sub(r"^\s*```(?:json)?\s*", "", s, flags=re.IGNORECASE)
+    s = re.sub(r"\s*```\s*$", "", s)
+    return s.strip()
+
+
+def _strip_outer_quotes(s: str) -> str:
+    s = (s or "").strip()
+    if len(s) >= 2 and s[0] == s[-1] and s[0] in ('"', "'"):
+        return s[1:-1].strip()
+    return s
+
+
+
+def _get_kwargs_for_instruction(result: dict, instruction_id: str) -> dict:
+    """Return kwargs dict associated with a specific instruction_id, if present.
+
+    Tolerates ':' vs '_' variants in instruction ids.
+    """
+    ids = result.get("instruction_id_list") or []
+    kwargs_list = result.get("kwargs") or []
+    target = instruction_id
+    target_alt = instruction_id.replace(":", "_") if ":" in instruction_id else instruction_id.replace("_", ":")
+    for iid, kw in zip(ids, kwargs_list):
+        if iid == target or iid == target_alt or iid.replace(":", "_") == target.replace(":", "_"):
+            return kw or {}
+    return {}
+
+
+def _has_instruction(result: dict, instruction_id: str) -> bool:
+    """Check for instruction_id; tolerant to ':' vs '_' variants."""
+    ids = set(result.get("instruction_id_list") or [])
+    if instruction_id in ids:
+        return True
+    # tolerate underscore/colon variants
+    ids_norm = set(i.replace(":", "_") for i in ids)
+    return instruction_id.replace(":", "_") in ids_norm
+
+
+def _try_parse_json_answer(s: str, audio_task: str) -> Optional[str]:
+    """Try to parse a JSON object from s and extract the answer string."""
+    s2 = _strip_outer_quotes(_strip_code_fences(s))
+
+    obj = None
+    try:
+        obj = json.loads(s2)
+    except Exception:
+        # Try extracting the first {...} block (handles extra text)
+        m = re.search(r"\{.*\}", s2, flags=re.DOTALL)
+        if not m:
+            return None
+        try:
+            obj = json.loads(m.group(0))
+        except Exception:
+            return None
+
+    if not isinstance(obj, dict):
+        return None
+
+    key_priority = {
+        "GR":  ["gender", "label", "answer", "prediction", "pred"],
+        "SER": ["emotion", "label", "answer", "prediction", "pred"],
+        "ASR": ["transcript", "text", "answer", "prediction", "pred"],
+    }
+    for k in key_priority.get(audio_task, []):
+        v = obj.get(k, None)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+
+    # Fallback: first non-empty string value
+    for v in obj.values():
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+
+    return None
+
+
+def _remove_title_tokens(s: str) -> str:
+    """Remove <<title>> tokens (used by detectable_format:title)."""
+    # Remove all occurrences of <<...>>
+    s2 = re.sub(r"<<[^\n]+>>", "", s)
+    # Drop now-empty lines
+    lines = [ln for ln in s2.splitlines() if ln.strip()]
+    return "\n".join(lines).strip()
+
+
+def _strip_leading_list_prefix(s: str) -> str:
+    """Strip common bullet/number list prefixes from the start of s."""
+    return re.sub(r"^\s*(?:\d+\s*[\.|\)|:|-]\s*|[-*•]\s*)", "", s).strip()
+
+
+def extract_answer_for_scoring(result: dict, audio_task: str = "") -> str:
+    """Extract the semantic answer from a (possibly wrapped) response for correctness scoring."""
+    response = (result.get("response") or "").strip()
+
+    # Always strip code fences first (common with json_format).
+    response = _strip_code_fences(response)
+
+    # 1) JSON format: parse JSON and pull the answer field/value
+    if _has_instruction(result, "detectable_format:json_format"):
+        parsed = _try_parse_json_answer(response, audio_task)
+        if parsed is not None:
+            return parsed
+
+    # 2) Quotation wrapper: strip outer quotes
+    if _has_instruction(result, "startend:quotation"):
+        response = _strip_outer_quotes(response)
+
+    # 3) Title wrapper: remove <<...>> token(s)
+    if _has_instruction(result, "detectable_format:title"):
+        response = _remove_title_tokens(response)
+
+    # 4) Repeat-prompt: remove repeated prompt prefix if available
+    if _has_instruction(result, "combination:repeat_prompt"):
+        kw = _get_kwargs_for_instruction(result, "combination:repeat_prompt")
+        prompt_to_repeat = kw.get("prompt_to_repeat")
+        if isinstance(prompt_to_repeat, str) and prompt_to_repeat.strip():
+            p = prompt_to_repeat.strip()
+            # Remove once at start (case-insensitive), including potential leading whitespace
+            pattern = r"^\s*" + re.escape(p) + r"\s*"
+            new_resp = re.sub(pattern, "", response, count=1, flags=re.IGNORECASE | re.DOTALL)
+            if new_resp != response:
+                response = new_resp.strip()
+            else:
+                # Fallback: drop first non-empty line if it matches
+                lines = [ln for ln in response.splitlines() if ln.strip()]
+                if lines and lines[0].strip().lower() == p.lower():
+                    response = "\n".join(lines[1:]).strip()
+
+    # 5) End-checker: remove forced ending phrase if available
+    if _has_instruction(result, "startend:end_checker"):
+        kw = _get_kwargs_for_instruction(result, "startend:end_checker")
+        end_phrase = kw.get("end_phrase")
+        if isinstance(end_phrase, str) and end_phrase.strip():
+            ep = end_phrase.strip()
+            # Compare case-insensitively
+            resp_r = response.rstrip()
+            if resp_r.lower().endswith(ep.lower()):
+                response = resp_r[: len(resp_r) - len(ep)].rstrip()
+
+    # 6) For numbered bullet list outputs, strip leading list marker on first line
+    if _has_instruction(result, "detectable_format:number_bullet_lists"):
+        lines = [ln for ln in response.splitlines() if ln.strip()]
+        if lines:
+            # Often the answer is the first bullet item
+            response = _strip_leading_list_prefix(lines[0])
+
+    return response.strip()
+
 
 
 def annotate_answer_correctness(result: dict, audio_task: str = "") -> dict:
     """Annotate each result dict with answer correctness.
 
+    IMPORTANT: correctness is computed on an extracted answer string that
+    removes / parses IF wrappers (e.g., JSON, quotation marks, title tokens,
+    repeated prompt, end phrase).
+
     Adds:
+      - 'response_for_scoring' (str): extracted answer used for scoring
       - 'wer' (float) when metric == 'wer'
-      - 'exact_match' (bool)
+      - 'exact_match' (bool) when metric == 'wer' or 'accuracy'
       - 'answer_correct' (bool) as a generic flag
     """
     metric = result.get("metric")
     label = result.get("label")
-    response = result.get("response", "")
 
     # Only handle examples with a label.
     if not metric or label is None:
         return result
 
+    response_for_scoring = extract_answer_for_scoring(result, audio_task)
+    result["response_for_scoring"] = response_for_scoring
+
     if metric == "wer":
-        wer_value = compute_wer(label, response)
+        wer_value = compute_wer(label, response_for_scoring)
         result["wer"] = wer_value
-        # "Correct" == perfect transcription by default
         exact = (wer_value == 0.0)
+        result["exact_match"] = exact
+        # "Correct" == perfect transcription by default
         result["answer_correct"] = exact
 
     elif metric == "accuracy":
         def _norm(s: str) -> str:
-            return re.sub(r"\s+", " ", s).strip().lower()
+            s = _strip_outer_quotes(_strip_code_fences(s))
+            # Remove punctuation, keep letters/digits/underscore/space
+            s = re.sub(r"[^\w\s]+", "", s)
+            s = re.sub(r"\s+", " ", s).strip().lower()
+            return s
 
-        correct = _norm(response) == _norm(label)
+        correct = _norm(response_for_scoring) == _norm(str(label))
+        result["exact_match"] = correct
         result["answer_correct"] = correct
 
     else:
@@ -143,7 +309,6 @@ def annotate_answer_correctness(result: dict, audio_task: str = "") -> dict:
         pass
 
     return result
-
 
 def read_prompt_list(input_jsonl_filename):
   """Read inputs from jsonl."""

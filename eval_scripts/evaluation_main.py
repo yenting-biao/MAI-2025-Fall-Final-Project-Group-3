@@ -13,15 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Binary of evaluating instruction following. See README.md."""
-
-import argparse
 import collections
 import dataclasses
 import json
 import os
 import re
-from typing import Dict, Optional, Sequence, Union, List
+from typing import Dict, Optional, Union, List
 from pathlib import Path
 from absl import flags
 from absl import logging
@@ -106,7 +103,7 @@ def compute_wer(ref_text: str, hyp_text: str) -> float:
         return 0.0
     distance = _edit_distance(ref_tokens, hyp_tokens)
     return distance / float(len(ref_tokens))
-  
+
 
 def _strip_code_fences(s: str) -> str:
     s = (s or "").strip()
@@ -122,6 +119,15 @@ def _strip_outer_quotes(s: str) -> str:
         return s[1:-1].strip()
     return s
 
+
+def _strip_answer_prefixes(s: str) -> str:
+    """Strip common leading answer markers like '[ANS]' used in ICL examples."""
+    s = (s or "").strip()
+    # Examples: "[ANS] happy", "[Answer] Woman"
+    s = re.sub(r"^\s*\[(?:ANS|ANSWER)\]\s*", "", s, flags=re.IGNORECASE)
+    # Examples: "ANS: happy", "Answer - Woman"
+    s = re.sub(r"^\s*(?:ANS|ANSWER)\s*[:\-]\s*", "", s, flags=re.IGNORECASE)
+    return s.strip()
 
 
 def _get_kwargs_for_instruction(result: dict, instruction_id: str) -> dict:
@@ -256,7 +262,7 @@ def extract_answer_for_scoring(result: dict, audio_task: str = "") -> str:
         if lines:
             # Often the answer is the first bullet item
             response = _strip_leading_list_prefix(lines[0])
-
+    response = _strip_answer_prefixes(response)
     return response.strip()
 
 
@@ -295,12 +301,37 @@ def annotate_answer_correctness(result: dict, audio_task: str = "") -> dict:
     elif metric == "accuracy":
         def _norm(s: str) -> str:
             s = _strip_outer_quotes(_strip_code_fences(s))
+            s = _strip_answer_prefixes(s)
             # Remove punctuation, keep letters/digits/underscore/space
             s = re.sub(r"[^\w\s]+", "", s)
             s = re.sub(r"\s+", " ", s).strip().lower()
             return s
 
-        correct = _norm(response_for_scoring) == _norm(str(label))
+        norm_label = _norm(str(label))
+        norm_resp = _norm(response_for_scoring)
+
+        # If this looks like a small-label classification task (GR/SER), extract the predicted label token
+        # from the response instead of requiring exact string equality.
+        allowed_ser = {"neutral", "happy", "sad", "angry"}
+        allowed_gr = {"man", "woman"}
+
+        # Prefer using audio_task if provided; otherwise infer from label space.
+        task = (audio_task or "").upper().strip()
+        if (task == "SER") or (norm_label in allowed_ser):
+            allowed = allowed_ser
+        elif (task == "GR") or (norm_label in allowed_gr):
+            allowed = allowed_gr
+        else:
+            allowed = set()
+
+        if allowed:
+            tokens = norm_resp.split()
+            candidates = [t for t in tokens if t in allowed]
+            pred = candidates[-1] if candidates else norm_resp
+            correct = (pred == norm_label)
+        else:
+            correct = (norm_resp == norm_label)
+
         result["exact_match"] = correct
         result["answer_correct"] = correct
 

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 ROOT_DIR=$(pwd)
 AUDIO_TASKS=("ASR" "SER" "GR")
 RESPONSE_TASKS=("closed_ended_questions")

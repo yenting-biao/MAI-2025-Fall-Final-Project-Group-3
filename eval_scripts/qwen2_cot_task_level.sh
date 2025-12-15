@@ -4,7 +4,7 @@ set -e
 
 MODEL_NAME="qwen2"
 RESPONSE_TASKS=("chain-of-thought")
-AUDIO_TASKS=("SER" "GR" "ASR" )
+AUDIO_TASKS=("ASR" "SER" "GR")
 
 for audio_task in "${AUDIO_TASKS[@]}"; do
     for response_task in "${RESPONSE_TASKS[@]}"; do

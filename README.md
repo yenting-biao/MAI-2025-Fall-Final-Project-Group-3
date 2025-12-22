@@ -17,7 +17,7 @@ pip install -e .
 cd ..
 ```
 
-#### All model need to activate its own environment
+#### All models need to activate their own environment
 ```bash
 conda create --name <your_env_name> python=3.11.2 -y
 conda activate <your_env_name>

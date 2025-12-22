@@ -31,6 +31,26 @@ def extract_result(text: str) -> str | None:
         return match.group(0)
     return None
 
+def textual_audio_to_label(textual_audio: str) -> dict:
+    """
+    return a dict: {
+        "ASR": transcript,
+        "SER": emotion,
+        "GR": gender
+    }
+    example textual_audio: 
+    [00:00:00 - 00:00:05] Mary Taylor, however, related the tale of Zora to Mrs. Gray's private ear later.(Gender: Female, Emotion: neutral)
+    """
+    
+    transcript = textual_audio.split("]")[-1].split("(")[0].strip()
+    gender = textual_audio.split("Gender:")[-1].split(",")[0].strip()
+    emotion = textual_audio.split("Emotion:")[-1].split(")")[0].strip()
+    return {
+        "ASR": transcript,
+        "SER": emotion,
+        "GR": gender
+    }
+
 
 def build_eval_prompt_components(
     data: Dict[str, Any], remove_instruction: bool = False
@@ -92,7 +112,10 @@ def flush_eval_batch(judge: VLLMInference, batch: List[BatchEntry], fout) -> Non
 def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
     print(f"\nEvaluating LLM judge on {args.input_response_data}\n")
     input_response_data_path = Path(args.input_response_data)
-    output_dir = input_response_data_path.parent / "reports"
+    if args.task_level:
+        output_dir = input_response_data_path.parent / "reports-task-level"
+    else:    
+        output_dir = input_response_data_path.parent / "reports"
     output_dir.mkdir(parents=True, exist_ok=True)
     tmp_dir = output_dir / "tmp"
     tmp_dir.mkdir(parents=True, exist_ok=True)
@@ -116,6 +139,26 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
             "w"
         ) as fout:
             datas = [json.loads(line) for line in fin.readlines() if line.strip()]
+            
+            if args.task_level:
+                # if "ASR" in path, metric set to "wer"; else set to "accuracy"
+                for data in datas:
+                    if "ASR" in str(input_response_data_path):
+                        data["metric"] = "wer"
+                    else:
+                        data["metric"] = "accuracy"
+                    
+                    if "label" not in data:
+                        metadata = textual_audio_to_label(data["textual_audio"])
+                        if "ASR" in str(input_response_data_path):
+                            data["label"] = metadata["ASR"]
+                        elif "SER" in str(input_response_data_path):
+                            data["label"] = metadata["SER"]
+                        elif "GR" in str(input_response_data_path):
+                            data["label"] = metadata["GR"]
+                        else:
+                            raise ValueError("Unknown audio task in path.")
+            
             batch: List[BatchEntry] = []
             for data in tqdm(datas, desc="Generating LLM judgments"):
                 prompt, system_prompt, content = build_eval_prompt_components(
@@ -135,16 +178,19 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
                 metric = data.get("metric")
                 dataset = data.get("dataset", "unknown")
                 if metric == "accuracy":
-                    result = extract_result(data.get("eval_response", ""))
+                    result = extract_result(data.get("eval_response", "")).split("</think>")[-1]
                     correct = bool(result and result.lower() == "yes")
                     dataset_group[dataset].append(1 if correct else 0)
                     data["correct"] = correct
                 elif metric == "wer":
-                    hyp = normalize_text(data.get("eval_response", ""))
-                    ref = normalize_text(data.get("label", ""))
+                    hyp = normalize_text(data.get("eval_response", "").split("</think>")[-1].strip())
+                    if "label" not in data:
+                        raise ValueError("WER metric requires 'label' field in the data.")
+                    ref = normalize_text(data.get("label", "").strip())
                     hyps.append(hyp)
                     refs.append(ref)
-                    data["correct"] = wer(truth=[ref], hypothesis=[hyp])
+                    data["correct"] = wer(reference=[ref], hypothesis=[hyp])
+                    
                 elif metric == "cot":
                     result = extract_result(data.get("eval_response", ""))
                     correct = bool(result and result.lower() == "yes")
@@ -155,7 +201,7 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
                 fout.write(json.dumps(data, ensure_ascii=False) + "\n")
 
         if refs:
-            wer_score = wer(truth=refs, hypothesis=hyps)
+            wer_score = wer(reference=refs, hypothesis=hyps)
             logging.info(f"WER: {wer_score}")
             print(f"WER: {wer_score}")
         for dataset, corrects in dataset_group.items():
@@ -221,6 +267,11 @@ def parse_args() -> argparse.Namespace:
         type=str,
         default="Qwen/Qwen3-8B",
         help="Model name passed to vLLM (default: Qwen/Qwen3-8B).",
+    )
+    parser.add_argument(
+        "--task_level",
+        action="store_true",
+        help="Whether to do task-level evaluation. When not set, do IF evaluation.",
     )
     return parser.parse_args()
 

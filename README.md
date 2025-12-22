@@ -1,145 +1,23 @@
 # MAI-2025-Fall-Final-Project-Group-3
 
-## Directory format
-
-* [audio_caption](./audio_caption)
-  * [captioner.py](./audio_caption/captioner.py)
-* [samples](./samples)
-  * [sd-qa_1008642825401516622.wav](./samples/sd-qa_1008642825401516622.wav)
-  * [sd-rq_6426446469024899068.wav](./samples/sd-rq_6426446469024899068.wav)
-* [models](./models)
-  * [basemodel.py](./models/basemodel.py)
-  * [diva.py](./models/diva.py)
-* [smoke_test_diva.py](./smoke_test_diva.py)
-* [README.md](./README.md)
-* [requirements](./requirements)
-     * [diva.txt](./requirements/diva.txt)
-
-### Model response dir format
-
- * [qwen](./qwen)
-  * [ASR](./qwen/ASR)
-    * [closed_ended_questions](./qwen/AR/closed_ended_questions)
-      * [change_case_english_capital](./qwen/AR/closed_ended_questions/change_case_english_capital)
-      * [change_case_english_lowercase](./qwen/AR/closed_ended_questions/change_case_english_lowercase)
-      * [detectable_format_json_format](./qwen/AR/closed_ended_questions/detectable_format_json_format)
-      * [startend_quotation](./qwen/AR/closed_ended_questions/startend_quotation)
-      * [detectable_format_title](./qwen/AR/closed_ended_questions/detectable_format_title)
-      * [combination_repeat_prompt](./qwen/AR/closed_ended_questions/combination_repeat_prompt)
-      * [startend_end_checker](./qwen/AR/closed_ended_questions/startend_end_checker)
-    * [creative_writing](./qwen/AR/creative_writing)
-        * [detectable_format_number_bullet_lists](./qwen/AR/creative_writing/detectable_format_number_bullet_lists)
-        * [keywords_existence](./qwen/AR/creative_writing/keywords_existence)
-        * [keywords_forbidden_words](./qwen/AR/creative_writing/keywords_forbidden_words)
-        * [length_constraints_number_words](./qwen/AR/creative_writing/length_constraints_number_words)
-        * [length_constraints_number_sentences](./qwen/AR/creative_writing/length_constraints_number_sentences)
-        * [length_constraints_number_paragraphs](./qwen/AR/creative_writing/length_constraints_number_paragraphs)
-    * [chain-of-thought](./qwen/AR/chain-of-thought)
-      * [chain-of-thought](./qwen/AR/chain-of-thought/chain-of-thought)
-  * [SER](./qwen/SER)
-    * [closed_ended_questions](./qwen/SER/closed_ended_questions)
-      * [change_case_english_capital](./qwen/SER/closed_ended_questions/change_case_english_capital)
-      * [change_case_english_lowercase](./qwen/SER/closed_ended_questions/change_case_english_lowercase)
-      * [detectable_format_json_format](./qwen/SER/closed_ended_questions/detectable_format_json_format)
-      * [startend_quotation](./qwen/SER/closed_ended_questions/startend_quotation)
-      * [detectable_format_title](./qwen/SER/closed_ended_questions/detectable_format_title)
-      * [combination_repeat_prompt](./qwen/SER/closed_ended_questions/combination_repeat_prompt)
-      * [startend_end_checker](./qwen/SER/closed_ended_questions/startend_end_checker)
-    * [creative_writing](./qwen/SER/creative_writing)
-      * [detectable_format_number_bullet_lists](./qwen/SER/creative_writing/detectable_format_number_bullet_lists)
-      * [keywords_existence](./qwen/SER/creative_writing/keywords_existence)
-      * [keywords_forbidden_words](./qwen/SER/creative_writing/keywords_forbidden_words)
-      * [length_constraints_number_words](./qwen/SER/creative_writing/length_constraints_number_words)
-      * [length_constraints_number_sentences](./qwen/SER/creative_writing/length_constraints_number_sentences)
-      * [length_constraints_number_paragraphs](./qwen/SER/creative_writing/length_constraints_number_paragraphs)
-    * [chain-of-thought](./qwen/SER/chain-of-thought)
-      * [chain-of-thought](./qwen/SER/chain-of-thought/chain-of-thought)
-  * [GR](./qwen/GR)
-    * [closed_ended_questions](./qwen/GR/closed_ended_questions)
-      * [change_case_english_capital](./qwen/GR/closed_ended_questions/change_case_english_capital)
-      * [change_case_english_lowercase](./qwen/GR/closed_ended_questions/change_case_english_lowercase)
-      * [detectable_format_json_format](./qwen/GR/closed_ended_questions/detectable_format_json_format)
-      * [startend_quotation](./qwen/GR/closed_ended_questions/startend_quotation)
-      * [detectable_format_title](./qwen/GR/closed_ended_questions/detectable_format_title)
-      * [combination_repeat_prompt](./qwen/GR/closed_ended_questions/combination_repeat_prompt)
-      * [startend_end_checker](./qwen/GR/closed_ended_questions/startend_end_checker)
-    * [creative_writing](./qwen/GR/creative_writing)
-      * [detectable_format_number_bullet_lists](./qwen/GR/creative_writing/detectable_format_number_bullet_lists)
-      * [keywords_existence](./qwen/GR/creative_writing/keywords_existence)
-      * [keywords_forbidden_words](./qwen/GR/creative_writing/keywords_forbidden_words)
-      * [length_constraints_number_words](./qwen/GR/creative_writing/length_constraints_number_words)
-      * [length_constraints_number_sentences](./qwen/GR/creative_writing/length_constraints_number_sentences)
-      * [length_constraints_number_paragraphs](./qwen/GR/creative_writing/length_constraints_number_paragraphs)
-    * [chain-of-thought](./qwen/GR/chain-of-thought)
-      * [chain-of-thought](./qwen/GR/chain-of-thought/chain-of-thought)
-
-
-- Tool for printing directory tree
-
-    ```bash
-    cd /path/to/MAI-2025-Fall-Final-Project-Group-3
-    ```
-
-    ```bash
-    tree=$(tree -tf --noreport -I '*~' --charset ascii $1 |
-       sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](\2):g')
-    printf "# Project tree\n\n${tree}"
-    ```
-
-### How to test
-
-#### DiVA
-
-Create and enter the conda env for running DiVA.
-
-```bash
-conda create --name diva python=3.12.12 -y
-conda activate diva
-pip install -r requirements/diva.txt
-```
-
-Run the following command (about 23.5GB VRAM required):
-
-```bash
-python smoke_test.py --model diva
-```
-
-#### BLSP-Emo
-
-Create and enter the conda env for running BLSP-Emo.
-
-```bash
-conda create --name blsp-emo python=3.11 -y  # Must use python=3.11 as BLSP-Emo uses some old packages like torch==2.0.1 that are not installable in newer Python versions
-conda activate blsp-emo
-pip install -r models/blsp_emo_package/requirements.txt
-pip install pyarrow==12.0.0  # needed to avoid the following error: "AttributeError: module 'pyarrow' has no attribute 'PyExtensionType'. Did you mean: 'ExtensionType'?"
-```
-
-Create a HuggingFace access token (if you want to use `hf` to download the weights in the next step)
-
-- Create a "fine-grained" token
-- Under "Repositories permissions" search for "cwang621/blsp-emo", select it, and check "Read access to contents of selected repos"
-- Click "Create token"
-- Run `export HF_TOKEN="<your access token>"`
-
-Run the following command (about 20GB VRAM required):
-
-```bash
-python smoke_test_blsp_emo.py
-```
-
-Note: model weights are automatically downloaded by `blsp_emo.py` using the HuggingFace CLI `hf`. If you want to download the weights manually, you can do so with `hf download cwang621/blsp-emo`; if weights are downloaded manually, remember to specify the path to weights when calling `BLSP_emo()`.
-
-
-## How to test and run ICL experiments
-
-### Testing data 
-To download the testing data, please refer to the README file of https://github.com/kehanlu/Speech-IFEval/tree/main
+### Download test data 
+To reproduce our experiment, please refer to the README file of https://github.com/kehanlu/Speech-IFEval/tree/main \
+Extract the `data/` directory like this `/path/to/MAI-2025-Fall-Final-Project-Group-3/data`
 
 ### Environment setup
+The four model needs four different environment, please set up your virtual environment properly.
 
-Create and enter the conda env for running ICL experiments in Qwen, Qwen2 and blsp_emo.
+####  DeSTA2.5-Audio
+For DeSTA2_5, we need to download the model manually.
+```bash
+cd models/
+git clone https://github.com/kehanlu/DeSTA2.5-Audio.git
+cd DeSTA2.5-Audio
+pip install -e .
+cd ..
+```
 
+#### All model need to activate its own environment
 ```bash
 conda create --name <your_env_name> python=3.11.2 -y
 conda activate <your_env_name>
@@ -147,63 +25,28 @@ pip install -r requirements/<model_name>.txt
 conda install -c conda-forge ffmpeg
 ```
 
-For DeSTA2_5, we need to download the model manually.
+###  To reproduce our experiments
+Default result will be saved in `model_responses/<MODELNAME>`
 ```bash
-git clone https://github.com/kehanlu/DeSTA2.5-Audio.git
-cd DeSTA2.5-Audio
-pip install -e .
+bash scripts/<MODELNAME>_ceq.sh
+bash scripts/<MODELNAME>_cw.sh
+bash scripts/<MODELNAME>_CoT.sh
 ```
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp_emo`] 
 
-```bash
-conda create --name <your_env_name> python=3.11.2 -y
-conda activate <your_env_name>
-pip install -r requirements/DeSTA2_5.txt
-conda install -c conda-forge ffmpeg
-```
-### Arguments
-
-For args details, please refer to the help message of `run.py`:
+###  How to do ICL on assigned IF task and audio task 
 
 ```bash
-python run.py --help
+python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task <RESPONSETASK> --IF_task <IFTASK> --examples <EXAMPLES> --output_dir <DIR>
 ```
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`]
+- `<AUDIOTASK>` : [`ASR`, `SER`, `GR`] 
+- `<RESPONSETASK>` : [`closed_ended_questions`, `chain-of-thought`, `creative_writing`]
+- `<IFTASK>` : Vary from different `<RESPONSETASK>`
+- `<EXAMPLES>` : [`0`~`8`]
+- `<DIR>` : The output directory you want to save in 
 
-### Data
-To download the data, please refer to the README file of https://github.com/kehanlu/Speech-IFEval/tree/main
-
-
-### Test
-
-To test the setup, you can run a smoke test with a small number of examples:
-
-```bash
-python run.py --model_name qwen --audio_task ASR --response_task closed_ended_questions --IF_task change_case:english_capital --examples 2 --use_test_sample --verbose --debug
-```
-
-### Run ICL experiments
-
-To run In-Context Learning (ICL) experiments, use the following command:
-
-```bash
-python run.py --model_name <model_name> --audio_task <audio_task> --response_task <response_task> --IF_task <IF_task> --examples <number_of_examples>
-```
-
-Replace `<model_name>`, `<audio_task>`, `<response_task>`, `<IF_task>`, and `<number_of_examples>` with your desired values. For example:
-
-```bash
-python run.py --model_name qwen --audio_task ASR --response_task closed_ended_questions --IF_task change_case:english_capital --examples 3
-```
-
-## Experiment Suite
-
-### Generate and save LALMs' responses.
-
-```bash
-bash scripts/<model_name>_ceq.sh
-bash scripts/<model_name>_cw.sh
-bash scripts/<model_name>_CoT.sh
-```
-
+### Default responses format 
 The query with metadata (e.g., instruction, the entire messages) and the model responses would be stored in the following dir structure.
 
 ```
@@ -234,7 +77,7 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
         ...
 ```
 
-Evaluate LALMs' responses w/o LLM judge (for `closed_ended_questions`).
+### Evaluate LALMs' responses w/o LLM judge (for `closed_ended_questions`).
 
 ```bash
 conda acitvate <your-env>
@@ -242,7 +85,7 @@ pip install -r eval_scripts/requirements.txt
 bash eval_scripts/<model_name>_ceq.sh
 ```
 
-Evaluate LALMs' responses with LLM judge (for `creative_writing` and `chain-of-thought`).
+### Evaluate LALMs' responses with LLM judge (for `creative_writing` and `chain-of-thought`).
 
 NOT IMPLEMENTED YET.
 

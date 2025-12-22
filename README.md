@@ -25,7 +25,7 @@ pip install -r requirements/<model_name>.txt
 conda install -c conda-forge ffmpeg
 ```
 
-###  To reproduce our experiments
+### To reproduce our experiments
 The default results will be saved in `model_responses/<MODELNAME>`
 ```bash
 bash scripts/<MODELNAME>_ceq.sh

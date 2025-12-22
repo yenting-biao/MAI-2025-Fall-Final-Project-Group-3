@@ -63,8 +63,8 @@ def build_eval_prompt_components(
     metric = data.get("metric")
 
     if metric == "accuracy":
-        system_prompt = f"""You will be given a question, a corresponding correct answer and a response from a model. 
-Model's Response is a reply to the Question. Your task is to judge if "Model's Response" aligns with the "Ground Truth Answer" based on the "Question". 
+        system_prompt = f"""You will be given a question, a corresponding correct answer and a response from a model.
+Model's Response is a reply to the Question. Your task is to judge if "Model's Response" aligns with the "Ground Truth Answer" based on the "Question".
 Please strictly follow the guidelines below:
 - Answer with the format "Result: <YES or NO>" at the end.
 - Output "YES" if the response aligns with the ground truth answer; output "NO" if the response does not match the ground truth answer.
@@ -279,11 +279,11 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     judge = VLLMInference(model_name=args.judge_name)
-    
+
     if args.input_response_data:
         run_llm_evaluation(args, judge)
         exit(0)
-    
+
     test_model = args.model_name
     audio_task, response_task, if_tasks = get_task_names(args)
     print(f"Evaluating IF level for model={test_model}, audio_task={audio_task}, "
@@ -293,14 +293,14 @@ def main() -> None:
         print(f"\nEvaluating IF task: {if_task}")
         if_task_formatted = if_task.replace(":", "_")
         input_dir = f"model_responses/{test_model}/{audio_task}/{response_task}/{if_task_formatted}"
-        
+
         # Check that there are exactly 9 output files and the filenames are in the foramat "output_{k}*.jsonl", where k = 0, ..., 8
         candidate_files = sorted(list(f for f in os.listdir(input_dir) if f.startswith("output_") and f.endswith(".jsonl")))
         assert len(candidate_files) == 9, f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."
         for i, file_name in enumerate(candidate_files):
             expected_prefix = f"output_{i}"
             assert file_name.startswith(expected_prefix), f"Expected file starting with {expected_prefix}, found {file_name}."
-        
+
 
         for input_file in candidate_files:
             args.input_response_data = os.path.join(input_dir, input_file)

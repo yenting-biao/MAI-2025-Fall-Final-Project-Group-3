@@ -77,19 +77,36 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
         ...
 ```
 
-### Evaluate LALMs' responses w/o LLM judge (for `closed_ended_questions`).
+### Evaluation 
+
+- `<model_name>` : [`qwen`, `qwen2`, `blsp_emo`, `desta2_5`]
+
+#### Env
 
 ```bash
 conda activate <your-env>
 pip install -r eval_scripts/requirements.txt
+```
+
+#### `closed_ended_questions`
+
+```bash
+conda activate <your-env>
 bash eval_scripts/<model_name>_ceq.sh
 ```
 
-### Evaluate LALMs' responses with LLM judge (for `creative_writing` and `chain-of-thought`).
-
-NOT IMPLEMENTED YET.
+#### `creative_writing`
 
 ```bash
-# bash eval_scripts/<model_name>_cw.sh # not implemented yet
-# bash eval_scripts/<model_name>_CoT.sh # not implemented yet
+conda activate <your-env>
+bash eval_scripts/<model_name>_cw.sh
 ```
+
+#### `chain-of-thought`
+
+```bash
+conda activate <your-env>
+bash eval_scripts/<model_name>_cot.sh # evaluate CoT IF rate
+bash eval_scripts/<model_name>_cot_task_level.sh # evaluate task level performance of CoT (extract output first then use wer and accuracy)
+```
+

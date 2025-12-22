@@ -7,7 +7,7 @@ Extract the `data/` directory from that repository and place it in `/path/to/MAI
 ### Environment setup
 The four models need four different environments, please set up your virtual environments properly.
 
-####  DeSTA2.5-Audio
+#### DeSTA2.5-Audio
 For DeSTA2_5, we need to download the model manually.
 ```bash
 cd models/

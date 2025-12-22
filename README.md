@@ -1,8 +1,8 @@
 # MAI-2025-Fall-Final-Project-Group-3
 
 ### Download test data 
-To reproduce our experiment, please refer to the README file of https://github.com/kehanlu/Speech-IFEval/tree/main \
-Extract the `data/` directory like this `/path/to/MAI-2025-Fall-Final-Project-Group-3/data`
+To reproduce our experiment, please refer to the README file of https://github.com/kehanlu/Speech-IFEval/tree/main.
+Extract the `data/` directory from that repository and place it in `/path/to/MAI-2025-Fall-Final-Project-Group-3/data`.
 
 ### Environment setup
 The four models need four different environments, please set up your virtual environments properly.

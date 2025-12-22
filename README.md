@@ -7,7 +7,7 @@ Extract the `data/` directory from that repository and place it in `/path/to/MAI
 ### Environment setup
 The four models need four different environments, please set up your virtual environments properly.
 
-####  DeSTA2.5-Audio
+#### DeSTA2.5-Audio
 For DeSTA2_5, we need to download the model manually.
 ```bash
 cd models/
@@ -25,8 +25,8 @@ pip install -r requirements/<model_name>.txt
 conda install -c conda-forge ffmpeg
 ```
 
-###  To reproduce our experiments
-Default result will be saved in `model_responses/<MODELNAME>`
+### To reproduce our experiments
+The default results will be saved in `model_responses/<MODELNAME>`
 ```bash
 bash scripts/<MODELNAME>_ceq.sh
 bash scripts/<MODELNAME>_cw.sh
@@ -34,7 +34,7 @@ bash scripts/<MODELNAME>_CoT.sh
 ```
 - `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp_emo`] 
 
-###  How to do ICL on assigned IF task and audio task 
+### How to do ICL on assigned IF task and audio task 
 
 ```bash
 python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task <RESPONSETASK> --IF_task <IFTASK> --examples <EXAMPLES> --output_dir <DIR>
@@ -42,7 +42,7 @@ python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task 
 - `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`]
 - `<AUDIOTASK>` : [`ASR`, `SER`, `GR`] 
 - `<RESPONSETASK>` : [`closed_ended_questions`, `chain-of-thought`, `creative_writing`]
-- `<IFTASK>` : Vary from different `<RESPONSETASK>`
+- `<IFTASK>` : Depends on the `<RESPONSETASK>`
 - `<EXAMPLES>` : [`0`~`8`]
 - `<DIR>` : The output directory you want to save in 
 

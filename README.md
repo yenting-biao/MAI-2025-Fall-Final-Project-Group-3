@@ -26,7 +26,7 @@ conda install -c conda-forge ffmpeg
 ```
 
 ###  To reproduce our experiments
-Default result will be saved in `model_responses/<MODELNAME>`
+The default results will be saved in `model_responses/<MODELNAME>`
 ```bash
 bash scripts/<MODELNAME>_ceq.sh
 bash scripts/<MODELNAME>_cw.sh

@@ -80,7 +80,7 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
 ### Evaluate LALMs' responses w/o LLM judge (for `closed_ended_questions`).
 
 ```bash
-conda acitvate <your-env>
+conda activate <your-env>
 pip install -r eval_scripts/requirements.txt
 bash eval_scripts/<model_name>_ceq.sh
 ```

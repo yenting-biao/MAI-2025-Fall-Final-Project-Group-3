@@ -5,7 +5,7 @@ To reproduce our experiment, please refer to the README file of https://github.c
 Extract the `data/` directory like this `/path/to/MAI-2025-Fall-Final-Project-Group-3/data`
 
 ### Environment setup
-The four model needs four different environment, please set up your virtual environment properly.
+The four models need four different environments, please set up your virtual environments properly.
 
 ####  DeSTA2.5-Audio
 For DeSTA2_5, we need to download the model manually.

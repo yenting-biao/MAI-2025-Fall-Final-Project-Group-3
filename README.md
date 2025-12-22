@@ -42,7 +42,7 @@ python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task 
 - `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`]
 - `<AUDIOTASK>` : [`ASR`, `SER`, `GR`] 
 - `<RESPONSETASK>` : [`closed_ended_questions`, `chain-of-thought`, `creative_writing`]
-- `<IFTASK>` : Vary from different `<RESPONSETASK>`
+- `<IFTASK>` : Depends on the `<RESPONSETASK>`
 - `<EXAMPLES>` : [`0`~`8`]
 - `<DIR>` : The output directory you want to save in 
 

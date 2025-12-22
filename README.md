@@ -34,7 +34,7 @@ bash scripts/<MODELNAME>_CoT.sh
 ```
 - `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp_emo`] 
 
-###  How to do ICL on assigned IF task and audio task 
+### How to do ICL on assigned IF task and audio task 
 
 ```bash
 python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task <RESPONSETASK> --IF_task <IFTASK> --examples <EXAMPLES> --output_dir <DIR>

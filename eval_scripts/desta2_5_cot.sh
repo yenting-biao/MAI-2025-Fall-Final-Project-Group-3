@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run multiple
-MODEL_NAME="qwen"
+MODEL_NAME="desta2_5"
 RESPONSE_TASKS=("chain-of-thought")
 AUDIO_TASKS=("ASR" "SER" "GR")
 

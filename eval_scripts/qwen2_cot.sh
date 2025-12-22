@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# Run single
+# python -m eval_scripts.eval_llm_judge \
+#     --input_response_data ./model_responses/qwen2/ASR/chain-of-thought/chain-of-thought/output_0-shot_20251211-004817.jsonl
+
 # Run multiple
-MODEL_NAME="qwen"
+MODEL_NAME="qwen2"
 RESPONSE_TASKS=("chain-of-thought")
 AUDIO_TASKS=("ASR" "SER" "GR")
 

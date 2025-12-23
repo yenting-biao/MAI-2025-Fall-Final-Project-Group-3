@@ -4,3 +4,6 @@ nltk
 immutabledict
 pandas
 openpyxl
+vllm
+whisper_normalizer
+jiwer

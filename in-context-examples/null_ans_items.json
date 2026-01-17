@@ -2,7 +2,7 @@
   {
     "audio_path": "abe2ce24-b399-432b-8f75-230bdf998065.wav",
     "instruction": "From the given utterance, Count the number of words that contain at least one unstressed phoneme Choose the answer from \"eighteen\", \"ten\", \"two\" or \"four\"",
-    "ans": null
+    "ans": "ten"
   },
   {
     "audio_path": "2443cde5-66cd-4a9b-8425-f6e2d412d1da.wav",
@@ -12,12 +12,12 @@
   {
     "audio_path": "e4d3b6af-52b9-4481-b77b-ae8b0599707f.wav",
     "instruction": "From the given utterance, count the number of words that start with a stressed phoneme Choose the answer from \"eleven\", \"zero\", \"seven\" or \"twelve\"",
-    "ans": null
+    "ans": "twelve"
   },
   {
     "audio_path": "b33ff495-1f9b-45e8-80ff-c339c18ec5ba.wav",
     "instruction": "From the given utterance, count the number of words that contain at least one stressed phoneme Choose the answer from \"six\", \"fifteen\", \"ten\" or \"twelve\"",
-    "ans": null
+    "ans": "fifteen"
   },
   {
     "audio_path": "1c168764-906e-4e23-877c-20f89b2599b9.wav",
@@ -27,17 +27,17 @@
   {
     "audio_path": "4d0794d8-5572-4601-881a-4e116ebfab2d.wav",
     "instruction": "From the given utterance, count the number of words that contain at least one stressed phoneme Choose the answer from \"seventeen\", \"seven\", \"seventeen\" or \"twenty\"",
-    "ans": null
+    "ans": "seventeen"
   },
   {
     "audio_path": "f93a8cb4-e0b8-4c22-8073-ee4ac767fc3c.wav",
     "instruction": "From the given utterance, Count the number of words that contain at least one unstressed phoneme Choose the answer from \"twelve\", \"seventeen\", \"seven\" or \"eleven\"",
-    "ans": null
+    "ans": "seventeen"
   },
   {
     "audio_path": "8e16e558-8dfb-4460-b26b-af5f0bd2fe2c.wav",
     "instruction": "From the given utterance, count the number of words that contain at least one unstressed phoneme Choose the answer from \"four\", \"fifteen\", \"twelve\" or \"zero\"",
-    "ans": null
+    "ans": "fifteen"
   },
   {
     "audio_path": "9f3fb106-7ccf-460c-aafa-5c8666b16b3e.wav",

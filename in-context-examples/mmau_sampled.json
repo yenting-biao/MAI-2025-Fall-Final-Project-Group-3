@@ -361,7 +361,7 @@
         {
           "audio_path": "MMAU/7da5df90-842c-4ea3-9a59-c883fbdd8a48.wav",
           "instruction": "Identify if any speaker experienced an emotion change in the given discussion. Choose the answer from \"second speaker\", \"none of the speakers\", \"first speaker\" or \"both speakers\"",
-          "ans": "first speaker"
+          "ans": "both speakers"
         },
         {
           "audio_path": "MMAU/0691ede7-f49f-4658-9642-2e386a3d1e5b.wav",

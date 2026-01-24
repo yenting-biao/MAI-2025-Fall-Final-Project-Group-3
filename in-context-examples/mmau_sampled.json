@@ -56,7 +56,7 @@
                 },
                 {
                     "audio_path": "MMAU/78bf1c95-9ee4-4746-bb66-fe91ff299090.wav",
-                    "instruction": "Which situation likely prompted the speaker’s actions during this recording? Choose the answer from \"Announcing an outdoor event cancellation due to weather\", \"Giving a speech during a sunny festival\", \"Describing a quiet indoor scene\" or \"Reporting on a fire drill inside a building\"",
+                    "instruction": "Which situation likely prompted the speaker\u2019s actions during this recording? Choose the answer from \"Announcing an outdoor event cancellation due to weather\", \"Giving a speech during a sunny festival\", \"Describing a quiet indoor scene\" or \"Reporting on a fire drill inside a building\"",
                     "ans": "Announcing an outdoor event cancellation due to weather"
                 },
                 {
@@ -129,44 +129,44 @@
             ],
             "Phonemic Stress Pattern Analysis": [
                 {
-                    "audio_path": "MMAU/abe2ce24-b399-432b-8f75-230bdf998065.wav",
-                    "instruction": "From the given utterance, Count the number of words that contain at least one unstressed phoneme Choose the answer from \"eighteen\", \"ten\", \"two\" or \"four\"",
-                    "ans": "ten"
+                    "audio_path": "MMAU/2eceae18-ca22-4ac5-8357-5ab1910a632a.wav",
+                    "instruction": "Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"feel, Pilgrim\", \"Gillies,threw\", \"Before,success\" or \"great,you're\"",
+                    "ans": null
                 },
                 {
-                    "audio_path": "MMAU/2443cde5-66cd-4a9b-8425-f6e2d412d1da.wav",
-                    "instruction": "From the given utterance, Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"According,wear\", \"parents,nikai\", \"perpetual,became\" or \"never, the\"",
-                    "ans": "never, the"
+                    "audio_path": "MMAU/08f54fc1-af30-45cd-bb03-bb05071202a5.wav",
+                    "instruction": "From the given utterance, identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"if,twenties\", \"mutual,written\", \"Pilgrim's,fought\" or \"it,is\"",
+                    "ans": null
                 },
                 {
-                    "audio_path": "MMAU/e4d3b6af-52b9-4481-b77b-ae8b0599707f.wav",
-                    "instruction": "From the given utterance, count the number of words that start with a stressed phoneme Choose the answer from \"eleven\", \"zero\", \"seven\" or \"twelve\"",
-                    "ans": "twelve"
+                    "audio_path": "MMAU/aa6e326d-a88f-47f4-afc0-d196b9c17892.wav",
+                    "instruction": "From the given utterance, Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"pictures,School\", \"were,after\", \"pick,dirt\" or \"mom,Genesis\"",
+                    "ans": null
                 },
                 {
-                    "audio_path": "MMAU/b33ff495-1f9b-45e8-80ff-c339c18ec5ba.wav",
-                    "instruction": "From the given utterance, count the number of words that contain at least one stressed phoneme Choose the answer from \"six\", \"fifteen\", \"ten\" or \"twelve\"",
-                    "ans": "fifteen"
+                    "audio_path": "MMAU/b6274735-6e19-4b87-a6f1-fdc0bcd45b80.wav",
+                    "instruction": "From the given utterance, Identify a pair of words where both contain at least one unstressed phoneme Choose the answer from \"imagine, saying\", \"Fauntleroy,conversations\", \"they've,only\" or \"relatable,parents\"",
+                    "ans": null
                 },
                 {
-                    "audio_path": "MMAU/1c168764-906e-4e23-877c-20f89b2599b9.wav",
-                    "instruction": "From the given utterance, identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"producer,engine\", \"big,appears\", \"woman, a\" or \"discovers,humanitarian\"",
-                    "ans": "woman, a"
+                    "audio_path": "MMAU/8af2ff82-0d28-4cfb-a388-ba7abdc73a7f.wav",
+                    "instruction": "From the given utterance, Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"tv,children\", \"wrote,audition\", \"wrote,Nye\" or \"really, other\"",
+                    "ans": null
                 },
                 {
-                    "audio_path": "MMAU/4d0794d8-5572-4601-881a-4e116ebfab2d.wav",
-                    "instruction": "From the given utterance, count the number of words that contain at least one stressed phoneme Choose the answer from \"seventeen\", \"seven\", \"seventeen\" or \"twenty\"",
-                    "ans": "seventeen"
+                    "audio_path": "MMAU/95356796-0fbf-4def-a33e-23f6063be1f7.wav",
+                    "instruction": "From the given utterance, identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"relatable,Jack\", \"about,Well\", \"monty, python\" or \"present,in\"",
+                    "ans": null
                 },
                 {
-                    "audio_path": "MMAU/f93a8cb4-e0b8-4c22-8073-ee4ac767fc3c.wav",
-                    "instruction": "From the given utterance, Count the number of words that contain at least one unstressed phoneme Choose the answer from \"twelve\", \"seventeen\", \"seven\" or \"eleven\"",
-                    "ans": "seventeen"
+                    "audio_path": "MMAU/be7504bf-30df-4979-b9d3-1a5d22e22d07.wav",
+                    "instruction": "Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"Aboich,goodness\", \"media, allegation\", \"daughter,followed\" or \"cold,hurry\"",
+                    "ans": null
                 },
                 {
-                    "audio_path": "MMAU/8e16e558-8dfb-4460-b26b-af5f0bd2fe2c.wav",
-                    "instruction": "From the given utterance, count the number of words that contain at least one unstressed phoneme Choose the answer from \"four\", \"fifteen\", \"twelve\" or \"zero\"",
-                    "ans": "fifteen"
+                    "audio_path": "MMAU/12a83307-46a9-4aad-92f9-7046fead85fa.wav",
+                    "instruction": "From the given utterance, identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"going,Fulci's\", \"become,the\", \"source,eighty-six\" or \"fab,rips\"",
+                    "ans": null
                 }
             ],
             "Emotion State summarisation": [

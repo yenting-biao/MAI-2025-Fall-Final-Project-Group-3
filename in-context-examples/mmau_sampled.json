@@ -131,42 +131,42 @@
                 {
                     "audio_path": "MMAU/2eceae18-ca22-4ac5-8357-5ab1910a632a.wav",
                     "instruction": "Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"feel, Pilgrim\", \"Gillies,threw\", \"Before,success\" or \"great,you're\"",
-                    "ans": null
+                    "ans": "feel, Pilgrim"
                 },
                 {
                     "audio_path": "MMAU/08f54fc1-af30-45cd-bb03-bb05071202a5.wav",
                     "instruction": "From the given utterance, identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"if,twenties\", \"mutual,written\", \"Pilgrim's,fought\" or \"it,is\"",
-                    "ans": null
+                    "ans": "it,is"
                 },
                 {
                     "audio_path": "MMAU/aa6e326d-a88f-47f4-afc0-d196b9c17892.wav",
                     "instruction": "From the given utterance, Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"pictures,School\", \"were,after\", \"pick,dirt\" or \"mom,Genesis\"",
-                    "ans": null
+                    "ans": "were,after"
                 },
                 {
                     "audio_path": "MMAU/b6274735-6e19-4b87-a6f1-fdc0bcd45b80.wav",
                     "instruction": "From the given utterance, Identify a pair of words where both contain at least one unstressed phoneme Choose the answer from \"imagine, saying\", \"Fauntleroy,conversations\", \"they've,only\" or \"relatable,parents\"",
-                    "ans": null
+                    "ans": "imagine, saying"
                 },
                 {
                     "audio_path": "MMAU/8af2ff82-0d28-4cfb-a388-ba7abdc73a7f.wav",
                     "instruction": "From the given utterance, Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"tv,children\", \"wrote,audition\", \"wrote,Nye\" or \"really, other\"",
-                    "ans": null
+                    "ans": "really, other"
                 },
                 {
                     "audio_path": "MMAU/95356796-0fbf-4def-a33e-23f6063be1f7.wav",
                     "instruction": "From the given utterance, identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"relatable,Jack\", \"about,Well\", \"monty, python\" or \"present,in\"",
-                    "ans": null
+                    "ans": "monty, python"
                 },
                 {
                     "audio_path": "MMAU/be7504bf-30df-4979-b9d3-1a5d22e22d07.wav",
                     "instruction": "Identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"Aboich,goodness\", \"media, allegation\", \"daughter,followed\" or \"cold,hurry\"",
-                    "ans": null
+                    "ans": "media, allegation"
                 },
                 {
                     "audio_path": "MMAU/12a83307-46a9-4aad-92f9-7046fead85fa.wav",
                     "instruction": "From the given utterance, identify a pair of words where one contains a stressed phoneme and the other contains an unstressed version of a similar-sounding phoneme Choose the answer from \"going,Fulci's\", \"become,the\", \"source,eighty-six\" or \"fab,rips\"",
-                    "ans": null
+                    "ans": "become,the"
                 }
             ],
             "Emotion State summarisation": [

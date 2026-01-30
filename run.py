@@ -49,6 +49,9 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
         case "blsp-emo":
             from models.blsp_emo import BLSP_Emo
             return BLSP_Emo(device=device)
+        case "qwen25_omni":
+            from models.Qwen25_omni import Qwen25_omni
+            return Qwen25_omni(device=device)
     raise ValueError(f"Model {model_name} not supported.")
 
 def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:

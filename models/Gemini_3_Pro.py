@@ -66,12 +66,19 @@ class Gemini3Pro(BaseModel):
             ValueError: If GEMINI_API_KEYS environment variable is not set.
         """
 
+        super().__init__(model_name=model_name)
+
         load_dotenv()
         api_keys = os.environ.get("GEMINI_API_KEYS", "")
         if not api_keys:
             raise ValueError("GEMINI_API_KEYS environment variable is not set.")
+        self.api_keys = [key for key in api_keys.replace(" ", "").split(",") if key]
+        if not self.api_keys:
+            raise ValueError(
+                "GEMINI_API_KEYS environment variable was not properly set."
+                ' Format should be "<key1>,<key2>,...,<keyN>" with no trailing commas'
+            )
 
-        self.api_keys = api_keys.replace(" ", "").split(",")
         self.current_key_index = 0
         self.client = genai.Client(api_key=self.api_keys[self.current_key_index])
         self.model_name = model_name
@@ -80,7 +87,7 @@ class Gemini3Pro(BaseModel):
         self.generation_config = (
             generation_config
             if generation_config is not None
-            else self.default_generation_config
+            else self.default_generation_config.copy()
         )
 
         if max_retries < len(self.api_keys):
@@ -146,6 +153,12 @@ class Gemini3Pro(BaseModel):
         assert len(self.contents) == 2 * len(conversation) - 1, (
             f"Expected {2 * len(conversation) - 1} contents, got {len(self.contents)}."
         )
+
+        # Used for debugging/logging purposes by run.py.
+        # Each item in self.contents is of type <google.genai.types.Content> and 
+        # cannot be serialized by the json module, so we convert self.contents
+        # to string here.
+        self.messages = str(self.contents)
 
     def generate(self) -> str:
         """Generate a response from the model based on processed input.

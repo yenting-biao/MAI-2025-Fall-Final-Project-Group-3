@@ -1,7 +1,5 @@
 #!/bin/bash
 set -e
-export CUDA_VISIBLE_DEVICES=4
-export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export CUBLAS_WORKSPACE_CONFIG=:16:8
 
 #   CEQ

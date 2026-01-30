@@ -251,6 +251,11 @@ def verify_args(args: argparse.Namespace) -> None:
 
 #   MMAU function 
 def MMAU_Get_ICL_Tasks(audio_id: str) -> Tuple[str, str]:
+    #   Check audio id
+    #   audio_id format: "MMAU/{NAME}.wav" try to get {NAME}
+    audio_id = audio_id.split('/')[-1]  # Get the file name
+    audio_id = audio_id[:-4]  # Remove the .wav extension
+    
     if audio_id in MMAU_AUDIO_INFO:
         task_info = MMAU_AUDIO_INFO[audio_id]
     elif audio_id in MMAU_MINI_AUDIO_INFO:
@@ -291,7 +296,7 @@ def main(args: argparse.Namespace) -> None:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)
             if (args.audio_task == "MMAU"):
-                main_task, sub_task = MMAU_Get_ICL_Tasks(test_case["audio_filepath"][5:-4])
+                main_task, sub_task = MMAU_Get_ICL_Tasks(test_case["audio_filepath"])
                 icl_data_shuffled = icl_data[main_task][sub_task][args.IF_task].copy() if args.examples > 0 else []
             else:
                 icl_data_shuffled = icl_data.copy()

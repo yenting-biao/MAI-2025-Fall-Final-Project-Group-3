@@ -128,6 +128,22 @@ class ChatHistory(object):
             self.cur_length -= pop_length
         return self.system_histroy + self.history + [(input_ids,)]
 
+    def get_conversation_string(self):
+        conversation_parts = []
+        
+        audio_idx = 1
+        for item in self.get_history():
+            if len(item) == 1:  # Text tokens
+                input_ids = item[0].squeeze(0).tolist()
+                decoded = self.tokenizer.decode(input_ids, errors='replace')
+                conversation_parts.append(decoded)
+            elif len(item) == 2:  # Audio (speech_values, attention_mask)
+                conversation_parts.append(f"[AUDIO {audio_idx}]")
+                audio_idx += 1
+        
+        return "".join(conversation_parts)
+
+
 class BLSP_Emo(BaseModel):
     def __init__(self, model_name: str = "BLSP_Emo", device: str = "cuda", path_to_weights: str = None):
         """
@@ -242,6 +258,8 @@ class BLSP_Emo(BaseModel):
             
             if answer is not None:  # means there is an assistant response
                 self.history.add_text_history("assistant", answer)
+        
+        self.messages = self.history.get_conversation_string()
 
     def generate(self) -> str:
         if not self.history.history:

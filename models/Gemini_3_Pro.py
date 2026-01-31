@@ -79,6 +79,9 @@ class Gemini3Pro(BaseModel):
                 ' Format should be "<key1>,<key2>,...,<keyN>" with no trailing commas'
             )
 
+        if max_retries < 1:
+            raise ValueError("max_retries must be at least 1.")
+
         self.current_key_index = 0
         self.client = genai.Client(api_key=self.api_keys[self.current_key_index])
         self.model_name = model_name
@@ -176,21 +179,23 @@ class Gemini3Pro(BaseModel):
         if not self.contents:
             raise ValueError("Please call process_input() before calling generate().")
 
-        for trial_idx in range(self.max_retries):
+        num_tries = 0
+        response = None
+        while response is None and num_tries < self.max_retries:
+            num_tries += 1
             try:
                 response = self.client.models.generate_content(
                     model=self.model_name,
                     contents=self.contents,
                     config=types.GenerateContentConfig(**self.generation_config),
                 )
-                break
             except Exception as e:
                 next_key_index = (self.current_key_index + 1) % len(self.api_keys)
                 print(
                     f"Error with API key number {self.current_key_index}: {e}"
                     + (
                         f". Trying API key number {next_key_index} next."
-                        if trial_idx + 1 < self.max_retries
+                        if num_tries < self.max_retries
                         else ""
                     )
                 )
@@ -198,7 +203,7 @@ class Gemini3Pro(BaseModel):
                 self.client = genai.Client(
                     api_key=self.api_keys[self.current_key_index]
                 )
-        else:
+        if num_tries == self.max_retries and response is None:
             raise RuntimeError(
                 f"Gemini failed to generate response in {self.max_retries} tries"
             )

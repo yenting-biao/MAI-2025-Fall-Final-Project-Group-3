@@ -27,7 +27,7 @@ class Qwen2_Audio_Chat(BaseModel):
         conversation = [
             {
                 "role": "system",
-                "content": f"You are a helpful assistant. You will be provided with {num_examples} exammple pairs of questions and answers. You should follow the examples to answer the last question.",
+                "content": f"You are a helpful assistant. You will be provided with {num_examples} example pairs of questions and answers. You should follow the examples to answer the last question.",
             }
         ]
         for message in raw_conversation[:num_examples]:

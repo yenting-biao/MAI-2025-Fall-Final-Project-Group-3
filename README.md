@@ -17,6 +17,24 @@ pip install -e .
 cd ..
 ```
 
+#### Gemini 3 Pro
+To run the experiments involving Gemini 3 Pro, the `GEMINI_API_KEYS` (note the "S")
+environment variable needs to be set beforehand with Gemini API keys.
+The format of the variable should be as follows:
+```bash
+GEMINI_API_KEYS='<key1>,<key2>,...,<keyN>'
+```
+Multiple API keys can be set by delimiting them with commas, but do not add a
+trailing comma. Obtain your own API keys from [Google AI Studio](https://aistudio.google.com/).
+
+The environment variable can be set by using the `export` command or by creating
+a file called `.env` to the current working directory and adding the variable
+to the file. In the latter case, [`python-dotenv`](https://github.com/theskumar/python-dotenv)
+is used to extract the variable from the file. The file should look like this:
+```bash
+GEMINI_API_KEYS='<key1>,<key2>,...,<keyN>'
+```
+
 #### All models need to activate their own environment
 ```bash
 conda create --name <your_env_name> python=3.11.2 -y

@@ -2,6 +2,19 @@ from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcess
 from qwen_omni_utils import process_mm_info
 from .basemodel import BaseModel
 import torch
+import logging
+
+
+# Suppress the warning about modified system prompt
+class SystemPromptWarningFilter(logging.Filter):
+    def filter(self, record):
+        return (
+            "System prompt modified, audio output may not work as expected"
+            not in record.getMessage()
+        )
+
+
+logging.getLogger().addFilter(SystemPromptWarningFilter())
 
 
 class Qwen25_omni(BaseModel):

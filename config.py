@@ -10,7 +10,7 @@ MAP_AUDIO_TASK = {
     "ASR": "Automatic_speech_recognition",
     "SER": "Speech_emotion_recognition",
     "GR": "Gender_recognition",
-    # "MMAU": "MMAU", # not implemented yet
+    "MMAU": "MMAU", 
 }
 IMPLEMENTED_IF_TASKS = [
     # closed_ended_questions

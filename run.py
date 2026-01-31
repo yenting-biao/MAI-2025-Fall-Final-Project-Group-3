@@ -12,6 +12,10 @@ from models.basemodel import BaseModel
 from config import get_task_parser
 from config import MAP_MODEL_NAME, MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS, TEST_SAMPLE
 
+#   Load MMAU audio information 
+MMAU_AUDIO_INFO = json.load(open("./in-context-examples/mmau-id2task.json", "r"))
+MMAU_MINI_AUDIO_INFO = json.load(open("./in-context-examples/mmau-mini-id2task.json", "r"))
+
 def set_seed(seed: int = 42, verbose: bool = False) -> None:
     # Python & OS
     random.seed(seed)
@@ -27,7 +31,7 @@ def set_seed(seed: int = 42, verbose: bool = False) -> None:
     # deterministic
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
-    torch.use_deterministic_algorithms(True)
+    torch.use_deterministic_algorithms(True, warn_only=True)
 
     if verbose:
         print(f"Seed set to {seed}")
@@ -66,12 +70,17 @@ def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:
     '''
     with open(args.icl_json_path, "r") as f:
         InContextDataset = json.load(f)
-    if args.response_task == "chain-of-thought":
+    if (args.audio_task == "MMAU"):
+        IclData = InContextDataset[args.audio_task][args.response_task]["speech"]
+    elif args.response_task == "chain-of-thought":
         IclData = InContextDataset[args.audio_task][args.response_task]
     else: # closed_ended_questions or creative_writing
         IclData = InContextDataset[args.audio_task][args.response_task][args.IF_task]
     
-    # Verify ICL data
+    if (args.audio_task == "MMAU") :
+        return IclData
+    
+    # Verify ICL data 
     assert len(IclData) == max_examples, \
         f"ICL data does not have the required number of examples: expected {max_examples}, got {len(IclData)}."
     assert all(item.get("audio_path") and item.get("instruction") and item.get("ans") for item in IclData), \
@@ -104,7 +113,7 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list
     if args.test_eval_dir:
         test_audio_dir = args.test_audio_dir
         test_dir = args.test_eval_dir
-        test_fn = os.path.join(test_dir, f"{args.response_task}.jsonl")
+        test_fn = os.path.join(test_dir, f"{args.response_task}_filtered.jsonl")
         with open(test_fn, "r") as fin:
             test_cases_tmp = [json.loads(line) for line in fin.readlines()]
         test_cases = []
@@ -208,7 +217,7 @@ def parse_args():
 
     # Dir Settings
     parser.add_argument("--output_dir", type=str, default="./model_responses/", help="Directory to save the outputs.")
-    parser.add_argument("--icl_json_path", type=str, default="./in-context-examples/ICL_examples_processed.json", help="Path to the JSON file containing in-context examples.")
+    parser.add_argument("--icl_json_path", type=str, default="./in-context-examples/ICL_examples.json", help="Path to the JSON file containing in-context examples.")
     parser.add_argument("--icl_audio_dir", type=str, default="./in-context-examples/audios/", help="Directory containing audio files for in-context examples.")
 
     """
@@ -240,6 +249,23 @@ def verify_args(args: argparse.Namespace) -> None:
     if args.verbose:
         print("Arguments verified successfully.")
 
+#   MMAU function 
+def MMAU_Get_ICL_Tasks(audio_id: str) -> Tuple[str, str]:
+    #   Check audio id
+    #   audio_id format: "MMAU/{NAME}.wav" try to get {NAME}
+    audio_id = audio_id.split('/')[-1]  # Get the file name
+    audio_id = audio_id[:-4]  # Remove the .wav extension
+    
+    if audio_id in MMAU_AUDIO_INFO:
+        task_info = MMAU_AUDIO_INFO[audio_id]
+    elif audio_id in MMAU_MINI_AUDIO_INFO:
+        task_info = MMAU_MINI_AUDIO_INFO[audio_id]
+    else:
+        raise ValueError(f"Audio ID {audio_id} not found in MMAU audio info.")
+    main_task = task_info["category"]
+    sub_task = task_info["sub-category"]
+    return main_task, sub_task
+
 def main(args: argparse.Namespace) -> None:
     t0 = datetime.datetime.now()
     audio_task_mapped = MAP_AUDIO_TASK[args.audio_task.upper()]
@@ -269,7 +295,11 @@ def main(args: argparse.Namespace) -> None:
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)
-            icl_data_shuffled = icl_data.copy()
+            if (args.audio_task == "MMAU"):
+                main_task, sub_task = MMAU_Get_ICL_Tasks(test_case["audio_filepath"])
+                icl_data_shuffled = icl_data[main_task][sub_task][args.IF_task].copy() if args.examples > 0 else []
+            else:
+                icl_data_shuffled = icl_data.copy()
             random.shuffle(icl_data_shuffled)
             icl_data_examples = icl_data_shuffled[:args.examples]
             messages, response = GenerateMessagesResponse(

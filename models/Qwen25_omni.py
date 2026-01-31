@@ -1,5 +1,3 @@
-import soundfile as sf
-
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 from qwen_omni_utils import process_mm_info
 from .basemodel import BaseModel
@@ -12,9 +10,11 @@ class Qwen25_omni(BaseModel):
         super().__init__(model_name=model_name)
         self.device = device
         self.model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
-            model_name, torch_dtype="bfloat16", device_map=device
+            model_name,
+            torch_dtype="bfloat16",
+            device_map="auto" if device == "cuda" else device,
         )
-        self.processor = Qwen2_5OmniProcessor.from_pretrained("Qwen/Qwen2.5-Omni-7B")
+        self.processor = Qwen2_5OmniProcessor.from_pretrained(model_name)
 
     def process_input(self, raw_conversation: list[dict]):
         num_examples = len(raw_conversation) - 1

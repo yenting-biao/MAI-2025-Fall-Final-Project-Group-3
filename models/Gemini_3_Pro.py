@@ -39,7 +39,6 @@ class Gemini3Pro(BaseModel):
     default_generation_config = {
         "temperature": 1.0,
         "max_output_tokens": 512,
-        "thinking_config": types.ThinkingConfig(thinking_level="low"),
         "seed": 0,
     }
 

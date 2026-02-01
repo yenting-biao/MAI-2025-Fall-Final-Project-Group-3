@@ -116,7 +116,7 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list
     if args.test_eval_dir:
         test_audio_dir = args.test_audio_dir
         test_dir = args.test_eval_dir
-        test_fn = os.path.join(test_dir, f"{args.response_task}_filtered.jsonl")
+        test_fn = os.path.join(test_dir, f"{args.response_task}_corrected_filtered.jsonl" if args.response_task != "creative_writing" else f"{args.response_task}.jsonl")
         with open(test_fn, "r") as fin:
             test_cases_tmp = [json.loads(line) for line in fin.readlines()]
         test_cases = []

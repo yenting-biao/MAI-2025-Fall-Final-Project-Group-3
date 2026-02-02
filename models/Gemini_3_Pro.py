@@ -37,7 +37,7 @@ class Gemini3Pro(BaseModel):
     """Gemini 3 Pro model wrapper with audio and text support."""
 
     default_generation_config = {
-        "temperature": 1.0,
+        "temperature": 0.0,
         "max_output_tokens": 512,
         "seed": 0,
     }

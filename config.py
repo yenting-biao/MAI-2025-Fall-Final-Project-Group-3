@@ -6,7 +6,7 @@ MAP_MODEL_NAME = {
     "desta2_5": "desta2_5",
     "blsp-emo": "BLSP-Emo",
     "qwen25_omni": "Qwen2.5-Omni",
-    "gemini_3_pro": "Gemini-3-Pro", 
+    "gemini_3_pro": "Gemini-3-Pro",
 }
 MAP_AUDIO_TASK = {
     "ASR": "Automatic_speech_recognition",

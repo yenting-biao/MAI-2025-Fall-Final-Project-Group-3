@@ -17,9 +17,9 @@ pip install -e .
 cd ..
 ```
 
-#### Gemini 3 Pro
+#### Gemini
 
-To run the experiments involving Gemini 3 Pro, the `GEMINI_API_KEYS` (note the "S")
+To run the experiments involving Gemini, the `GEMINI_API_KEYS` (note the "S")
 environment variable needs to be set beforehand with Gemini API keys.
 The format of the variable should be as follows:
 ```bash
@@ -51,14 +51,14 @@ bash scripts/<MODELNAME>_ceq.sh
 bash scripts/<MODELNAME>_cw.sh
 bash scripts/<MODELNAME>_CoT.sh
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini_3_pro`] 
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini`] 
 
 ### How to do ICL on assigned IF task and audio task 
 
 ```bash
 python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task <RESPONSETASK> --IF_task <IFTASK> --examples <EXAMPLES> --output_dir <DIR>
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini_3_pro`]
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini`]
 - `<AUDIOTASK>` : [`ASR`, `SER`, `GR`] 
 - `<RESPONSETASK>` : [`closed_ended_questions`, `chain-of-thought`, `creative_writing`]
 - `<IFTASK>` : Depends on the `<RESPONSETASK>`
@@ -98,7 +98,7 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
 
 ### Evaluation 
 
-- `<model_name>` : [`qwen`, `qwen2`, `blsp-emo`, `desta2_5`, `qwen25_omni`, `gemini_3_pro`]
+- `<model_name>` : [`qwen`, `qwen2`, `blsp-emo`, `desta2_5`, `qwen25_omni`, `gemini`]
 
 #### Env
 

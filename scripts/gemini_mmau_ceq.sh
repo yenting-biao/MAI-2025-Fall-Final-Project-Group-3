@@ -4,11 +4,19 @@ set -e
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export CUBLAS_WORKSPACE_CONFIG=:16:8
 
-AUDIO_TASKS=("ASR" "SER" "GR")
-RESPONSE_TASKS=("chain-of-thought")
-IF_TASKS=("chain-of-thought")
+AUDIO_TASKS=("MMAU")
+RESPONSE_TASKS=("closed_ended_questions")
+IF_TASKS=(
+    "change_case:english_capital"
+    "change_case:english_lowercase"
+    "detectable_format:json_format"
+    "startend:quotation"
+    "detectable_format:title"
+    "combination:repeat_prompt"
+    "startend:end_checker"
+)
 EXAMPLES=(0 1 2 3 4 5 6 7 8)
-MODEL_NAMES=("gemini_3_pro")
+MODEL_NAMES=("gemini")
 SEEDS=(42)
 OUTPUT_DIR="${OUTPUT_DIR:-model_responses/}"
 

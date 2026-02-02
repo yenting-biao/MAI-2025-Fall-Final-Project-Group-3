@@ -33,22 +33,25 @@ def _exists(obj: Any) -> bool:
     return obj is not None
 
 
-class Gemini3Pro(BaseModel):
-    """Gemini 3 Pro model wrapper with audio and text support."""
+class Gemini(BaseModel):
+    """Gemini model wrapper with audio and text support."""
 
     default_generation_config = {
         # Note: setting max_output_tokens will cause response to be empty
         # if the thinking tokens exceed max_output_tokens (i.e., thinking process
         # doesn't end by max_output_tokens). Appears to be a known open issue:
         # https://github.com/googleapis/python-genai/issues/626
-        "temperature": 1.0,
-        "thinking_config": types.ThinkingConfig(thinking_level="low"),
+        "temperature": 1.0,  # Temperature officially recommended by Google
+
+        # The default thinking level is dynamic.
+        # "thinking_config": types.ThinkingConfig(thinking_level="low"),
+
         # seed is set in run.py
     }
 
     def __init__(
         self,
-        model_name: str = "gemini-3-pro-preview",
+        model_name: str = "gemini-3-flash-preview",
         max_retries: int = 5,
         generation_config: dict[str, Any] | None = None,
     ):

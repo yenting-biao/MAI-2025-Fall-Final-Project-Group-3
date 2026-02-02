@@ -5,17 +5,10 @@ export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export CUBLAS_WORKSPACE_CONFIG=:16:8
 
 AUDIO_TASKS=("ASR" "SER" "GR")
-RESPONSE_TASKS=("creative_writing")
-IF_TASKS=(
-    "detectable_format:number_bullet_lists"
-    "keywords:existence"
-    "keywords:forbidden_words"
-    "length_constraints:number_words"
-    "length_constraints:number_sentences"
-    "length_constraints:number_paragraphs"
-)
+RESPONSE_TASKS=("chain-of-thought")
+IF_TASKS=("chain-of-thought")
 EXAMPLES=(0 1 2 3 4 5 6 7 8)
-MODEL_NAMES=("gemini_3_pro")
+MODEL_NAMES=("gemini")
 SEEDS=(42)
 OUTPUT_DIR="${OUTPUT_DIR:-model_responses/}"
 

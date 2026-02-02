@@ -56,9 +56,13 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
         case "qwen25_omni":
             from models.Qwen25_omni import Qwen25_omni
             return Qwen25_omni(device=device)
-        case "gemini_3_pro":
-            from models.Gemini_3_Pro import Gemini3Pro
-            return Gemini3Pro()
+        case model_name if "gemini" in model_name.lower():
+            from models.Gemini import Gemini
+            if model_name.lower() == "gemini":
+                # Use default Gemini model
+                return Gemini()
+            else:
+                return Gemini(model_name=model_name.lower())
     raise ValueError(f"Model {model_name} not supported.")
 
 def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:
@@ -301,7 +305,7 @@ def main(args: argparse.Namespace) -> None:
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)
-            if args.model_name == "gemini_3_pro":
+            if "gemini" in args.model_name:
                 model.generation_config["seed"] = args.seed + i
             if (args.audio_task == "MMAU"):
                 main_task, sub_task = MMAU_Get_ICL_Tasks(test_case["audio_filepath"])

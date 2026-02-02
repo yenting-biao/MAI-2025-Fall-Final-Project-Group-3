@@ -51,7 +51,7 @@ bash scripts/<MODELNAME>_ceq.sh
 bash scripts/<MODELNAME>_cw.sh
 bash scripts/<MODELNAME>_CoT.sh
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp_emo`, `qwen25_omni`, `gemini_3_pro`] 
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini_3_pro`] 
 
 ### How to do ICL on assigned IF task and audio task 
 
@@ -98,7 +98,7 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
 
 ### Evaluation 
 
-- `<model_name>` : [`qwen`, `qwen2`, `blsp_emo`, `desta2_5`, `qwen25_omni`, `gemini_3_pro`]
+- `<model_name>` : [`qwen`, `qwen2`, `blsp-emo`, `desta2_5`, `qwen25_omni`, `gemini_3_pro`]
 
 #### Env
 

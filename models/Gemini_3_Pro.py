@@ -37,8 +37,12 @@ class Gemini3Pro(BaseModel):
     """Gemini 3 Pro model wrapper with audio and text support."""
 
     default_generation_config = {
-        "temperature": 0.0,
-        "max_output_tokens": 512,
+        # Note: setting max_output_tokens will cause response to be empty
+        # if the thinking tokens exceed max_output_tokens (i.e., thinking process
+        # doesn't end by max_output_tokens). Appears to be a known open issue:
+        # https://github.com/googleapis/python-genai/issues/626
+        "temperature": 1.0,
+        "thinking_config": types.ThinkingConfig(thinking_level="low"),
         "seed": 0,
     }
 

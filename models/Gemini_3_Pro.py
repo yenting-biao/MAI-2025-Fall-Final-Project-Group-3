@@ -90,6 +90,8 @@ class Gemini3Pro(BaseModel):
         self.model_name = model_name
         self.max_retries = max_retries
         self.contents: list[types.Content] = []
+        self.files: list[types.File] = []  # To keep track of uploaded files so
+                                           # that we can delete them later.
         self.generation_config = (
             generation_config
             if generation_config is not None
@@ -129,6 +131,9 @@ class Gemini3Pro(BaseModel):
         """
 
         self.contents.clear()
+        for file in self.files:
+            self.client.files.delete(name=file.name)
+        self.files.clear()
 
         for idx, message in enumerate(conversation):
             audio_path = message["audio_path"]
@@ -214,7 +219,13 @@ class Gemini3Pro(BaseModel):
         # Five-second buffer between generations to prevent rate limit error
         time.sleep(5)
 
-        self.contents.clear()
+        self.contents.clear()  # This is to ensure we don't encounter a silent
+                               # bug where old contents are reused when new ones
+                               # should be used.
+        for file in self.files:
+            self.client.files.delete(name=file.name)
+        self.files.clear()
+
         if not response.text:
             print("Warning: Response is empty.")
             return ""

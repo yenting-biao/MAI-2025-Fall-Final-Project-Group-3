@@ -29,7 +29,7 @@ Multiple API keys can be set by delimiting them with commas, but do not add a
 trailing comma. Obtain your own API keys from [Google AI Studio](https://aistudio.google.com/).
 
 The environment variable can be set by using the `export` command or by creating
-a file called `.env` to the root of the project and adding the variable
+a file called `.env` in the root of the project and adding the variable
 to the file. In the latter case, [`python-dotenv`](https://github.com/theskumar/python-dotenv)
 is used to extract the variable from the file. The file should look like this:
 ```bash
@@ -51,14 +51,14 @@ bash scripts/<MODELNAME>_ceq.sh
 bash scripts/<MODELNAME>_cw.sh
 bash scripts/<MODELNAME>_CoT.sh
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp_emo`] 
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp_emo`, `qwen25_omni`, `gemini_3_pro`] 
 
 ### How to do ICL on assigned IF task and audio task 
 
 ```bash
 python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task <RESPONSETASK> --IF_task <IFTASK> --examples <EXAMPLES> --output_dir <DIR>
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`]
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini_3_pro`]
 - `<AUDIOTASK>` : [`ASR`, `SER`, `GR`] 
 - `<RESPONSETASK>` : [`closed_ended_questions`, `chain-of-thought`, `creative_writing`]
 - `<IFTASK>` : Depends on the `<RESPONSETASK>`
@@ -98,7 +98,7 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
 
 ### Evaluation 
 
-- `<model_name>` : [`qwen`, `qwen2`, `blsp_emo`, `desta2_5`, `qwen25_omni`]
+- `<model_name>` : [`qwen`, `qwen2`, `blsp_emo`, `desta2_5`, `qwen25_omni`, `gemini_3_pro`]
 
 #### Env
 

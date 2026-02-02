@@ -5,12 +5,13 @@ MAP_MODEL_NAME = {
     "qwen2": "Qwen2",
     "desta2_5": "desta2_5",
     "blsp-emo": "BLSP-Emo",
+    "qwen25_omni": "Qwen2.5-Omni",
 }
 MAP_AUDIO_TASK = {
     "ASR": "Automatic_speech_recognition",
     "SER": "Speech_emotion_recognition",
     "GR": "Gender_recognition",
-    # "MMAU": "MMAU", # not implemented yet
+    "MMAU": "MMAU", 
 }
 IMPLEMENTED_IF_TASKS = [
     # closed_ended_questions
@@ -43,7 +44,7 @@ def get_task_parser() -> argparse.ArgumentParser:
 
     # Model and Task Settings
     parser.add_argument("--model_name", type=str, default="qwen",
-                        choices=["qwen", "qwen2", "desta2_5", "blsp-emo"],
+                        choices=["qwen", "qwen2", "desta2_5", "blsp-emo", "qwen25_omni"],
                         help="Name of the pre-trained language model to use.")
 
     parser.add_argument("--audio_task", type=str, default="ASR",

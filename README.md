@@ -97,7 +97,7 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
 
 ### Evaluation 
 
-- `<model_name>` : [`qwen`, `qwen2`, `blsp_emo`, `desta2_5`]
+- `<model_name>` : [`qwen`, `qwen2`, `blsp_emo`, `desta2_5`, `qwen25_omni`]
 
 #### Env
 

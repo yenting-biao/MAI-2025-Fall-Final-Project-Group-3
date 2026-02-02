@@ -54,5 +54,7 @@ def filter_jsonl(speechifeval_jsonl_filename: str) -> None:
 
 
 if __name__ == "__main__":
-    filter_jsonl("chain-of-thought.jsonl")
-    filter_jsonl("closed_ended_questions.jsonl")
+    # filter_jsonl("chain-of-thought.jsonl")
+    filter_jsonl("chain-of-thought_corrected.jsonl")
+    # filter_jsonl("closed_ended_questions.jsonl")
+    filter_jsonl("closed_ended_questions_corrected.jsonl")

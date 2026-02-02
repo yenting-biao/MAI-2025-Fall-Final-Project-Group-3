@@ -301,6 +301,8 @@ def main(args: argparse.Namespace) -> None:
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)
+            if args.model_name == "gemini_3_pro":
+                model.generation_config["seed"] = args.seed + i
             if (args.audio_task == "MMAU"):
                 main_task, sub_task = MMAU_Get_ICL_Tasks(test_case["audio_filepath"])
                 icl_data_shuffled = icl_data[main_task][sub_task][args.IF_task].copy() if args.examples > 0 else []

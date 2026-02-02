@@ -43,7 +43,7 @@ class Gemini3Pro(BaseModel):
         # https://github.com/googleapis/python-genai/issues/626
         "temperature": 1.0,
         "thinking_config": types.ThinkingConfig(thinking_level="low"),
-        "seed": 0,
+        # seed is set in run.py
     }
 
     def __init__(

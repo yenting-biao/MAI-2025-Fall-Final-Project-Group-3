@@ -8,12 +8,13 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List
 import os
+from dotenv import load_dotenv
 
 from jiwer import wer
 from tqdm import tqdm
 from whisper_normalizer.basic import BasicTextNormalizer
 
-from .utils import VLLMInference # uses Qwen/Qwen3-8B by default
+from .utils import VLLMInference, OpenAIInference
 from config import get_task_parser
 from config import IMPLEMENTED_IF_TASKS
 
@@ -31,6 +32,7 @@ def extract_result(text: str) -> str | None:
         return match.group(0)
     return None
 
+
 def textual_audio_to_label(textual_audio: str) -> dict:
     """
     return a dict: {
@@ -38,18 +40,14 @@ def textual_audio_to_label(textual_audio: str) -> dict:
         "SER": emotion,
         "GR": gender
     }
-    example textual_audio: 
+    example textual_audio:
     [00:00:00 - 00:00:05] Mary Taylor, however, related the tale of Zora to Mrs. Gray's private ear later.(Gender: Female, Emotion: neutral)
     """
-    
+
     transcript = textual_audio.split("]")[-1].split("(")[0].strip()
     gender = textual_audio.split("Gender:")[-1].split(",")[0].strip()
     emotion = textual_audio.split("Emotion:")[-1].split(")")[0].strip()
-    return {
-        "ASR": transcript,
-        "SER": emotion,
-        "GR": gender
-    }
+    return {"ASR": transcript, "SER": emotion, "GR": gender}
 
 
 def build_eval_prompt_components(
@@ -84,7 +82,7 @@ Please strictly follow the guidelines below:
 - Output "NO" only if the response is a minimal or purely factual reply.
 - Answer in the format: "Result: <YES or NO>" at the end.
 """
-        content = f"**User input**: {instruction}\n**Model's Response**: {response}"
+        content = f"User input: {instruction}\nModel's Response: {response}"
     else:
         raise ValueError(f"Unsupported metric: {metric}")
 
@@ -95,11 +93,20 @@ Please strictly follow the guidelines below:
 BatchEntry = tuple[Dict[str, Any], str, str, str]
 
 
-def flush_eval_batch(judge: VLLMInference, batch: List[BatchEntry], fout) -> None:
+def flush_eval_batch(
+    judge: VLLMInference | OpenAIInference, batch: List[BatchEntry], fout
+) -> None:
     if not batch:
         return
 
-    prompts = [entry[1] for entry in batch]
+    if isinstance(judge, VLLMInference):
+        prompts = [entry[1] for entry in batch]
+    elif isinstance(judge, OpenAIInference):
+        prompts = [
+            (entry[2], entry[3]) for entry in batch
+        ]  # (system_prompt, user_prompt)
+    else:
+        raise ValueError("Unsupported judge type.")
     responses = judge.generate_response(prompts)
     for (data, prompt, system_prompt, user_prompt), response in zip(batch, responses):
         data["eval_messages"] = prompt
@@ -109,12 +116,12 @@ def flush_eval_batch(judge: VLLMInference, batch: List[BatchEntry], fout) -> Non
     batch.clear()
 
 
-def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
+def run_llm_evaluation(args: Any, judge: VLLMInference | OpenAIInference) -> None:
     print(f"\nEvaluating LLM judge on {args.input_response_data}\n")
     input_response_data_path = Path(args.input_response_data)
     if args.task_level:
         output_dir = input_response_data_path.parent / "reports-task-level"
-    else:    
+    else:
         output_dir = input_response_data_path.parent / "reports"
     output_dir.mkdir(parents=True, exist_ok=True)
     tmp_dir = output_dir / "tmp"
@@ -139,7 +146,7 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
             "w"
         ) as fout:
             datas = [json.loads(line) for line in fin.readlines() if line.strip()]
-            
+
             if args.task_level:
                 # if "ASR" in path, metric set to "wer"; else set to "accuracy"
                 for data in datas:
@@ -147,7 +154,7 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
                         data["metric"] = "wer"
                     else:
                         data["metric"] = "accuracy"
-                    
+
                     if "label" not in data:
                         metadata = textual_audio_to_label(data["textual_audio"])
                         if "ASR" in str(input_response_data_path):
@@ -158,7 +165,7 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
                             data["label"] = metadata["GR"]
                         else:
                             raise ValueError("Unknown audio task in path.")
-            
+
             batch: List[BatchEntry] = []
             for data in tqdm(datas, desc="Generating LLM judgments"):
                 prompt, system_prompt, content = build_eval_prompt_components(
@@ -178,19 +185,25 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
                 metric = data.get("metric")
                 dataset = data.get("dataset", "unknown")
                 if metric == "accuracy":
-                    result = extract_result(data.get("eval_response", "")).split("</think>")[-1]
+                    result = extract_result(data.get("eval_response", "")).split(
+                        "</think>"
+                    )[-1]
                     correct = bool(result and result.lower() == "yes")
                     dataset_group[dataset].append(1 if correct else 0)
                     data["correct"] = correct
                 elif metric == "wer":
-                    hyp = normalize_text(data.get("eval_response", "").split("</think>")[-1].strip())
+                    hyp = normalize_text(
+                        data.get("eval_response", "").split("</think>")[-1].strip()
+                    )
                     if "label" not in data:
-                        raise ValueError("WER metric requires 'label' field in the data.")
+                        raise ValueError(
+                            "WER metric requires 'label' field in the data."
+                        )
                     ref = normalize_text(data.get("label", "").strip())
                     hyps.append(hyp)
                     refs.append(ref)
                     data["correct"] = wer(reference=[ref], hypothesis=[hyp])
-                    
+
                 elif metric == "cot":
                     result = extract_result(data.get("eval_response", ""))
                     correct = bool(result and result.lower() == "yes")
@@ -210,6 +223,7 @@ def run_llm_evaluation(args: Any, judge: VLLMInference) -> None:
             accuracy = sum(corrects) / len(corrects)
             logging.info(f"{dataset} ACC: {accuracy}")
             print(f"{dataset} ACC: {accuracy}")
+
 
 def get_task_names(args):
     audio_task = args.audio_task
@@ -232,20 +246,25 @@ def get_task_names(args):
                 raise ValueError(f"IF task {if_task} not implemented.")
             if if_task.startswith("keywords"):
                 if args.audio_task != "ASR":
-                    raise ValueError(f"IF task {if_task} only supported for ASR audio task.")
+                    raise ValueError(
+                        f"IF task {if_task} only supported for ASR audio task."
+                    )
             if_tasks = [if_task]
     elif args.response_task == "chain-of-thought":
         response_task = args.response_task
         if args.IF_task is None or args.IF_task == "chain-of-thought":
             if_tasks = ["chain-of-thought"]
         else:
-            raise ValueError(f"IF task {args.IF_task} not supported for chain-of-thought.")
+            raise ValueError(
+                f"IF task {args.IF_task} not supported for chain-of-thought."
+            )
     elif args.response_task == "closed_ended_questions":
         raise ValueError("closed_ended_questions is not supported in eval_llm_judge.py")
     else:
         raise ValueError(f"Unknown response task: {args.response_task}")
 
     return audio_task, response_task, if_tasks
+
 
 def parse_args() -> argparse.Namespace:
     parser = get_task_parser()
@@ -265,20 +284,32 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--judge_name",
         type=str,
-        default="Qwen/Qwen3-8B",
-        help="Model name passed to vLLM (default: Qwen/Qwen3-8B).",
+        default="gpt-5-mini-2025-08-07",  # "Qwen/Qwen3-8B",
+        help="Model name passed to vLLM (default: gpt-5-mini-2025-08-07).",
     )
     parser.add_argument(
         "--task_level",
         action="store_true",
         help="Whether to do task-level evaluation. When not set, do IF evaluation.",
     )
+    parser.add_argument(
+        "--use_vllm_judge",
+        action="store_true",
+        help="Whether to use vLLMInference as judge. If not set, use OpenAIInference.",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    judge = VLLMInference(model_name=args.judge_name)
+    if args.use_vllm_judge:
+        judge = VLLMInference(model_name=args.judge_name)
+    else:
+        load_dotenv()  # Load environment variables from .env file
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        if not openai_api_key:
+            raise ValueError("OPENAI_API_KEY not found in environment variables.")
+        judge = OpenAIInference(model_name=args.judge_name, api_key=openai_api_key)
 
     if args.input_response_data:
         run_llm_evaluation(args, judge)
@@ -286,8 +317,10 @@ def main() -> None:
 
     test_model = args.model_name
     audio_task, response_task, if_tasks = get_task_names(args)
-    print(f"Evaluating IF level for model={test_model}, audio_task={audio_task}, "
-          f"response_task={response_task},\nif_tasks={if_tasks}")
+    print(
+        f"Evaluating IF level for model={test_model}, audio_task={audio_task}, "
+        f"response_task={response_task},\nif_tasks={if_tasks}"
+    )
 
     for if_task in if_tasks:
         print(f"\nEvaluating IF task: {if_task}")
@@ -295,12 +328,21 @@ def main() -> None:
         input_dir = f"model_responses/{test_model}/{audio_task}/{response_task}/{if_task_formatted}"
 
         # Check that there are exactly 9 output files and the filenames are in the foramat "output_{k}*.jsonl", where k = 0, ..., 8
-        candidate_files = sorted(list(f for f in os.listdir(input_dir) if f.startswith("output_") and f.endswith(".jsonl")))
-        assert len(candidate_files) == 9, f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."
+        candidate_files = sorted(
+            list(
+                f
+                for f in os.listdir(input_dir)
+                if f.startswith("output_") and f.endswith(".jsonl")
+            )
+        )
+        assert (
+            len(candidate_files) == 9
+        ), f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."
         for i, file_name in enumerate(candidate_files):
             expected_prefix = f"output_{i}"
-            assert file_name.startswith(expected_prefix), f"Expected file starting with {expected_prefix}, found {file_name}."
-
+            assert file_name.startswith(
+                expected_prefix
+            ), f"Expected file starting with {expected_prefix}, found {file_name}."
 
         for input_file in candidate_files:
             args.input_response_data = os.path.join(input_dir, input_file)

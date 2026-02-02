@@ -1,7 +1,7 @@
 import os, time
-from typing import List
-
-os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
+from typing import List, Tuple
+from tqdm import tqdm
+import dotenv
 
 
 class VLLMInference:
@@ -30,6 +30,8 @@ class VLLMInference:
         max_tokens: int = 8192,
     ):
         from vllm import LLM, SamplingParams
+
+        os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
 
         self.llm = LLM(
             model=model_name, gpu_memory_utilization=gpu_memory_utilization, seed=seed
@@ -72,19 +74,111 @@ class VLLMInference:
 
         return responses
 
+
+class OpenAIInference:
+    """Perform OpenAI inference against a chat-capable model."""
+
+    def __init__(
+        self,
+        model_name: str = "gpt-5-mini-2025-08-07",
+        api_key: str | None = None,
+        reasoning_effort: str = "minimal",
+        seed: int = 42,
+    ):
+        from openai import OpenAI
+
+        self.model_name = model_name
+        self.reasoning_effort = reasoning_effort
+        self.seed = seed
+        self.client = OpenAI(api_key=api_key)
+
+    def _prepare_input(self, prompt: str | Tuple[str, str]) -> List[dict[str, str]]:
+        if isinstance(prompt, str):
+            return [{"role": "user", "content": prompt}]
+        elif isinstance(prompt, tuple) and len(prompt) == 2:
+            system_prompt, user_prompt = prompt
+            return [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ]
+        else:
+            raise ValueError("Prompt must be a string or a tuple of (question, answer)")
+
+    def generate_response(self, prompts: List[str | Tuple[str, str]]) -> List[str]:
+        """Return one chat completion per prompt via the latest OpenAI Python API."""
+
+        responses = []
+        for prompt in tqdm(prompts, desc="Generating responses", dynamic_ncols=True):
+            messages = self._prepare_input(prompt)
+            completion = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages,
+                reasoning_effort=self.reasoning_effort,
+                seed=self.seed,
+            )
+            responses.append(completion.choices[0].message.content.strip())
+
+        return responses
+
+
 if __name__ == "__main__":
     # This block is for demonstration and testing purposes.
 
+    # t0 = time.time()
+    # judge = VLLMInference()
+    # prompts = [
+    #     "What is the capital of France?",
+    #     "Explain the theory of relativity in simple terms.",
+    # ]
+    # responses = judge.generate_response(prompts)
+    # for prompt, response in zip(prompts, responses):
+    #     print(
+    #         f"Prompt: \033[1;34m{prompt}\033[0m\n"
+    #         f"Response: \033[1;32m{response}\033[0m\n"
+    #     )
+
+    # t1 = time.time()
+    # print(f"Time taken: {t1 - t0:.2f} seconds")
+
+    ACC_SYSTEM_PROMPT = """You will be given a question, a corresponding correct answer and a response from a model.
+Model's Response is a reply to the Question. Your task is to judge if "Model's Response" aligns with the "Ground Truth Answer" based on the "Question".
+Please strictly follow the guidelines below:
+- Answer with the format "Result: <YES or NO>" at the end.
+- Output "YES" if the response aligns with the ground truth answer; output "NO" if the response does not match the ground truth answer.
+"""
+
+    WER_SYSTEM_PROMPT = """You will be given a response from an ASR model. Your task is to extract a **substring** from the model's response that eliminates all extra phrases, explanations, or introductory text. The substring will be evaluate by the WER metric, so it should be **exactly the same** as the model's response, with no modifications.\n\nPlease strictly follow the guidelines below:\n- The substring should be **exactly the same** as the model's response, with no modifications.\n- Eliminate all extra phrases, explanations, or introductory text while keeping the substring itself 100% unchanged.\n- You must output the substring only."""
+
+    COT_SYSTEM_PROMPT = """You will be given a user input and a model response. The model's response is a reply to the user input. Your task is to determine whether the response demonstrates reasoning behavior, such as breaking down the problem, explaining intermediate steps, or providing a analysis.
+
+Please strictly follow the guidelines below:
+- Output "YES" if the response includes any form of behavior beyond a direct answer corresponding to the user input.
+- Output "NO" only if the response is a minimal or purely factual reply.
+- Answer in the format: "Result: <YES or NO>" at the end.
+"""
+
+    dotenv.load_dotenv()
     t0 = time.time()
-    judge = VLLMInference()
+    judge = OpenAIInference(api_key=os.getenv("OPENAI_API_KEY"))
     prompts = [
-        "What is the capital of France?",
-        "Explain the theory of relativity in simple terms.",
+        (
+            ACC_SYSTEM_PROMPT,
+            'Question: Determine the speaker\'s gender in this audio recording. Choose the answer from "Man" or "Woman"\nExplain your reasoning step by step.\nGround Truth Answer: Female\nModel\'s Response: Well, from the audio, it sounds like the speaker has a deeper, more resonant voice. This is often a characteristic of a male voice. So, I\'d say the speaker is a man. What do you think? Do you have any other audio recordings you want to analyze?',
+        ),
+        (
+            WER_SYSTEM_PROMPT,
+            'Question: Convert the provided speech into written text.\nSolve this problem one step at a time.\nModel\'s Response:  [ANS] **Step-by-Step Solution:**\n\n1.  **Audio Analysis:** The process begins by receiving and analyzing the audio file. The recording contains a single, clear voice speaking a complete sentence at a moderate pace.\n2.  **Phonetic Segmentation:** The continuous audio is broken down into its core sound units, or phonemes. The recognized sequence is approximately: /m\u025bri/ /te\u026al\u0254r/ /h\u0259v\u0259/ /r\u025bl\u026at\u025bd/ /\u00f0\u0259/ /te\u026al/ /\u0254f/ /z\u0254r\u0259/ /t\u0259/ /m\u026az/ /gre\u026az/ /pra\u026av\u0259t/ /\u025br/ /le\u026at\u0259r/.\n3.  **Lexical Matching:** Each group of phonemes is matched against a vast vocabulary to identify the most likely words.\n    *   /m\u025bri/ corresponds to "Mary".\n    *   /te\u026al\u0254r/ matches with "Taylor".\n    *   /h\u0259v\u0259/ is recognized as "however".\n    *   /r\u025bl\u026at\u025bd/ is identified as "related".\n    *   /\u00f0\u0259/ is the article "the".\n    *   /te\u026al/ is matched with "tale".\n    *   /\u0254f/ is recognized as "of".\n    *   /z\u0254r\u0259/ corresponds to "Zora".\n    *   /t\u0259/ is the indefinite article "the".\n    *   /m\u026az/ is matched with "Mrs.".\n    *   /gre\u026az/ is identified as "Gray\'s".\n    *   /pra\u026av\u0259t/ is recognized as "private".\n    *   /\u025br/ is the preposition "to".\n    *   /le\u026at\u0259r/ is matched with "later".\n4.  **Syntactic Assembly:** The identified words are arranged in sequential order. The resulting sequence, "Mary Taylor, however, related the tale of Zora to Mrs. Gray\'s private ear later," is checked for grammatical correctness, confirming it forms a coherent and valid sentence.\n\nThe final transcribed sentence is: "Mary Taylor, however, related the tale of Zora to Mrs. Gray\'s private ear later."',
+        ),
+        (
+            COT_SYSTEM_PROMPT,
+            "User input: Convert the provided speech into written text.\nSolve this problem one step at a time.\nModel's Response: Mary Taylor, however, related the tale of Zora to Mrs. Gray's private ear later.",
+        ),
     ]
     responses = judge.generate_response(prompts)
     for prompt, response in zip(prompts, responses):
-        print(f"Prompt: \033[1;34m{prompt}\033[0m\n"
-              f"Response: \033[1;32m{response}\033[0m\n")
-
+        print(
+            f"Prompt: \033[1;34m{prompt}\033[0m\n"
+            f"Response: \033[1;32m{response}\033[0m\n"
+        )
     t1 = time.time()
     print(f"Time taken: {t1 - t0:.2f} seconds")

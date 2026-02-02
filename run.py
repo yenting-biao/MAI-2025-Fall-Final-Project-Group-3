@@ -56,6 +56,9 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
         case "qwen25_omni":
             from models.Qwen25_omni import Qwen25_omni
             return Qwen25_omni(device=device)
+        case "gemini_3_pro":
+            from models.Gemini_3_Pro import Gemini3Pro
+            return Gemini3Pro()
     raise ValueError(f"Model {model_name} not supported.")
 
 def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:

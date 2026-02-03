@@ -75,13 +75,38 @@ Please strictly follow the guidelines below:
         system_prompt = f"""You will be given a response from an ASR model. Your task is to extract a **substring** from the model's response that eliminates all extra phrases, explanations, or introductory text. The substring will be evaluate by the WER metric, so it should be **exactly the same** as the model's response, with no modifications.\n\nPlease strictly follow the guidelines below:\n- The substring should be **exactly the same** as the model's response, with no modifications.\n- Eliminate all extra phrases, explanations, or introductory text while keeping the substring itself 100% unchanged.\n- You must output the substring only."""
         content = f"Question: {instruction}\nModel's Response: {response}"
     elif metric == "cot":
-        system_prompt = f"""You will be given a **user input** and a **model's response**. The model's response is a reply to the user input. Your task is to determine whether the response demonstrates reasoning behavior, such as breaking down the problem, explaining intermediate steps, or providing an analysis, before answering the user's query.
+        system_prompt = f"""You will be given a **user input** and a **model's response**. The model's response is a reply to the user input. Your task is to determine whether the response demonstrates **reasoning behavior anywhere in the response**, regardless of order or position.
+
+**Reasoning behavior includes (but is not limited to):**
+
+* Explicit analysis or commentary at the beginning (e.g., “Let’s analyze…”, “First, consider…”).
+* Breaking the problem into parts or cases.
+* Explaining intermediate steps, assumptions, or decision criteria.
+* Justifying an answer, even if the final answer appears later or earlier.
+* Meta-reasoning about how the answer is derived.
+* Analysis of the question or problem before providing an answer.
+
+For example, reasoning behavior may involve phrases like:
+- "1. The audio contains... 2. ..."
+- "To identify ..., we must first ..."
+- "Let's break this down into steps..."
+- "**Tone**: The tone of the speech is... **Pitch**: ..."
+
+
+A response should be classified as **NO** only if it consists solely of a direct, minimal answer or factual statement, **without any explanation, justification, or analytical content anywhere in the response**. For example,
+
+- "The original content of this audio is: '...'" (no reasoning, just a direct transcription)
+- "The person speaking exhibits a happy mood." (no reasoning, just a direct statement)
+- "The pair of words that meet this criteria is 'Erwin, director.'" (no reasoning, just a direct answer)
+
 
 Please strictly follow the guidelines below:
-- First, briefly explain why the response should be classified as demonstrating reasoning behavior or not.
-- Then output "YES" if the response includes any form of reasoning behavior, such as breaking down the problem, explaining intermediate steps, or providing an analysis, beyond a direct answer corresponding to the user input.
-- Output "NO" only if the response is a minimal or purely factual reply to the user input.
-- Answer in the following format exactly:
+
+* First, briefly explain why the response should be classified as demonstrating reasoning behavior or not, based on the criteria above.
+* Then output "YES" if the response contains any reasoning behavior anywhere in the response.
+* Output "NO" only if the response is entirely non-analytical.
+* Answer in the following format exactly:
+
 ```
 Explanation: <your explanation>
 Result: <YES or NO>

@@ -1,5 +1,6 @@
 """Gemini Large Audio-Language Model model wrapper."""
 
+import atexit
 import time
 import os
 from typing import TypedDict, NotRequired, Any
@@ -7,7 +8,9 @@ from pathlib import Path
 
 from google import genai
 from google.genai import types
+from google.genai.errors import ClientError
 from dotenv import load_dotenv
+from tqdm import tqdm
 
 from models.basemodel import BaseModel
 
@@ -53,6 +56,7 @@ class Gemini(BaseModel):
         self,
         model_name: str = "gemini-3-flash-preview",
         max_retries: int = 5,
+        max_upload_retries: int = 3,
         generation_config: dict[str, Any] | None = None,
     ):
         """Initialize the Gemini model wrapper.
@@ -65,7 +69,12 @@ class Gemini(BaseModel):
             model_name: Name of the Gemini model to use.
             max_retries: Maximum number of retry attempts on failure. When a Gemini
                 API call fails, the wrapper will rotate to the next API key and retry
-                until max_retries is reached.
+                until max_retries is reached. If only one API key is provided, 
+                the same key will be retried up to max_retries times. Must be at 
+                least 1.
+            max_upload_retries: Maximum number of retry attempts for file uploads
+                in the case of errors like "400 Bad Request: Upload has already
+                been terminated.". Must be at least 1.
             generation_config: Gemini generation configuration.
 
         Raises:
@@ -87,19 +96,27 @@ class Gemini(BaseModel):
 
         if max_retries < 1:
             raise ValueError("max_retries must be at least 1.")
+        if max_upload_retries < 1:
+            raise ValueError("max_upload_retries must be at least 1.")
 
         self.current_key_index = 0
         self.client = genai.Client(api_key=self.api_keys[self.current_key_index])
         self.model_name = model_name
         self.max_retries = max_retries
+        self.max_upload_retries = max_upload_retries
         self.contents: list[types.Content] = []
-        self.files: list[types.File] = []  # To keep track of uploaded files so
-                                           # that we can delete them later.
         self.generation_config = (
             generation_config
             if generation_config is not None
             else self.default_generation_config.copy()
         )
+
+        # Keep track of uploaded files. We only upload each file once and reuse
+        # the uploaded file URIs in subsequent requests instead of reuploading
+        # all files at every call to process_input(). All uploaded files are deleted
+        # at program exit.
+        self.uploaded_files: dict[str, types.File] = {}
+        atexit.register(self._cleanup_files)
 
         if max_retries < len(self.api_keys):
             print(
@@ -134,9 +151,6 @@ class Gemini(BaseModel):
         """
 
         self.contents.clear()
-        for file in self.files:
-            self.client.files.delete(name=file.name)
-        self.files.clear()
 
         num_examples = len(conversation) - 1
         self.generation_config["system_instruction"] = f"You are a helpful assistant. You will be provided with {num_examples} example pairs of questions and answers. You should follow the examples to answer the last question."
@@ -151,7 +165,27 @@ class Gemini(BaseModel):
 
             # Create user turn consisting of audio and instruction
             user_parts = []
-            file = self.client.files.upload(file=audio_path)
+            num_retries = 0
+            while num_retries < self.max_upload_retries:
+                num_retries += 1
+                try:
+                    if audio_path in self.uploaded_files:
+                        file = self.uploaded_files[audio_path]
+                    else:
+                        file = self.client.files.upload(file=audio_path)
+                        self.uploaded_files[audio_path] = file
+                    break
+                except ClientError as e:
+                    print(f"Error uploading file {audio_path}: {e}")
+                    if num_retries == self.max_upload_retries:
+                        print("Conversation in question:", conversation)
+                        raise RuntimeError(
+                            f"Failed to upload file {audio_path} after"
+                            f" {self.max_upload_retries} attempts."
+                        )
+                    else:
+                        print("Retrying upload...")
+                        time.sleep(1)  # Brief pause before retrying
             user_parts.append(types.Part.from_uri(file_uri=file.uri, mime_type=file.mime_type))
             user_parts.append(types.Part(text=instruction))
             self.contents.append(types.Content(role="user", parts=user_parts))
@@ -214,9 +248,13 @@ class Gemini(BaseModel):
                     )
                 )
                 self.current_key_index = next_key_index
-                self.client = genai.Client(
-                    api_key=self.api_keys[self.current_key_index]
-                )
+
+                # Only create a new client if there are multiple API keys.
+                # Otherwise, keep using the same client.
+                if len(self.api_keys) != 1:
+                    self.client = genai.Client(
+                        api_key=self.api_keys[self.current_key_index]
+                    )
         if num_tries == self.max_retries and response is None:
             raise RuntimeError(
                 f"Gemini failed to generate response in {self.max_retries} tries"
@@ -225,11 +263,26 @@ class Gemini(BaseModel):
         self.contents.clear()  # This is to ensure we don't encounter a silent
                                # bug where old contents are reused when new ones
                                # should be used.
-        for file in self.files:
-            self.client.files.delete(name=file.name)
-        self.files.clear()
 
         if not response.text:
             print("Warning: Response is empty.")
             return ""
         return response.text
+
+    def _cleanup_files(self):
+        """Clean up all uploaded files.
+
+        If files are not explicitly deleted, they will take up space in quota
+        for 48 hours.
+
+        This function is called at program exit.
+        """
+
+        print(f"Cleaning up {len(self.uploaded_files)} uploaded files...")
+
+        for audio_path, file in tqdm(self.uploaded_files.items(), desc="Deleting audio files from Google servers"):
+            try:
+                self.client.files.delete(name=file.name)
+            except Exception as e:
+                print(f"Warning: Could not delete file {audio_path}: {e}")
+        self.uploaded_files.clear()

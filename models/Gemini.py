@@ -138,6 +138,9 @@ class Gemini(BaseModel):
             self.client.files.delete(name=file.name)
         self.files.clear()
 
+        num_examples = len(conversation) - 1
+        self.generation_config["system_instruction"] = f"You are a helpful assistant. You will be provided with {num_examples} example pairs of questions and answers. You should follow the examples to answer the last question."
+
         for idx, message in enumerate(conversation):
             audio_path = message["audio_path"]
             instruction = message["instruction"]
@@ -172,7 +175,7 @@ class Gemini(BaseModel):
         # Each item in self.contents is of type <google.genai.types.Content> and 
         # cannot be serialized by the json module, so we convert self.contents
         # to string here.
-        self.messages = str(self.contents)
+        self.messages = self.generation_config["system_instruction"] + str(self.contents)
 
     def generate(self) -> str:
         """Generate a response from the model based on processed input.

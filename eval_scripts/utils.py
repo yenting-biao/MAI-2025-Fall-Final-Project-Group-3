@@ -102,7 +102,9 @@ class OpenAIInference:
                 {"role": "user", "content": user_prompt},
             ]
         else:
-            raise ValueError("Prompt must be a string or a tuple of (question, answer)")
+            raise ValueError(
+                "Prompt must be a string or a tuple of two strings (system_prompt, user_prompt)"
+            )
 
     def generate_response(self, prompts: List[str | Tuple[str, str]]) -> List[str]:
         """Return one chat completion per prompt via the latest OpenAI Python API."""

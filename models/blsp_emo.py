@@ -37,10 +37,7 @@ class ChatHistory(object):
         self.nl_tokens = tokenizer.encode("\n")
 
         ### add system
-        if use_emotion:
-            sys_prompt = "You are a helpful assistant. Your response should fulfill requests with empathy toward user's emotion tone."
-        else:
-            sys_prompt = "You are a helpful assistant."
+        sys_prompt = "You are a helpful assistant."
         input_ids = self.im_start_tokens + self._tokenize_str("system", f"{sys_prompt}") + self.im_end_tokens
         input_ids = torch.LongTensor([input_ids])
         self.system_histroy = [(input_ids,)]
@@ -223,6 +220,9 @@ class BLSP_Emo(BaseModel):
         the audio as part of the text instruction.
         """
         self.history.reset()
+
+        num_examples = len(conversation) - 1
+        self.history.set_system_prompt(f"You are a helpful assistant. You will be provided with {num_examples} example pairs of questions and answers. You should follow the examples to answer the last question.")
         
         for turn in conversation:
             audio_path = turn.get("audio_path")

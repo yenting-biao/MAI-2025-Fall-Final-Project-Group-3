@@ -33,6 +33,14 @@ def extract_result(text: str) -> str | None:
     return None
 
 
+def extract_all_text_after_result(text: str) -> str | None:
+    pattern = r"(?i)(?<=result:\s)(.*)"
+    match = re.search(pattern, text, re.DOTALL)
+    if match:
+        return match.group(0).strip()
+    return None
+
+
 def textual_audio_to_label(textual_audio: str) -> dict:
     """
     return a dict: {
@@ -61,19 +69,54 @@ def build_eval_prompt_components(
     metric = data.get("metric")
 
     if metric == "accuracy":
-        system_prompt = f"""You will be given a question, a corresponding correct answer and a response from a model.
-Model's Response is a reply to the Question. Your task is to judge if "Model's Response" aligns with the "Ground Truth Answer" based on the "Question".
+        system_prompt = f"""You will be given a **question**, a corresponding **ground truth answer** and a **response** from a model. Model's response is a reply to the question. Your task is to judge if "model's response" aligns with the "ground Truth answer" based on the "question".
+
+Evaluation criteria:
+* Judge alignment based on semantic correctness, not surface-level wording.
+* Minor paraphrasing or differences in expression are acceptable if the meaning is equivalent.
+* If the model's response misses essential information, or contradicts the ground truth answer, it should be considered non-aligned.
+
 Please strictly follow the guidelines below:
-- Answer with the format "Result: <YES or NO>" at the end.
-- Output "YES" if the response aligns with the ground truth answer; output "NO" if the response does not match the ground truth answer.
+* First, provide a brief explanation why the response aligns or does not align with the ground truth answer, based on the criteria above.
+* Then Output "YES" if the response aligns with the ground truth answer; output "NO" if the response does not match the ground truth answer.
+* Answer in the following format exactly:
+
+```
+Explanation: <your explanation>
+Result: <YES or NO>
+```
 """
         content = (
-            f"Question: {instruction}\nGround Truth Answer: {label}\nModel's Response: "
+            f"**Question**: {instruction}\n**Ground Truth Answer**: {label}\n**Model's Response**: "
             f"{response}"
         )
     elif metric == "wer":
-        system_prompt = f"""You will be given a response from an ASR model. Your task is to extract a **substring** from the model's response that eliminates all extra phrases, explanations, or introductory text. The substring will be evaluate by the WER metric, so it should be **exactly the same** as the model's response, with no modifications.\n\nPlease strictly follow the guidelines below:\n- The substring should be **exactly the same** as the model's response, with no modifications.\n- Eliminate all extra phrases, explanations, or introductory text while keeping the substring itself 100% unchanged.\n- You must output the substring only."""
-        content = f"Question: {instruction}\nModel's Response: {response}"
+        system_prompt = f"""You will be given a **question** and a **model's response**. The question asks the model to **transcribe audio into text (ASR)**. The model’s response may include explanations, reasoning, or meta-comments in addition to the transcription.
+
+Your task is to extract the **ASR transcription only**.
+
+**Output format requirements:**
+
+You must output **exactly two lines** in the following format:
+
+```
+Explanation: <your explanation>
+Result: <extracted ASR substring, do not wrap in quotes or delimiters>
+```
+
+**Extraction rules:**
+
+* In `Explanation`, briefly describe how you identified the ASR transcription and removed non-ASR content.
+* In `Result`, output the extracted ASR transcription only. No quotation marks or delimiters.
+* The extracted text must be a **continuous substring copied verbatim** from the model’s response.
+* Do **not** modify, normalize, reformat, or rewrite the text in any way.
+* Remove all non-ASR content, including introductions, explanations, reasoning, or meta-language.
+* Do **not** include quotation marks or any other delimiters around the ASR text.
+* If the response does **not** contain any ASR transcription, leave `Result` **empty** (i.e., `Result:` followed by nothing).
+
+The extracted substring in `Result` will be evaluated using the **WER metric**, so **exact character-level matching** is required. Do NOT wrap the extracted text in quotes or any delimiters.
+"""
+        content = f"**Question**: {instruction}\n**Model's Response**: {response}"
     elif metric == "cot":
         system_prompt = f"""You will be given a **user input** and a **model's response**. The model's response is a reply to the user input. Your task is to determine whether the response demonstrates **reasoning behavior anywhere in the response**, regardless of order or position.
 
@@ -222,9 +265,10 @@ def run_llm_evaluation(args: Any, judge: VLLMInference | OpenAIInference) -> Non
                     dataset_group[dataset].append(1 if correct else 0)
                     data["correct"] = correct
                 elif metric == "wer":
-                    hyp = normalize_text(
+                    result = extract_all_text_after_result(
                         data.get("eval_response", "").split("</think>")[-1].strip()
                     )
+                    hyp = normalize_text(result if result is not None else "")
                     if "label" not in data:
                         raise ValueError(
                             "WER metric requires 'label' field in the data."
@@ -259,27 +303,30 @@ def get_task_names(args):
     audio_task = args.audio_task
 
     if args.response_task == "creative_writing":
-        response_task = args.response_task
-        if args.IF_task is None:
-            if_tasks = [
-                "detectable_format_number_bullet_lists",
-                "length_constraints_number_words",
-                "length_constraints_number_sentences",
-                "length_constraints_number_paragraphs",
-            ]
-            if args.audio_task == "ASR":
-                if_tasks.append("keywords_existence")
-                if_tasks.append("keywords_forbidden_words")
-        else:
-            if_task = args.IF_task
-            if if_task not in IMPLEMENTED_IF_TASKS:
-                raise ValueError(f"IF task {if_task} not implemented.")
-            if if_task.startswith("keywords"):
-                if args.audio_task != "ASR":
-                    raise ValueError(
-                        f"IF task {if_task} only supported for ASR audio task."
-                    )
-            if_tasks = [if_task]
+        raise ValueError(
+            "creative_writing is not supported in eval_llm_judge.py. It should be able to be judged directly with rule-based methods."
+        )
+        # response_task = args.response_task
+        # if args.IF_task is None:
+        #     if_tasks = [
+        #         "detectable_format_number_bullet_lists",
+        #         "length_constraints_number_words",
+        #         "length_constraints_number_sentences",
+        #         "length_constraints_number_paragraphs",
+        #     ]
+        #     if args.audio_task == "ASR":
+        #         if_tasks.append("keywords_existence")
+        #         if_tasks.append("keywords_forbidden_words")
+        # else:
+        #     if_task = args.IF_task
+        #     if if_task not in IMPLEMENTED_IF_TASKS:
+        #         raise ValueError(f"IF task {if_task} not implemented.")
+        #     if if_task.startswith("keywords"):
+        #         if args.audio_task != "ASR":
+        #             raise ValueError(
+        #                 f"IF task {if_task} only supported for ASR audio task."
+        #             )
+        #     if_tasks = [if_task]
     elif args.response_task == "chain-of-thought":
         response_task = args.response_task
         if args.IF_task is None or args.IF_task == "chain-of-thought":

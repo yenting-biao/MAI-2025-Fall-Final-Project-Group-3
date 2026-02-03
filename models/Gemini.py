@@ -61,9 +61,9 @@ class Gemini(BaseModel):
     ):
         """Initialize the Gemini model wrapper.
 
-        Requires GEMINI_API_KEYS environment variable to be set with
-        comma-separated API keys. You can set it in a .env file or set the
-        environment variable directly before calling this code.
+        Requires GEMINI_API_KEY environment variable to be set. You can set it 
+        in a .env file or set the environment variable directly before calling 
+        this code.
 
         Args:
             model_name: Name of the Gemini model to use.
@@ -78,29 +78,23 @@ class Gemini(BaseModel):
             generation_config: Gemini generation configuration.
 
         Raises:
-            ValueError: If GEMINI_API_KEYS environment variable is not set.
+            ValueError: If GEMINI_API_KEY environment variable is not set.
         """
 
         super().__init__(model_name=model_name)
 
         load_dotenv()
-        api_keys = os.environ.get("GEMINI_API_KEYS", "")
-        if not api_keys:
-            raise ValueError("GEMINI_API_KEYS environment variable is not set.")
-        self.api_keys = [key for key in api_keys.replace(" ", "").split(",") if key]
-        if not self.api_keys:
-            raise ValueError(
-                "GEMINI_API_KEYS environment variable was not properly set."
-                ' Format should be "<key1>,<key2>,...,<keyN>" with no trailing commas'
-            )
+        api_key = os.environ.get("GEMINI_API_KEY", "")
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY environment variable is not set.")
+        self.api_key = api_key
 
         if max_retries < 1:
             raise ValueError("max_retries must be at least 1.")
         if max_upload_retries < 1:
             raise ValueError("max_upload_retries must be at least 1.")
 
-        self.current_key_index = 0
-        self.client = genai.Client(api_key=self.api_keys[self.current_key_index])
+        self.client = genai.Client(api_key=self.api_key)
         self.model_name = model_name
         self.max_retries = max_retries
         self.max_upload_retries = max_upload_retries
@@ -118,14 +112,7 @@ class Gemini(BaseModel):
         self.uploaded_files: dict[str, types.File] = {}
         atexit.register(self._cleanup_files)
 
-        if max_retries < len(self.api_keys):
-            print(
-                f"Warning: max_retries ({max_retries}) is less than the number"
-                f" of API keys ({len(self.api_keys)})."
-            )
-
         print(f"Initialized Gemini model: {model_name}")
-        print(f"Using {len(self.api_keys)} API keys")
         print(f"Using generation configuration: {self.generation_config}")
 
     def process_input(self, conversation: list[_Message]) -> None:
@@ -238,23 +225,16 @@ class Gemini(BaseModel):
                     config=types.GenerateContentConfig(**self.generation_config),
                 )
             except Exception as e:
-                next_key_index = (self.current_key_index + 1) % len(self.api_keys)
                 print(
-                    f"Error with API key number {self.current_key_index}: {e}"
+                    f"Error with API: {e}"
                     + (
-                        f". Trying API key number {next_key_index} next."
+                        f". Retrying..."
                         if num_tries < self.max_retries
                         else ""
                     )
                 )
-                self.current_key_index = next_key_index
-
-                # Only create a new client if there are multiple API keys.
-                # Otherwise, keep using the same client.
-                if len(self.api_keys) != 1:
-                    self.client = genai.Client(
-                        api_key=self.api_keys[self.current_key_index]
-                    )
+                if num_tries < self.max_retries:
+                    time.sleep(1)  # Brief pause before retrying
         if num_tries == self.max_retries and response is None:
             raise RuntimeError(
                 f"Gemini failed to generate response in {self.max_retries} tries"

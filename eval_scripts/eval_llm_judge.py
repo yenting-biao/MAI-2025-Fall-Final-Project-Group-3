@@ -75,14 +75,19 @@ Please strictly follow the guidelines below:
         system_prompt = f"""You will be given a response from an ASR model. Your task is to extract a **substring** from the model's response that eliminates all extra phrases, explanations, or introductory text. The substring will be evaluate by the WER metric, so it should be **exactly the same** as the model's response, with no modifications.\n\nPlease strictly follow the guidelines below:\n- The substring should be **exactly the same** as the model's response, with no modifications.\n- Eliminate all extra phrases, explanations, or introductory text while keeping the substring itself 100% unchanged.\n- You must output the substring only."""
         content = f"Question: {instruction}\nModel's Response: {response}"
     elif metric == "cot":
-        system_prompt = f"""You will be given a user input and a model response. The model's response is a reply to the user input. Your task is to determine whether the response demonstrates reasoning behavior, such as breaking down the problem, explaining intermediate steps, or providing a analysis.
+        system_prompt = f"""You will be given a **user input** and a **model's response**. The model's response is a reply to the user input. Your task is to determine whether the response demonstrates reasoning behavior, such as breaking down the problem, explaining intermediate steps, or providing an analysis, before answering the user's query.
 
 Please strictly follow the guidelines below:
-- Output "YES" if the response includes any form of behavior beyond a direct answer corresponding to the user input.
-- Output "NO" only if the response is a minimal or purely factual reply.
-- Answer in the format: "Result: <YES or NO>" at the end.
+- First, briefly explain why the response should be classified as demonstrating reasoning behavior or not.
+- Then output "YES" if the response includes any form of reasoning behavior, such as breaking down the problem, explaining intermediate steps, or providing an analysis, beyond a direct answer corresponding to the user input.
+- Output "NO" only if the response is a minimal or purely factual reply to the user input.
+- Answer in the following format exactly:
+```
+Explanation: <your explanation>
+Result: <YES or NO>
+```
 """
-        content = f"User input: {instruction}\nModel's Response: {response}"
+        content = f"**User input**: {instruction}\n**Model's Response**: {response}"
     else:
         raise ValueError(f"Unsupported metric: {metric}")
 

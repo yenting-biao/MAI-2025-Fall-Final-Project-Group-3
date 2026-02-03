@@ -15,7 +15,7 @@ IF_TASKS=(
     "combination:repeat_prompt"
     "startend:end_checker"
 )
-EXAMPLES=(1 2 3 4 5 6 7 8)
+EXAMPLES=(0 1 2 3 4 5 6 7 8)
 MODEL_NAMES=("gemini")
 SEEDS=(42)
 OUTPUT_DIR="${OUTPUT_DIR:-model_responses/}"

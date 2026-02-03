@@ -222,9 +222,6 @@ class Gemini(BaseModel):
                 f"Gemini failed to generate response in {self.max_retries} tries"
             )
 
-        # Five-second buffer between generations to prevent rate limit error
-        time.sleep(5)
-
         self.contents.clear()  # This is to ensure we don't encounter a silent
                                # bug where old contents are reused when new ones
                                # should be used.

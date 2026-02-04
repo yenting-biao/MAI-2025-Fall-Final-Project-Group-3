@@ -324,6 +324,7 @@ def main(args: argparse.Namespace) -> None:
             if "gemini" in args.model_name:
                 output_data["thinking_summary"] = model.thinking_summary
                 if args.IF_task == "chain-of-thought":
+                    del output_data["response"]
                     output_data["response"] = f'<thinking_summary>\n{output_data["thinking_summary"]}\n<thinking_summary>\n{output_data["response"]}'  # Insert thinking summary into response
             fout.write(json.dumps(output_data) + "\n")
 

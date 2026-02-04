@@ -61,10 +61,10 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
             return CascadeModel(llm_model_name="meta-llama/Llama-3.1-8B-Instruct", device=device)
         case "cascade_qwen-7b-chat":
             from models.cascade import CascadeModel
-            return CascadeModel(llm_model_name="Qwen/Qwen-7B-Chat", device=device)  
+            return CascadeModel(llm_model_name="Qwen/Qwen-7B-Chat", device=device)
         case "cascade_qwen25-7b-instruct":
             from models.cascade import CascadeModel
-            return CascadeModel(llm_model_name="Qwen/Qwen2.5-7B-Instruct", device=device)  
+            return CascadeModel(llm_model_name="Qwen/Qwen2.5-7B-Instruct", device=device)
         case _:
             raise ValueError(f"Model {model_name} not supported.")
 

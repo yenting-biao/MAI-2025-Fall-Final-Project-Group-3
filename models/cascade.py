@@ -7,8 +7,8 @@ import torch
 import json
 
 """
-1. Use whisper-large-v3 to convert audio to text
-2. Use the corresponding LLM to generate response based on the transcribed text
+1. Load pre-computed audio-to-text captions from ./audio_caption/audio_captions.json
+2. Use the corresponding LLM to generate a response based on the transcribed text
 """
 
 ValidLLMs = [
@@ -27,7 +27,6 @@ class CascadeModel(BaseModel):
             self.AUDIO2TEXT = json.load(f)
         
         # Load LLM model for response generation
-        # self.llm_processor = AutoProcessor.from_pretrained(llm_model_name, trust_remote_code=True)
         self.llm_tokenizer = AutoTokenizer.from_pretrained(llm_model_name, trust_remote_code=True, cache_dir="./cache")
         self.llm_model = (
             AutoModelForCausalLM.from_pretrained(
@@ -87,7 +86,8 @@ class CascadeModel(BaseModel):
                 audio_id = message["audio_path"].split("/")[-1]
                 audio_input = self.AUDIO2TEXT.get(audio_id, "")
                 message["audio_info"] = audio_input
-            conversation = "" ; ICL_examplenums = len(raw_conversation) - 1
+            conversation = "" 
+            ICL_examplenums = len(raw_conversation) - 1
             conversation += "You are a helpful voice assistant. You will be provided with {} example pairs of questions and answers based on audio inputs. You should follow the examples to answer the last question.\n".format(ICL_examplenums)
             ICL_examples = raw_conversation[:-1]
             for message in ICL_examples:
@@ -131,8 +131,6 @@ class CascadeModel(BaseModel):
             input_ids=input_ids,        
             attention_mask=attention_mask,
             do_sample=False,
-            temperature=1.0,
-            top_p=1.0,
             max_new_tokens=512,
         ) 
         generated_ids = output_ids[0][input_ids.shape[-1]:]
@@ -168,11 +166,11 @@ class CascadeModel(BaseModel):
         return response.strip()
     
     def generate(self) -> str:
-        if (self.model_name == 'meta-llama/Llama-3.1-8B-Instruct'):
+        if self.model_name == 'meta-llama/Llama-3.1-8B-Instruct':
             return self._llama_generate_response()
-        elif (self.model_name == 'Qwen/Qwen2.5-7B-Instruct'):
+        elif self.model_name == 'Qwen/Qwen2.5-7B-Instruct':
             return self._Qwen25_generate_response()
-        elif (self.model_name == 'Qwen/Qwen-7B-Chat'):
+        elif self.model_name == 'Qwen/Qwen-7B-Chat':
             return self._Qwen_generate_response()
         else:
             raise NotImplementedError(f"Model '{self.model_name}' is not implemented yet.")         ##  This should not happen due to the assertion in __init__

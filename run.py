@@ -321,6 +321,10 @@ def main(args: argparse.Namespace) -> None:
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")
             output_data = {**test_case, "messages": messages, "response": response,}
+            if "gemini" in args.model_name:
+                output_data["thinking_summary"] = model.thinking_summary
+                if args.IF_task == "chain-of-thought":
+                    output_data["response"] = f'<thinking_summary>\n{output_data["thinking_summary"]}\n<thinking_summary>\n{output_data["response"]}'  # Insert thinking summary into response
             fout.write(json.dumps(output_data) + "\n")
 
     t1 = datetime.datetime.now()

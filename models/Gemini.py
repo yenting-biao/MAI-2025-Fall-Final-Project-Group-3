@@ -49,6 +49,10 @@ class Gemini(BaseModel):
         # The default thinking level is dynamic.
         # "thinking_config": types.ThinkingConfig(thinking_level="low"),
 
+        # Get thinking summary since Gemini does most of its reasoning behind-
+        # the-scenes.
+        "thinking_config": types.ThinkingConfig(include_thoughts=True),
+
         # seed is set in run.py
     }
 
@@ -138,6 +142,9 @@ class Gemini(BaseModel):
         """
 
         self.contents.clear()
+        if hasattr(self, "thinking_summary"):
+            del self.thinking_summary  # Clear any previous thinking summary to catch
+                                       # bugs where old thinking summaries are reused.
 
         num_examples = len(conversation) - 1
         self.generation_config["system_instruction"] = f"You are a helpful assistant. You will be provided with {num_examples} example pairs of questions and answers. You should follow the examples to answer the last question."
@@ -244,10 +251,18 @@ class Gemini(BaseModel):
                                # bug where old contents are reused when new ones
                                # should be used.
 
-        if not response.text:
+        if len(response.candidates[0].content.parts) < 2 or not response.candidates[0].content.parts[0].thought:
+            print("Warning: Model did not think.")
+            self.thinking_summary = ""
+            self.answer = response.text
+        else:
+            self.thinking_summary = response.candidates[0].content.parts[0].text
+            self.answer = response.candidates[0].content.parts[1].text
+
+        if not self.answer:
             print("Warning: Response is empty.")
             return ""
-        return response.text
+        return self.answer
 
     def _cleanup_files(self):
         """Clean up all uploaded files.

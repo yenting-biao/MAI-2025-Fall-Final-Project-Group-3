@@ -132,6 +132,8 @@ class CascadeModel(BaseModel):
             attention_mask=attention_mask,
             do_sample=False,
             max_new_tokens=512,
+            pad_token_id=self.llm_tokenizer.eos_token_id,
+
         ) 
         generated_ids = output_ids[0][input_ids.shape[-1]:]
         output_text = self.llm_tokenizer.decode(

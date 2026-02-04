@@ -56,7 +56,17 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
         case "qwen25_omni":
             from models.Qwen25_omni import Qwen25_omni
             return Qwen25_omni(device=device)
-    raise ValueError(f"Model {model_name} not supported.")
+        case "cascade_llama-3_1-8b-instruct":
+            from models.cascade import CascadeModel
+            return CascadeModel(llm_model_name="meta-llama/Llama-3.1-8B-Instruct", device=device)
+        case "cascade_qwen-7b-chat":
+            from models.cascade import CascadeModel
+            return CascadeModel(llm_model_name="Qwen/Qwen-7B-Chat", device=device)  
+        case "cascade_qwen25-7b-instruct":
+            from models.cascade import CascadeModel
+            return CascadeModel(llm_model_name="Qwen/Qwen2.5-7B-Instruct", device=device)  
+        case _:
+            raise ValueError(f"Model {model_name} not supported.")
 
 def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:
     '''

@@ -1,13 +1,9 @@
-# from .basemodel import BaseModel
-from basemodel import BaseModel
+from .basemodel import BaseModel
 from transformers import (
-    WhisperForConditionalGeneration,
-    AutoProcessor,
     AutoModelForCausalLM,
     AutoTokenizer,
 )
 import torch
-import librosa
 import json
 
 """
@@ -18,86 +14,122 @@ import json
 ValidLLMs = [
     'meta-llama/Llama-3.1-8B-Instruct', 
     'Qwen/Qwen-7B-Chat', 
-    'Qwen/Qwen-7B', 
-    'Qwen/Qwen2.5-7B',
+    'Qwen/Qwen2.5-7B-Instruct',
 ]
 
 class CascadeModel(BaseModel):
     def __init__(self, llm_model_name: str, device: str = "cuda"):
         assert llm_model_name in ValidLLMs, f"LLM model '{llm_model_name}' is not supported. Choose from {ValidLLMs}."
         self.device = device
-        super().__init__(model_name=f"CascadeModel_with_{llm_model_name}")
+        super().__init__(model_name=f"{llm_model_name}")
         # Load audio2text file 
-        self.AUDIO2TEXT = json.load(open("../audio_caption/audio_captions.json", "r"))
+        with open("./audio_caption/audio_captions.json", "r") as f:
+            self.AUDIO2TEXT = json.load(f)
         
         # Load LLM model for response generation
-        self.llm_processor = AutoProcessor.from_pretrained(llm_model_name, trust_remote_code=True)
-        self.llm_tokenizer = AutoTokenizer.from_pretrained(llm_model_name, trust_remote_code=True)
+        # self.llm_processor = AutoProcessor.from_pretrained(llm_model_name, trust_remote_code=True)
+        self.llm_tokenizer = AutoTokenizer.from_pretrained(llm_model_name, trust_remote_code=True, cache_dir="./cache")
         self.llm_model = (
             AutoModelForCausalLM.from_pretrained(
                 llm_model_name,
                 device_map=device,
                 trust_remote_code=True,
-                cache_dir="../cache",
+                cache_dir="./cache",
             ).eval()
         )
 
     def _Info2String(self, info: list[dict]) -> str:
         audio_str = ""
         for i in info:
-            audio_str += f"[{i['time_segment']}]\n"
-            audio_str += f"Text: \"{i['ASR']}\"\n"
-            audio_str += f"Gender: {i['Gender']}\n"
-            audio_str += f"Emotion: {i['Emotion']}\n"
-            audio_str += "\n\n"
+            audio_str += f"{i['time_segment']} {i['ASR']} (Gender: {i['Gender']}, Emotion: {i['Emotion']}).\n"
         return audio_str
     
     def process_input(self, raw_conversation: list[dict]) -> None:
-        # Step 1: Transcribe audio to text using Whisper
-        for message in raw_conversation:
-            if "audio_path" in message:
+        if (self.model_name in ['meta-llama/Llama-3.1-8B-Instruct', 'Qwen/Qwen2.5-7B-Instruct']):
+            # Step 1: Transcribe audio to text using Whisper
+            for message in raw_conversation:
+                if "audio_path" not in message:
+                    raise ValueError("Each message must contain 'audio_path' key.")
                 audio_id = message["audio_path"].split("/")[-1]
                 audio_input = self.AUDIO2TEXT.get(audio_id, "")
                 message["audio_info"] = audio_input
-                
-        # Step 2: Generate response using LLM based on transcriptions
-        ICL_examplenums = len(raw_conversation) - 1
-        conversation = []
-        conversation.append({"role": "system", "content": "You are a helpful voice assistant. You will be provided with {} example pairs of questions and answers based on audio inputs. You should follow the examples to answer the last question. Only output the final answer in English without any additional words.".format(ICL_examplenums)})
-        ICL_examples = raw_conversation[:-1]
-        for message in ICL_examples:
+            
+                    
+            # Step 2: Generate response using LLM based on transcriptions
+            ICL_examplenums = len(raw_conversation) - 1
+            conversation = []
+            conversation.append({"role": "system", "content": "You are a helpful voice assistant. You will be provided with {} example pairs of questions and answers based on audio inputs. You should follow the examples to answer the last question.".format(ICL_examplenums)})
+            ICL_examples = raw_conversation[:-1]
+            for message in ICL_examples:
+                audio_info = message.get("audio_info", "N/A")
+                audio_str = self._Info2String(audio_info)
+                conversation.append({
+                    "role": "user", 
+                    "content": f"Below is an analysis of an audio file. \nEach line contains: a time range, the transcribed speech, the speaker's perceived gender, the detected emotion \n Please use this information to answer the question.\n" + audio_str + f"Question: {message['instruction']}"
+                }) 
+                conversation.append({
+                    "role": "assistant", 
+                    "content": message["answer"]
+                })
+            
+            #   Test example
+            message = raw_conversation[-1]
             audio_info = message.get("audio_info", "N/A")
             audio_str = self._Info2String(audio_info)
-            conversation.append({
-                "role": "user", 
-                "content": f"Below is a structured analysis of an audio file. \nEach segment contains: a time range, the transcribed speech, the speaker's perceived gender, the detected emotion \n Please use this information to answer the question.\n" + audio_str + f"Question: {message['instruction']}"
-            }) 
-            conversation.append({
-                "role": "assistant", 
-                "content": message["ans"]
-            })
+            conversation.append({"role": "user", "content": f"Below is an analysis of an audio file. \nEach line contains: a time range, the transcribed speech, the speaker's perceived gender, the detected emotion \n Please use this information to answer the question. Only answer what is explicitly asked.\n" + audio_str + f"Question: {message['instruction']}"})
+            
+            self.messages = conversation
         
-        #   Test example
-        message = raw_conversation[-1]
-        audio_info = message.get("audio_info", "N/A")
-        audio_str = self._Info2String(audio_info)
-        conversation.append({"role": "user", "content": f"Below is a structured analysis of an audio file. \nEach segment contains: a time range, the transcribed speech, the speaker's perceived gender, the detected emotion \n Please use this information to answer the question.\n" + audio_str + f"Question: {message['instruction']}"})
+        elif (self.model_name == 'Qwen/Qwen-7B-Chat'):
+            for message in raw_conversation:
+                if "audio_path" not in message:
+                    raise ValueError("Each message must contain 'audio_path' key.")
+                audio_id = message["audio_path"].split("/")[-1]
+                audio_input = self.AUDIO2TEXT.get(audio_id, "")
+                message["audio_info"] = audio_input
+            conversation = "" ; ICL_examplenums = len(raw_conversation) - 1
+            conversation += "You are a helpful voice assistant. You will be provided with {} example pairs of questions and answers based on audio inputs. You should follow the examples to answer the last question.\n".format(ICL_examplenums)
+            ICL_examples = raw_conversation[:-1]
+            for message in ICL_examples:
+                audio_info = message.get("audio_info", "N/A")
+                audio_str = self._Info2String(audio_info)
+                conversation += f"User: Below is an analysis of an audio file. \nEach line contains: a time range, the transcribed speech, the speaker's perceived gender, the detected emotion \n Please use this information to answer the question.\n" + audio_str + f"Question: {message['instruction']}\n"
+                conversation += f"Assistant: {message['answer']}\n"
+            
+            #   Test example
+            message = raw_conversation[-1]
+            audio_info = message.get("audio_info", "N/A")
+            audio_str = self._Info2String(audio_info)
+            conversation += f"User: Below is an analysis of an audio file. \nEach line contains: a time range, the transcribed speech, the speaker's perceived gender, the detected emotion \n Please use this information to answer the question. Only answer what is explicitly asked.\n" + audio_str + f"Question: {message['instruction']}\n"
+            
+            self.messages = conversation
         
-        self.messages = conversation
+        else:
+            raise NotImplementedError(f"Model '{self.model_name}' is not implemented yet.")         ##  This should not happen due to the assertion in __init__
         return
 
-    def generate(self) -> str:
+    def _llama_generate_response(self) -> str:
         encoding = self.llm_tokenizer.apply_chat_template(
             self.messages,
             tokenize=True,
             add_generation_prompt=True, 
             return_tensors="pt"
-        ).to(torch.device(self.device))
-        input_ids = encoding.input_ids.to(self.device)
-        attention_mask = encoding.attention_mask.to(self.device)
+        )
+        # Handle both tensor and mapping outputs from apply_chat_template
+        if isinstance(encoding, torch.Tensor):
+            input_ids = encoding.to(self.device)
+            attention_mask = torch.ones_like(input_ids, device=self.device)
+        else:
+            # Assume a dict-like / BatchEncoding object
+            input_ids = encoding["input_ids"].to(self.device)
+            attention_mask = encoding.get("attention_mask")
+            if attention_mask is None:
+                attention_mask = torch.ones_like(input_ids, device=self.device)
+            else:
+                attention_mask = attention_mask.to(self.device)
         output_ids = self.llm_model.generate(
-            input_ids=input_ids.to(self.device),
-            attention_mask=attention_mask.to(self.device),
+            input_ids=input_ids,        
+            attention_mask=attention_mask,
             do_sample=False,
             temperature=1.0,
             top_p=1.0,
@@ -111,17 +143,37 @@ class CascadeModel(BaseModel):
         
         return output_text.strip()
     
-Test_message = [{
-    "audio_path": "../data/audios/MMAU/516653d5-79d7-404e-a208-62367fdc59b7.wav", 
-    "instruction": "Convert the provided spoken statement into text.\nYour entire response should be in all capital letters."
-}]
+    def _Qwen25_generate_response(self) -> str:
+        text = self.llm_tokenizer.apply_chat_template(
+            self.messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
+        model_inputs = self.llm_tokenizer([text], return_tensors="pt").to(self.device)
 
-if __name__ == "__main__":
-    cascade_model = CascadeModel(llm_model_name='meta-llama/Llama-3.1-8B-Instruct', device="cuda")
+        generated_ids = self.llm_model.generate(
+            **model_inputs,
+            max_new_tokens=512
+        )
+        generated_ids = [
+            output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+        ]
 
-    cascade_model.process_input(Test_message)
-    response = cascade_model.generate()
-    print(response)
+        response = self.llm_tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+        
+        return response.strip()
     
-
+    def _Qwen_generate_response(self) -> str:
+        response, history = self.llm_model.chat(self.llm_tokenizer, self.messages, history=None)
+        return response.strip()
     
+    def generate(self) -> str:
+        if (self.model_name == 'meta-llama/Llama-3.1-8B-Instruct'):
+            return self._llama_generate_response()
+        elif (self.model_name == 'Qwen/Qwen2.5-7B-Instruct'):
+            return self._Qwen25_generate_response()
+        elif (self.model_name == 'Qwen/Qwen-7B-Chat'):
+            return self._Qwen_generate_response()
+        else:
+            raise NotImplementedError(f"Model '{self.model_name}' is not implemented yet.")         ##  This should not happen due to the assertion in __init__
+

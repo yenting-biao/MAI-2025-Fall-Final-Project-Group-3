@@ -12,7 +12,7 @@ from models.basemodel import BaseModel
 from config import get_task_parser
 from config import MAP_MODEL_NAME, MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS, TEST_SAMPLE
 
-#   Load MMAU audio information 
+#   Load MMAU audio information
 MMAU_AUDIO_INFO = json.load(open("./in-context-examples/mmau-id2task.json", "r"))
 MMAU_MINI_AUDIO_INFO = json.load(open("./in-context-examples/mmau-mini-id2task.json", "r"))
 
@@ -95,16 +95,16 @@ def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:
         IclData = InContextDataset[args.audio_task][args.response_task]
     else: # closed_ended_questions or creative_writing
         IclData = InContextDataset[args.audio_task][args.response_task][args.IF_task]
-    
+
     if (args.audio_task == "MMAU") :
         return IclData
-    
-    # Verify ICL data 
+
+    # Verify ICL data
     assert len(IclData) == max_examples, \
         f"ICL data does not have the required number of examples: expected {max_examples}, got {len(IclData)}."
     assert all(item.get("audio_path") and item.get("instruction") and item.get("ans") for item in IclData), \
         "ICL data is not properly formatted: missing or empty 'audio_path', 'instruction', or 'ans' fields."
-    
+
     return IclData
 
 def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list[dict], str]:
@@ -155,10 +155,9 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list
 def GetOutputFilePath(args: argparse.Namespace) -> Path:
     output_dir = Path(args.output_dir) / args.model_name.lower() / args.audio_task / args.response_task
     output_dir = output_dir / args.IF_task.replace(':', '_')
-    ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     if not os.path.exists(output_dir):
         os.makedirs(output_dir, exist_ok=True)
-    output_fn = output_dir / f"output_{args.examples}-shot_{ts}.jsonl"
+    output_fn = output_dir / f"output_{args.examples}-shot.jsonl"
     return output_fn
 
 def GenerateICLandTestExamples(
@@ -268,13 +267,13 @@ def verify_args(args: argparse.Namespace) -> None:
     if args.verbose:
         print("Arguments verified successfully.")
 
-#   MMAU function 
+#   MMAU function
 def MMAU_Get_ICL_Tasks(audio_id: str) -> Tuple[str, str]:
     #   Check audio id
     #   audio_id format: "MMAU/{NAME}.wav" try to get {NAME}
     audio_id = audio_id.split('/')[-1]  # Get the file name
     audio_id = audio_id[:-4]  # Remove the .wav extension
-    
+
     if audio_id in MMAU_AUDIO_INFO:
         task_info = MMAU_AUDIO_INFO[audio_id]
     elif audio_id in MMAU_MINI_AUDIO_INFO:

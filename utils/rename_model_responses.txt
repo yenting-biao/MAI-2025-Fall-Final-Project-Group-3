@@ -1,0 +1,39 @@
+python3 - <<'PY'
+import re
+from pathlib import Path
+
+root = Path("model_responses")
+# removes trailing _YYYYMMDD-HHMMSS or -YYYYMMDD-HHMMSS (right before extensions)
+pat = re.compile(r"([_-])\d{8}-\d{6}$")
+
+DRY_RUN = False  # <-- first keep True to preview, then set to False to actually rename
+cnt = 0
+
+for p in sorted(root.rglob("*")):
+    if not p.is_file():
+        continue
+
+    suffixes = "".join(p.suffixes)                 # e.g. ".jsonl" or ".jsonl.gz"
+    base = p.name[:-len(suffixes)] if suffixes else p.name
+
+    if not pat.search(base):
+        continue
+
+    new_base = pat.sub("", base)
+    new_name = new_base + suffixes
+    new_path = p.with_name(new_name)
+
+    if new_path.exists():
+        print(f"SKIP (target exists): {p} -> {new_path}")
+        continue
+
+    if DRY_RUN:
+        print(f"WOULD RENAME: {p} -> {new_path}")
+        cnt += 1
+    else:
+        p.rename(new_path)
+        print(f"RENAMED: {p} -> {new_path}")
+        cnt += 1
+
+print(f"Total files processed: {cnt}")
+PY

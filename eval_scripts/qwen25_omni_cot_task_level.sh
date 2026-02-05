@@ -2,7 +2,7 @@
 
 set -e
 
-MODEL_NAME="desta2_5"
+MODEL_NAME="qwen25_omni"
 RESPONSE_TASKS=("chain-of-thought")
 AUDIO_TASKS=("ASR" "SER" "GR" "MMAU")
 

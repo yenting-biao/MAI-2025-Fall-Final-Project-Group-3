@@ -17,6 +17,21 @@ pip install -e .
 cd ..
 ```
 
+#### Gemini
+
+To run the experiments involving Gemini, the `GEMINI_API_KEY`
+environment variable needs to be set beforehand with a valid Gemini API key.
+The format of the variable should be as follows:
+```bash
+GEMINI_API_KEY='<your_gemini_api_key_here>'
+```
+Obtain your own API key from [Google AI Studio](https://aistudio.google.com/).
+
+The environment variable can be set by using the `export` command or by creating
+a file called `.env` in the root of the project and adding the variable
+to the file. In the latter case, [`python-dotenv`](https://github.com/theskumar/python-dotenv)
+is used to extract the variable from the file. See `.env.example` for an example.
+
 #### All models need to activate their own environment
 ```bash
 conda create --name <your_env_name> python=3.11.2 -y
@@ -32,14 +47,14 @@ bash scripts/<MODELNAME>_ceq.sh
 bash scripts/<MODELNAME>_cw.sh
 bash scripts/<MODELNAME>_CoT.sh
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp_emo`] 
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini`] 
 
 ### How to do ICL on assigned IF task and audio task 
 
 ```bash
 python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task <RESPONSETASK> --IF_task <IFTASK> --examples <EXAMPLES> --output_dir <DIR>
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`]
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini`]
 - `<AUDIOTASK>` : [`ASR`, `SER`, `GR`] 
 - `<RESPONSETASK>` : [`closed_ended_questions`, `chain-of-thought`, `creative_writing`]
 - `<IFTASK>` : Depends on the `<RESPONSETASK>`
@@ -79,7 +94,7 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
 
 ### Evaluation 
 
-- `<model_name>` : [`qwen`, `qwen2`, `blsp_emo`, `desta2_5`, `qwen25_omni`]
+- `<model_name>` : [`qwen`, `qwen2`, `blsp-emo`, `desta2_5`, `qwen25_omni`, `gemini`]
 
 #### Env
 

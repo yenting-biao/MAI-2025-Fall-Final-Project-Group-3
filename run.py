@@ -65,8 +65,14 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
         case "cascade_qwen25-7b-instruct":
             from models.cascade import CascadeModel
             return CascadeModel(llm_model_name="Qwen/Qwen2.5-7B-Instruct", device=device)
-        case _:
-            raise ValueError(f"Model {model_name} not supported.")
+        case model_name if "gemini" in model_name.lower():
+            from models.Gemini import Gemini
+            if model_name.lower() == "gemini":
+                # Use default Gemini model
+                return Gemini()
+            else:
+                return Gemini(model_name=model_name.lower())
+    raise ValueError(f"Model {model_name} not supported.")
 
 def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:
     '''
@@ -308,6 +314,8 @@ def main(args: argparse.Namespace) -> None:
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)
+            if "gemini" in args.model_name:
+                model.generation_config["seed"] = args.seed + i
             if (args.audio_task == "MMAU"):
                 main_task, sub_task = MMAU_Get_ICL_Tasks(test_case["audio_filepath"])
                 icl_data_shuffled = icl_data[main_task][sub_task][args.IF_task].copy() if args.examples > 0 else []
@@ -322,6 +330,14 @@ def main(args: argparse.Namespace) -> None:
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")
             output_data = {**test_case, "messages": messages, "response": response,}
+            if "gemini" in args.model_name:
+                del output_data["response"]
+                output_data["thinking_summary"] = model.thinking_summary
+                if args.IF_task == "chain-of-thought":
+                    output_data["response"] = f'<thinking_summary>\n{output_data["thinking_summary"]}\n</thinking_summary>\n{response}'  # Insert thinking summary into response
+                else:
+                    # Reinsert to ensure "response" key comes after "thinking_summary"
+                    output_data["response"] = response
             fout.write(json.dumps(output_data) + "\n")
 
     t1 = datetime.datetime.now()

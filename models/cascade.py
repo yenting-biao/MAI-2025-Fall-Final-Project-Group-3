@@ -131,7 +131,7 @@ class CascadeModel(BaseModel):
             input_ids=input_ids,        
             attention_mask=attention_mask,
             do_sample=False,
-            max_new_tokens=512,
+            max_new_tokens=8192,
             pad_token_id=self.llm_tokenizer.eos_token_id,
 
         ) 
@@ -153,7 +153,7 @@ class CascadeModel(BaseModel):
 
         generated_ids = self.llm_model.generate(
             **model_inputs,
-            max_new_tokens=512
+            max_new_tokens=8192
         )
         generated_ids = [
             output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)

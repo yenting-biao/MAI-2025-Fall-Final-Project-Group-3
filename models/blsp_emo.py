@@ -21,7 +21,7 @@ class ChatHistory(object):
         tokenizer, 
         extractor, 
         max_window_size=6144,
-        max_new_tokens=512,
+        max_new_tokens=8192,
         use_emotion=False,
         speech_downsample_rate=16
     ):

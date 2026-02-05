@@ -96,7 +96,7 @@ class Qwen25_omni(BaseModel):
                 **inputs,
                 use_audio_in_video=USE_AUDIO_IN_VIDEO,
                 return_audio=False,
-                max_new_tokens=512,
+                max_new_tokens=8192,
                 do_sample=False,
                 temperature=None,
                 top_p=None,

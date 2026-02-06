@@ -46,7 +46,7 @@ class DeSTA2_5(BaseModel):
             do_sample=False,
             temperature=1.0,
             top_p=1.0,
-            max_new_tokens=8192,
+            max_new_tokens=4096,
         )
         return outputs.text[0]
         # return super().generate()

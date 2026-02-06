@@ -4,7 +4,7 @@ set -e
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export CUBLAS_WORKSPACE_CONFIG=:16:8
 
-AUDIO_TASKS=("ASR" "SER" "GR")
+AUDIO_TASKS=("ASR" "SER" "GR" "MMAU")
 RESPONSE_TASKS=("closed_ended_questions")
 IF_TASKS=(
     "change_case:english_capital"

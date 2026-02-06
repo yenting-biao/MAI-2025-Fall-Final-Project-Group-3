@@ -153,6 +153,7 @@ class CascadeModel(BaseModel):
 
         generated_ids = self.llm_model.generate(
             **model_inputs,
+            do_sample=False,
             max_new_tokens=8192
         )
         generated_ids = [

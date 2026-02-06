@@ -11,6 +11,7 @@ from tqdm import tqdm
 from models.basemodel import BaseModel
 from config import get_task_parser
 from config import MAP_MODEL_NAME, MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS, TEST_SAMPLE
+from transformers import set_seed as set_transformers_seed
 
 #   Load MMAU audio information
 MMAU_AUDIO_INFO = json.load(open("./in-context-examples/mmau-id2task.json", "r"))
@@ -32,6 +33,8 @@ def set_seed(seed: int = 42, verbose: bool = False) -> None:
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
     torch.use_deterministic_algorithms(True, warn_only=True)
+    
+    set_transformers_seed(seed)
 
     if verbose:
         print(f"Seed set to {seed}")
@@ -309,7 +312,7 @@ def main(args: argparse.Namespace) -> None:
     # Process each test case, generate a response, and save the response with metadata
     output_fn = GetOutputFilePath(args)
     print("\n\nStarting inference on test cases...\n")
-    pbar = enumerate(test_cases) if args.debug or args.verbose else enumerate(tqdm(test_cases))
+    pbar = enumerate(test_cases) if args.debug or args.verbose else enumerate(tqdm(test_cases, dynamic_ncols=True))
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)

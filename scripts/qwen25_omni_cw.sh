@@ -25,6 +25,12 @@ for model_name in "${MODEL_NAMES[@]}"; do
       for IF_task in "${IF_TASKS[@]}"; do
         for examples in "${EXAMPLES[@]}"; do
           for seed in "${SEEDS[@]}"; do
+
+            # if not asr, skip keywords:existence and keywords:forbidden_words
+            if [[ "${audio_task}" != "ASR" && ( "${IF_task}" == "keywords:existence" || "${IF_task}" == "keywords:forbidden_words" ) ]]; then
+              continue
+            fi
+
             python run.py \
               --model_name "${model_name}" \
               --audio_task "${audio_task}" \

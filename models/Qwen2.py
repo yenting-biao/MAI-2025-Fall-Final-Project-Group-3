@@ -89,7 +89,7 @@ class Qwen2_Audio_Chat(BaseModel):
 
     def generate(self) -> str:
         generate_ids = self.model.generate(
-            **self.inputs, do_sample=False, max_new_tokens=8192
+            **self.inputs, do_sample=False, max_new_tokens=4096
         )
         generate_ids = generate_ids[:, self.inputs.input_ids.size(1) :]
 

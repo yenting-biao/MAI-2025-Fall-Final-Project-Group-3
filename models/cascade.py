@@ -131,7 +131,7 @@ class CascadeModel(BaseModel):
             input_ids=input_ids,        
             attention_mask=attention_mask,
             do_sample=False,
-            max_new_tokens=8192,
+            max_new_tokens=4096,
             pad_token_id=self.llm_tokenizer.eos_token_id,
 
         ) 
@@ -154,7 +154,7 @@ class CascadeModel(BaseModel):
         generated_ids = self.llm_model.generate(
             **model_inputs,
             do_sample=False,
-            max_new_tokens=8192
+            max_new_tokens=4096
         )
         generated_ids = [
             output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
@@ -165,7 +165,15 @@ class CascadeModel(BaseModel):
         return response.strip()
     
     def _Qwen_generate_response(self) -> str:
-        response, history = self.llm_model.chat(self.llm_tokenizer, self.messages, history=None)
+        response, history = self.llm_model.chat(
+            self.llm_tokenizer, 
+            self.messages, 
+            do_sample=False,
+            temperature=0,
+            num_beams=1,
+            max_new_tokens=4096,
+            history=None
+        )
         return response.strip()
     
     def generate(self) -> str:

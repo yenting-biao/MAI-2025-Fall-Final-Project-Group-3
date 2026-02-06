@@ -402,7 +402,7 @@ def main() -> None:
     for if_task in if_tasks:
         print(f"\nEvaluating IF task: {if_task}")
         if_task_formatted = if_task.replace(":", "_")
-        input_dir = f"model_responses/{test_model}/{audio_task}/{response_task}/{if_task_formatted}"
+        input_dir = f"model_responses/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
 
         # Check that there are exactly 9 output files and the filenames are in the foramat "output_{k}*.jsonl", where k = 0, ..., 8
         candidate_files = sorted(

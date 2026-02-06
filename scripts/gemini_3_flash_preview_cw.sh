@@ -4,19 +4,18 @@ set -e
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export CUBLAS_WORKSPACE_CONFIG=:16:8
 
-AUDIO_TASKS=("MMAU")
-RESPONSE_TASKS=("closed_ended_questions")
+AUDIO_TASKS=("ASR" "SER" "GR")
+RESPONSE_TASKS=("creative_writing")
 IF_TASKS=(
-    "change_case:english_capital"
-    "change_case:english_lowercase"
-    "detectable_format:json_format"
-    "startend:quotation"
-    "detectable_format:title"
-    "combination:repeat_prompt"
-    "startend:end_checker"
+    "detectable_format:number_bullet_lists"
+    "keywords:existence"
+    "keywords:forbidden_words"
+    "length_constraints:number_words"
+    "length_constraints:number_sentences"
+    "length_constraints:number_paragraphs"
 )
 EXAMPLES=(0 1 2 3 4 5 6 7 8)
-MODEL_NAMES=("gemini")
+MODEL_NAMES=("gemini-3-flash-preview")
 SEEDS=(42)
 OUTPUT_DIR="${OUTPUT_DIR:-model_responses/}"
 

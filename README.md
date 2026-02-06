@@ -47,14 +47,14 @@ bash scripts/<MODELNAME>_ceq.sh
 bash scripts/<MODELNAME>_cw.sh
 bash scripts/<MODELNAME>_CoT.sh
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini-2.5-flash`] 
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini-2.5-flash`, `gemini-3-flash-preview`] 
 
 ### How to do ICL on assigned IF task and audio task 
 
 ```bash
 python run.py --model_name <MODELNAME> --audio_task <AUDIOTASK> --response_task <RESPONSETASK> --IF_task <IFTASK> --examples <EXAMPLES> --output_dir <DIR>
 ```
-- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini-2.5-flash`]
+- `<MODELNAME>` : [`qwen`, `qwen2`, `desta2_5`, `blsp-emo`, `qwen25_omni`, `gemini-2.5-flash`, `gemini-3-flash-preview`]
 - `<AUDIOTASK>` : [`ASR`, `SER`, `GR`] 
 - `<RESPONSETASK>` : [`closed_ended_questions`, `chain-of-thought`, `creative_writing`]
 - `<IFTASK>` : Depends on the `<RESPONSETASK>`
@@ -94,7 +94,7 @@ The query with metadata (e.g., instruction, the entire messages) and the model r
 
 ### Evaluation 
 
-- `<model_name>` : [`qwen`, `qwen2`, `blsp-emo`, `desta2_5`, `qwen25_omni`, `gemini-2.5-flash`]
+- `<model_name>` : [`qwen`, `qwen2`, `blsp-emo`, `desta2_5`, `qwen25_omni`, `gemini-2.5-flash`, `gemini-3-flash-preview`]
 
 #### Env
 

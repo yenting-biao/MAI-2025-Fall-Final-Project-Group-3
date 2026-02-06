@@ -10,6 +10,7 @@ MAP_MODEL_NAME = {
     "cascade_qwen-7b-chat": "Qwen/Qwen-7B-Chat",
     "cascade_qwen25-7b-instruct": "Qwen/Qwen2.5-7B-Instruct",
     "gemini-2.5-flash": "Gemini 2.5 Flash",
+    "gemini-3-flash-preview": "Gemini 3 Flash Preview",
 }
 MAP_AUDIO_TASK = {
     "ASR": "Automatic_speech_recognition",
@@ -48,7 +49,7 @@ def get_task_parser() -> argparse.ArgumentParser:
 
     # Model and Task Settings
     parser.add_argument("--model_name", type=str, default="qwen",
-                        choices=["qwen", "qwen2", "desta2_5", "blsp-emo", "qwen25_omni", "cascade_Llama-3_1-8B-Instruct", "cascade_Qwen-7B-Chat", "cascade_Qwen25-7B-Instruct", "gemini-2.5-flash"],
+                        choices=["qwen", "qwen2", "desta2_5", "blsp-emo", "qwen25_omni", "cascade_Llama-3_1-8B-Instruct", "cascade_Qwen-7B-Chat", "cascade_Qwen25-7B-Instruct", "gemini-2.5-flash", "gemini-3-flash-preview"],
                         help="Name of the pre-trained language model to use.")
 
     parser.add_argument("--audio_task", type=str, default="ASR",

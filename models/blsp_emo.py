@@ -202,7 +202,7 @@ class BLSP_Emo(BaseModel):
         # Modify config
         self.generation_config.update(
             **{
-                "max_new_tokens": 8192,
+                "max_new_tokens": 4096,
                 "min_new_tokens": 1,
                 "max_window_size": 30000,
                 "do_sample": False,  # Greedy decoding
@@ -210,12 +210,17 @@ class BLSP_Emo(BaseModel):
                 # Note: it looks like top_p=0.5 and top_k=0 were set in the original GenerationConfig. If we set do_sample=False, we get a warning about do_sample=False and top_p/top_k settings both being set, even if we set top_p and top_k to None. Setting top_p=1.0 silences the warning for top_p but the warning for top_k can't seem to be silenced.
                 "top_p": 1.0,
                 "top_k": 1,
+                # Note: temperature, top_p and top_k are required by transformers
+                # to be set even if do_sample=False, otherwise it will throw an error.
+                # Furthermore, setting any of them to None or even setting the 
+                # temperature to 0 raises warnings that recommend unsetting these
+                # attributes, even though actually unsetting them causes an error.
                 "num_beams": 1,
                 "num_return_sequences": 1,
                 "bos_token_id": self.nl_tokens[0],
             }
         )
-        assert self.generation_config.max_new_tokens == 8192 and \
+        assert self.generation_config.max_new_tokens == 4096 and \
                self.generation_config.max_window_size == 30000
 
         self.history = ChatHistory(self.tokenizer, self.extractor, self.generation_config.max_window_size, self.generation_config.max_new_tokens)

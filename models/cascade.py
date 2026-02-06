@@ -152,7 +152,8 @@ class CascadeModel(BaseModel):
         model_inputs = self.llm_tokenizer([text], return_tensors="pt").to(self.device)
 
         generated_ids = self.llm_model.generate(
-            **model_inputs,do_sample=False,
+            **model_inputs,
+            do_sample=False,
             max_new_tokens=8192
         )
         generated_ids = [

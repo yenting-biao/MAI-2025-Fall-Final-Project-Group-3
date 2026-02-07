@@ -22,6 +22,14 @@ for model_name in "${MODEL_NAMES[@]}"; do
   for audio_task in "${AUDIO_TASKS[@]}"; do
     for response_task in "${RESPONSE_TASKS[@]}"; do
       for IF_task in "${IF_TASKS[@]}"; do
+
+        # Skip keyword IF tasks for SER and GR
+        if [[ ( "$audio_task" == "SER" || "$audio_task" == "GR" ) && \
+              ( "$IF_task" == "keywords:existence" || "$IF_task" == "keywords:forbidden_words" ) ]]; then
+          echo "Skipping: audio_task=$audio_task IF_task=$IF_task"
+          continue
+        fi
+
         for examples in "${EXAMPLES[@]}"; do
           for seed in "${SEEDS[@]}"; do
             python run.py \

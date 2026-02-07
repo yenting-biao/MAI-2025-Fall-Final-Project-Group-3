@@ -3,7 +3,7 @@ set -e
 
 export CUBLAS_WORKSPACE_CONFIG=:16:8
 
-AUDIO_TASKS=("ASR" "SER" "GR")
+AUDIO_TASKS=("ASR" "SER" "GR" "MMAU")
 RESPONSE_TASKS=("chain-of-thought")
 IF_TASKS=("chain-of-thought")
 EXAMPLES=(0 1 2 3 4 5 6 7 8)

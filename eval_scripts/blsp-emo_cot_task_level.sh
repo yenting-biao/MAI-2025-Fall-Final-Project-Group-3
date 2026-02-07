@@ -4,7 +4,7 @@ set -e
 
 MODEL_NAME="blsp-emo"
 RESPONSE_TASKS=("chain-of-thought")
-AUDIO_TASKS=("ASR" "SER" "GR")
+AUDIO_TASKS=("MMAU" "ASR" "SER" "GR")
 
 for audio_task in "${AUDIO_TASKS[@]}"; do
     for response_task in "${RESPONSE_TASKS[@]}"; do

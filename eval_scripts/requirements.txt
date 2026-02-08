@@ -7,3 +7,4 @@ openpyxl
 vllm
 whisper_normalizer
 jiwer
+openai

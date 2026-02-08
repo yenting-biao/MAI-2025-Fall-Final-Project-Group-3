@@ -1,8 +1,3 @@
-"""
-References:
-- https://github.com/cwang621/blsp-emo/blob/main/chat_demo.py
-- Gemini 3 Pro
-"""
 import os
 from shutil import which
 
@@ -16,13 +11,12 @@ from .blsp_emo_package.src.qwen_generation_utils import get_stop_words_ids, deco
 from .basemodel import BaseModel
 
 class ChatHistory(object):
-    """Taken from https://github.com/cwang621/blsp-emo/blob/main/chat_demo.py"""
+    """Adapted from https://github.com/cwang621/blsp-emo/blob/main/chat_demo.py"""
     def __init__(self, 
         tokenizer, 
         extractor, 
-        max_window_size=6144,
-        max_new_tokens=8192,
-        use_emotion=False,
+        max_window_size,
+        max_new_tokens,
         speech_downsample_rate=16
     ):
         super().__init__()
@@ -40,7 +34,7 @@ class ChatHistory(object):
         sys_prompt = "You are a helpful assistant."
         input_ids = self.im_start_tokens + self._tokenize_str("system", f"{sys_prompt}") + self.im_end_tokens
         input_ids = torch.LongTensor([input_ids])
-        self.system_histroy = [(input_ids,)]
+        self.system_history = [(input_ids,)]
         self.system_length = input_ids.shape[1]
 
         self.reset()
@@ -48,7 +42,7 @@ class ChatHistory(object):
     def set_system_prompt(self, prompt):
         input_ids = self.im_start_tokens + self._tokenize_str("system", f"{prompt}") + self.im_end_tokens
         input_ids = torch.LongTensor([input_ids])
-        self.system_histroy = [(input_ids,)]
+        self.system_history = [(input_ids,)]
         self.system_length = input_ids.shape[1]
     
     def reset(self):
@@ -120,10 +114,16 @@ class ChatHistory(object):
         length = input_ids.shape[1]
 
         while self.cur_length > (self.max_window_size - self.max_new_tokens - length):
+            with open("max_window_size_exceeded.txt", "w") as f:
+                f.write("max_window_size was exceeded\n")
+            raise RuntimeError(
+                "Should not have reached here."
+                " This means max_window_size is too small."
+            )
             pop_length = self.lengths.pop(0)
             self.history.pop(0)
             self.cur_length -= pop_length
-        return self.system_histroy + self.history + [(input_ids,)]
+        return self.system_history + self.history + [(input_ids,)]
 
     def get_conversation_string(self):
         conversation_parts = []
@@ -177,9 +177,9 @@ class BLSP_Emo(BaseModel):
         
         # Load Model
         self.model = Blsp2Model.from_pretrained(
-            path_to_weights, 
+            path_to_weights,
             torch_dtype=torch.float16,
-            device_map="cuda",
+            device_map=device,
         )
         # self.model = self.model.half()
         self.model = self.model.bfloat16()  # don't use self.model.half() as it will cause an error; see https://github.com/meta-llama/llama/issues/380#issuecomment-1656714118
@@ -202,28 +202,28 @@ class BLSP_Emo(BaseModel):
         # Modify config
         self.generation_config.update(
             **{
-                # original generation_config.update from chat_demo.py: (may need to tweak these settings if current window size is too small or response is cut off)
-                # "max_new_tokens": 512,
-                # "min_new_tokens": 1,
-                # "temperature": 0.5,
-                # "max_window_size": 6144,
-                # "bos_token_id": self.tokenizer.encode("\n")[0],
-                # "num_return_sequences": 1,
-
-                "max_new_tokens": 128,
+                "max_new_tokens": 4096,
                 "min_new_tokens": 1,
+                "max_window_size": 30000,
                 "do_sample": False,  # Greedy decoding
                 "temperature": 1.0,
                 # Note: it looks like top_p=0.5 and top_k=0 were set in the original GenerationConfig. If we set do_sample=False, we get a warning about do_sample=False and top_p/top_k settings both being set, even if we set top_p and top_k to None. Setting top_p=1.0 silences the warning for top_p but the warning for top_k can't seem to be silenced.
                 "top_p": 1.0,
                 "top_k": 1,
+                # Note: temperature, top_p and top_k are required by transformers
+                # to be set even if do_sample=False, otherwise it will throw an error.
+                # Furthermore, setting any of them to None or even setting the 
+                # temperature to 0 raises warnings that recommend unsetting these
+                # attributes, even though actually unsetting them causes an error.
                 "num_beams": 1,
                 "num_return_sequences": 1,
                 "bos_token_id": self.nl_tokens[0],
             }
         )
+        assert self.generation_config.max_new_tokens == 4096 and \
+               self.generation_config.max_window_size == 30000
 
-        self.history = ChatHistory(self.tokenizer, self.extractor, self.generation_config.max_window_size, self.generation_config.max_new_tokens, False)
+        self.history = ChatHistory(self.tokenizer, self.extractor, self.generation_config.max_window_size, self.generation_config.max_new_tokens)
 
     def process_input(self, conversation: list[dict]):
         """

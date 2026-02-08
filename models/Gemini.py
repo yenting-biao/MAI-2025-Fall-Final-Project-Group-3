@@ -46,8 +46,9 @@ class Gemini(BaseModel):
         # https://github.com/googleapis/python-genai/issues/626
         "temperature": 1.0,  # Temperature officially recommended by Google
 
-        # The default thinking level is dynamic.
-        # "thinking_config": types.ThinkingConfig(thinking_level="low"),
+        # The default thinking level is usually dynamic if thinking level is not 
+        # specified. Default thinking level depends on model, so please check
+        # https://ai.google.dev/gemini-api/docs/thinking.
 
         # Get thinking summary since Gemini does most of its reasoning behind-
         # the-scenes.
@@ -58,7 +59,7 @@ class Gemini(BaseModel):
 
     def __init__(
         self,
-        model_name: str = "gemini-3-flash-preview",
+        model_name: str = "gemini-2.5-flash",
         max_retries: int = 5,
         max_upload_retries: int = 3,
         generation_config: dict[str, Any] | None = None,
@@ -70,7 +71,9 @@ class Gemini(BaseModel):
         this code.
 
         Args:
-            model_name: Name of the Gemini model to use.
+            model_name: Name of the Gemini model to use. model_name will be passed
+                directly to the Gemini API, so it must be a valid model code. See
+                https://ai.google.dev/gemini-api/docs/models for valid model codes.
             max_retries: Maximum number of retry attempts on failure. When a Gemini
                 API call fails, the wrapper will rotate to the next API key and retry
                 until max_retries is reached. If only one API key is provided, 

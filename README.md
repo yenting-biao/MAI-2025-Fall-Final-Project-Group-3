@@ -17,6 +17,26 @@ pip install -e .
 cd ..
 ```
 
+#### BLSP Emo
+For BLSP Emo, we use the official pretrained weights available on Hugging Face at 
+https://huggingface.co/cwang621/blsp-emo. Our code (specifically, `models/blsp_emo.py`)
+automatically downloads the weights to a folder called `blsp_emo_weights`. Downloading
+the weights requires permission from Hugging Face via an access token. The manual
+steps required from you are:
+
+1. Acquire a Hugging Face access token.
+
+See https://huggingface.co/docs/hub/en/security-tokens for instructions on how to
+get an access token using your own account. A "Read" (i.e., read-only) type token 
+is sufficient.
+
+2. Log in to Hugging Face on your local machine.
+
+Run `hf auth login` and paste your access token. See 
+https://huggingface.co/docs/huggingface_hub/en/guides/cli for more details on
+the command. After running the command, the model weights can now be downloaded, just
+go ahead and run the experiments for this model.
+
 #### Gemini
 
 To run the experiments involving Gemini, the `GEMINI_API_KEY`

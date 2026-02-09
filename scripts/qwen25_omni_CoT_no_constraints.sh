@@ -10,7 +10,7 @@ IF_TASKS=("chain-of-thought")
 EXAMPLES=(0 1 2 3 4 5 6 7 8)
 MODEL_NAMES=("qwen25_omni")
 SEEDS=(42)
-OUTPUT_DIR="${OUTPUT_DIR:-model_responses/}"
+OUTPUT_DIR="${OUTPUT_DIR:-model_responses_no_constraints/}"
 
 for model_name in "${MODEL_NAMES[@]}"; do
   for audio_task in "${AUDIO_TASKS[@]}"; do

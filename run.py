@@ -156,7 +156,7 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list
     return test_cases, test_audio_dir
 
 def GetOutputFilePath(args: argparse.Namespace) -> Path:
-    model_name_part = (args.model_name.lower() + "_no_constraints") if args.no_output_constraints else args.model_name.lower() 
+    model_name_part = args.model_name.lower() 
     output_dir = Path(args.output_dir) / Path(model_name_part) / args.audio_task / args.response_task
     output_dir = output_dir / args.IF_task.replace(':', '_')
     if not os.path.exists(output_dir):

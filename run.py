@@ -156,18 +156,32 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list
     return test_cases, test_audio_dir
 
 def GetOutputFilePath(args: argparse.Namespace) -> Path:
-    output_dir = Path(args.output_dir) / args.model_name.lower() / args.audio_task / args.response_task
+    model_name_part = (args.model_name.lower() + "_no_constraints") if args.no_output_constraints else args.model_name.lower() 
+    output_dir = Path(args.output_dir) / Path(model_name_part) / args.audio_task / args.response_task
     output_dir = output_dir / args.IF_task.replace(':', '_')
     if not os.path.exists(output_dir):
         os.makedirs(output_dir, exist_ok=True)
     output_fn = output_dir / f"output_{args.examples}-shot.jsonl"
     return output_fn
 
+def remove_output_constraints_from_instruction(instruction: str) -> str:
+    tail_to_remove = "For example:\n```JSON\n{\n...\n}\n```"
+    instruction = instruction.strip()
+    if instruction.endswith(tail_to_remove):
+        instruction = instruction[: -len(tail_to_remove)]
+    
+    assert instruction.count("\n") == 1, "Instruction does not have exactly 1 newline as expected."
+    
+    # Split instruction into two parts
+    instruction = instruction.split("\n")[0]  # Keep only the part before the newline
+    return instruction.strip()
+
 def GenerateICLandTestExamples(
     icl_data:list[dict],
     icl_audio_path:str,
     test_case_formatted: Dict[str, str],
-    debug: bool = False
+    debug: bool = False,
+    remove_output_constraints: bool = False
 ) -> list[dict]:
     '''
         Generate In-Context Learning Examples and concatenate with test example.
@@ -190,7 +204,7 @@ def GenerateICLandTestExamples(
     for item in icl_data:
         ICL_example = {}
         ICL_example["audio_path"] = os.path.join(icl_audio_path, item["audio_path"])
-        ICL_example["instruction"] = item["instruction"]
+        ICL_example["instruction"] = item["instruction"] if not remove_output_constraints else remove_output_constraints_from_instruction(item["instruction"])
         ICL_example["answer"] = f" [ANS] {item.get('ans', None)} "
         ret.append(ICL_example)
         if debug:
@@ -208,12 +222,13 @@ def GenerateMessagesResponse(
     icl_audio_dir: str,
     use_test_sample: bool = False,
     debug: bool = False,
+    remove_output_constraints: bool = False
 ) -> Tuple[str, str]:
     test_case_formatted = {
         "audio_path": os.path.join(test_audio_dir, test_case["audio_filepath"]),
         "instruction": test_case["instruction"],
     } if not use_test_sample else test_case
-    conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug)
+    conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug, remove_output_constraints)
     model.process_input(conversation)
     if debug:
         print("-- Input processed. ---")
@@ -240,6 +255,9 @@ def parse_args():
     parser.add_argument("--output_dir", type=str, default="./model_responses/", help="Directory to save the outputs.")
     parser.add_argument("--icl_json_path", type=str, default="./in-context-examples/ICL_examples.json", help="Path to the JSON file containing in-context examples.")
     parser.add_argument("--icl_audio_dir", type=str, default="./in-context-examples/audios/", help="Directory containing audio files for in-context examples.")
+    
+    # experiment to remove output constraints
+    parser.add_argument("--no_output_constraints", action="store_true", help="Whether to remove output constraints in instructions for ICL experiment. Using this flag will output to a separate folder with '_no_constraints' suffix for analysis.")
 
     """
     [IMPORTANT] Test Settings
@@ -316,6 +334,8 @@ def main(args: argparse.Namespace) -> None:
     with open(output_fn, "w") as fout:
         for i, test_case in pbar:
             set_seed(args.seed + i, args.verbose)
+            if args.no_output_constraints:
+                test_case["instruction"] = remove_output_constraints_from_instruction(test_case["instruction"])
             if "gemini" in args.model_name:
                 model.generation_config["seed"] = args.seed + i
             if (args.audio_task == "MMAU"):
@@ -327,7 +347,8 @@ def main(args: argparse.Namespace) -> None:
             icl_data_examples = icl_data_shuffled[:args.examples]
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,
-                args.icl_audio_dir, args.use_test_sample, args.debug
+                args.icl_audio_dir, args.use_test_sample, args.debug,
+                args.no_output_constraints
             )
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")

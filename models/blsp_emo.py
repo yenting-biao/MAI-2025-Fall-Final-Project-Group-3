@@ -1,3 +1,14 @@
+"""
+The ChatHistory class is a modified version of the original ChatHistory class
+(https://github.com/cwang621/blsp-emo/blob/main/chat_demo.py) from the BLSP Emo 
+official repository. Code from BLSP Emo is licensed under the Apache License, 
+Version 2.0: https://github.com/cwang621/blsp-emo?tab=Apache-2.0-1-ov-file.
+
+The modifications to the original ChatHistory class include:
+- Logic to convert the chat history into a single readable string
+- Logic to ensure history is not truncated
+"""
+
 import os
 from shutil import which
 

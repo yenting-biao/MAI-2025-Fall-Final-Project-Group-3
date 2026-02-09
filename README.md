@@ -18,6 +18,13 @@ cd ..
 ```
 
 #### BLSP Emo
+
+##### Download BLSP Emo Official Repository
+
+`models/blsp_emo.py` imports code from the [BLSP Emo repository](https://github.com/cwang621/blsp-emo). Please run `git submodule update --init --recursive` to download the repository. The BLSP Emo repository is [licensed under the Apache License, Version 2.0](https://github.com/cwang621/blsp-emo?tab=Apache-2.0-1-ov-file).
+
+##### Add Hugging Face Access Token to Download BLSP Emo Weights
+
 For BLSP Emo, we use the official pretrained weights available on Hugging Face at 
 https://huggingface.co/cwang621/blsp-emo. Our code (specifically, `models/blsp_emo.py`)
 automatically downloads the weights to a folder called `blsp_emo_weights`. Downloading

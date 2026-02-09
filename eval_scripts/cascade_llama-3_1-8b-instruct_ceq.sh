@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ROOT_DIR=$(pwd)
-AUDIO_TASKS=("ASR" "SER" "GR")
+AUDIO_TASKS=("ASR" "SER" "GR" "MMAU")
 RESPONSE_TASKS=("closed_ended_questions")
 IF_TASKS=(
     "change_case:english_capital"

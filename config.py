@@ -16,7 +16,7 @@ MAP_AUDIO_TASK = {
     "ASR": "Automatic_speech_recognition",
     "SER": "Speech_emotion_recognition",
     "GR": "Gender_recognition",
-    "MMAU": "MMAU", 
+    "MMAU": "MMAU",
 }
 IMPLEMENTED_IF_TASKS = [
     # closed_ended_questions
@@ -49,7 +49,9 @@ def get_task_parser() -> argparse.ArgumentParser:
 
     # Model and Task Settings
     parser.add_argument("--model_name", type=str, default="qwen",
-                        choices=["qwen", "qwen2", "desta2_5", "blsp-emo", "qwen25_omni", "cascade_Llama-3_1-8B-Instruct", "cascade_Qwen-7B-Chat", "cascade_Qwen25-7B-Instruct", "gemini-2.5-flash", "gemini-3-flash-preview"],
+                        choices=["qwen", "qwen2", "desta2_5", "blsp-emo", "qwen25_omni",
+                                 "cascade_llama-3_1-8b-instruct", "cascade_qwen-7b-chat", "cascade_qwen25-7b-instruct",
+                                 "gemini-2.5-flash", "gemini-3-flash-preview"],
                         help="Name of the pre-trained language model to use.")
 
     parser.add_argument("--audio_task", type=str, default="ASR",

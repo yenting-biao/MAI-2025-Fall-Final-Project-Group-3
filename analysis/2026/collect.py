@@ -32,6 +32,16 @@ GROUP_MAP_CEQ = {
 }
 GROUP_MAP_CEQ = {k.replace(':', '_'): v for k, v in GROUP_MAP_CEQ.items()}
 
+GROUP_MAP_CW = {
+    "detectable_format:number_bullet_lists": "bullet_lists",
+    "length_constraints:number_words": "length_constraints",
+    "length_constraints:number_sentences": "length_constraints",
+    "length_constraints:number_paragraphs": "length_constraints",
+    "keywords:forbidden_words": "keywords",
+    "keywords:existence": "keywords",
+}
+GROUP_MAP_CW = {k.replace(':', '_'): v for k, v in GROUP_MAP_CW.items()}
+
 MAP_AUDIO_TASK = {
     "ASR": "Automatic_speech_recognition",
     "SER": "Speech_emotion_recognition",
@@ -118,7 +128,7 @@ def createDFfromRuleEvalResults(results:dict[int, dict[str, Any]], response_task
 
     return pd.DataFrame(d)
 
-def eval(model_name:str, response_task:str="closed_ended_questions", root:str="../../", to_csv:bool=True):
+def eval(model_name:str, response_task:str, root:str="../../", to_csv:bool=True):
     response_task = response_task.lower()
     d_df = {}
     for audio_task, performance_metric in AUDIO_TASK_PERFORMANCE_METRIC.items():
@@ -162,7 +172,7 @@ if __name__ == "__main__":
     fn = os.path.join(f"summary_ceq.xlsx")
 
     with pd.ExcelWriter(fn, engine="openpyxl") as writer:
-        for audio_task in ["ASR", "GR", "SER"]:
+        for audio_task in AUDIO_TASK_PERFORMANCE_METRIC.keys():
             dfs = []
             for model_name in MODEL_ORDER:
                 df = d_df[model_name][audio_task].copy()
@@ -215,13 +225,13 @@ if __name__ == "__main__":
 
     # CW
     response_task ="creative_writing"
-    d_df_cw = {}
+    d_df = {}
     for model_name in MAP_MODEL_NAME.keys():
         print(f"------------ {model_name} ------------")
-        d_df_cw[model_name] = eval(model_name, response_task=response_task, to_csv=True)
+        d_df[model_name] = eval(model_name, response_task=response_task, to_csv=True)
 
     group_order = []
-    for v in GROUP_MAP_CEQ.values():
+    for v in GROUP_MAP_CW.values():
         if v not in group_order and v != "other":
             group_order.append(v)
 
@@ -229,17 +239,19 @@ if __name__ == "__main__":
     fn = os.path.join(f"summary_cw.xlsx")
 
     with pd.ExcelWriter(fn, engine="openpyxl") as writer:
-        for audio_task in ["ASR", "GR", "SER"]:
+        for audio_task in AUDIO_TASK_PERFORMANCE_METRIC.keys():
+            if response_task == "creative_writing" and audio_task == "MMAU":
+                continue
             dfs = []
             for model_name in MODEL_ORDER:
                 df = d_df[model_name][audio_task].copy()
 
                 df["model"] = model_name
-                df["IF_task_group"] = df["IF_task"].map(GROUP_MAP_CEQ)
+                df["IF_task_group"] = df["IF_task"].map(GROUP_MAP_CW)
 
                 df = df[[
                     "IF_task_group", "IF_task", "n", "model",
-                    "shot_level", "if_rate_strict", "if_rate_loose", "mean_performance"
+                    "shot_level", "if_rate"
                 ]]
                 dfs.append(df)
 

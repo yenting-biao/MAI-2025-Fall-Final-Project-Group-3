@@ -4,6 +4,75 @@ from tqdm import tqdm
 import dotenv
 import datetime
 import json
+import tempfile
+import fcntl
+
+
+def update_token_usage_log(log_file: str, prompt_tokens: int, completion_tokens: int, total_tokens: int) -> dict:
+    """
+    Thread-safe update of token usage log file.
+    
+    Uses file locking and atomic writes to prevent race conditions during concurrent access.
+    
+    Args:
+        log_file: Path to the log file
+        prompt_tokens: Number of prompt tokens to add
+        completion_tokens: Number of completion tokens to add
+        total_tokens: Total tokens to add
+    
+    Returns:
+        Updated token usage data dictionary
+    """
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    
+    # Use a lock file to ensure only one process updates at a time
+    lock_file = log_file + ".lock"
+    
+    with open(lock_file, "w") as lock_fd:
+        # Acquire exclusive lock
+        fcntl.flock(lock_fd.fileno(), fcntl.LOCK_EX)
+        
+        try:
+            # Read current data
+            if os.path.exists(log_file):
+                with open(log_file, "r") as f:
+                    token_usage_data = json.load(f)
+            else:
+                token_usage_data = {
+                    "input_tokens": 0,
+                    "output_tokens": 0,
+                    "total_tokens": 0,
+                    "calls": 0,
+                }
+            
+            # Update data
+            token_usage_data["input_tokens"] += prompt_tokens
+            token_usage_data["output_tokens"] += completion_tokens
+            token_usage_data["total_tokens"] += total_tokens
+            token_usage_data["calls"] += 1
+            
+            # Atomic write: write to temp file then rename
+            temp_fd, temp_path = tempfile.mkstemp(
+                dir=os.path.dirname(log_file),
+                prefix=".tmp_token_usage_",
+                suffix=".json"
+            )
+            try:
+                with os.fdopen(temp_fd, "w") as f:
+                    json.dump(token_usage_data, f, indent=4)
+                # Atomic rename
+                os.replace(temp_path, log_file)
+            except Exception:
+                # Clean up temp file if something goes wrong
+                if os.path.exists(temp_path):
+                    os.unlink(temp_path)
+                raise
+            
+            return token_usage_data
+        finally:
+            # Release lock
+            fcntl.flock(lock_fd.fileno(), fcntl.LOCK_UN)
+
 
 class VLLMInference:
     """
@@ -121,36 +190,23 @@ class OpenAIInference:
             )
             responses.append(completion.choices[0].message.content.strip())
             
-            # save token usage info to logs/{date}_openai_token_usage.json
-            os.makedirs("logs", exist_ok=True)
-            # utc time
+            # save token usage info to logs/{date}_openai_token_usage.json (thread-safe)
             date_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
             log_file = f"logs/{date_str}_openai_token_usage.json"
-            if os.path.exists(log_file):
-                with open(log_file, "r") as f:
-                    token_usage_data = json.load(f)
-            else:
-                token_usage_data = {
-                    "input_tokens": 0,
-                    "output_tokens": 0,
-                    "total_tokens": 0,
-                    "calls": 0,
-                }
             
             token_usage = completion.usage
-            token_usage_data["input_tokens"] += token_usage.prompt_tokens
-            token_usage_data["output_tokens"] += token_usage.completion_tokens
-            token_usage_data["total_tokens"] += token_usage.total_tokens
-            token_usage_data["calls"] += 1
+            token_usage_data = update_token_usage_log(
+                log_file,
+                token_usage.prompt_tokens,
+                token_usage.completion_tokens,
+                token_usage.total_tokens
+            )
             
             # print warning if total tokens exceed 2.5M in a single day
             if token_usage_data["total_tokens"] > 2500000:
                 print(
                     f"\033[1;31mWarning: Total token usage exceeded 2.5M tokens today ({token_usage_data['total_tokens']} tokens).\033[0m"
                 )
-
-            with open(log_file, "w") as f:
-                json.dump(token_usage_data, f, indent=4)
 
         return responses
 

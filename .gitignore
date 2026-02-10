@@ -214,3 +214,4 @@ outputs_old/
 
 slurm-*.out
 logs/
+*.lock

@@ -205,7 +205,9 @@ def GenerateICLandTestExamples(
         ICL_example = {}
         ICL_example["audio_path"] = os.path.join(icl_audio_path, item["audio_path"])
         ICL_example["instruction"] = item["instruction"] if not remove_output_constraints else remove_output_constraints_from_instruction(item["instruction"])
-        ICL_example["answer"] = f" [ANS] {item.get('ans', None)} "
+        ans = item["ans"]
+        assert ans is not None, "Answer in ICL example cannot be None."
+        ICL_example["answer"] = json.dumps(ans, ensure_ascii=False) if isinstance(ans, dict) else str(ans)
         ret.append(ICL_example)
         if debug:
             print(f"ICL Example added: {ICL_example}")

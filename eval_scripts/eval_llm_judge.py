@@ -374,6 +374,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Whether to use vLLMInference as judge. If not set, use OpenAIInference.",
     )
+    parser.add_argument(
+        "--no_output_constraints",
+        action="store_true",
+        help="Whether to judge the model responses with output constraints removed from the instructions.",
+    )
     return parser.parse_args()
 
 
@@ -402,7 +407,10 @@ def main() -> None:
     for if_task in if_tasks:
         print(f"\nEvaluating IF task: {if_task}")
         if_task_formatted = if_task.replace(":", "_")
-        input_dir = f"model_responses/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
+        if args.no_output_constraints:  # TODO: edit the path later
+            input_dir = f"model_responses_no_constraints/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
+        else:
+            input_dir = f"model_responses/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
 
         # Check that there are exactly 9 output files and the filenames are in the foramat "output_{k}*.jsonl", where k = 0, ..., 8
         candidate_files = sorted(

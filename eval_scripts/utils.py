@@ -2,7 +2,8 @@ import os, time
 from typing import List, Tuple
 from tqdm import tqdm
 import dotenv
-
+import datetime
+import json
 
 class VLLMInference:
     """
@@ -119,6 +120,37 @@ class OpenAIInference:
                 seed=self.seed,
             )
             responses.append(completion.choices[0].message.content.strip())
+            
+            # save token usage info to logs/{date}_openai_token_usage.json
+            os.makedirs("logs", exist_ok=True)
+            # utc time
+            date_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+            log_file = f"logs/{date_str}_openai_token_usage.json"
+            if os.path.exists(log_file):
+                with open(log_file, "r") as f:
+                    token_usage_data = json.load(f)
+            else:
+                token_usage_data = {
+                    "input_tokens": 0,
+                    "output_tokens": 0,
+                    "total_tokens": 0,
+                    "calls": 0,
+                }
+            
+            token_usage = completion.usage
+            token_usage_data["input_tokens"] += token_usage.prompt_tokens
+            token_usage_data["output_tokens"] += token_usage.completion_tokens
+            token_usage_data["total_tokens"] += token_usage.total_tokens
+            token_usage_data["calls"] += 1
+            
+            # print warning if total tokens exceed 2.5M in a single day
+            if token_usage_data["total_tokens"] > 2500000:
+                print(
+                    f"\033[1;31mWarning: Total token usage exceeded 2.5M tokens today ({token_usage_data['total_tokens']} tokens).\033[0m"
+                )
+
+            with open(log_file, "w") as f:
+                json.dump(token_usage_data, f, indent=4)
 
         return responses
 

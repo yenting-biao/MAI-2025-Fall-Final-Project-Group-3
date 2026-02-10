@@ -1,0 +1,15 @@
+model,Setting,New CoT Acc
+qwen2,Zero-shot,0.3058734530123755
+qwen2,ICL,0.6239145232671468
+desta2_5,Zero-shot,0.9248608844462575
+desta2_5,ICL,0.9905551943084454
+blsp-emo,Zero-shot,0.5785203885035582
+blsp-emo,ICL,0.9461550557595535
+qwen25_omni,Zero-shot,0.5891206537014367
+qwen25_omni,ICL,0.8132695271771155
+gemini-2.5-flash,Zero-shot,0.9736842105263157
+gemini-2.5-flash,ICL,0.9991776315789473
+gemini-3-flash-preview,ICL,
+cascade_qwen25-7b-instruct,ICL,
+cascade_llama-3_1-8b-instruct,Zero-shot,0.9131425948592408
+cascade_llama-3_1-8b-instruct,ICL,0.9309346879391629

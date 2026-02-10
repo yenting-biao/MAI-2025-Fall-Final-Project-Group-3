@@ -23,55 +23,56 @@ def update_token_usage_log(log_file: str, prompt_tokens: int, completion_tokens:
     Returns:
         Updated token usage data dictionary
     """
-    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    # Create directory if log_file has a directory component
+    if dir_path := os.path.dirname(log_file):
+        os.makedirs(dir_path, exist_ok=True)
     
     # Use a lock file to ensure only one process updates at a time
     lock_file = log_file + ".lock"
     
-    with open(lock_file, "w") as lock_fd:
-        # Acquire exclusive lock
+    # Use 'a' mode to avoid truncating the lock file unnecessarily
+    with open(lock_file, "a") as lock_fd:
+        # Acquire exclusive lock (automatically released when file is closed)
         fcntl.flock(lock_fd.fileno(), fcntl.LOCK_EX)
         
+        # Read current data
+        if os.path.exists(log_file):
+            with open(log_file, "r") as f:
+                token_usage_data = json.load(f)
+        else:
+            token_usage_data = {
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "total_tokens": 0,
+                "calls": 0,
+            }
+        
+        # Update data
+        token_usage_data["input_tokens"] += prompt_tokens
+        token_usage_data["output_tokens"] += completion_tokens
+        token_usage_data["total_tokens"] += total_tokens
+        token_usage_data["calls"] += 1
+        
+        # Atomic write: write to temp file then rename
+        # Use current directory if log_file has no directory component
+        temp_dir = os.path.dirname(log_file) or "."
+        temp_fd, temp_path = tempfile.mkstemp(
+            dir=temp_dir,
+            prefix=".tmp_token_usage_",
+            suffix=".json"
+        )
         try:
-            # Read current data
-            if os.path.exists(log_file):
-                with open(log_file, "r") as f:
-                    token_usage_data = json.load(f)
-            else:
-                token_usage_data = {
-                    "input_tokens": 0,
-                    "output_tokens": 0,
-                    "total_tokens": 0,
-                    "calls": 0,
-                }
-            
-            # Update data
-            token_usage_data["input_tokens"] += prompt_tokens
-            token_usage_data["output_tokens"] += completion_tokens
-            token_usage_data["total_tokens"] += total_tokens
-            token_usage_data["calls"] += 1
-            
-            # Atomic write: write to temp file then rename
-            temp_fd, temp_path = tempfile.mkstemp(
-                dir=os.path.dirname(log_file),
-                prefix=".tmp_token_usage_",
-                suffix=".json"
-            )
-            try:
-                with os.fdopen(temp_fd, "w") as f:
-                    json.dump(token_usage_data, f, indent=4)
-                # Atomic rename
-                os.replace(temp_path, log_file)
-            except Exception:
-                # Clean up temp file if something goes wrong
-                if os.path.exists(temp_path):
-                    os.unlink(temp_path)
-                raise
-            
-            return token_usage_data
-        finally:
-            # Release lock
-            fcntl.flock(lock_fd.fileno(), fcntl.LOCK_UN)
+            with os.fdopen(temp_fd, "w") as f:
+                json.dump(token_usage_data, f, indent=4)
+            # Atomic rename
+            os.replace(temp_path, log_file)
+        except Exception:
+            # Clean up temp file if something goes wrong
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+            raise
+        
+        return token_usage_data
 
 
 class VLLMInference:

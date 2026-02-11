@@ -161,48 +161,63 @@ def main():
             )
         for i in range(9):
             # IF Rate
-            if_results = load_jsonl(
-                f"{base_dir}/reports/llm_eval@output_{i}-shot.jsonl"
-            )
-            if_rate = sum([res["correct"] for res in if_results]) / len(if_results)
+            if not args.task_only:
+                if_results = load_jsonl(
+                    f"{base_dir}/reports/llm_eval@output_{i}-shot.jsonl"
+                )
+                if_rate = sum([res["correct"] for res in if_results]) / len(if_results)
 
+            # Task Performance
+            if not args.if_only:
+                task_results = load_jsonl(
+                    f"{base_dir}/reports-task-level/llm_eval@output_{i}-shot.jsonl"
+                )
+                if args.audio_task == "ASR":
+                    hyps = []
+                    refs = []
+                    for item in task_results:
+                        result = extract_all_text_after_result(
+                            item.get("eval_response", "").split("</think>")[-1].strip()
+                        )
+                        hyps.append(
+                            normalize_text(result if result is not None else "")
+                        )
+                        refs.append(normalize_text(item.get("label", "").strip()))
+                    task_performance = wer(refs, hyps)
+                else:
+                    task_performance = sum(
+                        [float(res["correct"]) for res in task_results]
+                    ) / len(task_results)
+
+            # Print results
             if args.if_only:
                 if args.detail_output:
                     print(f"{i}    | {if_rate:%}")
                 else:
                     print(f"{if_rate:%}")
                 continue
-
-            # Task Performance
-            task_results = load_jsonl(
-                f"{base_dir}/reports-task-level/llm_eval@output_{i}-shot.jsonl"
-            )
-            if args.audio_task == "ASR":
-                hyps = []
-                refs = []
-                for item in task_results:
-                    result = extract_all_text_after_result(
-                        item.get("eval_response", "").split("</think>")[-1].strip()
-                    )
-                    hyps.append(normalize_text(result if result is not None else ""))
-                    refs.append(normalize_text(item.get("label", "").strip()))
-                task_performance = wer(refs, hyps)
-            else:
-                task_performance = sum(
-                    [float(res["correct"]) for res in task_results]
-                ) / len(task_results)
-
-            # Print results
-            if args.detail_output:
-                if args.audio_task == "ASR":
-                    print(f"{i}    | {if_rate:%} | {task_performance}")
+            elif args.task_only:
+                if args.detail_output:
+                    if args.audio_task == "ASR":
+                        print(f"{i}    | {task_performance}")
+                    else:
+                        print(f"{i}    | {task_performance:%}")
                 else:
-                    print(f"{i}    | {if_rate:%} | {task_performance:%}")
+                    if args.audio_task == "ASR":
+                        print(f"{task_performance}")
+                    else:
+                        print(f"{task_performance:%}")
             else:
-                if args.audio_task == "ASR":
-                    print(f"{if_rate:%}\t{task_performance}")
+                if args.detail_output:
+                    if args.audio_task == "ASR":
+                        print(f"{i}    | {if_rate:%} | {task_performance}")
+                    else:
+                        print(f"{i}    | {if_rate:%} | {task_performance:%}")
                 else:
-                    print(f"{if_rate:%}\t{task_performance:%}")
+                    if args.audio_task == "ASR":
+                        print(f"{if_rate:%}\t{task_performance}")
+                    else:
+                        print(f"{if_rate:%}\t{task_performance:%}")
     else:
         raise NotImplementedError(
             "Only chain-of-thought response task is supported in this script."

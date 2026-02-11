@@ -31,7 +31,7 @@ def _rewrite_repeat_prompt_ans(ans, prompt_to_repeat: str) -> str:
         content = s.strip()
 
     # Join without breaking formatting
-    if prompt_to_repeat.endswith((":"," ","\n","\t")):
+    if prompt_to_repeat.endswith((": "," ","\n","\t")):
         return f"{prompt_to_repeat}{content}"
     return f"{prompt_to_repeat} {content}"
 
@@ -39,10 +39,11 @@ def _rewrite_end_checker_ans(ans, end_phrase: str, mmau: bool = False) -> str:
     s = ans if isinstance(ans, str) else str(ans)
     if mmau:
         first_line = s.split("This")[0].rstrip() if "This" in s else s.rstrip()
+        return f"{first_line} {end_phrase}"
     else:
         splitlines = s.splitlines()
         first_line = splitlines[0].rstrip() if splitlines else s.rstrip()
-    return f"{first_line}\n{end_phrase}"
+        return f"{first_line}\n{end_phrase}"
 
 def set_seed(seed: int = 42, verbose: bool = False) -> None:
     # Python & OS
@@ -334,6 +335,27 @@ def MMAU_Get_ICL_Tasks(audio_id: str) -> Tuple[str, str]:
     sub_task = task_info["sub-category"]
     return main_task, sub_task
 
+def rewrite_ans(args, test_case, icl_data_examples: list[dict]) -> list[dict]:
+    '''
+    For certain IF tasks,
+    we need to modify the ICL examples to remove or change specific output constraints in the answers
+    to ensure a fair evaluation of the model's capabilities without those constraints.
+    This is only done when --no_output_constraints flag is set and there are ICL examples to modify.
+    '''
+    if args.IF_task in ("combination:repeat_prompt", "combination_repeat_prompt"):
+        prompt_to_repeat = _get_kwarg(test_case, "prompt_to_repeat")
+        if prompt_to_repeat is not None:
+            for ex in icl_data_examples:
+                ex["ans"] = _rewrite_repeat_prompt_ans(ex["ans"], prompt_to_repeat)
+
+    elif args.IF_task in ("startend:end_checker", "startend_end_checker"):
+        end_phrase = _get_kwarg(test_case, "end_phrase")
+        if end_phrase is not None:
+            for ex in icl_data_examples:
+                ex["ans"] = _rewrite_end_checker_ans(ex["ans"], end_phrase, mmau=(args.audio_task == "MMAU"))
+
+    return icl_data_examples
+
 def main(args: argparse.Namespace) -> None:
     t0 = datetime.datetime.now()
     audio_task_mapped = MAP_AUDIO_TASK[args.audio_task.upper()]
@@ -375,22 +397,9 @@ def main(args: argparse.Namespace) -> None:
             random.shuffle(icl_data_shuffled)
             icl_data_examples = copy.deepcopy(icl_data_shuffled[:args.examples])
 
-            # For certain IF tasks,
-            # we need to modify the ICL examples to remove or change specific output constraints in the answers
-            # to ensure a fair evaluation of the model's capabilities without those constraints.
-            # This is only done when --no_output_constraints flag is set and there are ICL examples to modify.
+            #   Rewrite ICL answers if needed
             if args.no_output_constraints and args.examples > 0:
-                if args.IF_task in ("combination:repeat_prompt", "combination_repeat_prompt"):
-                    prompt_to_repeat = _get_kwarg(test_case, "prompt_to_repeat")
-                    if prompt_to_repeat is not None:
-                        for ex in icl_data_examples:
-                            ex["ans"] = _rewrite_repeat_prompt_ans(ex["ans"], prompt_to_repeat)
-
-                elif args.IF_task in ("startend:end_checker", "startend_end_checker"):
-                    end_phrase = _get_kwarg(test_case, "end_phrase")
-                    if end_phrase is not None:
-                        for ex in icl_data_examples:
-                            ex["ans"] = _rewrite_end_checker_ans(ex["ans"], end_phrase, mmau=(args.audio_task == "MMAU"))
+                icl_data_examples = rewrite_ans(args, test_case, icl_data_examples)
 
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,

@@ -1,21 +1,50 @@
-import argparse
-import torch
-import json, os, datetime
-import random
-import numpy as np
+import argparse, json, os, datetime, random, copy
 from typing import Dict, Tuple
-
 from pathlib import Path
-from tqdm import tqdm
 
+import torch
+import numpy as np
+from tqdm import tqdm
 from models.basemodel import BaseModel
+from transformers import set_seed as set_transformers_seed
+
 from config import get_task_parser
 from config import MAP_MODEL_NAME, MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS, TEST_SAMPLE
-from transformers import set_seed as set_transformers_seed
 
 #   Load MMAU audio information
 MMAU_AUDIO_INFO = json.load(open("./in-context-examples/mmau-id2task.json", "r"))
 MMAU_MINI_AUDIO_INFO = json.load(open("./in-context-examples/mmau-mini-id2task.json", "r"))
+
+def _get_kwarg(test_case: dict, key: str):
+    """Extract a value from test_case['kwargs'] which is a list[dict]."""
+    for d in test_case.get("kwargs", []) or []:
+        if key in d:
+            return d[key]
+    return None
+
+def _rewrite_repeat_prompt_ans(ans, prompt_to_repeat: str) -> str:
+    s = ans if isinstance(ans, str) else str(ans)
+    # Keep everything after the first ":" as the transcription/content.
+    if ":" in s:
+        content = s.split(":", 1)[1].lstrip()
+    else:
+        content = s.strip()
+
+    # Join without breaking formatting
+    if prompt_to_repeat.endswith((": "," ","\n","\t")):
+        return f"{prompt_to_repeat}{content}"
+    return f"{prompt_to_repeat} {content}"
+
+def _rewrite_end_checker_ans(ans, end_phrase: str, mmau: bool = False) -> str:
+    s = ans if isinstance(ans, str) else str(ans)
+    if mmau:
+        first_line = s.split("This")[0].rstrip() if "This" in s else s.rstrip()
+        first_line = f"{first_line}." if not first_line.endswith(".") else first_line
+        return f"{first_line} {end_phrase}"
+    else:
+        splitlines = s.splitlines()
+        first_line = splitlines[0].rstrip() if splitlines else s.rstrip()
+        return f"{first_line}\n{end_phrase}"
 
 def set_seed(seed: int = 42, verbose: bool = False) -> None:
     # Python & OS
@@ -33,7 +62,7 @@ def set_seed(seed: int = 42, verbose: bool = False) -> None:
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
     torch.use_deterministic_algorithms(True, warn_only=True)
-    
+
     set_transformers_seed(seed)
 
     if verbose:
@@ -156,7 +185,7 @@ def GetTestCases(args: argparse.Namespace, audio_task_mapped: str) -> tuple[list
     return test_cases, test_audio_dir
 
 def GetOutputFilePath(args: argparse.Namespace) -> Path:
-    model_name_part = args.model_name.lower() 
+    model_name_part = args.model_name.lower()
     output_dir = Path(args.output_dir) / Path(model_name_part) / args.audio_task / args.response_task
     output_dir = output_dir / args.IF_task.replace(':', '_')
     if not os.path.exists(output_dir):
@@ -169,9 +198,9 @@ def remove_output_constraints_from_instruction(instruction: str) -> str:
     instruction = instruction.strip()
     if instruction.endswith(tail_to_remove):
         instruction = instruction[: -len(tail_to_remove)]
-    
+
     assert instruction.count("\n") == 1, "Instruction does not have exactly 1 newline as expected."
-    
+
     # Split instruction into two parts
     instruction = instruction.split("\n")[0]  # Keep only the part before the newline
     return instruction.strip()
@@ -257,7 +286,7 @@ def parse_args():
     parser.add_argument("--output_dir", type=str, default="./model_responses/", help="Directory to save the outputs.")
     parser.add_argument("--icl_json_path", type=str, default="./in-context-examples/ICL_examples.json", help="Path to the JSON file containing in-context examples.")
     parser.add_argument("--icl_audio_dir", type=str, default="./in-context-examples/audios/", help="Directory containing audio files for in-context examples.")
-    
+
     # experiment to remove output constraints
     parser.add_argument("--no_output_constraints", action="store_true", help="Whether to remove output constraints in instructions for ICL experiment. Using this flag will output to a separate folder with '_no_constraints' suffix for analysis.")
 
@@ -307,6 +336,27 @@ def MMAU_Get_ICL_Tasks(audio_id: str) -> Tuple[str, str]:
     sub_task = task_info["sub-category"]
     return main_task, sub_task
 
+def rewrite_ans(args, test_case, icl_data_examples: list[dict]) -> list[dict]:
+    '''
+    For certain IF tasks,
+    we need to modify the ICL examples to remove or change specific output constraints in the answers
+    to ensure a fair evaluation of the model's capabilities without those constraints.
+    This is only done when --no_output_constraints flag is set and there are ICL examples to modify.
+    '''
+    if args.IF_task in ("combination:repeat_prompt", "combination_repeat_prompt"):
+        prompt_to_repeat = _get_kwarg(test_case, "prompt_to_repeat")
+        if prompt_to_repeat is not None:
+            for ex in icl_data_examples:
+                ex["ans"] = _rewrite_repeat_prompt_ans(ex["ans"], prompt_to_repeat)
+
+    elif args.IF_task in ("startend:end_checker", "startend_end_checker"):
+        end_phrase = _get_kwarg(test_case, "end_phrase")
+        if end_phrase is not None:
+            for ex in icl_data_examples:
+                ex["ans"] = _rewrite_end_checker_ans(ex["ans"], end_phrase, mmau=(args.audio_task == "MMAU"))
+
+    return icl_data_examples
+
 def main(args: argparse.Namespace) -> None:
     t0 = datetime.datetime.now()
     audio_task_mapped = MAP_AUDIO_TASK[args.audio_task.upper()]
@@ -346,7 +396,12 @@ def main(args: argparse.Namespace) -> None:
             else:
                 icl_data_shuffled = icl_data.copy()
             random.shuffle(icl_data_shuffled)
-            icl_data_examples = icl_data_shuffled[:args.examples]
+            icl_data_examples = copy.deepcopy(icl_data_shuffled[:args.examples])
+
+            #   Rewrite ICL answers if needed
+            if args.no_output_constraints and args.examples > 0:
+                icl_data_examples = rewrite_ans(args, test_case, icl_data_examples)
+
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,
                 args.icl_audio_dir, args.use_test_sample, args.debug,

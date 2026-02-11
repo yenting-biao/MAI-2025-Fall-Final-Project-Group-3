@@ -48,7 +48,7 @@ from typing import Any
 import run
 
 
-def _short(x: Any, n: int = 220) -> str:
+def _short(x: Any, n: int = 256) -> str:
     s = x if isinstance(x, str) else json.dumps(x, ensure_ascii=False)
     return s if len(s) <= n else s[:n] + " ..."
 
@@ -61,7 +61,7 @@ def _strip_instruction_or_die(instr: str) -> str:
         print("\n[ERROR] remove_output_constraints_from_instruction failed.")
         print(f"  instruction newlines = {instr.count(chr(10))}")
         print("  instruction preview:")
-        print(_short(instr, 800))
+        print(_short(instr, 1024))
         raise
 
 
@@ -189,7 +189,7 @@ def main():
         test_case_no = copy.deepcopy(tc)
         test_case_sw = copy.deepcopy(tc)
 
-        # Match run.main(): strip test instruction when no_output_constraints 
+        # Match run.main(): strip test instruction when no_output_constraints
         _maybe_strip_test_instruction(args_ns, test_case_sw)
 
         # Select ICL pool exactly like run.main()
@@ -224,7 +224,7 @@ def main():
         print(f"[{idx}/{len(selected)}] test_id={test_case_no.get('id')} audio={test_case_no.get('audio_filepath')}")
         if mmau_task:
             print(f"  MMAU resolved: main_task={mmau_task[0]} | sub_task={mmau_task[1]}")
-        print(f"  kwargs: \033[93m{_short(test_case_no.get('kwargs', []), 500)}\033[0m")
+        print(f"  kwargs: \033[93m{_short(test_case_no.get('kwargs', []), 512)}\033[0m")
         if args_ns.IF_task == "combination:repeat_prompt":
             print(f"  prompt_to_repeat = {run._get_kwarg(test_case_no, 'prompt_to_repeat')!r}")
         if args_ns.IF_task == "startend:end_checker":
@@ -240,27 +240,27 @@ def main():
 
             print(f"\n  ICL #{i_ex} changed={changed}")
             print(f"    ICL audio_path: {ex0.get('audio_path')}")
-            print(f"    instr first line (raw): {_short(ex0.get('instruction', '').splitlines()[0], 180)}")
+            print(f"    instr first line (raw): {_short(ex0.get('instruction', '').splitlines()[0], 256)}")
             if args_ns.no_output_constraints:
                 stripped = _strip_instruction_or_die(ex0.get("instruction", ""))
-                print(f"    instr (stripped):      {_short(stripped, 180)}")
-            print(f"    ans (no-swap): {_short(a0, 300)}")
-            print(f"    ans (swap):    {_short(a1, 300)}")
+                print(f"    instr (stripped):      {_short(stripped, 256)}")
+            print(f"    ans (no-swap): {_short(a0, 256)}")
+            print(f"    ans (swap):    {_short(a1, 256)}")
 
         # Print conversation JSON (context message)
         print("\n[CONTEXT | NO-SWAP] (conversation list that will be fed into model.process_input)")
         if args.print_full_context:
             print(json.dumps(convo_no, ensure_ascii=False, indent=2))
         else:
-            print(_short(convo_no, 1200))
+            print(_short(convo_no, 4096))
 
         print("\n[CONTEXT | SWAP] (conversation list that will be fed into model.process_input)")
         if args.print_full_context:
             print(json.dumps(convo_sw, ensure_ascii=False, indent=2))
         else:
-            print(_short(convo_sw, 1200))
+            print(_short(convo_sw, 4096))
 
-    print("\nDone.\n")
+    print("\nDONE.\n")
 
 
 if __name__ == "__main__":

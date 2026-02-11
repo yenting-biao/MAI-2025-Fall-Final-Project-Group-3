@@ -39,6 +39,7 @@ def _rewrite_end_checker_ans(ans, end_phrase: str, mmau: bool = False) -> str:
     s = ans if isinstance(ans, str) else str(ans)
     if mmau:
         first_line = s.split("This")[0].rstrip() if "This" in s else s.rstrip()
+        first_line = f"{first_line}." if not first_line.endswith(".") else first_line
         return f"{first_line} {end_phrase}"
     else:
         splitlines = s.splitlines()

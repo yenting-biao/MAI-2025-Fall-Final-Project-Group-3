@@ -98,13 +98,6 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--examples",
-        type=int,
-        default=5,
-        help="Number of in-context examples to use. Select from [0, 8]",
-    )
-
-    parser.add_argument(
         "--no_output_constraints",
         action="store_true",
         help="Whether to summarize the model's performance without output constraints responses",
@@ -116,7 +109,26 @@ def parse_args():
         help="Whether to print detailed performance for each IF task and each shot number. If not set, an easy to paste summary table will be printed instead.",
     )
 
-    return parser.parse_args()
+    parser.add_argument(
+        "--if_only",
+        action="store_true",
+        help="Whether to summarize only the model's performance on IF tasks. If set, the script will only print the IF Rate without the task performance.",
+    )
+
+    parser.add_argument(
+        "--task_only",
+        action="store_true",
+        help="Whether to summarize only the model's performance on the main task. If set, the script will only print the task performance without the IF Rate.",
+    )
+
+    args = parser.parse_args()
+
+    if args.if_only and args.task_only:
+        raise ValueError(
+            "Cannot set both --if_only and --task_only. Please choose one or neither."
+        )
+
+    return args
 
 
 def main():
@@ -139,17 +151,29 @@ def main():
 
     # CoT
     if args.response_task == "chain-of-thought":
-        print(
-            "Shot | IF Rate | Task Performance"
-            if args.detail_output
-            else "IFRate | Task Performance"
-        )
-        for i in range(9):  # 0-8
+        if args.if_only:
+            print("Shot | IF Rate" if args.detail_output else "IF Rate")
+        else:
+            print(
+                "Shot | IF Rate | Task Performance"
+                if args.detail_output
+                else "IFRate | Task Performance"
+            )
+        for i in range(9):
+            # IF Rate
             if_results = load_jsonl(
                 f"{base_dir}/reports/llm_eval@output_{i}-shot.jsonl"
             )
             if_rate = sum([res["correct"] for res in if_results]) / len(if_results)
 
+            if args.if_only:
+                if args.detail_output:
+                    print(f"{i}    | {if_rate:%}")
+                else:
+                    print(f"{if_rate:%}")
+                continue
+
+            # Task Performance
             task_results = load_jsonl(
                 f"{base_dir}/reports-task-level/llm_eval@output_{i}-shot.jsonl"
             )
@@ -168,6 +192,7 @@ def main():
                     [float(res["correct"]) for res in task_results]
                 ) / len(task_results)
 
+            # Print results
             if args.detail_output:
                 if args.audio_task == "ASR":
                     print(f"{i}    | {if_rate:%} | {task_performance}")

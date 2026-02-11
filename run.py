@@ -23,13 +23,7 @@ def _get_kwarg(test_case: dict, key: str):
     return None
 
 def _rewrite_repeat_prompt_ans(ans, prompt_to_repeat: str) -> str:
-    """
-    ICL 'combination:repeat_prompt' answers look like:
-      "<some prompt>:<content>"  (see ICL_examples.json) :contentReference[oaicite:2]{index=2}
-    We keep <content> and swap in the test case prompt_to_repeat.
-    """
     s = ans if isinstance(ans, str) else str(ans)
-
     # Keep everything after the first ":" as the transcription/content.
     if ":" in s:
         content = s.split(":", 1)[1].lstrip()
@@ -41,14 +35,12 @@ def _rewrite_repeat_prompt_ans(ans, prompt_to_repeat: str) -> str:
         return f"{prompt_to_repeat}{content}"
     return f"{prompt_to_repeat} {content}"
 
-def _rewrite_end_checker_ans(ans, end_phrase: str) -> str:
-    """
-    ICL 'startend:end_checker' answers look like:
-      "<content>\\n<end phrase>" (see ICL_examples.json) :contentReference[oaicite:3]{index=3}
-    We keep <content> and replace the end phrase.
-    """
+def _rewrite_end_checker_ans(ans, end_phrase: str, mmau: bool = False) -> str:
     s = ans if isinstance(ans, str) else str(ans)
-    first_line = s.splitlines()[0].rstrip() if s.splitlines() else s.rstrip()
+    if mmau:
+        first_line = s.split("This")[0].rstrip() if "This" in s else s.rstrip()
+    else:
+        first_line = s.splitlines()[0].rstrip() if s.splitlines() else s.rstrip()
     return f"{first_line}\n{end_phrase}"
 
 def set_seed(seed: int = 42, verbose: bool = False) -> None:
@@ -397,7 +389,7 @@ def main(args: argparse.Namespace) -> None:
                     end_phrase = _get_kwarg(test_case, "end_phrase")
                     if end_phrase is not None:
                         for ex in icl_data_examples:
-                            ex["ans"] = _rewrite_end_checker_ans(ex["ans"], end_phrase)
+                            ex["ans"] = _rewrite_end_checker_ans(ex["ans"], end_phrase, mmau=(args.audio_task == "MMAU"))
 
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,

@@ -153,6 +153,10 @@ def main():
     if args.response_task == "chain-of-thought":
         if args.if_only:
             print("Shot | IF Rate" if args.detail_output else "IF Rate")
+        elif args.task_only:
+            print(
+                "Shot | Task Performance" if args.detail_output else "Task Performance"
+            )
         else:
             print(
                 "Shot | IF Rate | Task Performance"

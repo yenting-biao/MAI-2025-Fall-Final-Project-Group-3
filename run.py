@@ -40,7 +40,8 @@ def _rewrite_end_checker_ans(ans, end_phrase: str, mmau: bool = False) -> str:
     if mmau:
         first_line = s.split("This")[0].rstrip() if "This" in s else s.rstrip()
     else:
-        first_line = s.splitlines()[0].rstrip() if s.splitlines() else s.rstrip()
+        splitlines = s.splitlines()
+        first_line = splitlines[0].rstrip() if splitlines else s.rstrip()
     return f"{first_line}\n{end_phrase}"
 
 def set_seed(seed: int = 42, verbose: bool = False) -> None:

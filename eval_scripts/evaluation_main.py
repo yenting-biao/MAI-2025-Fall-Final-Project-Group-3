@@ -561,24 +561,21 @@ def print_report(outputs):
 def parse_args():
   """Parses command line arguments."""
   parser = get_task_parser()
-  parser.add_argument(
-      "--input_response_data",
-      "-i",
-      type=str,
-      default=None,
-      help="Path to input response data in JSONL format.",
-  )
+  parser.add_argument("--input_response_data_root", type=str, default="model_responses/", help="Root directory for input response data.")
+  parser.add_argument("--input_response_data", "-i", type=str, default=None, help="Path to input response data in JSONL format.")
   return parser.parse_args()
 
 
 def main():
     args = parse_args()
+    if args.input_response_data is None and args.input_response_data_root is None:
+        raise ValueError("Either --input_response_data or --input_response_data_root must be provided.")
 
     if args.input_response_data:
       input_response_data = args.input_response_data
       input_file_name = input_response_data.split("/")[-1]
     else:
-      input_response_data_dir = os.path.join("model_responses", args.model_name, args.audio_task, args.response_task)
+      input_response_data_dir = os.path.join(args.input_response_data_root, args.model_name, args.audio_task, args.response_task)
       if args.response_task != "chain-of-thought" and args.IF_task:
         input_response_data_dir = os.path.join(input_response_data_dir, args.IF_task.replace(":", "_"))
       input_file_name = ""

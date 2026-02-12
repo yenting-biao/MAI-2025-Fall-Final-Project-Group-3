@@ -210,7 +210,8 @@ def GenerateICLandTestExamples(
     icl_audio_path:str,
     test_case_formatted: Dict[str, str],
     debug: bool = False,
-    remove_output_constraints: bool = False
+    remove_output_constraints: bool = False,
+    no_audio_icl: bool = False
 ) -> list[dict]:
     '''
         Generate In-Context Learning Examples and concatenate with test example.
@@ -232,7 +233,7 @@ def GenerateICLandTestExamples(
     ret = []
     for item in icl_data:
         ICL_example = {}
-        ICL_example["audio_path"] = os.path.join(icl_audio_path, item["audio_path"])
+        ICL_example["audio_path"] = os.path.join(icl_audio_path, item["audio_path"]) if not no_audio_icl else None
         ICL_example["instruction"] = item["instruction"] if not remove_output_constraints else remove_output_constraints_from_instruction(item["instruction"])
         ans = item["ans"]
         assert ans is not None, "Answer in ICL example cannot be None."
@@ -253,13 +254,14 @@ def GenerateMessagesResponse(
     icl_audio_dir: str,
     use_test_sample: bool = False,
     debug: bool = False,
-    remove_output_constraints: bool = False
+    remove_output_constraints: bool = False,
+    no_audio_icl: bool = False
 ) -> Tuple[str, str]:
     test_case_formatted = {
         "audio_path": os.path.join(test_audio_dir, test_case["audio_filepath"]),
         "instruction": test_case["instruction"],
     } if not use_test_sample else test_case
-    conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug, remove_output_constraints)
+    conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug, remove_output_constraints, no_audio_icl)
     model.process_input(conversation)
     if debug:
         print("-- Input processed. ---")
@@ -289,6 +291,9 @@ def parse_args():
 
     # experiment to remove output constraints
     parser.add_argument("--no_output_constraints", action="store_true", help="Whether to remove output constraints in instructions for ICL experiment. Using this flag will output to a separate folder with '_no_constraints' suffix for analysis.")
+
+    # experiment to use no audio examples in ICL
+    parser.add_argument("--no_audio_icl", action="store_true", help="Whether to remove audio information in the ICL examples, leaving only the instructions and answers. This is to test how audio affects the ICL performance. Using this flag will output to a separate folder with '_no_audio_icl' suffix for analysis.")
 
     """
     [IMPORTANT] Test Settings
@@ -405,7 +410,7 @@ def main(args: argparse.Namespace) -> None:
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,
                 args.icl_audio_dir, args.use_test_sample, args.debug,
-                args.no_output_constraints
+                args.no_output_constraints, args.no_audio_icl
             )
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")

@@ -5,12 +5,20 @@ export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export CUBLAS_WORKSPACE_CONFIG=:16:8
 
 AUDIO_TASKS=("ASR" "SER" "GR" "MMAU")
-RESPONSE_TASKS=("chain-of-thought")
-IF_TASKS=("chain-of-thought")
+RESPONSE_TASKS=("closed_ended_questions")
+IF_TASKS=(
+    "change_case:english_capital"
+    "change_case:english_lowercase"
+    "detectable_format:json_format"
+    "startend:quotation"
+    "detectable_format:title"
+    "combination:repeat_prompt"
+    "startend:end_checker"
+)
 EXAMPLES=(1 2 3 4 5 6 7 8)
 MODEL_NAMES=("qwen25_omni")
 SEEDS=(42)
-OUTPUT_DIR="${OUTPUT_DIR:-model_responses_no_audio_icl/}"
+OUTPUT_DIR="${OUTPUT_DIR:-model_responses_no_constraints_no_audio_icl/}"
 
 for model_name in "${MODEL_NAMES[@]}"; do
   for audio_task in "${AUDIO_TASKS[@]}"; do
@@ -26,6 +34,7 @@ for model_name in "${MODEL_NAMES[@]}"; do
               --seed "${seed}" \
               --examples "${examples}" \
               --output_dir "${OUTPUT_DIR}" \
+              --no_output_constraints \
               --no_audio_icl
           done
         done

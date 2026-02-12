@@ -34,7 +34,6 @@ for model_name in "${MODEL_NAMES[@]}"; do
               --seed "${seed}" \
               --examples "${examples}" \
               --output_dir "${OUTPUT_DIR}" \
-              --no_output_constraints \
               --no_audio_icl
           done
         done

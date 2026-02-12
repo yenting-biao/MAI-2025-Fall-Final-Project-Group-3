@@ -18,7 +18,7 @@ IF_TASKS=(
 EXAMPLES=(0 1 2 3 4 5 6 7 8)
 MODEL_NAMES=("qwen2")
 SEEDS=(42)
-OUTPUT_DIR="${OUTPUT_DIR:-model_responses_no_constraints/}"
+OUTPUT_DIR="${OUTPUT_DIR:-model_responses/}"
 
 for model_name in "${MODEL_NAMES[@]}"; do
   for audio_task in "${AUDIO_TASKS[@]}"; do
@@ -33,8 +33,7 @@ for model_name in "${MODEL_NAMES[@]}"; do
               --IF_task "${IF_task}" \
               --seed "${seed}" \
               --examples "${examples}" \
-              --output_dir "${OUTPUT_DIR}" \
-              --no_output_constraints
+              --output_dir "${OUTPUT_DIR}"
           done
         done
       done

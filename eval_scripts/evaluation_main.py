@@ -568,8 +568,6 @@ def parse_args():
 
 def main():
     args = parse_args()
-    if args.input_response_data is None and args.input_response_data_root is None:
-        raise ValueError("Either --input_response_data or --input_response_data_root must be provided.")
 
     if args.input_response_data:
       input_response_data = args.input_response_data

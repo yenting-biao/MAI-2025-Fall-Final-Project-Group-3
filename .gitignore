@@ -212,5 +212,8 @@ data/
 output_old/
 outputs_old/
 
+# Generated model evaluation outputs
+model_responses_no_constraints/
+
 slurm-*.out
 logs/

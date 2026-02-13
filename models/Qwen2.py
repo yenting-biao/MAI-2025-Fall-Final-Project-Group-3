@@ -69,16 +69,19 @@ class Qwen2_Audio_Chat(BaseModel):
             if isinstance(message["content"], list):
                 for ele in message["content"]:
                     if ele["type"] == "audio":
-                        audios.append(
-                            librosa.load(
-                                ele["audio_url"],
-                                sr=self.processor.feature_extractor.sampling_rate,
-                            )[0]
-                        )
+                        if ele["audio_url"] is not None:
+                            audios.append(
+                                librosa.load(
+                                    ele["audio_url"],
+                                    sr=self.processor.feature_extractor.sampling_rate,
+                                )[0]
+                            )
+                        else:
+                            audios.append(None)
 
         inputs = self.processor(
             text=text,
-            audio=audios,
+            audio=(audios if not None in audios else None),
             return_tensors="pt",
             padding=True,
             sampling_rate=self.processor.feature_extractor.sampling_rate,

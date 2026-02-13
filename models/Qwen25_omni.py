@@ -44,18 +44,31 @@ class Qwen25_omni(BaseModel):
         ]
 
         for i, message in enumerate(raw_conversation):
-            conversation.append(
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "audio",
-                            "audio_url": message["audio_path"],
-                        },
-                        {"type": "text", "text": message["instruction"]},
-                    ],
-                }
-            )
+            if message["audio_path"] is None:
+                assert (
+                    i != len(raw_conversation) - 1
+                ), "The test example must contain audio input."
+                conversation.append(
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": message["instruction"]},
+                        ],
+                    }
+                )
+            else:
+                conversation.append(
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "audio",
+                                "audio_url": message["audio_path"],
+                            },
+                            {"type": "text", "text": message["instruction"]},
+                        ],
+                    }
+                )
 
             if i != len(raw_conversation) - 1:
                 if "answer" not in message or message["answer"] is None:

@@ -31,7 +31,7 @@ class Qwen2_Audio_Chat(BaseModel):
             }
         ]
         for message in raw_conversation[:num_examples]:
-            if "audio_path" not in message:
+            if message["audio_path"] is None:
                 conversation.append(
                     {
                         "role": "user",
@@ -57,7 +57,7 @@ class Qwen2_Audio_Chat(BaseModel):
 
         # test sample
         assert (
-            "audio_path" in raw_conversation[-1]
+            raw_conversation[-1]["audio_path"] is not None
         ), "The last message must contain 'audio_path' key for the test sample."
         conversation.append(
             {

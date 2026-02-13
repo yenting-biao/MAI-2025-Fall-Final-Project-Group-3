@@ -102,6 +102,11 @@ def parse_args():
         action="store_true",
         help="Whether to summarize the model's performance without output constraints responses",
     )
+    parser.add_argument(
+        "--no_audio_icl",
+        action="store_true",
+        help="Whether to summarize the model's performance without audio ICL examples",
+    )
 
     parser.add_argument(
         "--detail_output",
@@ -134,14 +139,12 @@ def parse_args():
 def main():
     args = parse_args()
 
-    base_dir = (
-        (
-            "../model_responses"
-            if not args.no_output_constraints
-            else "../model_responses_no_constraints"
-        )
-        + f"/{args.model_name.lower()}/{args.audio_task}/{args.response_task}/{args.IF_task}"
-    )
+    base_dir = "../model_responses"
+    if args.no_output_constraints:
+        base_dir += "_no_constraints"
+    if args.no_audio_icl:
+        base_dir += "_no_audio_icl"
+    base_dir += f"/{args.model_name.lower()}/{args.audio_task}/{args.response_task}/{args.IF_task}"
     print(f"Model: {args.model_name}")
     print(f"Audio Task: {args.audio_task}")
     print(f"Response Task: {args.response_task}")
@@ -164,6 +167,8 @@ def main():
                 else "IFRate | Task Performance"
             )
         for i in range(9):
+            if args.no_audio_icl and i == 0:
+                continue
             # IF Rate
             if not args.task_only:
                 if_results = load_jsonl(

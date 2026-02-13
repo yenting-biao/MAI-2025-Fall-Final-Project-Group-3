@@ -379,6 +379,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Whether to judge the model responses with output constraints removed from the instructions.",
     )
+    parser.add_argument(
+        "--no_audio_icl",
+        action="store_true",
+        help="Whether to judge the model responses with audios removed from the in-context learning examples.",
+    )
     return parser.parse_args()
 
 
@@ -407,7 +412,9 @@ def main() -> None:
     for if_task in if_tasks:
         print(f"\nEvaluating IF task: {if_task}")
         if_task_formatted = if_task.replace(":", "_")
-        if args.no_output_constraints:  # TODO: edit the path later
+        if args.no_audio_icl and args.no_output_constraints:
+            input_dir = f"model_responses_no_constraints_no_audio_icl/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
+        elif args.no_output_constraints:
             input_dir = f"model_responses_no_constraints/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
         else:
             input_dir = f"model_responses/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
@@ -420,14 +427,21 @@ def main() -> None:
                 if f.startswith("output_") and f.endswith(".jsonl")
             )
         )
-        assert (
-            len(candidate_files) == 9
-        ), f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."
-        for i, file_name in enumerate(candidate_files):
-            expected_prefix = f"output_{i}"
-            assert file_name.startswith(
-                expected_prefix
-            ), f"Expected file starting with {expected_prefix}, found {file_name}."
+        if len(candidate_files) == 8:
+            # they should be output_1 to output_8, missing output_0
+            # if not, raise error
+            expected_files = [f"output_{k}-shot.jsonl" for k in range(1, 9)]
+            assert candidate_files == expected_files, f"Expected files {expected_files}, found {candidate_files}."
+            print(f"Found 8 output files (output_1 to output_8) in {input_dir}, with output_0 missing as expected. Proceeding with evaluation.")
+        else:
+            assert (
+                len(candidate_files) == 9
+            ), f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."            
+            for i, file_name in enumerate(candidate_files):
+                expected_prefix = f"output_{i}"
+                assert file_name.startswith(
+                    expected_prefix
+                ), f"Expected file starting with {expected_prefix}, found {file_name}."
 
         for input_file in candidate_files:
             args.input_response_data = os.path.join(input_dir, input_file)

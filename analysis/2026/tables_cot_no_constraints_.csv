@@ -1,0 +1,16 @@
+model,Setting,CoT
+qwen2,Zero-shot,0.3058734530123755
+qwen2,One-shot,0.2570419103313838
+qwen2,Few-shot,0.32433856362482416
+desta2_5,Zero-shot,0.9248608844462575
+desta2_5,One-shot,0.9941860475
+desta2_5,Few-shot,0.9952981565625
+blsp-emo,Zero-shot,0.5785203885035582
+blsp-emo,One-shot,0.9369588376626318
+blsp-emo,Few-shot,0.8568080205358354
+qwen25_omni,Zero-shot,0.5891206537014367
+qwen25_omni,One-shot,0.4583684674902533
+qwen25_omni,Few-shot,0.5212452612079677
+gemini-2.5-flash,Zero-shot,0.9736842105263157
+gemini-2.5-flash,One-shot,0.9934210525
+gemini-2.5-flash,Few-shot,0.9975328946875

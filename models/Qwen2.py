@@ -31,22 +31,34 @@ class Qwen2_Audio_Chat(BaseModel):
             }
         ]
         for message in raw_conversation[:num_examples]:
-            conversation.append(
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "audio",
-                            "audio_url": message["audio_path"],
-                        },
-                        {"type": "text", "text": message["instruction"]},
-                    ],
-                }
-            )
+            if "audio_path" not in message:
+                conversation.append(
+                    {
+                        "role": "user",
+                        "content": message["instruction"],
+                    }
+                )
+            else:
+                conversation.append(
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "audio",
+                                "audio_url": message["audio_path"],
+                            },
+                            {"type": "text", "text": message["instruction"]},
+                        ],
+                    }
+                )
             if "answer" not in message or message["answer"] is None:
                 raise ValueError("Answer is required for ICL examples.")
             conversation.append({"role": "assistant", "content": message["answer"]})
 
+        # test sample
+        assert (
+            "audio_path" in raw_conversation[-1]
+        ), "The last message must contain 'audio_path' key for the test sample."
         conversation.append(
             {
                 "role": "user",

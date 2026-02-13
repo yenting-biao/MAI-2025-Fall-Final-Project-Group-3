@@ -1,5 +1,31 @@
+"""
+Usage examples:
+
+# Collect results of CEQ
+cd <project_root>
+cd analysis/2026/
+python collect.py -ceq \
+    --root ../../ --responses_root model_responses_no_constraints \
+    --output_fn auto
+
+# Collect results of CW
+cd <project_root>
+cd analysis/2026/
+python collect.py -cw \
+    --root ../../ --responses_root model_responses \
+    --output_fn auto
+
+# Collect results of both CEQ and CW
+cd <project_root>
+cd analysis/2026/
+python collect.py -ceq -cw \
+    --root ../../ --responses_root model_responses \
+    --output_fn auto
+"""
+
 import json
 import os
+import argparse
 from typing import Any
 import numpy as np
 import pandas as pd
@@ -63,10 +89,10 @@ MAP_MODEL_NAME = {
     "blsp-emo": "BLSP-Emo",
     "qwen25_omni": "Qwen2.5-Omni",
     "gemini-2.5-flash": "Gemini 2.5 Flash",
-    "gemini-3-flash-preview": "Gemini 3 Flash Preview",
+    # "gemini-3-flash-preview": "Gemini 3 Flash Preview",
     # "cascade_qwen-7b-chat": "Qwen/Qwen-7B-Chat",
-    "cascade_qwen25-7b-instruct": "Qwen/Qwen2.5-7B-Instruct",
-    "cascade_llama-3_1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
+    # "cascade_qwen25-7b-instruct": "Qwen/Qwen2.5-7B-Instruct",
+    # "cascade_llama-3_1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
 }
 
 MODEL_ORDER = list(MAP_MODEL_NAME.keys())
@@ -128,19 +154,19 @@ def createDFfromRuleEvalResults(results:dict[int, dict[str, Any]], response_task
 
     return pd.DataFrame(d)
 
-def eval(model_name:str, response_task:str, root:str="../../", to_csv:bool=True):
+def eval(model_name:str, response_task:str, root:str="../../", responses_root:str="model_responses", to_csv:bool=True):
     response_task = response_task.lower()
     d_df = {}
     for audio_task, performance_metric in AUDIO_TASK_PERFORMANCE_METRIC.items():
         if response_task == "creative_writing" and audio_task == "MMAU":
             continue
-        IF_tasks = os.listdir(os.path.join(root, "model_responses", model_name, audio_task, response_task))
+        IF_tasks = os.listdir(os.path.join(root, responses_root, model_name, audio_task, response_task))
         IF_tasks = [ft for ft in IF_tasks if ft in GROUP_MAP.keys()]
         results = {}
         for IF_task in IF_tasks:
             results[IF_task] = get_rule_eval_jsonl(
                 model_name, audio_task, response_task, IF_task,
-                data_dir=os.path.join(root, "model_responses")
+                data_dir=os.path.join(root, responses_root)
             )
         d_df[audio_task] = createDFfromRuleEvalResults(results, response_task, performance_metric)
 
@@ -154,14 +180,16 @@ def eval(model_name:str, response_task:str, root:str="../../", to_csv:bool=True)
 
     return d_df
 
-if __name__ == "__main__":
-
-    # CEQ
+def eval_ceq(args):
     response_task = "closed_ended_questions"
     d_df = {}
     for model_name in MAP_MODEL_NAME.keys():
         print(f"------------ {model_name} ------------")
-        d_df[model_name] = eval(model_name, response_task=response_task, to_csv=True)
+        d_df[model_name] = eval(
+            model_name, response_task=response_task,
+            root=args.root, responses_root=args.responses_root,
+            to_csv=True
+        )
 
     group_order = []
     for v in GROUP_MAP_CEQ.values():
@@ -169,7 +197,10 @@ if __name__ == "__main__":
             group_order.append(v)
 
     df_audio_task = {}
-    fn = os.path.join(f"summary_ceq.xlsx")
+    if args.output_fn.lower() == 'auto':
+        fn = f"summary_ceq{args.responses_root.split('model_responses')[-1]}.xlsx"
+    else:
+        fn = args.output_fn
 
     with pd.ExcelWriter(fn, engine="openpyxl") as writer:
         for audio_task in AUDIO_TASK_PERFORMANCE_METRIC.keys():
@@ -185,14 +216,10 @@ if __name__ == "__main__":
                     "shot_level", "if_rate_strict", "if_rate_loose", "mean_performance"
                 ]]
                 dfs.append(df)
-
             df_all = pd.concat(dfs, ignore_index=True)
 
-            # --- ordered categoricals for deterministic sorting ---
-            # shot_level: if it's numeric, this works; if it's strings like "0-shot", see note below
             shot_order = sorted(df_all["shot_level"].dropna().unique())
             df_all["shot_level"] = pd.Categorical(df_all["shot_level"], categories=shot_order, ordered=True)
-
             df_all["IF_task_group"] = pd.Categorical(df_all["IF_task_group"], categories=group_order, ordered=True)
             df_all["model"] = pd.Categorical(df_all["model"], categories=MODEL_ORDER, ordered=True)
 
@@ -223,12 +250,16 @@ if __name__ == "__main__":
 
             print(f"Saving combined summary to {fn}")
 
-    # CW
+def eval_cw(args):
     response_task ="creative_writing"
     d_df = {}
     for model_name in MAP_MODEL_NAME.keys():
         print(f"------------ {model_name} ------------")
-        d_df[model_name] = eval(model_name, response_task=response_task, to_csv=True)
+        d_df[model_name] = eval(
+            model_name, response_task=response_task,
+            root=args.root, responses_root=args.responses_root,
+            to_csv=True
+        )
 
     group_order = []
     for v in GROUP_MAP_CW.values():
@@ -236,7 +267,10 @@ if __name__ == "__main__":
             group_order.append(v)
 
     df_audio_task = {}
-    fn = os.path.join(f"summary_cw.xlsx")
+    if args.output_fn.lower() == 'auto':
+        fn = f"summary_cw{args.responses_root.split('model_responses')[-1]}.xlsx"
+    else:
+        fn = args.output_fn
 
     with pd.ExcelWriter(fn, engine="openpyxl") as writer:
         for audio_task in AUDIO_TASK_PERFORMANCE_METRIC.keys():
@@ -254,14 +288,10 @@ if __name__ == "__main__":
                     "shot_level", "if_rate"
                 ]]
                 dfs.append(df)
-
             df_all = pd.concat(dfs, ignore_index=True)
 
-            # --- ordered categoricals for deterministic sorting ---
-            # shot_level: if it's numeric, this works; if it's strings like "0-shot", see note below
             shot_order = sorted(df_all["shot_level"].dropna().unique())
             df_all["shot_level"] = pd.Categorical(df_all["shot_level"], categories=shot_order, ordered=True)
-
             df_all["IF_task_group"] = pd.Categorical(df_all["IF_task_group"], categories=group_order, ordered=True)
             df_all["model"] = pd.Categorical(df_all["model"], categories=MODEL_ORDER, ordered=True)
 
@@ -291,3 +321,20 @@ if __name__ == "__main__":
             df_audio_task[f"{audio_task}_compare_shots_grouped"] = df_all_compare_shots_grouped
 
     print(f"Saving combined summary to {fn}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Collect evaluation results and save summaries.")
+    parser.add_argument("--root", type=str, default="../../", help="Root directory for the project.")
+    parser.add_argument("--responses_root", type=str, default="model_responses", help="Root directory for model responses and evaluation results.")
+    parser.add_argument("--eval_ceq", "-ceq", action="store_true", help="Whether to evaluate closed-ended questions.")
+    parser.add_argument("--eval_cw", "-cw", action="store_true", help="Whether to evaluate creative writing.")
+    parser.add_argument("--output_fn", type=str, default='auto')
+    args = parser.parse_args()
+
+    # CEQ
+    if args.eval_ceq:
+        eval_ceq(args)
+
+    # CW
+    if args.eval_cw:
+        eval_cw(args)

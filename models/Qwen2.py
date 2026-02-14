@@ -91,13 +91,23 @@ class Qwen2_Audio_Chat(BaseModel):
                         else:
                             audios.append(None)
 
-        inputs = self.processor(
-            text=text,
-            audio=(audios if not None in audios else None),
-            return_tensors="pt",
-            padding=True,
-            sampling_rate=self.processor.feature_extractor.sampling_rate,
-        ).to(self.device)
+        has_none = any(a is None for a in audios)
+        if has_none:
+            inputs = self.processor(
+                text=text,
+                return_tensors="pt",
+                padding=True,
+                sampling_rate=self.processor.feature_extractor.sampling_rate,
+            )
+        else:
+            inputs = self.processor(
+                text=text,
+                audio=audios,
+                return_tensors="pt",
+                padding=True,
+                sampling_rate=self.processor.feature_extractor.sampling_rate,
+            )
+        inputs = inputs.to(self.device)
         inputs.input_ids = inputs.input_ids.to(self.device)
         self.inputs = inputs
         return

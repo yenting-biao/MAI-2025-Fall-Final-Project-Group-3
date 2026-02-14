@@ -31,22 +31,34 @@ class Qwen2_Audio_Chat(BaseModel):
             }
         ]
         for message in raw_conversation[:num_examples]:
-            conversation.append(
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "audio",
-                            "audio_url": message["audio_path"],
-                        },
-                        {"type": "text", "text": message["instruction"]},
-                    ],
-                }
-            )
+            if message["audio_path"] is None:
+                conversation.append(
+                    {
+                        "role": "user",
+                        "content": message["instruction"],
+                    }
+                )
+            else:
+                conversation.append(
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "audio",
+                                "audio_url": message["audio_path"],
+                            },
+                            {"type": "text", "text": message["instruction"]},
+                        ],
+                    }
+                )
             if "answer" not in message or message["answer"] is None:
                 raise ValueError("Answer is required for ICL examples.")
             conversation.append({"role": "assistant", "content": message["answer"]})
 
+        # test sample
+        assert (
+            raw_conversation[-1]["audio_path"] is not None
+        ), "The last message must contain 'audio_path' key for the test sample."
         conversation.append(
             {
                 "role": "user",
@@ -79,13 +91,23 @@ class Qwen2_Audio_Chat(BaseModel):
                         else:
                             audios.append(None)
 
-        inputs = self.processor(
-            text=text,
-            audio=(audios if not None in audios else None),
-            return_tensors="pt",
-            padding=True,
-            sampling_rate=self.processor.feature_extractor.sampling_rate,
-        ).to(self.device)
+        has_none = any(a is None for a in audios)
+        if has_none:
+            inputs = self.processor(
+                text=text,
+                return_tensors="pt",
+                padding=True,
+                sampling_rate=self.processor.feature_extractor.sampling_rate,
+            )
+        else:
+            inputs = self.processor(
+                text=text,
+                audio=audios,
+                return_tensors="pt",
+                padding=True,
+                sampling_rate=self.processor.feature_extractor.sampling_rate,
+            )
+        inputs = inputs.to(self.device)
         inputs.input_ids = inputs.input_ids.to(self.device)
         self.inputs = inputs
         return

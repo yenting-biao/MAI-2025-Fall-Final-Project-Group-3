@@ -157,33 +157,36 @@ class Gemini(BaseModel):
             instruction = message["instruction"]
             answer: str | None = message.get("answer", None)
 
-            if not Path(audio_path).exists():
-                raise ValueError(f"Audio file not found, got {audio_path}")
-
-            # Create user turn consisting of audio and instruction
+            # Create user turn consisting of audio (if provided) and instruction
             user_parts = []
-            num_retries = 0
-            while num_retries < self.max_upload_retries:
-                num_retries += 1
-                try:
-                    if audio_path in self.uploaded_files:
-                        file = self.uploaded_files[audio_path]
-                    else:
-                        file = self.client.files.upload(file=audio_path)
-                        self.uploaded_files[audio_path] = file
-                    break
-                except ClientError as e:
-                    print(f"Error uploading file {audio_path}: {e}")
-                    if num_retries == self.max_upload_retries:
-                        print("Conversation in question:", conversation)
-                        raise RuntimeError(
-                            f"Failed to upload file {audio_path} after"
-                            f" {self.max_upload_retries} attempts."
-                        )
-                    else:
-                        print("Retrying upload...")
-                        time.sleep(1)  # Brief pause before retrying
-            user_parts.append(types.Part.from_uri(file_uri=file.uri, mime_type=file.mime_type))
+            
+            if audio_path is not None:
+                if not Path(audio_path).exists():
+                    raise ValueError(f"Audio file not found, got {audio_path}")
+
+                num_retries = 0
+                while num_retries < self.max_upload_retries:
+                    num_retries += 1
+                    try:
+                        if audio_path in self.uploaded_files:
+                            file = self.uploaded_files[audio_path]
+                        else:
+                            file = self.client.files.upload(file=audio_path)
+                            self.uploaded_files[audio_path] = file
+                        break
+                    except ClientError as e:
+                        print(f"Error uploading file {audio_path}: {e}")
+                        if num_retries == self.max_upload_retries:
+                            print("Conversation in question:", conversation)
+                            raise RuntimeError(
+                                f"Failed to upload file {audio_path} after"
+                                f" {self.max_upload_retries} attempts."
+                            )
+                        else:
+                            print("Retrying upload...")
+                            time.sleep(1)  # Brief pause before retrying
+                user_parts.append(types.Part.from_uri(file_uri=file.uri, mime_type=file.mime_type))
+            
             user_parts.append(types.Part(text=instruction))
             self.contents.append(types.Content(role="user", parts=user_parts))
 

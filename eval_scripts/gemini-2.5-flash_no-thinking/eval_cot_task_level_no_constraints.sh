@@ -12,6 +12,7 @@ for audio_task in "${AUDIO_TASKS[@]}"; do
             --model_name="${MODEL_NAME}" \
             --audio_task="${audio_task}" \
             --response_task="${response_task}" \
+            --task_level \
             --no_output_constraints
     done
 done

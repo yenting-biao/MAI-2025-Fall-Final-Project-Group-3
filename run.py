@@ -15,6 +15,9 @@ from config import MAP_MODEL_NAME, MAP_AUDIO_TASK, IMPLEMENTED_IF_TASKS, TEST_SA
 MMAU_AUDIO_INFO = json.load(open("./in-context-examples/mmau-id2task.json", "r"))
 MMAU_MINI_AUDIO_INFO = json.load(open("./in-context-examples/mmau-mini-id2task.json", "r"))
 
+# Load audio2text file
+AUDIO2TEXT = json.load(open("./audio_caption/audio_captions.json", "r"))
+
 def _get_kwarg(test_case: dict, key: str):
     """Extract a value from test_case['kwargs'] which is a list[dict]."""
     for d in test_case.get("kwargs", []) or []:
@@ -211,7 +214,8 @@ def GenerateICLandTestExamples(
     test_case_formatted: Dict[str, str],
     debug: bool = False,
     remove_output_constraints: bool = False,
-    no_audio_icl: bool = False
+    no_audio_icl: bool = False,
+    model_name: str = "",
 ) -> list[dict]:
     '''
         Generate In-Context Learning Examples and concatenate with test example.
@@ -230,14 +234,49 @@ def GenerateICLandTestExamples(
                 }
             ]
     '''
+
+    def info2String(info: list[dict]) -> str:
+        audio_str = ""
+        for i in info:
+            audio_str += f"{i['time_segment']} {i['ASR']} (Gender: {i['Gender']}, Emotion: {i['Emotion']}).\n"
+        return audio_str
+
+
+    def wrap_audio_info_with_special_tokens(instruction: str, audio_info: str, model_name: str) -> str:
+        audio_special_token_map = {
+            "qwen2": ("<|audio_bos|>", "<|audio_eos|>"),
+            "qwen25_omni": ("<|audio_bos|>", "<|audio_eos|>"),
+            "desta2_5": ("<start_audio>", "<end_audio>"),
+            "gemini-2.5-flash": ("<start_of_audio>", "<end_of_audio>"),
+            "gemini-2.5-flash_no-thinking": ("<start_of_audio>", "<end_of_audio>"),
+        }
+        if model_name in audio_special_token_map:
+            bos_token, eos_token = audio_special_token_map[model_name]
+            return f"{bos_token}\n{audio_info}\n{eos_token}\n{instruction}"
+        elif model_name == "blsp-emo":
+            return f"{instruction}\n\nSpeech: {audio_info}"
+        else:
+            raise ValueError(f"Model {model_name} does not have defined audio special tokens.")
+
     ret = []
     for item in icl_data:
         ICL_example = {}
+
         ICL_example["audio_path"] = os.path.join(icl_audio_path, item["audio_path"]) if not no_audio_icl else None
-        ICL_example["instruction"] = item["instruction"] if not remove_output_constraints else remove_output_constraints_from_instruction(item["instruction"])
+        instruction = item["instruction"] if not remove_output_constraints else remove_output_constraints_from_instruction(item["instruction"])
+
+        if no_audio_icl:
+            audio_id = item["audio_path"].split("/")[-1]
+            audio_info = AUDIO2TEXT.get(audio_id, "")
+            audio_str = info2String(audio_info) if audio_info else ""
+            instruction = wrap_audio_info_with_special_tokens(instruction, audio_str, model_name)
+
+        ICL_example["instruction"] = instruction
+
         ans = item["ans"]
         assert ans is not None, "Answer in ICL example cannot be None."
         ICL_example["answer"] = json.dumps(ans, ensure_ascii=False) if isinstance(ans, dict) else str(ans)
+
         ret.append(ICL_example)
         if debug:
             print(f"ICL Example added: {ICL_example}")
@@ -255,13 +294,14 @@ def GenerateMessagesResponse(
     use_test_sample: bool = False,
     debug: bool = False,
     remove_output_constraints: bool = False,
-    no_audio_icl: bool = False
+    no_audio_icl: bool = False,
+    model_name: str = "",
 ) -> Tuple[str, str]:
     test_case_formatted = {
         "audio_path": os.path.join(test_audio_dir, test_case["audio_filepath"]),
         "instruction": test_case["instruction"],
     } if not use_test_sample else test_case
-    conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug, remove_output_constraints, no_audio_icl)
+    conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug, remove_output_constraints, no_audio_icl, model_name)
     model.process_input(conversation)
     if debug:
         print("-- Input processed. ---")
@@ -410,7 +450,7 @@ def main(args: argparse.Namespace) -> None:
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,
                 args.icl_audio_dir, args.use_test_sample, args.debug,
-                args.no_output_constraints, args.no_audio_icl
+                args.no_output_constraints, args.no_audio_icl, args.model_name
             )
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")

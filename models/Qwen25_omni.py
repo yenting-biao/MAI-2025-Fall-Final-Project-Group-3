@@ -83,6 +83,7 @@ class Qwen25_omni(BaseModel):
         text = self.processor.apply_chat_template(
             conversation, add_generation_prompt=True, tokenize=False
         )
+        self.messages = text
 
         # set use audio in video flag as in example
         USE_AUDIO_IN_VIDEO = False

@@ -46,6 +46,7 @@ def parse_args():
             "cascade_qwen-7b-chat",
             "cascade_qwen25-7b-instruct",
             "gemini-2.5-flash",
+            "gemini-2.5-flash_no-thinking",
             "gemini-3-flash-preview",
         ],
         help="Name of the pre-trained language model to use.",

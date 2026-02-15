@@ -29,7 +29,7 @@ class DeSTA2_5(BaseModel):
         messages.append(
             {
                 "role": "system",
-                "content": "You are a helpful voice assistant. You will be provided with {} example pairs of questions and answers based on audio inputs. You should follow the examples to answer the last question.".format(
+                "content": "You are a helpful voice assistant. You will be provided with {} example pairs of questions and answers. You should follow the examples to answer the last question.".format(
                     ICL_examples
                 ),
             }

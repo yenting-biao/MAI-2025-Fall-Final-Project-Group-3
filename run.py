@@ -444,8 +444,8 @@ def main(args: argparse.Namespace) -> None:
             icl_data_examples = copy.deepcopy(icl_data_shuffled[:args.examples])
 
             #   Rewrite ICL answers if needed
-            if args.no_output_constraints and args.examples > 0:
-                icl_data_examples = rewrite_ans(args, test_case, icl_data_examples)
+            # if args.no_output_constraints and args.examples > 0:
+            icl_data_examples = rewrite_ans(args, test_case, icl_data_examples)
 
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,

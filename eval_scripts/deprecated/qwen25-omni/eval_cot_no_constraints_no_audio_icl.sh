@@ -2,7 +2,7 @@
 
 MODEL_NAME="qwen25_omni"
 RESPONSE_TASKS=("chain-of-thought")
-AUDIO_TASKS=("ASR" "SER" "GR" "MMAU")
+AUDIO_TASKS=("ASR") #("ASR") only asr has not been judged yet
 
 for audio_task in "${AUDIO_TASKS[@]}"; do
     for response_task in "${RESPONSE_TASKS[@]}"; do
@@ -10,7 +10,6 @@ for audio_task in "${AUDIO_TASKS[@]}"; do
             --model_name="${MODEL_NAME}" \
             --audio_task="${audio_task}" \
             --response_task="${response_task}" \
-            --task_level \
             --no_output_constraints \
             --no_audio_icl
     done

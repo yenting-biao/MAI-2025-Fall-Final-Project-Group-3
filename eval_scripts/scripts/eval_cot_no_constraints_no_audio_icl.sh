@@ -2,7 +2,7 @@
 
 MODEL_NAME="$1"
 RESPONSE_TASKS=("chain-of-thought")
-AUDIO_TASKS=("ASR") #("ASR") only asr has not been judged yet
+AUDIO_TASKS=("ASR" "SER" "GR" "MMAU")
 
 for audio_task in "${AUDIO_TASKS[@]}"; do
     for response_task in "${RESPONSE_TASKS[@]}"; do

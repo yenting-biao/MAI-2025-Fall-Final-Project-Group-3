@@ -106,7 +106,16 @@ def load_model(model_name, device: str = "cuda") -> BaseModel:
                 # Use default Gemini model
                 return Gemini()
             else:
-                return Gemini(model_name=model_name.lower())
+                generation_config = None
+                if "no-thinking" in model_name.lower():
+                    # assume model_name format is "{gemini_model_name}_no-thinking"
+                    model_name = model_name.lower().replace("_no-thinking", "")
+                    from google.genai import types
+                    generation_config = {
+                        "temperature": 1.0,
+                        "thinking_config": types.ThinkingConfig(thinking_budget=0),
+                    }
+                return Gemini(model_name=model_name.lower(), generation_config=generation_config)
     raise ValueError(f"Model {model_name} not supported.")
 
 def GetICLData(args: argparse.Namespace, max_examples: int = 8) -> list[dict]:
@@ -458,7 +467,7 @@ def main(args: argparse.Namespace) -> None:
             if "gemini" in args.model_name:
                 del output_data["response"]
                 output_data["thinking_summary"] = model.thinking_summary
-                if args.IF_task == "chain-of-thought":
+                if args.IF_task == "chain-of-thought" and model.thinking_summary:
                     output_data["response"] = f'<thinking_summary>\n{output_data["thinking_summary"]}\n</thinking_summary>\n{response}'  # Insert thinking summary into response
                 else:
                     # Reinsert to ensure "response" key comes after "thinking_summary"

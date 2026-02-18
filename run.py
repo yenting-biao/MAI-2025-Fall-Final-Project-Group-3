@@ -48,6 +48,21 @@ def _rewrite_end_checker_ans(ans, end_phrase: str, mmau: bool = False) -> str:
         splitlines = s.splitlines()
         first_line = splitlines[0].rstrip() if splitlines else s.rstrip()
         return f"{first_line}\n{end_phrase}"
+    
+def _rewrite_repeat_prompt_end_checker_instruction(instruction: str, target_phrase: str) -> str:
+    lines = instruction.strip().split("\n")
+    if len(lines) != 2:
+        raise ValueError("Instruction does not have exactly 2 lines as expected.")
+    main_instruction = lines[0]
+    output_constraint = lines[1]
+    
+    # replace the phrase in "..." in the output constraint with the target phrase, keeping the rest unchanged
+    if output_constraint.count('"') != 2:
+        raise ValueError("Output constraint does not have exactly 2 double quotes as expected.")
+    prefix = output_constraint.split('"')[0]
+    suffix = output_constraint.split('"')[2]
+    new_output_constraint = f'{prefix}"{target_phrase}"{suffix}'
+    return f"{main_instruction}\n{new_output_constraint}"
 
 def set_seed(seed: int = 42, verbose: bool = False) -> None:
     # Python & OS
@@ -343,6 +358,10 @@ def parse_args():
 
     # experiment to use no audio examples in ICL
     parser.add_argument("--no_audio_icl", action="store_true", help="Whether to remove audio information in the ICL examples, leaving only the instructions and answers. This is to test how audio affects the ICL performance. Using this flag will output to a separate folder with '_no_audio_icl' suffix for analysis.")
+    
+    # experiment to not align test cases with IF tasks in the examples
+    # TODO: actually we do not use this flag for now
+    parser.add_argument("--no_align_testcase", action="store_true", help="Whether to not align the test cases with the specified IF task. If set, the IF constraints for CEQ combination:repeat_prompt and startend:end_checker in the examples will not be guaranteed the same as the one in the test case, which means the model have to learn in a more general way to follow the constraints without relying on seeing the exact same constraints in the examples.")
 
     """
     [IMPORTANT] Test Settings
@@ -390,7 +409,7 @@ def MMAU_Get_ICL_Tasks(audio_id: str) -> Tuple[str, str]:
     sub_task = task_info["sub-category"]
     return main_task, sub_task
 
-def rewrite_ans(args, test_case, icl_data_examples: list[dict]) -> list[dict]:
+def rewrite_instruction_and_ans(args, test_case, icl_data_examples: list[dict]) -> list[dict]:
     '''
     For certain IF tasks,
     we need to modify the ICL examples to remove or change specific output constraints in the answers
@@ -401,12 +420,14 @@ def rewrite_ans(args, test_case, icl_data_examples: list[dict]) -> list[dict]:
         prompt_to_repeat = _get_kwarg(test_case, "prompt_to_repeat")
         if prompt_to_repeat is not None:
             for ex in icl_data_examples:
+                ex["instruction"] = _rewrite_repeat_prompt_end_checker_instruction(ex["instruction"], prompt_to_repeat)
                 ex["ans"] = _rewrite_repeat_prompt_ans(ex["ans"], prompt_to_repeat)
 
     elif args.IF_task in ("startend:end_checker", "startend_end_checker"):
         end_phrase = _get_kwarg(test_case, "end_phrase")
         if end_phrase is not None:
             for ex in icl_data_examples:
+                ex["instruction"] = _rewrite_repeat_prompt_end_checker_instruction(ex["instruction"], end_phrase)
                 ex["ans"] = _rewrite_end_checker_ans(ex["ans"], end_phrase, mmau=(args.audio_task == "MMAU"))
 
     return icl_data_examples
@@ -454,7 +475,8 @@ def main(args: argparse.Namespace) -> None:
 
             #   Rewrite ICL answers if needed
             # if args.no_output_constraints and args.examples > 0:
-            icl_data_examples = rewrite_ans(args, test_case, icl_data_examples)
+            if not args.no_align_testcase and args.examples > 0: # this will ensure the test case and the ICL examples are aligned in terms of the output constraints for combination:repeat_prompt and startend:end_checker
+                icl_data_examples = rewrite_instruction_and_ans(args, test_case, icl_data_examples)
 
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,

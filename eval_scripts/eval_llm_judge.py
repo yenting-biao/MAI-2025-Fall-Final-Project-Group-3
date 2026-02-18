@@ -362,7 +362,7 @@ def parse_args() -> argparse.Namespace:
         "--judge_name",
         type=str,
         default="gpt-5-mini-2025-08-07",  # "Qwen/Qwen3-8B",
-        help="Model name passed to vLLM (default: gpt-5-mini-2025-08-07).",
+        help="Model name passed to LLM judge (default: gpt-5-mini-2025-08-07).",
     )
     parser.add_argument(
         "--task_level",
@@ -431,12 +431,16 @@ def main() -> None:
             # they should be output_1 to output_8, missing output_0
             # if not, raise error
             expected_files = [f"output_{k}-shot.jsonl" for k in range(1, 9)]
-            assert candidate_files == expected_files, f"Expected files {expected_files}, found {candidate_files}."
-            print(f"Found 8 output files (output_1 to output_8) in {input_dir}, with output_0 missing as expected. Proceeding with evaluation.")
+            assert (
+                candidate_files == expected_files
+            ), f"Expected files {expected_files}, found {candidate_files}."
+            print(
+                f"Found 8 output files (output_1 to output_8) in {input_dir}, with output_0 missing as expected. Proceeding with evaluation."
+            )
         else:
             assert (
                 len(candidate_files) == 9
-            ), f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."            
+            ), f"Expected 9 output files in {input_dir}, found {len(candidate_files)}."
             for i, file_name in enumerate(candidate_files):
                 expected_prefix = f"output_{i}"
                 assert file_name.startswith(

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-MODEL_NAME="qwen25_omni"
+set -e
+
+MODEL_NAME="$1"
 RESPONSE_TASKS=("chain-of-thought")
 AUDIO_TASKS=("ASR" "SER" "GR" "MMAU")
 
@@ -10,7 +12,6 @@ for audio_task in "${AUDIO_TASKS[@]}"; do
             --model_name="${MODEL_NAME}" \
             --audio_task="${audio_task}" \
             --response_task="${response_task}" \
-            --no_output_constraints \
-            --no_audio_icl
+            --task_level
     done
 done

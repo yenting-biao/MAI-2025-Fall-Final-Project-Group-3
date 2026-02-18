@@ -16,8 +16,7 @@ IF_TASKS=(
     "startend:end_checker"
 )
 EXAMPLES=(1 2 3 4 5 6 7 8)
-MODEL_NAMES=("$1") # qwen2, desta2_5, qwen25_omni, blsp-emo, gemini-2.5-flash
-# TODO: @togimoto add support for gemini-2.5-flash_no-thinking
+MODEL_NAMES=("$1") # qwen2, desta2_5, qwen25_omni, blsp-emo, gemini-2.5-flash, gemini-2.5-flash_no-thinking
 SEEDS=(42)
 OUTPUT_DIR="${OUTPUT_DIR:-model_responses_no_constraints_no_audio_icl/}"
 

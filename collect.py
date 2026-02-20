@@ -3,23 +3,20 @@ Usage examples:
 
 # Collect results of CEQ
 cd <project_root>
-cd analysis/2026/
 python collect.py -ceq \
-    --root ../../ --responses_root model_responses_no_constraints \
+    --responses_root model_responses_no_constraints \
     --output_fn auto
 
 # Collect results of CW
 cd <project_root>
-cd analysis/2026/
 python collect.py -cw \
-    --root ../../ --responses_root model_responses \
+    --responses_root model_responses \
     --output_fn auto
 
 # Collect results of both CEQ and CW
 cd <project_root>
-cd analysis/2026/
 python collect.py -ceq -cw \
-    --root ../../ --responses_root model_responses \
+    --responses_root model_responses \
     --output_fn auto
 """
 
@@ -29,6 +26,10 @@ import argparse
 from typing import Any
 import numpy as np
 import pandas as pd
+from config import (
+    MAP_MODEL_NAME,
+    MAP_AUDIO_TASK,
+)
 
 GROUP_MAP = {
     "detectable_format:number_bullet_lists": "bullet_lists",
@@ -68,31 +69,11 @@ GROUP_MAP_CW = {
 }
 GROUP_MAP_CW = {k.replace(':', '_'): v for k, v in GROUP_MAP_CW.items()}
 
-MAP_AUDIO_TASK = {
-    "ASR": "Automatic_speech_recognition",
-    "SER": "Speech_emotion_recognition",
-    "GR": "Gender_recognition",
-    "MMAU": "MMAU",
-}
-
 AUDIO_TASK_PERFORMANCE_METRIC = {
     "ASR": "wer",
     "SER": "answer_correct",
     "GR": "answer_correct",
     "MMAU": "answer_correct",
-}
-
-MAP_MODEL_NAME = {
-    # "qwen": "Qwen",
-    "qwen2": "Qwen2",
-    "desta2_5": "desta2_5",
-    "blsp-emo": "BLSP-Emo",
-    "qwen25_omni": "Qwen2.5-Omni",
-    "gemini-2.5-flash": "Gemini 2.5 Flash",
-    # "gemini-3-flash-preview": "Gemini 3 Flash Preview",
-    # "cascade_qwen-7b-chat": "Qwen/Qwen-7B-Chat",
-    # "cascade_qwen25-7b-instruct": "Qwen/Qwen2.5-7B-Instruct",
-    # "cascade_llama-3_1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
 }
 
 MODEL_ORDER = list(MAP_MODEL_NAME.keys())
@@ -154,7 +135,7 @@ def createDFfromRuleEvalResults(results:dict[int, dict[str, Any]], response_task
 
     return pd.DataFrame(d)
 
-def eval(model_name:str, response_task:str, root:str="../../", responses_root:str="model_responses", to_csv:bool=True):
+def eval(model_name:str, response_task:str, root:str="./", responses_root:str="model_responses", to_csv:bool=True):
     response_task = response_task.lower()
     d_df = {}
     for audio_task, performance_metric in AUDIO_TASK_PERFORMANCE_METRIC.items():

@@ -257,7 +257,7 @@ class Gemini(BaseModel):
                                # bug where old contents are reused when new ones
                                # should be used.
 
-        if not response.candidates[0].content.parts or len(response.candidates[0].content.parts) < 2 or not response.candidates[0].content.parts[0].thought:
+        if not response.candidates[0].content or not response.candidates[0].content.parts or len(response.candidates[0].content.parts) < 2 or not response.candidates[0].content.parts[0].thought:
             print("Warning: Model did not think.")
             self.thinking_summary = ""
             self.answer = response.text

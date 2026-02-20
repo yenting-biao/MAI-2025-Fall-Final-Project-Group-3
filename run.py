@@ -240,6 +240,7 @@ def GenerateICLandTestExamples(
     remove_output_constraints: bool = False,
     no_audio_icl: bool = False,
     model_name: str = "",
+    audio_only: bool = False,
 ) -> list[dict]:
     '''
         Generate In-Context Learning Examples and concatenate with test example.
@@ -295,7 +296,10 @@ def GenerateICLandTestExamples(
             audio_str = info2String(audio_info) if audio_info else ""
             instruction = wrap_audio_info_with_special_tokens(instruction, audio_str, model_name)
 
-        ICL_example["instruction"] = instruction
+        if audio_only:
+            ICL_example["instruction"] = ""
+        else:
+            ICL_example["instruction"] = instruction
 
         ans = item["ans"]
         assert ans is not None, "Answer in ICL example cannot be None."
@@ -320,12 +324,13 @@ def GenerateMessagesResponse(
     remove_output_constraints: bool = False,
     no_audio_icl: bool = False,
     model_name: str = "",
+    audio_only: bool = False,
 ) -> Tuple[str, str]:
     test_case_formatted = {
         "audio_path": os.path.join(test_audio_dir, test_case["audio_filepath"]),
-        "instruction": test_case["instruction"],
+        "instruction": "" if audio_only else test_case["instruction"],
     } if not use_test_sample else test_case
-    conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug, remove_output_constraints, no_audio_icl, model_name)
+    conversation = GenerateICLandTestExamples(icl_data, icl_audio_dir, test_case_formatted, debug, remove_output_constraints, no_audio_icl, model_name, audio_only)
     model.process_input(conversation)
     if debug:
         print("-- Input processed. ---")
@@ -362,6 +367,9 @@ def parse_args():
     # experiment to not align test cases with IF tasks in the examples
     # TODO: actually we do not use this flag for now
     parser.add_argument("--no_align_testcase", action="store_true", help="Whether to not align the test cases with the specified IF task. If set, the IF constraints for CEQ combination:repeat_prompt and startend:end_checker in the examples will not be guaranteed the same as the one in the test case, which means the model have to learn in a more general way to follow the constraints without relying on seeing the exact same constraints in the examples.")
+    
+    # experiment to test with only audio input (no textual instruction) in the ICL examples and test sample
+    parser.add_argument("--audio_only", action="store_true", help="Whether to use only audio input without any textual instruction in the ICL examples and test sample. If set, all textual instructions in the ICL examples and test sample will be removed, and the model will have to rely solely on the audio input to understand the task and generate the response, which is a more challenging setting to test the model's ability to induce the task from audio input and text output. Using this flag will output to a separate folder with '_audio_only' suffix for analysis.")
 
     """
     [IMPORTANT] Test Settings
@@ -481,7 +489,7 @@ def main(args: argparse.Namespace) -> None:
             messages, response = GenerateMessagesResponse(
                 test_audio_dir, test_case, model, icl_data_examples,
                 args.icl_audio_dir, args.use_test_sample, args.debug,
-                args.no_output_constraints, args.no_audio_icl, args.model_name
+                args.no_output_constraints, args.no_audio_icl, args.model_name, args.audio_only
             )
             if args.debug or args.verbose:
                 print(f"Model response [{i}]: \033[92m{response}\033[0m")

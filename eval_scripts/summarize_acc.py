@@ -35,12 +35,16 @@ def get_base_dir(
     IF_task: str,
     no_output_constraints: bool,
     no_audio_icl: bool,
+    audio_only: bool,
 ) -> str:
     base_dir = "../model_responses"
-    if no_output_constraints:
-        base_dir += "_no_constraints"
-    if no_audio_icl:
-        base_dir += "_no_audio_icl"
+    if audio_only:
+        base_dir += "_audio_only"
+    else:
+        if no_output_constraints:
+            base_dir += "_no_constraints"
+        if no_audio_icl:
+            base_dir += "_no_audio_icl"
     base_dir += f"/{model_name.lower()}/{audio_task}/{response_task}/{IF_task}"
     return base_dir
 
@@ -126,6 +130,11 @@ def parse_args():
         action="store_true",
         help="Whether to summarize the model's performance without audio ICL examples",
     )
+    parser.add_argument(
+        "--audio_only",
+        action="store_true",
+        help="Whether to summarize only the model's performance on audio-only inputs.",
+    )
 
     parser.add_argument(
         "--detail_output",
@@ -177,6 +186,7 @@ def main():
             args.IF_task,
             args.no_output_constraints,
             args.no_audio_icl,
+            args.audio_only,
         )
         for model_name in model_names
     ]
@@ -202,7 +212,7 @@ def main():
         # CoT
         if args.response_task == "chain-of-thought":
             for i in range(9):
-                if args.no_audio_icl and i == 0:
+                if (args.no_audio_icl or args.audio_only) and i == 0:
                     continue
                 # IF Rate
                 if not args.task_only:

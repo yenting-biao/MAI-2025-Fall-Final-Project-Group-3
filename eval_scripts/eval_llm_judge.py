@@ -384,6 +384,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Whether to judge the model responses with audios removed from the in-context learning examples.",
     )
+    parser.add_argument(
+        "--audio_only",
+        action="store_true",
+        help="Whether to judge the model responses with only audio inputs and no textual instructions.",
+    )
     return parser.parse_args()
 
 
@@ -412,7 +417,9 @@ def main() -> None:
     for if_task in if_tasks:
         print(f"\nEvaluating IF task: {if_task}")
         if_task_formatted = if_task.replace(":", "_")
-        if args.no_audio_icl and args.no_output_constraints:
+        if args.audio_only:
+            input_dir = f"model_responses_audio_only/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
+        elif args.no_audio_icl and args.no_output_constraints:
             input_dir = f"model_responses_no_constraints_no_audio_icl/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"
         elif args.no_output_constraints:
             input_dir = f"model_responses_no_constraints/{test_model.lower()}/{audio_task}/{response_task}/{if_task_formatted}"

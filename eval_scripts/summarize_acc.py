@@ -28,6 +28,23 @@ def extract_all_text_after_result(text: str) -> str | None:
     return None
 
 
+def get_base_dir(
+    model_name: str,
+    audio_task: str,
+    response_task: str,
+    IF_task: str,
+    no_output_constraints: bool,
+    no_audio_icl: bool,
+) -> str:
+    base_dir = "../model_responses"
+    if no_output_constraints:
+        base_dir += "_no_constraints"
+    if no_audio_icl:
+        base_dir += "_no_audio_icl"
+    base_dir += f"/{model_name.lower()}/{audio_task}/{response_task}/{IF_task}"
+    return base_dir
+
+
 def parse_args():
     parser = argparse.ArgumentParser()
 
@@ -48,8 +65,9 @@ def parse_args():
             "gemini-2.5-flash",
             "gemini-2.5-flash_no-thinking",
             "gemini-3-flash-preview",
+            "ALL",
         ],
-        help="Name of the pre-trained language model to use.",
+        help="Name of the pre-trained language model to use, where 'ALL' indicates summarizing performance of all models.",
     )
 
     parser.add_argument(
@@ -139,99 +157,119 @@ def parse_args():
 
 def main():
     args = parse_args()
+    model_names = (
+        [args.model_name]
+        if args.model_name != "ALL"
+        else [
+            "blsp-emo",
+            "desta2_5",
+            "qwen2",
+            "qwen25_omni",
+            "gemini-2.5-flash",
+            "gemini-2.5-flash_no-thinking",
+        ]
+    )
+    base_dirs = [
+        get_base_dir(
+            model_name,
+            args.audio_task,
+            args.response_task,
+            args.IF_task,
+            args.no_output_constraints,
+            args.no_audio_icl,
+        )
+        for model_name in model_names
+    ]
 
-    base_dir = "../model_responses"
-    if args.no_output_constraints:
-        base_dir += "_no_constraints"
-    if args.no_audio_icl:
-        base_dir += "_no_audio_icl"
-    base_dir += f"/{args.model_name.lower()}/{args.audio_task}/{args.response_task}/{args.IF_task}"
     print(f"Model: {args.model_name}")
     print(f"Audio Task: {args.audio_task}")
     print(f"Response Task: {args.response_task}")
     print(f"IF Task: {args.IF_task}")
-    print(f"Summarizing model performance under {base_dir}")
+    print(f"Summarizing model performance under {', '.join(base_dirs)}")
     print("-" * 30)
-
-    # CoT
-    if args.response_task == "chain-of-thought":
-        if args.if_only:
-            print("Shot | IF Rate" if args.detail_output else "IF Rate")
-        elif args.task_only:
-            print(
-                "Shot | Task Performance" if args.detail_output else "Task Performance"
-            )
-        else:
-            print(
-                "Shot | IF Rate | Task Performance"
-                if args.detail_output
-                else "IFRate | Task Performance"
-            )
-        for i in range(9):
-            if args.no_audio_icl and i == 0:
-                continue
-            # IF Rate
-            if not args.task_only:
-                if_results = load_jsonl(
-                    f"{base_dir}/reports/llm_eval@output_{i}-shot.jsonl"
-                )
-                if_rate = sum([res["correct"] for res in if_results]) / len(if_results)
-
-            # Task Performance
-            if not args.if_only:
-                task_results = load_jsonl(
-                    f"{base_dir}/reports-task-level/llm_eval@output_{i}-shot.jsonl"
-                )
-                if args.audio_task == "ASR":
-                    hyps = []
-                    refs = []
-                    for item in task_results:
-                        result = extract_all_text_after_result(
-                            item.get("eval_response", "").split("</think>")[-1].strip()
-                        )
-                        hyps.append(
-                            normalize_text(result if result is not None else "")
-                        )
-                        refs.append(normalize_text(item.get("label", "").strip()))
-                    task_performance = wer(refs, hyps)
-                else:
-                    task_performance = sum(
-                        [float(res["correct"]) for res in task_results]
-                    ) / len(task_results)
-
-            # Print results
-            if args.if_only:
-                if args.detail_output:
-                    print(f"{i}    | {if_rate:%}")
-                else:
-                    print(f"{if_rate:%}")
-                continue
-            elif args.task_only:
-                if args.detail_output:
-                    if args.audio_task == "ASR":
-                        print(f"{i}    | {task_performance}")
-                    else:
-                        print(f"{i}    | {task_performance:%}")
-                else:
-                    if args.audio_task == "ASR":
-                        print(f"{task_performance}")
-                    else:
-                        print(f"{task_performance:%}")
-            else:
-                if args.detail_output:
-                    if args.audio_task == "ASR":
-                        print(f"{i}    | {if_rate:%} | {task_performance}")
-                    else:
-                        print(f"{i}    | {if_rate:%} | {task_performance:%}")
-                else:
-                    if args.audio_task == "ASR":
-                        print(f"{if_rate:%}\t{task_performance}")
-                    else:
-                        print(f"{if_rate:%}\t{task_performance:%}")
+    if args.if_only:
+        print("Shot | IF Rate" if args.detail_output else "IF Rate")
+    elif args.task_only:
+        print("Shot | Task Performance" if args.detail_output else "Task Performance")
     else:
-        raise NotImplementedError(
-            "Only chain-of-thought response task is supported in this script."
+        print(
+            "Shot | IF Rate | Task Performance"
+            if args.detail_output
+            else "IFRate | Task Performance"
         )
+
+    for base_dir in base_dirs:
+        # CoT
+        if args.response_task == "chain-of-thought":
+            for i in range(9):
+                if args.no_audio_icl and i == 0:
+                    continue
+                # IF Rate
+                if not args.task_only:
+                    if_results = load_jsonl(
+                        f"{base_dir}/reports/llm_eval@output_{i}-shot.jsonl"
+                    )
+                    if_rate = sum([res["correct"] for res in if_results]) / len(
+                        if_results
+                    )
+
+                # Task Performance
+                if not args.if_only:
+                    task_results = load_jsonl(
+                        f"{base_dir}/reports-task-level/llm_eval@output_{i}-shot.jsonl"
+                    )
+                    if args.audio_task == "ASR":
+                        hyps = []
+                        refs = []
+                        for item in task_results:
+                            result = extract_all_text_after_result(
+                                item.get("eval_response", "")
+                                .split("</think>")[-1]
+                                .strip()
+                            )
+                            hyps.append(
+                                normalize_text(result if result is not None else "")
+                            )
+                            refs.append(normalize_text(item.get("label", "").strip()))
+                        task_performance = wer(refs, hyps)
+                    else:
+                        task_performance = sum(
+                            [float(res["correct"]) for res in task_results]
+                        ) / len(task_results)
+
+                # Print results
+                if args.if_only:
+                    if args.detail_output:
+                        print(f"{i}    | {if_rate:%}")
+                    else:
+                        print(f"{if_rate:%}")
+                    continue
+                elif args.task_only:
+                    if args.detail_output:
+                        if args.audio_task == "ASR":
+                            print(f"{i}    | {task_performance}")
+                        else:
+                            print(f"{i}    | {task_performance:%}")
+                    else:
+                        if args.audio_task == "ASR":
+                            print(f"{task_performance}")
+                        else:
+                            print(f"{task_performance:%}")
+                else:
+                    if args.detail_output:
+                        if args.audio_task == "ASR":
+                            print(f"{i}    | {if_rate:%} | {task_performance}")
+                        else:
+                            print(f"{i}    | {if_rate:%} | {task_performance:%}")
+                    else:
+                        if args.audio_task == "ASR":
+                            print(f"{if_rate:%}\t{task_performance}")
+                        else:
+                            print(f"{if_rate:%}\t{task_performance:%}")
+        else:
+            raise NotImplementedError(
+                "Only chain-of-thought response task is supported in this script."
+            )
 
 
 if __name__ == "__main__":

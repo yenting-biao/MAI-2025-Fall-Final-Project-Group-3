@@ -187,7 +187,9 @@ class Gemini(BaseModel):
                             time.sleep(1)  # Brief pause before retrying
                 user_parts.append(types.Part.from_uri(file_uri=file.uri, mime_type=file.mime_type))
             
-            user_parts.append(types.Part(text=instruction))
+            if instruction:
+                user_parts.append(types.Part(text=instruction))
+            
             self.contents.append(types.Content(role="user", parts=user_parts))
 
             # Create assistant response if message is an in-context learning example
